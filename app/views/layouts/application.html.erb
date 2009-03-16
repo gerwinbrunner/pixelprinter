@@ -5,7 +5,7 @@
 	<meta http-equiv="imagetoolbar" content="no" />
 	<meta name="MSSmartTagsPreventParsing" content="true" />
 
-  <title>Billify</title>
+  <title><%= APP_NAME %></title>
 
   <%= stylesheet_link_tag 'application' %>
   <%= javascript_include_tag 'prototype' %>
@@ -14,7 +14,7 @@
 <body>
   
   <div id="header">
-    <h1><%= link_to 'Billify', '/' %></h1>      
+    <h1><%= link_to APP_NAME, '/' %></h1>      
     
     <p id="login-link">  
       <% if current_shop %>
@@ -27,8 +27,8 @@
   <div id="container" class="clearfix">
     
     <ul id="tabs">
-      <%= tab :index, {:controller => 'home'}, :label => 'Home' %>
-      <%= tab :design, {:controller => 'home', :action => 'design'}, :label => 'Design Help' %>
+      <%= tab :index, {:controller => 'home'}, :label => 'Orders' %>
+      <%= tab :design, {:controller => 'home', :action => 'design'}, :label => 'Templates' %>
     </ul>
   
     <!-- Flash error & notice-->

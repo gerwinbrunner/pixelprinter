@@ -18,6 +18,10 @@ h3 { margin-top: 24px; }
 #header h1 { color: #fffad5; }
 
 #login-link {
+  float: right;
+  position: relative;
+  bottom: 43px;
+  right: 15px;
   color: #ededed;
 }
 
