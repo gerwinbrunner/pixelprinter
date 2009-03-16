@@ -1,0 +1,16 @@
+# If you don't have an API key yet, register your application at:
+#
+# <YourShopURL>/admin/api 
+#   (e.g. "http://shopname.myshopify.com/admin/api")
+
+development:
+  api_key: 410f012da1a66227d7a926416b3f8fae
+  secret: 1e6c9f71751bbb2efb9de89959a7945e
+
+test:
+  api_key: 410f012da1a66227d7a926416b3f8fae
+  secret: 1e6c9f71751bbb2efb9de89959a7945e
+
+production:
+  api_key: 410f012da1a66227d7a926416b3f8fae
+  secret: 1e6c9f71751bbb2efb9de89959a7945e
