@@ -1,0 +1,31 @@
+<h1>{{ shop_name }}</h1>
+
+Thank you for your business.
+
+<br/>
+<br/>
+<br/>
+<h3>Payment Details</h3>
+
+<div>
+  <p>Amount: {{ total_price | money }}</p>
+  <p>Invoice: {{ name }}</p
+  <p>Credit Card: {{ payment.card_number }}</p>
+  
+  {% if note_body %}
+    <p>Description: {{ note_body }}</p>
+  {% endif %}
+</div>
+
+Buyer:
+<div>
+  {{ customer.name }}<br/>
+  {{ billing_address.company }}<br/>
+  {{ billing_address.street }}<br/>
+  {{ billing_address.city }}<br/>
+  {{ billing_address.zip }}<br/>
+  {{ billing_address.country }}<br/>
+</div>
+
+If you have any questions, please send an email to 
+<a href="mailto:{{shop_email}}">{{ shop_email }}</a>
