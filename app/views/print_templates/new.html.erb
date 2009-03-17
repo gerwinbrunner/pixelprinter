@@ -1,0 +1,9 @@
+<script type="text/javascript">
+   $(document).ready(function() {
+      $("#html").markItUp(myHtmlSettings);
+   });
+</script>
+
+<% form_for(@tmpl) do |f| %>
+  <%= f.text_area :body, :id => "html", :cols => 80, :rows => 20 %>
+<% end %>

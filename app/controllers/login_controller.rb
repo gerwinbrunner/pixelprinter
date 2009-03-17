@@ -16,6 +16,10 @@ class LoginController < ApplicationController
     shopify_session = ShopifyAPI::Session.new(params[:shop], params[:t])
     if shopify_session.valid?
       session[:shopify] = shopify_session
+      
+      # save shop to local DB
+      @shop = Shop.find_or_create_by_name(shopify_session.name)
+      
       flash[:notice] = "Logged in to shopify store."
       
       return_address = session[:return_to] || '/home'
@@ -33,4 +37,5 @@ class LoginController < ApplicationController
     
     redirect_to :action => 'index'
   end
+  
 end 
