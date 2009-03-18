@@ -1,3 +1,3 @@
-module HomeHelper
+module OrdersHelper
 
 end

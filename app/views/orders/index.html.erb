@@ -15,12 +15,14 @@
     <ul>
     <% @orders.each do |order| %>
       <li>
-        <div class="order box">
+        <div class="order box" onmouseover="$('#<%= "print-#{dom_id(order)}" %>').show();" onmouseout="$('#<%= "print-#{dom_id(order)}" %>').hide();">
           <div class="wrapper">
             <strong><%= link_to order.name, "http://#{current_shop.url}/admin/orders/#{order.id}" %></strong>
             <span class="price"><%= order.total_price %> <%= order.currency %></span>
             <span class="highlight"><%= order.financial_status %></span>
             by <span class="note"><%= order.billing_address.name %></span>
+            <%= link_to "Print", {:controller => 'print_templates', :action => 'preview'}, :class => 'print-link', :id => "print-#{dom_id(order)}" %>
+            
           </div>
         </div>
       </li>

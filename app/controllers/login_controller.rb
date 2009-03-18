@@ -1,4 +1,6 @@
 class LoginController < ApplicationController
+  #around_filter :shopify_session, :ex
+  
   def index
     # Ask user for their #{shop}.myshopify.com address
   end
@@ -22,7 +24,7 @@ class LoginController < ApplicationController
       
       flash[:notice] = "Logged in to shopify store."
       
-      return_address = session[:return_to] || '/home'
+      return_address = session[:return_to] || '/orders'
       session[:return_to] = nil
       redirect_to return_address
     else

@@ -31,9 +31,8 @@ h3 { margin-top: 24px; }
 #login-link a.shop_name:hover { text-decoration: underline; }
 
 #container {
-  width: 90%;
   min-width: 800px;
-  margin: 40px auto;
+  margin: 40px 40px 40px 15%;
   background: #fff;
   border-right: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
@@ -48,7 +47,7 @@ h3 { margin-top: 24px; }
   padding: 0;
   height: 20px;
   position: absolute;
-  top: 123px;
+  top: 117px;
 }
 
 #tabs li {
@@ -123,8 +122,19 @@ code { font-size: 140%; }
  * DASHBOARD
  */
 
-.order, .product { width: 55%; }
+.product { width: 55%; }
 .product { margin: 10px; } 
+
+.order {
+	width: 55%;
+	position: relative;
+}
+
+.print-link {
+	position: absolute;
+	right: 8px;
+	display: none;
+}
 
 .product img {
   margin: 0 10px 0 0;
