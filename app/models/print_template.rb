@@ -1,10 +1,11 @@
 class PrintTemplate < ActiveRecord::Base
   belongs_to :shop
   
-  validates_presence_of :name, :body, :shop_id
-  validates_length_of :name, :within => 2..32
+  validates_presence_of :body, :shop_id
+  validates_length_of   :name, :within => 2..32
   
   attr_protected :shop_id
+
 
   def parse
     Liquid::Template.parse(body)
@@ -23,15 +24,13 @@ class PrintTemplate < ActiveRecord::Base
 
   def load_template(template_name)
     content = File.read("#{RAILS_ROOT}/db/printing/#{template_name}.liquid")
-    self.update_attribute :body, content
+    self.update_attributes :name => template_name.to_s, :body => content
   end
   
 protected 
   def validate
     success, message = check_syntax
-    if not success
-      errors.add_to_base message
-    end
+    errors.add_to_base message unless success
   end
   
 end

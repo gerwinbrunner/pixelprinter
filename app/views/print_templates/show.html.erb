@@ -1,33 +1,11 @@
 <% title @tmpl.name %>
 
-<div id="preview-area" style="display:none">
-</div>
-
-<div id="action-links">
-  <ul>
-    <li class="no-icon"><%= link_to 'Go back', admin_orders_path %></li>
-    <li class="no-icon">
-			<%= link_to_function 'Edit', javascript_edit('template'), :id => 'template-edit-link' %>
-		</li>
-		<li class="no-pad">
-			<%= delete_resource_image_tag [:admin, @tmpl], "Are you sure you want to delete this template?"%>
-		</li>		
-  </ul>
-</div>
-
-<p style="text-align: center"><%= button_to_function 'Preview', "new Dialog('preview-area', '#{url_for :action => 'preview', :id => @tmpl}', {})" %></p>
-
+<% nav_link :action => 'index' %>
+<% nav_link({:action => 'destroy', :id => @tmpl.id}, "Delete", :method => 'delete', :confirm => "Are you sure you want to delete the template named \"#{@tmpl.name}\"?") %>
 
 <div>
-  <% editable_body('template') do %>
-  	<div id="body-show" style="padding: 12px; border: 2px solid #666; background-color: #efefef; text-align: left">
-      <!-- Table Wrapper to prevent the layout from breaking due to invalid user text! -->
-      <table><tr><td> <%= @tmpl.body %> </td></tr></table>
-  	</div>
-  <% end %>
-</div>  
-
-<div id="template-edit" style="display: none">
-	<%= render 	:partial => 'form', 
-							:locals => { :print_template => @tmpl, :method => 'put' } %>
+	<div id="body-show" style="padding: 12px; border: 2px solid #666; background-color: #efefef; text-align: left">
+    <!-- Table Wrapper to prevent the layout from breaking due to invalid user text! -->
+    <table><tr><td> <%= @tmpl.body %> </td></tr></table>
+	</div>
 </div>

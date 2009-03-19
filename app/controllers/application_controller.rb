@@ -7,4 +7,11 @@ class ApplicationController < ActionController::Base
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
+  
+  protected
+  
+  def shop
+    Shop.find_by_name(session[:shopify].name)
+  end
+  
 end

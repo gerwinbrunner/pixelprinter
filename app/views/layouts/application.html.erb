@@ -30,8 +30,8 @@
   <div id="container" class="clearfix">
     
     <ul id="tabs">
-      <%= tab :index, {:controller => 'orders'}, :label => "Orders" %>
-      <%= tab :index, {:controller => 'print_templates'}, :label => "Templates" %>
+      <%= tab "Orders", {:controller => 'orders'}%>
+      <%= tab "Templates", {:controller => 'print_templates'} %>
     </ul>
   
     <!-- Flash error & notice-->
@@ -40,6 +40,9 @@
   
     <!-- begin div.main-->
     <div id="main">
+      <%= nav_linklist_html %>
+      
+      <%= title_html %>
       <%= @content_for_layout %>   
     </div>
     <!-- end div.main -->

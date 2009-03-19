@@ -1,0 +1,25 @@
+<% nav_link :action => 'index' %>
+
+<%= error_messages_for 'tmpl', :object_name => 'template' %>
+
+<% form_for(tmpl, :method => method) do |f| %>
+  <div class="header">
+    <%= f.label :name, "Name:" %>
+    <%= f.text_field :name %>
+  </div>
+  
+  <%= f.text_area :body, :id => "html-editor", :cols => 80, :rows => 20 %>
+  
+  <%= f.submit (method.to_s == 'post' ? 'Create' : 'Update') %>
+<% end %>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#html-editor").markItUp(myHtmlSettings);
+  });
+   
+  <% if method == 'post' %>
+    $(":text:visible:enabled:first").focus().select();
+  <% end %>
+</script>

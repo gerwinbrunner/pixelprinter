@@ -1,9 +1,3 @@
-<script type="text/javascript">
-   $(document).ready(function() {
-      $("#html").markItUp(myHtmlSettings);
-   });
-</script>
+<% title "Create new template", :description => "Start a new printing template" %>
 
-<% form_for(@tmpl) do |f| %>
-  <%= f.text_area :body, :id => "html", :cols => 80, :rows => 20 %>
-<% end %>
+<%= render :partial => 'form', :locals => {:tmpl => @tmpl, :method => 'post'} %>

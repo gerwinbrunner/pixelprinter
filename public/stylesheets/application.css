@@ -32,7 +32,7 @@ h3 { margin-top: 24px; }
 
 #container {
   min-width: 800px;
-  margin: 40px 40px 40px 15%;
+  margin: 40px 15%;
   background: #fff;
   border-right: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
@@ -68,6 +68,15 @@ h3 { margin-top: 24px; }
 
 #tabs a:link#current, #tabs a:visited#current, #tabs a:hover { color: #000 !important; }
 #tabs a:link#current, #tabs a:visited#current { font-weight: bold; background: #fff; }
+
+#title {
+	margin-bottom: 32px;
+}
+
+#title h2 {
+	font-weight: bold;
+	margin-bottom: 8px;
+}
 
 a { color: #22658b; }
 a:hover { color: #359cd7; }
@@ -130,7 +139,7 @@ code { font-size: 140%; }
 	position: relative;
 }
 
-.print-link {
+.side-link {
 	position: absolute;
 	right: 8px;
 	display: none;
@@ -152,13 +161,6 @@ code { font-size: 140%; }
   font-family: Times, "Times New Roman";
   font-style: italic;
 }
-
-#orders ul {
-  list-style-type: none; 
-  padding: 0 0 0 7px;
-}
-
-#orders li { padding: 3px; }
 
 #sidebar {
   float: right; 
@@ -203,6 +205,7 @@ code { font-size: 140%; }
 .description {
 	margin: 0px 0px 0px 4px; 
 	font-weight: normal;
+	color: #666;
 }
 
 .box {
@@ -291,4 +294,43 @@ h1.blue, h2.blue, h3.blue {
   border: 1px solid #000;
   color: #fff;
   padding: 10px;
+}
+
+a.action {
+	color: #c00;
+}
+
+.header {
+	margin-bottom: 16px;
+}
+
+.header * {
+	font-size: 120%;
+}
+
+.template {
+	width: 55%;
+	position: relative;
+}
+
+.itemlist ul {
+  list-style-type: none; 
+  padding: 0 0 0 16px;	
+}
+
+.itemlist li { 
+	padding: 3px;
+}
+
+.linklist {
+	list-style: none;
+	padding: 0px;
+}
+
+.linklist li {
+	display: inline;
+}
+
+.linklist li a {
+	color: #c00;
 }

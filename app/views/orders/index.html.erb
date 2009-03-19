@@ -1,11 +1,9 @@
+<% title "Your orders", :description => "You can print orders or save them as a PDF file using different templates"%>
+
 <div id="sidebar">
-  
 </div>
 
-
-<div id="orders">
-  <h2>Your orders</h2>
-
+<div class="itemlist">
   <% if @orders.blank? %>  
 
     <em class="note">There are no orders in your store.</em>
@@ -21,8 +19,7 @@
             <span class="price"><%= order.total_price %> <%= order.currency %></span>
             <span class="highlight"><%= order.financial_status %></span>
             by <span class="note"><%= order.billing_address.name %></span>
-            <%= link_to "Print", {:controller => 'print_templates', :action => 'preview'}, :class => 'print-link', :id => "print-#{dom_id(order)}" %>
-            
+            <%= link_to "Print", {:controller => 'print_templates', :action => 'preview', :order_id => order.id}, :class => 'side-link action', :id => "print-#{dom_id(order)}" %>          
           </div>
         </div>
       </li>
