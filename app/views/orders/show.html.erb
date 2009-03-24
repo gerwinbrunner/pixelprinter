@@ -1,0 +1,13 @@
+<div id="sidebar">
+  <%= render :partial => 'print_templates/select_template', :locals => {:tmpls => @tmpls} %>
+</div>
+
+
+<div class="order box">
+  <div class="wrapper">
+    <strong><%= @order.name %></strong>
+    <span class="price"><%= @order.total_price %> <%= @order.currency %></span>
+    <span class="highlight"><%= @order.financial_status %></span>
+    by <span class="note"><%= @order.billing_address.name %></span>
+  </div>
+</div>

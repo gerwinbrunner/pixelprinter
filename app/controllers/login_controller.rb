@@ -1,8 +1,8 @@
 class LoginController < ApplicationController
-  #around_filter :shopify_session, :ex
   
   def index
     # Ask user for their #{shop}.myshopify.com address
+    flash[:notice] = "Please log into your shop to authenticate yourself first."
   end
 
   def authenticate

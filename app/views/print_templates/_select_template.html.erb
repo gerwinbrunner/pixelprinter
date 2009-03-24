@@ -1,0 +1,18 @@
+<h4>Select the template you want to print:</h4>
+<% if tmpls.blank? %>
+
+  <em class="note">No templates found, you should create a new one.</em>
+
+<% else %>
+  <% form_tag({:action => 'preview'}, :id => "selected-templates") do %>
+    <ul id="print-list">
+    <% tmpls.each do |tmpl| %>
+      <li>
+        <%= check_box_tag 'print', tmpl.id %>
+        <%= link_to tmpl.name, :controller => 'print_templates', :action => 'show', :id => tmpl %>
+      </li>
+    <% end %>
+    
+    </ul>
+  <% end %>
+<% end %>

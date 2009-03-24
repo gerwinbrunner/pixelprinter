@@ -173,11 +173,16 @@ code { font-size: 140%; }
 }
 
 #sidebar ul {
-  padding-left: 20px;
-  list-style-type: square;
+  padding-left: 0px;
+  list-style-type: none;
 }
 
 #sidebar li { margin: 8px 0; }
+
+
+#print-list * {
+	vertical-align: top;
+}
 
 /* STYLE OVERVIEW */
 

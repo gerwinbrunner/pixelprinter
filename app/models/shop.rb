@@ -3,10 +3,6 @@ class Shop < ActiveRecord::Base
 
   after_create :create_base_templates
   
-  def orders
-    ShopifyAPI::Order.find(:all, :params => {:order => "created_at DESC" })
-  end
-  
 #  private
   
   # Create 3 templates as a starting point for the user

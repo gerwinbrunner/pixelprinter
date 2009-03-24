@@ -92,13 +92,26 @@ module ShopifyAPI
   class CustomCollection < ActiveResource::Base
   end                                                                 
 
-  class ShippingAddress < ActiveResource::Base
-  end
-
-  class BillingAddress < ActiveResource::Base
+  class Address < ActiveResource::Base
     def name
       "#{first_name} #{last_name}"
     end
+    
+    def street
+      street = address1
+      street += ", #{address2}" unless address2.blank?
+      street
+    end
+    
+    def to_liquid
+      Hash.from_xml(to_xml)['billing_address'].merge('street' => street)
+    end
+  end
+  
+  class ShippingAddress < Address
+  end
+
+  class BillingAddress < Address
   end         
 
   class LineItem < ActiveResource::Base 
@@ -169,9 +182,6 @@ module ShopifyAPI
   end
 
   class Authorization < Payment
-  end
-  
-  class Order < ActiveResource::Base    
   end
 
   class Country < ActiveResource::Base
