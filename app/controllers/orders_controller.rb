@@ -8,13 +8,19 @@ class OrdersController < ApplicationController
   end
   
   def show
-    @order = ShopifyAPI::Order.find(params[:id])
-    if params[:template_id]
-      @tmpl = shop.templates.find(params[:template_id])
-      @rendered_template = @tmpl.render(Order.new(@order, shop).to_liquid)
-      render :text => @rendered_template
-    else
-      @tmpls = shop.templates
+    respond_to do |format|
+      format.js do
+        if params[:template_id]
+          @tmpl = shop.templates.find(params[:template_id])
+          @rendered_template = "<h1>TOTO#{@tmpl.id}</h1>"#@tmpl.render(@order.to_liquid)
+          @checked = params[:checked]
+          #render :text => @rendered_template
+        end
+      end
+      format.html do
+        @order = ShopifyAPI::Order.find(params[:id])
+        @tmpls = shop.templates
+      end
     end
   end
 end

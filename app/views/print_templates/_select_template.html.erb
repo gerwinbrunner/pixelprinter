@@ -8,7 +8,7 @@
     <ul id="print-list">
     <% tmpls.each do |tmpl| %>
       <li>
-        <%= check_box_tag 'print', tmpl.id %>
+        <%= check_box_tag 'print', tmpl.id, nil, :onchange => "$.get('/orders/show', {checked: this.checked, id: template_id: #{tmpl.id}})" %>
         <%= link_to tmpl.name, :controller => 'print_templates', :action => 'show', :id => tmpl %>
       </li>
     <% end %>

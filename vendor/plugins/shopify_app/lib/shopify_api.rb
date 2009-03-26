@@ -93,19 +93,6 @@ module ShopifyAPI
   end                                                                 
 
   class Address < ActiveResource::Base
-    def name
-      "#{first_name} #{last_name}"
-    end
-    
-    def street
-      street = address1
-      street += ", #{address2}" unless address2.blank?
-      street
-    end
-    
-    def to_liquid
-      Hash.from_xml(to_xml)['billing_address'].merge('street' => street)
-    end
   end
   
   class ShippingAddress < Address

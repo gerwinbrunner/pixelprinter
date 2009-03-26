@@ -6,8 +6,6 @@ class PrintTemplate < ActiveRecord::Base
   
   attr_protected :shop_id
 
-  named_scope :default, :conditions => {:default => true}
-
   def parse
     Liquid::Template.parse(body)
   end

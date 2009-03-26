@@ -1,5 +1,22 @@
 <div id="sidebar">
-  <%= render :partial => 'print_templates/select_template', :locals => {:tmpls => @tmpls} %>
+  <h4>Select the template you want to print:</h4>
+  <% if @tmpls.blank? %>
+
+    <em class="note">No templates found, you should create a new one.</em>
+
+  <% else %>
+    <% form_tag({:action => 'preview'}, :id => "selected-templates") do %>
+      <ul id="print-list">
+      <% @tmpls.each do |tmpl| %>
+        <li>
+          <%= check_box_tag 'print', tmpl.id, nil, :onchange => "$.get('/orders/show', {checked: this.checked, id: #{@order.id}, template_id: #{tmpl.id}}, null, 'script')" %>
+          <%= link_to tmpl.name, :controller => 'print_templates', :action => 'show', :id => tmpl %>
+        </li>
+      <% end %>
+
+      </ul>
+    <% end %>
+  <% end %>
 </div>
 
 
@@ -10,4 +27,12 @@
     <span class="highlight"><%= @order.financial_status %></span>
     by <span class="note"><%= @order.billing_address.name %></span>
   </div>
+</div>
+
+<div id="preview">
+<% @tmpls.each do |tmpl| %>
+  <% content_tag :div, :class => "preview", :id => "template-preview-#{tmpl.id}" do %>
+    
+  <% end %>
+<% end %>
 </div>

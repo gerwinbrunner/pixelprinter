@@ -3,7 +3,7 @@ module MoneyHelper
   # taken from Shop model in Shopify
   class << self
     def money_format
-      ShopifyAPI::Shop.money_format.blank? ? '$ {{amount}}' : ShopifyAPI::Shop.current.money_format]
+      ShopifyAPI::Shop.money_format.blank? ? '$ {{amount}}' : ShopifyAPI::Shop.current.money_format
     end
   
     def money_with_currency_format
