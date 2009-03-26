@@ -12,9 +12,11 @@ class OrdersController < ApplicationController
       format.js do
         if params[:template_id]
           @tmpl = shop.templates.find(params[:template_id])
-          @rendered_template = "<h1>TOTO#{@tmpl.id}</h1>"#@tmpl.render(@order.to_liquid)
+          @rendered_template = @tmpl.render(@order.to_liquid)
           @checked = params[:checked]
-          #render :text => @rendered_template
+          render :update do |page|
+            page.insert_html(:top, "preview-#{@tmpl.id}", :partial => "preview", :locals => {:rendered_template => @rendered_template, :tmpl => @tmpl})
+          end
         end
       end
       format.html do

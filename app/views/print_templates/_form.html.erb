@@ -1,5 +1,13 @@
 <% nav_link :action => 'index' %>
 
+<div id="sidebar">
+  <h4>Help</h4>
+  <ul>
+  <li><%= link_to "How does the template language work?", "http://wiki.shopify.com/Liquid", :class => "action", :target => "wiki" %></li>
+  <li><%= link_to "What variables can I use?", "http://wiki.shopify.com/Order", :class => "action", :target => "wiki" %></li>
+  </ul>
+</div>
+
 <%= error_messages_for 'tmpl', :object_name => 'template' %>
 
 <% form_for(tmpl, :method => method) do |f| %>

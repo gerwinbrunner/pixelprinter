@@ -168,7 +168,7 @@ code { font-size: 140%; }
   background: #f5fbfe; 
   border-left: 1px solid #D7E4EA; 
   color: #003366; 
-  padding: 0 20px 20px 20px;
+  padding: 0px 20px 20px 20px;
   margin-bottom: 18px;
 }
 
@@ -301,6 +301,13 @@ h1.blue, h2.blue, h3.blue {
   padding: 10px;
 }
 
+/* Billify */
+
+
+#print-button {
+	font-size: 120%;
+}
+
 a.action {
 	color: #c00;
 }
@@ -338,4 +345,17 @@ a.action {
 
 .linklist li a {
 	color: #c00;
+}
+
+.template-preview {
+	width: 55%;
+	margin: 8px 0px;
+	padding: 8px;
+	border: 1px solid #666;
+}
+
+.help {
+	margin: 8px;
+	padding: 8px;
+	background: #eee;
 }

@@ -1,6 +1,1 @@
-if @checked == "true"
-  page.insert_html :top, "template-preview-#{@tmpl.id}", @rendered_template
-  page.visual_effect :highlight, 'preview'
-else
-  page.replace_html "template-preview-#{@tmpl.id}", ""
-end
+page.insert_html(:top, "preview-#{@tmpl.id}", :partial => "preview", :locals => {:rendered_template => @rendered_template, :tmpl => @tmpl})

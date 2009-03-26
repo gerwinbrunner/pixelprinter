@@ -5,16 +5,16 @@
     <em class="note">No templates found, you should create a new one.</em>
 
   <% else %>
-    <% form_tag({:action => 'preview'}, :id => "selected-templates") do %>
+    <% form_tag({:action => 'print'}, :id => "selected-templates") do %>
       <ul id="print-list">
       <% @tmpls.each do |tmpl| %>
         <li>
-          <%= check_box_tag 'print', tmpl.id, nil, :onchange => "$.get('/orders/show', {checked: this.checked, id: #{@order.id}, template_id: #{tmpl.id}}, null, 'script')" %>
+          <%= check_box_tag 'print', tmpl.id, nil, :onchange => template_selection_listener(@order, tmpl) %>
           <%= link_to tmpl.name, :controller => 'print_templates', :action => 'show', :id => tmpl %>
         </li>
       <% end %>
-
       </ul>
+      <%= submit_tag "Print", :id => "print-button", :style => "display: none" %>
     <% end %>
   <% end %>
 </div>
@@ -31,8 +31,14 @@
 
 <div id="preview">
 <% @tmpls.each do |tmpl| %>
-  <% content_tag :div, :class => "preview", :id => "template-preview-#{tmpl.id}" do %>
+  <% content_tag :div, :id => "preview-#{tmpl.id}" do %>
     
   <% end %>
 <% end %>
 </div>
+
+<script type="text/javascript">
+  window.onload = function() {
+    checkSelectedTemplates();
+  }
+</script>

@@ -1,3 +1,5 @@
-<% content_tag :div, :class => "preview", :id => "template-preview-#{tmpl.id}" do %>
-  <%= rendered_template %>
+<% content_tag :div, :id => "template-preview-#{tmpl.id}" do %>
+  <div class="template-preview">
+    <%= rendered_template %>
+  </div>
 <% end %>

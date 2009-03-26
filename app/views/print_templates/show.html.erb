@@ -1,6 +1,7 @@
 <% title @tmpl.name %>
 
 <% nav_link :action => 'index' %>
+<% nav_link({:action => 'edit', :id => @tmpl.id}, "Edit") %>
 <% nav_link({:action => 'destroy', :id => @tmpl.id}, "Delete", :method => 'delete', :confirm => "Are you sure you want to delete the template named \"#{@tmpl.name}\"?") %>
 
 <div>
