@@ -10,3 +10,30 @@
     <table><tr><td> <%= @tmpl.body %> </td></tr></table>
 	</div>
 </div>
+
+<% javascript_tag do -%>
+  $("#body-show").bind("click", function() {
+    window.location = "/print_templates/<%= @tmpl.id %>/edit"
+  });
+  
+  $("#body-show").qtip({
+     content: 'Click to edit this template',
+     
+     show: 'mouseover',
+     hide: 'mouseout',
+     style: { 
+       name: 'green',
+       border: {
+         width: 1,
+         radius: 6
+        },
+        width: 200
+     },
+     position: {
+       corner: {
+         target: 'topLeft',
+         tooltip: 'leftBottom'
+       }
+     }
+  })
+<% end -%>

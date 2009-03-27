@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<order>
+  <buyer-accepts-marketing type="boolean">true</buyer-accepts-marketing>
+  <closed-at type="datetime" nil="true"></closed-at>
+  <created-at type="datetime">2008-12-08T16:03:40+01:00</created-at>
+  <currency>USD</currency>
+  <email>johnsmith@shopify.com</email>
+  <financial-status>pending</financial-status>
+  <fulfillment-status nil="true"></fulfillment-status>
+  <gateway>Bank Deposit</gateway>
+  <id type="integer">6001882</id>
+  <name>#1011</name>
+  <note nil="true"></note>
+  <number type="integer">11</number>
+  <subtotal-price type="decimal">13.95</subtotal-price>
+  <taxes-included type="boolean">false</taxes-included>
+  <token>0957514ab578d99239b6b8de7df626b2</token>
+  <total-discounts type="decimal">0.00</total-discounts>
+  <total-line-items-price type="decimal">13.95</total-line-items-price>
+  <total-price type="decimal">19.60</total-price>
+  <total-tax type="decimal">2.65</total-tax>
+  <total-weight type="integer">2200</total-weight>
+  <updated-at type="datetime">2008-12-08T16:03:58+01:00</updated-at>
+  <browser-ip nil="true"></browser-ip>
+  <billing-address>
+    <address1>123 Main St</address1>
+    <address2>Apartment 2</address2>
+    <city>Ottawa</city>
+    <company></company>
+    <country>Canada</country>
+    <first-name>John</first-name>
+    <last-name>Smith</last-name>
+    <phone>1234567</phone>
+    <province>Ontario</province>
+    <zip>123 456</zip>
+    <name>John Smith</name>
+  </billing-address>
+  <shipping-address>
+    <address1>Mayener Str. 150</address1>
+    <address2></address2>
+    <city>Ottawa</city>
+    <company></company>
+    <country>Canada</country>
+    <first-name>John</first-name>
+    <last-name>Smith</last-name>
+    <phone>1234567</phone>
+    <province>Ontario</province>
+    <zip>123 456</zip>
+    <name>John Smith</name>
+  </shipping-address>
+  <line-items type="array">
+    <line-item>
+      <fulfillment-service>manual</fulfillment-service>
+      <grams type="integer">1000</grams>
+      <id type="integer">11879902</id>
+      <price type="decimal">12.95</price>
+      <quantity type="integer">1</quantity>
+      <sku></sku>
+      <title>Shopify T-Shirt</title>
+      <variant-id type="integer">27858</variant-id>
+      <variant-title nil="true"></variant-title>
+      <vendor>Homegrown</vendor>
+      <name>Shopify T-Shirt</name>
+      <product-title>Shopify T-Shirt</product-title>
+    </line-item>
+  </line-items>
+  <shipping-line>
+    <code>Standard Shipping</code>
+    <price type="decimal">3.00</price>
+    <title>Standard Shipping</title>
+  </shipping-line>
+</order>

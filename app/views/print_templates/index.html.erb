@@ -1,4 +1,4 @@
-<% title "Your templates", :description => "Printing templates are html/liquid files which will get converted to PDF" %>
+<% title "Your templates", :description => "You can create templates for various purposes. Use HTML and Liquid variables to edit the content." %>
 
 <div id="sidebar">
 </div>
@@ -15,11 +15,11 @@
       <li>
         <div class="template box" onmouseover="$('#<%= "#{dom_id(tmpl)}-actions" %>').show();" onmouseout="$('#<%= "#{dom_id(tmpl)}-actions" %>').hide();">
           <div class="wrapper">
-            <strong><%= link_to tmpl.name, :action => 'preview', :id => tmpl %></strong>
+            <strong><%= link_to tmpl.name, {:action => 'show', :id => tmpl} %></strong>
             <% content_tag :span, :id => "#{dom_id(tmpl)}-actions", :class => "side-link" do %>
-              <%= link_to "Show", {:action => 'show', :id => tmpl}, :class => 'action' %> |
               <%= link_to "Edit", {:action => 'edit', :id => tmpl}, :class => 'action' %> |
-              <%= link_to "Duplicate", {:action => 'new', :name => tmpl.name + "--COPY", :body => tmpl.body}, :class => 'action', :title => "Copy the contents of this template into a new one you can edit" %>
+              <%= link_to "Duplicate", {:action => 'new', :name => tmpl.name + "--COPY", :body => tmpl.body}, :class => 'action', :title => "Copy the contents of this template into a new one you can edit" %> |
+              <%= link_to "Preview", {:action => 'preview', :id => tmpl}, :class => 'action' %>
             <% end %>
           </div>
         </div>

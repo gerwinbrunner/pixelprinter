@@ -1,1 +1,0 @@
-page.insert_html(:top, "preview-#{@tmpl.id}", :partial => "preview", :locals => {:rendered_template => @rendered_template, :tmpl => @tmpl})

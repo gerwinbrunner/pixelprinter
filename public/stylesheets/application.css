@@ -303,10 +303,21 @@ h1.blue, h2.blue, h3.blue {
 
 /* Billify */
 
+/* ID */
 
-#print-button {
-	font-size: 120%;
+#preview-status {
+	color: #666;
+	font-style: italic;
+	width: 55%;
+	margin: 16px 0px;
 }
+
+#body-show {
+	cursor: pointer;
+}
+
+
+/* CLASS */
 
 a.action {
 	color: #c00;

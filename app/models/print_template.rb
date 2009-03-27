@@ -21,7 +21,7 @@ class PrintTemplate < ActiveRecord::Base
     parse.render(assigns, EmailMoneyFilter)
   end
 
-  def load_template(template_name)
+  def from_file(template_name)
     content = File.read("#{RAILS_ROOT}/db/printing/#{template_name}.liquid")
     self.update_attributes :name => template_name.to_s, :body => content
   end

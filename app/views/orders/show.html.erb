@@ -9,7 +9,7 @@
       <ul id="print-list">
       <% @tmpls.each do |tmpl| %>
         <li>
-          <%= check_box_tag 'print', tmpl.id, nil, :onchange => template_selection_listener(@order, tmpl) %>
+          <%= check_box_tag 'print', tmpl.id, tmpl.default, :id => "template-checkbox-#{tmpl.id}" %>
           <%= link_to tmpl.name, :controller => 'print_templates', :action => 'show', :id => tmpl %>
         </li>
       <% end %>
@@ -30,15 +30,24 @@
 </div>
 
 <div id="preview">
-<% @tmpls.each do |tmpl| %>
-  <% content_tag :div, :id => "preview-#{tmpl.id}" do %>
+  <div id="preview-status" style="display: none">
+    Generating preview...
+  </div>
+  
+  <% @tmpls.each do |tmpl| %>
+    <% content_tag :div, :id => "preview-#{tmpl.id}" do %>
     
+    <% end %>
   <% end %>
-<% end %>
 </div>
 
-<script type="text/javascript">
-  window.onload = function() {
-    checkSelectedTemplates();
-  }
-</script>
+
+<% javascript_tag do -%>
+  $(document).ready(function() {
+    checkSelectedTemplates('<%= @order.id %>');
+    
+    $("#selected-templates :checkbox").bind("change", function() {
+      checkSelectedTemplates('<%= @order.id %>');
+    });
+  });
+<% end -%>

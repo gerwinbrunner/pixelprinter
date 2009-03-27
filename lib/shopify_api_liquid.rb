@@ -27,7 +27,7 @@ module ShopifyAPI
         'gateway'           => gateway,
         'order_name'        => name, 
         'order_number'      => number, 
-        'shop_name'         => name,
+        'shop_name'         => Shop.current.name,
         'subtotal_price'    => subtotal_price,
         'total_price'       => total_price,
         'tax_price'         => total_tax,

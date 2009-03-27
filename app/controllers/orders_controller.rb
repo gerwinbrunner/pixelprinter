@@ -25,4 +25,8 @@ class OrdersController < ApplicationController
       end
     end
   end
+  
+  def print
+    
+  end
 end

@@ -13,7 +13,7 @@ class PrintTemplateTest < ActiveSupport::TestCase
   context "#load_template" do
     should "save body and name from that template" do
       template = @shop.templates.new
-      template.load_template(:invoice)
+      template.from_file(:invoice)
       assert !template.new_record?
       assert_equal 'invoice', template.name
       assert_equal File.read("#{RAILS_ROOT}/db/printing/invoice.liquid"), template.body

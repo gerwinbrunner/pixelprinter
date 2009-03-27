@@ -1,8 +1,4 @@
-<% title "Your orders", :description => "You can print orders or save them as a PDF file using different templates"%>
-
-<div id="sidebar">
-  <%= render :partial => 'print_templates/select_template', :locals => {:tmpls => @tmpls} %>
-</div>
+<% title "Your orders", :description => "Select the order you want to print. You can choose different templates for various purposes."%>
 
 <div class="itemlist">
   <% if @orders.blank? %>  
@@ -20,7 +16,7 @@
             <span class="price"><%= order.total_price %> <%= order.currency %></span>
             <span class="highlight"><%= order.financial_status %></span>
             by <span class="note"><%= order.billing_address.name %></span>
-            <%= link_to "Print", {:controller => 'print', :action => 'preview', :order_id => order.id}, :class => 'side-link action', :id => "print-#{dom_id(order)}", :onclick => %[if ($("#selected-templates :checkbox:checked").length == 0) { alert("Please select a template to print first."); return false } else { var template_id = $("#selected-templates :checkbox:checked")[0].value; $("#print-#{dom_id(order)}")[0].href += "&template_id=" + template_id; return true }] %>          
+            <% link_to "Print", {:controller => 'print', :action => 'preview', :order_id => order.id}, :class => 'side-link action', :id => "print-#{dom_id(order)}", :onclick => %[if ($("#selected-templates :checkbox:checked").length == 0) { alert("Please select a template to print first."); return false } else { var template_id = $("#selected-templates :checkbox:checked")[0].value; $("#print-#{dom_id(order)}")[0].href += "&template_id=" + template_id; return true }] %>          
           </div>
         </div>
       </li>
