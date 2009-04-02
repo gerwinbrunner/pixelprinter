@@ -26,7 +26,7 @@
     <address1>123 Main St</address1>
     <address2>Apartment 2</address2>
     <city>Ottawa</city>
-    <company></company>
+    <company>Test Company</company>
     <country>Canada</country>
     <first-name>John</first-name>
     <last-name>Smith</last-name>
@@ -36,10 +36,10 @@
     <name>John Smith</name>
   </billing-address>
   <shipping-address>
-    <address1>Mayener Str. 150</address1>
-    <address2></address2>
+    <address1>123 Main St</address1>
+    <address2>Apartment 2</address2>
     <city>Ottawa</city>
-    <company></company>
+    <company>Test Company</company>
     <country>Canada</country>
     <first-name>John</first-name>
     <last-name>Smith</last-name>

@@ -11,8 +11,4 @@ class ShopTest < ActiveSupport::TestCase
     # TODO: should be 3 templates when finished
     assert_equal 1, @shop.templates.count
   end
-  
-  should "be able to create an example order from an XML file" do
-    order = @shop.example_order
-  end
 end

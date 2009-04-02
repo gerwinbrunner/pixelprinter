@@ -32,7 +32,7 @@ h3 { margin-top: 24px; }
 
 #container {
   min-width: 800px;
-  margin: 40px 15%;
+  margin: 40px 10%;
   background: #fff;
   border-right: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
@@ -131,11 +131,10 @@ code { font-size: 140%; }
  * DASHBOARD
  */
 
-.product { width: 55%; }
+.product { width: 65%; }
 .product { margin: 10px; } 
 
 .order {
-	width: 55%;
 	position: relative;
 }
 
@@ -164,7 +163,7 @@ code { font-size: 140%; }
 
 #sidebar {
   float: right; 
-  width: 280px; 
+  width: 250px; 
   background: #f5fbfe; 
   border-left: 1px solid #D7E4EA; 
   color: #003366; 
@@ -214,14 +213,15 @@ code { font-size: 140%; }
 }
 
 .box {
-  padding: 0;
   background:#FAFAFA url('../images/box-bg2.gif') repeat-x scroll left top;
-  border:1px solid #CCCCCC;
+  border: 1px solid #CCCCCC;
+	padding: 8px;
+	width: 65%;
 }
 
 .wrapper {
   border:1px solid #FFFFFF;
-  padding: 10px;
+  padding: 0;
 }
 
 .info {
@@ -308,7 +308,7 @@ h1.blue, h2.blue, h3.blue {
 #preview-status {
 	color: #666;
 	font-style: italic;
-	width: 55%;
+	width: 65%;
 	margin: 16px 0px;
 }
 
@@ -332,7 +332,7 @@ a.action {
 }
 
 .template {
-	width: 55%;
+	width: 65%;
 	position: relative;
 }
 
@@ -359,7 +359,7 @@ a.action {
 }
 
 .template-preview {
-	width: 55%;
+	width: 65%;
 	margin: 8px 0px;
 	padding: 8px;
 	border: 1px solid #666;

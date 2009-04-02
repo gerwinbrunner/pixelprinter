@@ -110,7 +110,6 @@ module ShopifyAPI
   # Order model
   #
   class Order < ActiveResource::Base  
-
     def close; load_attributes_from_response(post(:close)); end
 
     def open; load_attributes_from_response(post(:open)); end
@@ -119,7 +118,7 @@ module ShopifyAPI
       Payment.get
     end
     
-    def capture(amount = nil); load_attributes_from_response(post(:capture, :amount => amount)); end           
+    def capture(amount = nil); load_attributes_from_response(post(:capture, :amount => amount)); end
   end
 
   # Shopify product

@@ -28,8 +28,8 @@ function toggleTemplatePreview(order, checkbox) {
     if (templatePreview.length == 1) { 
       templatePreview.show();
     } else { 
-      $.ajax({url: "/orders/show", dataType: "script",
-							data: "checked=" + this.checked + "&id=" + order + "&template_id=" + template,
+      $.ajax({url: "/orders/" + order, dataType: "script",
+							data: "template_id=" + template,
 							beforeSend: function() { $("#preview-status").show(); }, 
 							success: function() { $("#preview-status").hide(); }
 			});

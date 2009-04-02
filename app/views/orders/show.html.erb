@@ -19,20 +19,19 @@
   <% end %>
 </div>
 
+<a href="/print_templates" class="colorbox">Click me</a>
 
 <div class="order box">
-  <div class="wrapper">
-    <strong><%= @order.name %></strong>
-    <span class="price"><%= @order.total_price %> <%= @order.currency %></span>
-    <span class="highlight"><%= @order.financial_status %></span>
-    by <span class="note"><%= @order.billing_address.name %></span>
-  </div>
+  <strong><%= @order.name %></strong>
+  <span class="price"><%= @order.total_price %> <%= @order.currency %></span>
+  <span class="highlight"><%= @order.financial_status %></span>
+  by <span class="note"><%= @order.billing_address.name %></span>
 </div>
 
 <div id="preview">
-  <div id="preview-status" style="display: none">
+  <p id="preview-status" style="display: none">
     Generating preview...
-  </div>
+  </p>
   
   <% @tmpls.each do |tmpl| %>
     <% content_tag :div, :id => "preview-#{tmpl.id}" do %>
@@ -50,4 +49,6 @@
       checkSelectedTemplates('<%= @order.id %>');
     });
   });
+  
+  $(".colorbox").colorbox({initialWidth: 600, initialHeight: 400});
 <% end -%>

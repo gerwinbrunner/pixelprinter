@@ -47,8 +47,19 @@
 .markItUp .markItUpButton14 a {
 	background-image:url(images/picture.png); 
 }
+
 .markItUp .markItUpButton15 a {
 	background-image:url(images/link.png);
+}
+
+/* Liquid output */
+.markItUp .markItUpButton16 a {
+	background-image:url(images/shopify_small_icon.gif);
+}
+
+/* Liquid tag */
+.markItUp .markItUpButton17 a {
+	/* background-image:url(images/shopify_small_icon.gif); */
 }
 
 .markItUp .clean a {

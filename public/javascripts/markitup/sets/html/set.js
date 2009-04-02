@@ -13,6 +13,7 @@ myHtmlSettings = {
 	onShiftEnter:	{keepDefault:false, replaceWith:'<br />\n'},
 	onCtrlEnter:	{keepDefault:false, openWith:'\n<p>', closeWith:'</p>\n'},
 	onTab:			{keepDefault:false, openWith:'	 '},
+	
 	markupSet: [
 		{name:'Heading 1', key:'1', openWith:'<h1(!( class="[![Class]!]")!)>', closeWith:'</h1>', placeHolder:'Your title here...' },
 		{name:'Heading 2', key:'2', openWith:'<h2(!( class="[![Class]!]")!)>', closeWith:'</h2>', placeHolder:'Your title here...' },
@@ -33,10 +34,14 @@ myHtmlSettings = {
 		{name:'Picture', key:'P', replaceWith:'<img src="[![Source:!:http://]!]" alt="[![Alternative text]!]" />' },
 		{name:'Link', key:'L', openWith:'<a href="[![Link:!:http://]!]"(!( title="[![Title]!]")!)>', closeWith:'</a>', placeHolder:'Your text to link...' },
 		{separator:'---------------' },
-		{name:'Liquid Output', openWith:'{{ ', closeWith:' }}' },
+		{name:'Liquid variables', openWith:'{{ ', closeWith:' }}' },
 		{name:'Liquid Tag', openWith:'{% ', closeWith:' %}' },
 		{separator:'---------------' },
 		{name:'Clean', className:'clean', replaceWith:function(markitup) { return markitup.selection.replace(/<(.*?)>/g, "") } },
-		{name:'Preview', className:'preview', call:'preview' }
+		{name:'Preview', className:'preview', call:'previewTemplate' }
 	]
+}
+
+function previewTemplate() {
+	alert("yo");
 }

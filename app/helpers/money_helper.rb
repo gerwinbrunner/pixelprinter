@@ -11,7 +11,8 @@ module MoneyHelper
     end
 
     def money_in_emails_format
-      ShopifyAPI::Shop.current.settings[:money_in_emails_format].blank? ? '${{amount}}' : ShopifyAPI::Shop.current.money_in_emails_format
+      #ShopifyAPI::Shop.current.settings[:money_in_emails_format].blank? ? 
+      '$ {{amount}}'# : ShopifyAPI::Shop.current.money_in_emails_format
     end
   
     def money_with_currency_in_emails_format
@@ -54,8 +55,8 @@ module MoneyHelper
     when Money then amount.cents
     when NilClass, nil then return ''
     when Numeric then amount
+    when String then amount.to_i
     end                          
-                           
     precision = 2
     
     if strip_precision
@@ -86,10 +87,10 @@ module MoneyHelper
     chunks
   end
   
-  def self.format_with_delimiters(cents, precision = 2, tousands = ',', decimal = '.')
-    parts = sprintf("%.#{precision}f", cents / 100.0).split('.')    
-    parts[0].gsub!(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1#{tousands}")
-    parts.join decimal
+  def self.format_with_delimiters(cents, precision = 2, thousands = ',', decimal = '.')
+    parts = sprintf("%.#{precision}f", cents / 100.0).split('.')
+    parts[0].gsub!(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1#{thousands}")
+    parts.join(decimal)
   end
   
 end

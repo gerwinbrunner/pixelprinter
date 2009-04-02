@@ -12,7 +12,7 @@
 	text-decoration:none;
 }
 .markItUp  {
-	width:700px;
+	width: 65%;
 	margin:5px 0 5px 0;
 	border:5px solid #F5F5F5;	
 }
@@ -26,11 +26,11 @@
 	font:12px 'Courier New', Courier, monospace;
 	padding: 5px;
 	border:3px solid #3C769D;
-	width:643px;
+	width: 96%;
 	height:320px;
 	/* background-image:url(images/bg-editor.png); */
 	background-repeat:no-repeat;
-	clear:both; display:block;
+	clear:left; display:block;
 	line-height:18px;
 	overflow:auto;
 }

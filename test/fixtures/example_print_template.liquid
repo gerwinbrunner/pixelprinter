@@ -1,0 +1,66 @@
+You bought from shop_name:
+
+{{shop_name}}
+
+Order name: {{order_name}}
+Name:       {{name}}
+Order #:    {{order_number}}
+
+Email:   {{ email }}
+Gateway: {{ gateway }}
+
+Subtotal price: {{ subtotal_price | money }}
+Tax Price:      {{ tax_price | money }}
+Shipping price: {{ shipping_price | money }}
+-----------------------
+Total price:    {{ total_price | money }}
+
+
+Shipping Address: 
+  {{ shipping_address.name }}
+  {{ shipping_address.street }}
+  {{ shipping_address.city }}, {{ shipping_address.province }}  {{ shipping_address.zip }} 
+  {{ shipping_address.country }}
+  {{ shipping_address.phone }}
+
+
+Billing Address:
+{{ billing_address.last_name }}, {{ billing_address.first_name }}
+{{ billing_address.street }}
+{{ billing_address.city }}, {{ billing_address.province }}  {{ billing_address.zip }} 
+{{ billing_address.country }}
+{{ billing_address.phone }}
+
+
+Line Items:
+{% for line_item in line_items %}
+  {{ line_item.quantity }} x {{ line_item.title }}		(SKU: {{ line_item.sku }})
+
+  ID:         {{ line_item.id }}
+  VARIANT:    {{ line_item.variant }}
+  PRODUCT:    {{ line_item.product }}
+  PRICE:      {{ line_item.price }}
+  LINE PRICE: {{ line_item.line_price }}
+  TAX:        {{ line_item.tax }}
+  GRAMS:      {{ line_item.grams }}
+  VENDOR:     {{ line_item.vendor }}
+{% endfor %}
+
+
+Fulfilled line items: 
+{% for line in fulfilled_line_items %}
+  {{ line.quantity }} x {{line.title }}		(sku: {{ line.sku }})
+{% endfor %}
+
+
+Unfulfilled line items:
+{% for line in unfulfilled_line_items %}
+  {{ line.quantity }} x {{line.title }}		(sku: {{ line.sku }})
+{% endfor %}
+
+Shipping method: {{ shipping_method.title }}
+
+Note:       {{ note }}
+Attributes: {{ attributes }}
+
+Customer name and email: {{ customer.name }}, {{ customer.email }}

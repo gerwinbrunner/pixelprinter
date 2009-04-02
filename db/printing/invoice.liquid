@@ -10,7 +10,7 @@ Thank you for your business.
 <div>
   <p>Amount: {{ total_price | money }}</p>
   <p>Invoice: {{ name }}</p
-  <p>Credit Card: {{ payment.card_number }}</p>
+  <p>Payment method: {{ gateway }}</p>
   
   {% if note %}
     <p>Description: {{ note }}</p>
@@ -28,4 +28,4 @@ Buyer:
 </div>
 
 If you have any questions, please send an email to 
-<a href="mailto:{{shop_email}}">{{ shop_email }}</a>
+<a href="mailto:{{ shop_email }}">{{ shop_email }}</a>

@@ -1,12 +1,23 @@
-module ShopifyAPI  
+module ShopifyAPI
+  puts "Monkeypatching ShopifyAPI Liquid extension..."
+  
   class Shop
+    def settings
+      {:money_format => "whatever"}
+    end
+    
   end               
 
   class Address < ActiveResource::Base
     def to_liquid
-      address = Hash.from_xml(to_xml)
+      address_hash = Hash.from_xml(to_xml)
       # is either shipping address or billing address
-      address[address.keys.first]
+      address_hash[address_hash.keys.first].merge('street' => street)
+    end
+    
+    def street
+      street  = address1
+      street += ", #{address2}" unless address2.blank?  
     end
   end
   
@@ -19,6 +30,11 @@ module ShopifyAPI
   class Order < ActiveResource::Base
     include OrderCalculations
     
+    def self.example(file = '/db/example_order.xml')
+      order_xml = File.read(RAILS_ROOT + file)
+      ShopifyAPI::Order.new(Hash.from_xml(order_xml)['order'])
+    end
+
     def to_liquid
       fulfilled, unfulfilled = line_items.partition {|item| item.fulfilled?}
       { 
@@ -28,10 +44,10 @@ module ShopifyAPI
         'order_name'        => name, 
         'order_number'      => number, 
         'shop_name'         => Shop.current.name,
-        'subtotal_price'    => subtotal_price,
-        'total_price'       => total_price,
-        'tax_price'         => total_tax,
-        'shipping_price'    => shipping_price,      
+        'subtotal_price'    => cents(subtotal_price),
+        'total_price'       => cents(total_price),
+        'tax_price'         => cents(total_tax),
+        'shipping_price'    => cents(shipping_line.price),
         'shipping_address'  => shipping_address, 
         'billing_address'   => billing_address, 
         'line_items'        => line_items,
@@ -59,7 +75,77 @@ module ShopifyAPI
       end
       values
     end
+   
+    def cents(amount)
+      (amount * 100).to_i
+    end
+  end
+  
+  class LineItem < ActiveResource::Base 
+    def to_liquid
+      hash = as_hash
+      hash['variant_id'] = variant_id    
+      #hash['variant'] = Proc.new { Variant.find(variant_id) rescue nil }         
+      #hash['product'] = Proc.new { Product.find(hash['variant'].product_id) rescue nil } 
+      hash.to_liquid
+    end
     
+    private
+    
+    def as_hash
+      {
+        'id'         => id, 
+        'title'      => name, 
+        'price'      => price, 
+        'line_price' => (price * quantity), 
+        'quantity'   => quantity,
+        'sku'        => sku,
+        'grams'      => grams,
+        'vendor'     => vendor
+      }
+    end
+  end       
+
+
+  class Product < ActiveResource::Base
+    # truncated (as opposed to Shopify's model) for simplicity
+    def to_liquid
+      {
+        'id'                      => id,
+        'title'                   => title,
+        'handle'                  => handle,
+        'description'             => body_html,
+        'vendor'                  => vendor,
+        'type'                    => product_type
+      }
+    end
+  end
+  
+  
+  class Variant < ActiveResource::Base
+    # truncated (as opposed to Shopify's model) for simplicity
+    def to_liquid
+      { 
+        'id'                 => id, 
+        'title'              => title,
+        'trait1'             => trait1,
+        'trait2'             => trait2,
+        'trait3'             => trait3,
+        'price'              => price, 
+        'weight'             => grams, 
+        'compare_at_price'   => compare_at_price, 
+        'inventory_quantity' => inventory_quantity, 
+        'sku'                => sku 
+      }
+    end
   end
 
+
+  class ShippingLine < ActiveResource::Base
+    def to_liquid
+      {'title' => title, 'price' => price}
+    end
+  end
+  
+  puts "...Done."
 end
