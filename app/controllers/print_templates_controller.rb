@@ -12,10 +12,16 @@ class PrintTemplatesController < ApplicationController
   end
   
   def show
+    puts "SHOW"
     @tmpl = shop.templates.find(params[:id])
     
     respond_to do |format|
       format.html
+      format.js do
+        @order = params[:order_id] ? ShopifyAPI::Order.find(params[:order_id]) : ShopifyAPI::Order.example
+        @rendered_template = @tmpl.render(@order.to_liquid)
+        render :partial => "preview", :locals => {:rendered_template => @rendered_template, :tmpl => @tmpl}
+      end
       format.xml do
         render :xml => @tmpl
       end

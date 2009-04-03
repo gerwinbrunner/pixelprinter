@@ -28,11 +28,9 @@ function toggleTemplatePreview(order, checkbox) {
     if (templatePreview.length == 1) { 
       templatePreview.show();
     } else { 
-      $.ajax({url: "/orders/" + order, dataType: "script",
-							data: "template_id=" + template,
-							beforeSend: function() { $("#preview-status").show(); }, 
-							success: function() { $("#preview-status").hide(); }
-			});
+			$("#preview-status").show();
+      $("#preview-" + template).load("/print_templates/show/" + template + "&order_id=" + order, 
+																		null, function() { $("#preview-status").hide(); });
     }
   } else { 
     templatePreview.hide();

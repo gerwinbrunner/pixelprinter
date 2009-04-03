@@ -19,15 +19,18 @@
   <%= f.text_area :body, :id => "html-editor", :cols => 80, :rows => 20 %>
   
   <%= f.submit (method.to_s == 'post' ? 'Create' : 'Update') %>
+  <%# TODO: fix URL, somehow it didn't work with :url => {:action => 'show', :id => tmpl} or :url => tmpl %>
+  or <%= link_to "Preview", "/print_templates/show/#{tmpl.id}", :id => "preview-link" %>
 <% end %>
-
 
 <script type="text/javascript">
   $(document).ready(function() {
     $("#html-editor").markItUp(myHtmlSettings);
+
+    <% if method == 'post' %>
+      $(":text:visible:enabled:first").focus().select();
+    <% end %>
+    
+    $("#preview-link").colorbox({fixedWidth: "60%", fixedHeight: "60%", transition: "150"});
   });
-   
-  <% if method == 'post' %>
-    $(":text:visible:enabled:first").focus().select();
-  <% end %>
 </script>

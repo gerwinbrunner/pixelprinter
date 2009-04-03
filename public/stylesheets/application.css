@@ -316,6 +316,10 @@ h1.blue, h2.blue, h3.blue {
 	cursor: pointer;
 }
 
+#colorbox {
+	overflow: auto;
+	width: 75%;
+}
 
 /* CLASS */
 
@@ -360,9 +364,8 @@ a.action {
 
 .template-preview {
 	width: 65%;
-	margin: 8px 0px;
+	margin: 8px 0px 64px 0px;
 	padding: 8px;
-	border: 1px solid #666;
 }
 
 .help {

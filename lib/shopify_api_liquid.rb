@@ -1,6 +1,4 @@
 module ShopifyAPI
-  puts "Monkeypatching ShopifyAPI Liquid extension..."
-  
   class Shop
     def settings
       {:money_format => "whatever"}
@@ -146,6 +144,4 @@ module ShopifyAPI
       {'title' => title, 'price' => price}
     end
   end
-  
-  puts "...Done."
 end

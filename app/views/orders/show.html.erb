@@ -19,8 +19,6 @@
   <% end %>
 </div>
 
-<a href="/print_templates" class="colorbox">Click me</a>
-
 <div class="order box">
   <strong><%= @order.name %></strong>
   <span class="price"><%= @order.total_price %> <%= @order.currency %></span>
@@ -29,15 +27,9 @@
 </div>
 
 <div id="preview">
-  <p id="preview-status" style="display: none">
-    Generating preview...
-  </p>
+  <p id="preview-status" style="display: none">Generating preview...</p>
   
-  <% @tmpls.each do |tmpl| %>
-    <% content_tag :div, :id => "preview-#{tmpl.id}" do %>
-    
-    <% end %>
-  <% end %>
+  <% @tmpls.each do |tmpl| %> <div id="preview-<%= tmpl.id %>"></div> <% end %>
 </div>
 
 
@@ -48,7 +40,8 @@
     $("#selected-templates :checkbox").bind("change", function() {
       checkSelectedTemplates('<%= @order.id %>');
     });
+    
+    
+    $(".colorbox").colorbox({initialWidth: 600, initialHeight: 400});
   });
-  
-  $(".colorbox").colorbox({initialWidth: 600, initialHeight: 400});
 <% end -%>
