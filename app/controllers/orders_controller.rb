@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   def index
     @orders = ShopifyAPI::Order.find(:all)
     @tmpls  = shop.templates
+    @default_template = @tmpls.find(:first, :conditions => {:default => true})
   end
   
   def show

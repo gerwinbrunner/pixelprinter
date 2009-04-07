@@ -32,4 +32,21 @@ module ApplicationHelper
     end
     linklist << "</ul>"
   end
+  
+  def preview_status
+    content_tag :p, :id => "preview-status" do
+      image_tag("status.gif") + " Generating preview..."
+    end
+  end
+  
+  def preview_link(template=nil, order=nil, options={})
+    url = {:controller => 'print_templates', :action => 'preview'}
+    url.merge!(:id => template) if template
+    url.merge!(:order_id => order) if order
+    
+    link_to_remote("Preview", {:url => url, :submit => "print_template_form", 
+            :loading => "togglePreviewLinkStatus(true);",
+            :complete => "jQuery.facebox(request.responseText); togglePreviewLinkStatus(false);", 
+            :html => {:id => "preview-link"}}.deep_merge(options))
+  end
 end

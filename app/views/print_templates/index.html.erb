@@ -17,8 +17,8 @@
           <strong><%= link_to tmpl.name, {:action => 'show', :id => tmpl} %></strong>
           <% content_tag :span, :id => "#{dom_id(tmpl)}-actions", :class => "side-link" do %>
             <%= link_to "Edit", {:action => 'edit', :id => tmpl}, :class => 'action' %> |
-            <%= link_to "Duplicate", {:action => 'new', :name => tmpl.name + "--COPY", :body => tmpl.body}, :class => 'action', :title => "Copy the contents of this template into a new one you can edit" %> |
-            <%= link_to "Preview", {:action => 'preview', :id => tmpl}, :class => 'action' %>
+            <%= link_to "Duplicate", {:action => 'new', :id => tmpl.id}, :class => 'action', :title => "Copy the contents of this template into a new one you can edit" %> |
+            <%= preview_link(tmpl.id, nil, :html => {:class => 'action preview-link'}, :title => tmpl.name) %>
           <% end %>
         </div>
       </li>
@@ -29,3 +29,5 @@
 </div>
 
 <%= link_to "Create new template", {:action => 'new'}, :class => 'action' %>
+
+<%= preview_status %>

@@ -57,7 +57,11 @@ module ShopifyAPI
         'customer'          => {'email' => email, 'name' => billing_address.name}
       }
     end
-    
+
+    def url
+      "#{ShopifyAPI::Session.protocol}://#{ShopifyAPI::Shop.current.domain}/admin/orders/#{id}"
+    end
+
     private
 
     # additional methods from original Ordel model in shopify, needed for to_liquid

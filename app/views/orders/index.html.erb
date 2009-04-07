@@ -15,11 +15,12 @@
           <span class="price"><%= order.total_price %> <%= order.currency %></span>
           <span class="highlight"><%= order.financial_status %></span>
           by <span class="note"><%= order.billing_address.name %></span>
-          <% link_to "Print", {:controller => 'print', :action => 'preview', :order_id => order.id}, :class => 'side-link action', :id => "print-#{dom_id(order)}", :onclick => %[if ($("#selected-templates :checkbox:checked").length == 0) { alert("Please select a template to print first."); return false } else { var template_id = $("#selected-templates :checkbox:checked")[0].value; $("#print-#{dom_id(order)}")[0].href += "&template_id=" + template_id; return true }] %>          
+          
+          <%= preview_link(@default_template.id, order.id, :html => {:class => 'side-link action', :id => "print-#{dom_id(order)}"}) %>
         </div>
       </li>
     <% end %>
     </ul>
-
+    <%= preview_status %>
   <% end %>
 </div>

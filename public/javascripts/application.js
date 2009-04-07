@@ -24,15 +24,27 @@ function checkAllTemplatePreviews(order) {
 function toggleTemplatePreview(order, checkbox) {
 	var	template = checkbox.value;
 	var templatePreview = $("#template-preview-" + template);
-  if (checkbox.checked == true) {
+  if (checkbox.checked == true && checkbox.disabled == false) {
     if (templatePreview.length == 1) { 
       templatePreview.show();
     } else { 
+			checkbox.disabled = true;
 			$("#preview-status").show();
-      $("#preview-" + template).load("/print_templates/show/" + template + "&order_id=" + order, 
-																		null, function() { $("#preview-status").hide(); });
+      $("#preview-" + template).load("/print_templates/preview?id=" + template + "&order_id=" + order, 
+																		null, function() { $("#preview-status").hide(); checkbox.disabled = false;});
     }
   } else { 
     templatePreview.hide();
   }
+}
+
+
+function togglePreviewLinkStatus(active) {
+	if (active) {
+		$("#main-buttons").hide();
+		$("#preview-status").show();
+	} else {
+		$("#main-buttons").show();
+		$("#preview-status").hide();
+	}
 }

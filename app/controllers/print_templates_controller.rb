@@ -12,16 +12,10 @@ class PrintTemplatesController < ApplicationController
   end
   
   def show
-    puts "SHOW"
     @tmpl = shop.templates.find(params[:id])
     
     respond_to do |format|
       format.html
-      format.js do
-        @order = params[:order_id] ? ShopifyAPI::Order.find(params[:order_id]) : ShopifyAPI::Order.example
-        @rendered_template = @tmpl.render(@order.to_liquid)
-        render :partial => "preview", :locals => {:rendered_template => @rendered_template, :tmpl => @tmpl}
-      end
       format.xml do
         render :xml => @tmpl
       end
@@ -29,8 +23,8 @@ class PrintTemplatesController < ApplicationController
   end
   
   def new
-    @tmpl = shop.templates.new
-    @tmpl.name, @tmpl.body = params[:name], params[:body]
+    @tmpl = params[:id] ? shop.templates.find(params[:id]) : shop.templates.new
+    @tmpl.name += "--COPY" unless @tmpl.new_record?
   end
 
   def create
@@ -95,6 +89,19 @@ class PrintTemplatesController < ApplicationController
         head :ok
       end
     end
+  end
+
+  def preview
+    Shop.benchmark("Getting template.") do
+      @tmpl  = params[:id] ? shop.templates.find(params[:id]) : shop.templates.new(params[:print_template])
+    end
+    Shop.benchmark("Getting or creating order.") do
+      @order = params[:order_id] ? ShopifyAPI::Order.find(params[:order_id]) : ShopifyAPI::Order.example
+    end
+    Shop.benchmark("Rendering template.") do
+      @rendered_template = @tmpl.render(@order.to_liquid)
+    end
+    render :partial => "preview", :locals => {:rendered_template => @rendered_template, :tmpl => @tmpl}
   end
   
 end

@@ -8,10 +8,12 @@
   <title><%= APP_NAME %></title>
 
   <%= stylesheet_link_tag 'application' %>
+  <%= stylesheet_link_tag 'print', :media => 'print' %>
+
   <%= javascript_include_tag :defaults %>
   
-  <%= javascript_include_tag 'markitup/jquery.markitup.pack', 'markitup/sets/html/set', 'jquery.qtip.pack', 'jquery.colorbox.min' %>
-  <%= stylesheet_link_tag '/javascripts/markitup/skins/markitup/style.css', '/javascripts/markitup/sets/html/style.css', 'colorbox', 'colorbox-custom', 'colorbox-custom-ie' %> 
+  <%= javascript_include_tag 'markitup/jquery.markitup.pack', 'markitup/sets/html/set', 'facebox' %>
+  <%= stylesheet_link_tag '/javascripts/markitup/skins/markitup/style.css', '/javascripts/markitup/sets/html/style.css', 'facebox' %>
 </head>
 	
 <body>

@@ -1,3 +1,6 @@
+<% nav_link :action => 'index' %>
+<% nav_link(@order.url, "Show details", :title => "Open order in Shopify admin interface") %>
+
 <div id="sidebar">
   <h4>Select the template you want to print:</h4>
   <% if @tmpls.blank? %>
@@ -14,7 +17,7 @@
         </li>
       <% end %>
       </ul>
-      <%= submit_tag "Print", :id => "print-button", :style => "display: none" %>
+      <%= button_to_function "Print", "window.print()", :id => "print-button", :style => "display: none" %>
     <% end %>
   <% end %>
 </div>
@@ -27,7 +30,7 @@
 </div>
 
 <div id="preview">
-  <p id="preview-status" style="display: none">Generating preview...</p>
+  <%= preview_status %>
   
   <% @tmpls.each do |tmpl| %> <div id="preview-<%= tmpl.id %>"></div> <% end %>
 </div>
@@ -40,8 +43,5 @@
     $("#selected-templates :checkbox").bind("change", function() {
       checkSelectedTemplates('<%= @order.id %>');
     });
-    
-    
-    $(".colorbox").colorbox({initialWidth: 600, initialHeight: 400});
   });
 <% end -%>

@@ -29,16 +29,16 @@ myHtmlSettings = {
 		{separator:'---------------' },
 		{name:'Ul', openWith:'<ul>\n', closeWith:'</ul>\n' },
 		{name:'Ol', openWith:'<ol>\n', closeWith:'</ol>\n' },
-		{name:'Li', openWith:'<li>', closeWith:'</li>' },
+		{name:'Li', key: '9', openWith:'<li>', closeWith:'</li>' },
 		{separator:'---------------' },
 		{name:'Picture', key:'P', replaceWith:'<img src="[![Source:!:http://]!]" alt="[![Alternative text]!]" />' },
 		{name:'Link', key:'L', openWith:'<a href="[![Link:!:http://]!]"(!( title="[![Title]!]")!)>', closeWith:'</a>', placeHolder:'Your text to link...' },
 		{separator:'---------------' },
-		{name:'Liquid variables', openWith:'{{ ', closeWith:' }}' },
-		{name:'Liquid Tag', openWith:'{% ', closeWith:' %}' },
+		{name:'Liquid variables', key: '7', openWith:'{{ ', closeWith:' }}' },
+		{name:'Liquid Tag', key: '8', openWith:'{% ', closeWith:' %}' },
 		{separator:'---------------' },
 		{name:'Clean', className:'clean', replaceWith:function(markitup) { return markitup.selection.replace(/<(.*?)>/g, "") } },
-		{name:'Preview', className:'preview', call:'previewTemplate' }
+		{name:'Preview', key: 'E', className:'preview', replaceWith: function(markitup) { $("#preview-link").click(); } }
 	]
 }
 

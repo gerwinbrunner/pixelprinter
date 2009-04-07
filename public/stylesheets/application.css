@@ -178,6 +178,21 @@ code { font-size: 140%; }
 
 #sidebar li { margin: 8px 0; }
 
+#sidebar dl {
+	margin: 8px 0 0 0;
+	font-size: 90%;
+	line-height: 120%;
+}
+
+#sidebar dt {
+	font-weight: bold;
+	margin: 0px;
+}
+
+#sidebar dd {
+	margin-left: 8px;
+	font-style: italic;
+}
 
 #print-list * {
 	vertical-align: top;
@@ -306,10 +321,15 @@ h1.blue, h2.blue, h3.blue {
 /* ID */
 
 #preview-status {
+	display: none;
 	color: #666;
 	font-style: italic;
+	text-decoration: none;
 	width: 65%;
-	margin: 16px 0px;
+}
+
+#preview-status * {
+	vertical-align: top;
 }
 
 #body-show {
@@ -368,8 +388,21 @@ a.action {
 	padding: 8px;
 }
 
+
+#facebox .template-preview {
+	width: 90%;
+	height: 600px;
+	margin: 32px 32px;
+	padding: 8px;
+	overflow: auto;
+}
+
 .help {
 	margin: 8px;
 	padding: 8px;
 	background: #eee;
+}
+
+#main-buttons {
+	
 }

@@ -5,35 +5,19 @@
 <% nav_link({:action => 'destroy', :id => @tmpl.id}, "Delete", :method => 'delete', :confirm => "Are you sure you want to delete the template named \"#{@tmpl.name}\"?") %>
 
 <div>
-	<div id="body-show" style="padding: 12px; border: 2px solid #666; background-color: #efefef; text-align: left">
+	<div id="body-show" class="box" title="Click to edit this template">
     <!-- Table Wrapper to prevent the layout from breaking due to invalid user text! -->
     <table><tr><td> <%= @tmpl.body %> </td></tr></table>
 	</div>
 </div>
 
+<%# TODO: remove QTip if not used elsewhere %>
 <% javascript_tag do -%>
-  $("#body-show").bind("click", function() {
-    window.location = "/print_templates/<%= @tmpl.id %>/edit"
+  $(document).ready(function() {
+
+    $("#body-show").click(function() {
+      window.location = "/print_templates/<%= @tmpl.id %>/edit"
+    });
+
   });
-  
-  $("#body-show").qtip({
-     content: 'Click to edit this template',
-     
-     show: 'mouseover',
-     hide: 'mouseout',
-     style: { 
-       name: 'green',
-       border: {
-         width: 1,
-         radius: 6
-        },
-        width: 200
-     },
-     position: {
-       corner: {
-         target: 'topLeft',
-         tooltip: 'leftBottom'
-       }
-     }
-  })
 <% end -%>
