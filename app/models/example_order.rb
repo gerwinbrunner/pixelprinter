@@ -1,5 +1,3 @@
-require 'faker'
-
 module ExampleOrder
   
   def self.included(base)    
