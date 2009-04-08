@@ -28,10 +28,10 @@ function toggleTemplatePreview(order, checkbox) {
     if (templatePreview.length == 1) { 
       templatePreview.show();
     } else { 
-			checkbox.disable();
+			checkbox.disabled = true;
 			$("#preview-status").show();
       $("#preview-" + template).load("/print_templates/preview?id=" + template + "&order_id=" + order, 
-																		null, function() { $("#preview-status").hide(); checkbox.enable();});
+																		null, function() { $("#preview-status").hide(); checkbox.disabled = false;});
     }
   } else { 
     templatePreview.hide();
