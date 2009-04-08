@@ -23,7 +23,8 @@ class PrintTemplatesController < ApplicationController
   end
   
   def new
-    @tmpl = shop.templates.new
+    @tmpls = shop.templates
+    @tmpls.new
     if params[:id]
       original = shop.templates.find(params[:id])
       @tmpl.name = original.name + "--COPY"
@@ -55,7 +56,8 @@ class PrintTemplatesController < ApplicationController
   end
 
   def edit
-    @tmpl = shop.templates.find(params[:id])
+    @tmpls = shop.templates
+    @tmpl = @tmpls.find(params[:id])
   end
   
   def update

@@ -35,6 +35,7 @@
   <div id="main-buttons">
     <%= f.submit(method.to_s == 'post' ? 'Create' : 'Update') %>
     or <%= preview_link %>
+       <%= preview_link(tmpl.id, nil, :templates => all_templates) %>
   </div>
   <%= preview_status %>
 <% end %>
