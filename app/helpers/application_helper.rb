@@ -48,7 +48,7 @@ module ApplicationHelper
     url = {:controller => 'print_templates', :action => 'preview'}
     url.merge!(:id => template) if template
     url.merge!(:order_id => order) if order
-    template_selector = add_template_selector_options(order, options.delete(:templates)) if options[:templates]
+    template_selector = add_template_selector_options(template, order, options.delete(:templates)) if options[:templates]
     
     link_to_remote("Preview", {:url => url, :submit => "print_template_form", 
             :loading => "togglePreviewLinkStatus(true);",
@@ -56,9 +56,9 @@ module ApplicationHelper
             :html => {:id => "preview-link"}}.deep_merge(options))
   end
   
-  def add_template_selector_options(order, tmpls)
+  def add_template_selector_options(selected_template, order, tmpls)
     ids   = tmpls.map(&:id).map{|var| "'#{var}'"}.join(", ")
     names = tmpls.map(&:name).map{|var| "'#{var}'"}.join(", ")
-    "addTemplateSelectorOptions('#{order}', [#{ids}], [#{names}]);"
+    "addTemplateSelectorOptions('#{selected_template}', '#{order}', [#{ids}], [#{names}]);"
   end
 end

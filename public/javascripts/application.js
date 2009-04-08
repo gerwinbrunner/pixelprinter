@@ -50,10 +50,10 @@ function togglePreviewLinkStatus(active) {
 }
 
 
-function addTemplateSelectorOptions(order, templateIDs, templateNames) {
+function addTemplateSelectorOptions(selectedTemplate, order, templateIDs, templateNames) {
 	var selecta = $("#template-selector");
 	var selections = jQuery.map(templateIDs, function(id, index){
-		return "<option value='" + id + "'>" + templateNames[index] + "</option>";
+		return "<option value='" + id + "'" + (selectedTemplate == id ? " selected=true" : "") +  ">" + templateNames[index] + "</option>";
 	});
 	selecta.html(selections.join(" "));
 	
