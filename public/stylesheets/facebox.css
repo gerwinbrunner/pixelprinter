@@ -64,7 +64,7 @@
   border-top: 1px solid #DDDDDD;
   padding-top: 5px;
   margin-top: 10px;
-  text-align: right;
+  text-align: left;
 	position: relative;
 }
 
@@ -103,7 +103,8 @@
 	position: relative;
 }
 
-.print {
+.close {
 	position: absolute;
-	left: 0px;
+	right: 0px;
+	bottom: 0px;
 }

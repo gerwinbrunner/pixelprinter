@@ -23,8 +23,12 @@ class PrintTemplatesController < ApplicationController
   end
   
   def new
-    @tmpl = params[:id] ? shop.templates.find(params[:id]) : shop.templates.new
-    @tmpl.name += "--COPY" unless @tmpl.new_record?
+    @tmpl = shop.templates.new
+    if params[:id]
+      original = shop.templates.find(params[:id])
+      @tmpl.name = original.name + "--COPY"
+      @tmpl.body = original.body
+    end
   end
 
   def create
@@ -92,15 +96,10 @@ class PrintTemplatesController < ApplicationController
   end
 
   def preview
-    Shop.benchmark("Getting template.") do
-      @tmpl  = params[:id] ? shop.templates.find(params[:id]) : shop.templates.new(params[:print_template])
-    end
-    Shop.benchmark("Getting or creating order.") do
-      @order = params[:order_id] ? ShopifyAPI::Order.find(params[:order_id]) : ShopifyAPI::Order.example
-    end
-    Shop.benchmark("Rendering template.") do
-      @rendered_template = @tmpl.render(@order.to_liquid)
-    end
+    @tmpl  = params[:id] ? shop.templates.find(params[:id]) : shop.templates.new(params[:print_template])
+    @order = params[:order_id].blank? ? ShopifyAPI::Order.example : ShopifyAPI::Order.find(params[:order_id])
+    @rendered_template = @tmpl.render(@order.to_liquid)
+
     render :partial => "preview", :locals => {:rendered_template => @rendered_template, :tmpl => @tmpl}
   end
   

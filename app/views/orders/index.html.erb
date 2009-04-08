@@ -16,7 +16,7 @@
           <span class="highlight"><%= order.financial_status %></span>
           by <span class="note"><%= order.billing_address.name %></span>
           
-          <%= preview_link(@default_template.id, order.id, :html => {:class => 'side-link action', :id => "print-#{dom_id(order)}"}) %>
+          <%= preview_link(@default_template.id, order.id, :html => {:class => 'side-link action', :id => "print-#{dom_id(order)}"}, :templates => @tmpls) %>
         </div>
       </li>
     <% end %>

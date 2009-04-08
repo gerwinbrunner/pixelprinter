@@ -322,10 +322,16 @@ h1.blue, h2.blue, h3.blue {
 
 #preview-status {
 	display: none;
+
+	border: 1px solid #666;
+	background-color: #fff;
+	padding: 8px;
+	width: 200px;
+	text-align: center;
+	z-index: 200;
 	color: #666;
 	font-style: italic;
 	text-decoration: none;
-	width: 65%;
 }
 
 #preview-status * {

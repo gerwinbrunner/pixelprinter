@@ -96,9 +96,10 @@
                 <div class="content"> \
                 </div> \
                 <div class="footer"> \
-                	<a href="#" class="print" onclick="window.print()"> \
-                  	Print \
-                	</a> \
+									<form action="."> \
+										<select id="template-selector" /> \
+										<input type="button" value="Print" class="print" onclick="window.print()" /> \
+									</form> \
                   <a href="#" class="close"> \
                     <img src="/images/facebox/closelabel.gif" title="close" class="close_image" /> \
                   </a> \

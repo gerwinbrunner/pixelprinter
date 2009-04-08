@@ -28,10 +28,10 @@ function toggleTemplatePreview(order, checkbox) {
     if (templatePreview.length == 1) { 
       templatePreview.show();
     } else { 
-			checkbox.disabled = true;
+			checkbox.disable();
 			$("#preview-status").show();
       $("#preview-" + template).load("/print_templates/preview?id=" + template + "&order_id=" + order, 
-																		null, function() { $("#preview-status").hide(); checkbox.disabled = false;});
+																		null, function() { $("#preview-status").hide(); checkbox.enable();});
     }
   } else { 
     templatePreview.hide();
@@ -47,4 +47,22 @@ function togglePreviewLinkStatus(active) {
 		$("#main-buttons").show();
 		$("#preview-status").hide();
 	}
+}
+
+
+function addTemplateSelectorOptions(order, templateIDs, templateNames) {
+	var selecta = $("#template-selector");
+	var selections = jQuery.map(templateIDs, function(id, index){
+		return "<option value='" + id + "'>" + templateNames[index] + "</option>";
+	});
+	selecta.html(selections.join(" "));
+	
+	selecta.bind('change', function(e) {
+		var template = e.target.value;
+		$("#preview-status").show();
+		selecta.disable();
+		$("#facebox .content").load("/print_templates/preview?id=" + template + "&order_id=" + order, 
+			null, function() { $("#preview-status").hide(); selecta.enable(); } 
+		);
+	});
 }

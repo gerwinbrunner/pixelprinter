@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
   def index
     @orders = ShopifyAPI::Order.find(:all)
     @tmpls  = shop.templates
+    # TODO: make sure there is no error when all templates are deleted
     @default_template = @tmpls.find(:first, :conditions => {:default => true}) || @tmpls.find(:first)
   end
   

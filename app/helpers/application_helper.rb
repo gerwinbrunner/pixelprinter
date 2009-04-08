@@ -34,8 +34,13 @@ module ApplicationHelper
   end
   
   def preview_status
-    content_tag :p, :id => "preview-status" do
+    p = content_tag :div, :id => "preview-status" do
       image_tag("status.gif") + " Generating preview..."
+    end
+    p += javascript_tag do
+      %Q{
+        $('#preview-status').center();
+      }
     end
   end
   
@@ -43,10 +48,17 @@ module ApplicationHelper
     url = {:controller => 'print_templates', :action => 'preview'}
     url.merge!(:id => template) if template
     url.merge!(:order_id => order) if order
+    template_selector = add_template_selector_options(order, options.delete(:templates)) if options[:templates]
     
     link_to_remote("Preview", {:url => url, :submit => "print_template_form", 
             :loading => "togglePreviewLinkStatus(true);",
-            :complete => "jQuery.facebox(request.responseText); togglePreviewLinkStatus(false);", 
+            :complete => "jQuery.facebox(request.responseText); togglePreviewLinkStatus(false); #{template_selector}", 
             :html => {:id => "preview-link"}}.deep_merge(options))
+  end
+  
+  def add_template_selector_options(order, tmpls)
+    ids   = tmpls.map(&:id).map{|var| "'#{var}'"}.join(", ")
+    names = tmpls.map(&:name).map{|var| "'#{var}'"}.join(", ")
+    "addTemplateSelectorOptions('#{order}', [#{ids}], [#{names}]);"
   end
 end

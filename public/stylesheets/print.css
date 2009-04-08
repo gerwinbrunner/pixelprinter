@@ -1,6 +1,10 @@
+body {
+	font-size: 11px;
+}
+
 /* HIDE ELEMENTS */
 #utils, #nav, #sbar, 
-#reportlink, #action-links, #secondary, .tools, .toolbox {
+#reportlink, #action-links, #secondary, .tools, .toolbox, . {
   display: none !important;
 }
 
@@ -18,7 +22,7 @@ form {
 	display: none;
 }
 
-.order, .linklist {
+.order, .linklist, .itemlist, .action {
 	display: none;
 }
 
@@ -188,4 +192,8 @@ dd {
 	margin:0 0 1em;
   padding:0;
 }
-  
+
+/* Always print each template on a new page */  
+.template-preview {
+	page-break-after: always;
+}
