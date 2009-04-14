@@ -1,7 +1,9 @@
+page << "Status.hide()"
 page << "$('#modal-dialog').dialog('close')"
-page << "$('#preview-status').hide()"
 
-if @tmpl.name_changed?
-  page.replace_html("edit-link-#{@tmpl.id}", @tmpl.name)
-  page << "$('#edit-link-#{@tmpl.id}').effect('highlight')"
-end
+page.replace_html("edit-link-#{@tmpl.id}", @tmpl.name)
+page << "$('#edit-link-#{@tmpl.id}').effect('pulsate')"
+
+# remove old preview (which is kinda cached), so that it can be reloaded again
+page.replace("template-preview-#{@tmpl.id}", "")
+page << "$('#template-checkbox-#{@tmpl.id}').attr('checked', false)"

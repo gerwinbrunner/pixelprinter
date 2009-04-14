@@ -12,25 +12,22 @@ class PrintTemplatesController < ApplicationController
   end
   
   def show
-    @tmpl = shop.templates.find(params[:id])
-    
-    respond_to do |format|
-      format.html
-      format.xml do
-        render :xml => @tmpl
-      end
+    @tmpl  = params[:id] ? shop.templates.find(params[:id]) : shop.templates.new(params[:print_template])
+    @order = params[:order_id].blank? ? ShopifyAPI::Order.example : ShopifyAPI::Order.find(params[:order_id])
+    @rendered_template = @tmpl.render(@order.to_liquid)
+    if params[:inline]
+      render :partial => 'preview', :locals => {:rendered_template => @rendered_template, :tmpl => @tmpl, :inline => true}
     end
   end
+
   
   def new
-    @tmpls = shop.templates
-    @tmpl = @tmpls.new
+    @tmpl = shop.templates.new
     if params[:id]
       original = shop.templates.find(params[:id])
       @tmpl.name = original.name + "--COPY"
       @tmpl.body = original.body
     end
-    render :template => 'print_templates/new', :layout => false
   end
 
   def create
@@ -38,13 +35,13 @@ class PrintTemplatesController < ApplicationController
     if @tmpl.save
       msg = "Successfully added printing template #{@tmpl.name}."
     else
-      msg = "Error while trying to add a new printing template!"
+      msg = "Error: #{@tmpl.errors.full_messages.to_sentence}"
       render :update do |page|
-        errs = @tmpl.errors.full_messages.to_sentence
-        page.alert(errs)
+        page << %Q[ Status.show("#{msg}", 'error') ]
       end
     end
   end
+
 
   def edit
     @tmpls = shop.templates
@@ -58,13 +55,13 @@ class PrintTemplatesController < ApplicationController
     if @tmpl.update_attributes(params[:print_template])
       msg = "Updated print template."
     else
-      msg = "Error while trying to update print template: #{@tmpl.errors.full_messages.to_s}"
+      msg = "Error: #{@tmpl.errors.full_messages.to_sentence}"
       render :update do |page|
-        errs = @tmpl.errors.full_messages.to_sentence
-        page.alert(errs)
+        page << %Q[ Status.show("#{msg}", 'error') ]
       end        
     end
   end 
+
 
   def destroy
     @tmpl = shop.templates.find(params[:id])
@@ -77,14 +74,6 @@ class PrintTemplatesController < ApplicationController
         head :ok
       end
     end
-  end
-
-  def preview
-    @tmpl  = params[:id] ? shop.templates.find(params[:id]) : shop.templates.new(params[:print_template])
-    @order = params[:order_id].blank? ? ShopifyAPI::Order.example : ShopifyAPI::Order.find(params[:order_id])
-    @rendered_template = @tmpl.render(@order.to_liquid)
-
-    render :partial => "preview", :locals => {:rendered_template => @rendered_template, :tmpl => @tmpl}
   end
   
 end

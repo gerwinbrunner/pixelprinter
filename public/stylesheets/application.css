@@ -211,16 +211,23 @@ code { font-size: 140%; }
 }
 /* Flash */
 
-#flasherrors, #flashnotices {
-  background: #faf7ea;
+.error, .notice {
   border-bottom: 1px solid #e8e6d9;
 	padding: 10px;
   font-weight: bold;
-  text-align:center;
+  text-align: center;
+  color: #eee !important;
 }
 
-#flasherrors { color: #6e290b; }
-#flashnotices { color: #549d19; }
+.error p, .notice p {
+}
+
+.error p { 
+	color: #e00;
+}
+
+.notice p { 
+}
 
 /* CLASSES */
 
@@ -412,11 +419,6 @@ a.action {
 	background: #eee;
 }
 
-#main-buttons {
-	
-}
-
-
 #html-editor {
 	font-family: "Courier New", "Courier", "monospace";
 	width: 100%;
@@ -424,4 +426,29 @@ a.action {
 
 #print-button {
 	display: none;
+}
+
+#modal-dialog {
+	background-color: #fff;
+	position: relative;
+}
+
+.button-panel {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+
+.buttons {
+	background-color: #eee;
+	border: 1px solid #ccc;
+	text-align: center;
+	padding: 12px 16px;
+	margin: 16px;
+}
+
+.buttons a {
+	color: #c00 !important;
 }

@@ -4,6 +4,7 @@
 <div id="modal-dialog">
 </div>
 
+
 <% sidebar do %>
   <h4>Select the template you want to print:</h4>
   <% if @tmpls.blank? %>
@@ -14,16 +15,15 @@
     <% form_tag({:action => 'print'}, :id => "selected-templates") do %>
       <ul id="print-list">
       <% @tmpls.each do |tmpl| %>
-        <li class="template-item">
-          <%= render :partial => 'template_checkbox', :locals => {:tmpl => tmpl} %>
-        </li>
+        <%= render :partial => 'template_checkbox', :locals => {:tmpl => tmpl} %>
       <% end %>
-      <li id="template-create-link"><%= link_to_function "Create new template", "Template.create()" %></li>
+      <li id="template-create-link"><%= link_to_remote "Create new template", :url => {:controller => 'print_templates', :action => 'new'}, :loading => "Status.show()" %></li>
       </ul>
       <%= button_to_function "Print", "window.print()", :id => "print-button" %>
     <% end %>
   <% end %>
 <% end %>
+
 
 <div class="order box">
   <strong><%= @order.name %></strong>
@@ -32,7 +32,6 @@
   by <span class="note"><%= @order.billing_address.name %></span>
 </div>
 
-<%= preview_status %>
 
 <div id="preview">
   <% @tmpls.each do |tmpl| %> <div id="preview-<%= tmpl.id %>"></div> <% end %>
@@ -40,19 +39,9 @@
 
 
 <% content_for :javascript do %>
-  $(document).ready(function() {
-    checkSelectedTemplates('<%= @order.id %>');
-    
-    $("#selected-templates :checkbox").bind("change", function() {
-      checkSelectedTemplates('<%= @order.id %>');
-    });
-
-    // This is a bit of a hack: 
-    //   Get the ID of the template from it's link and pass it on to the preview() function.
-    //   It is solved like this (with #live) to make sure later inserted links respond to the preview function as well.
-    $(".template-item a").live("click", function() {
-      var template = $(this).attr('id').match(/\d+/)[0]
-      Template.preview(template ,<%= @order.id %>)
-    });
+  Templates.checkAll('<%= @order.id %>');
+  
+  $("#selected-templates :checkbox").live("change", function() {
+    Templates.checkAll('<%= @order.id %>');
   });
 <% end %>

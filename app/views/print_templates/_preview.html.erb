@@ -3,3 +3,15 @@
     <%= rendered_template %>
   </div>
 <% end %>
+
+<% unless defined?(inline) %>
+  <div class="button-panel">
+    <p class="buttons">
+      <%= button_to_function "Print", "window.print()"%>
+      or
+      <%= button_to_remote "Edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl}, :method => 'get', :loading => "Status.show()", :complete => "Status.hide()" %>
+      or
+      <%= link_to_function "Cancel", "$('#modal-dialog').dialog('close')" %>
+    </p>
+  </div>
+<% end%>

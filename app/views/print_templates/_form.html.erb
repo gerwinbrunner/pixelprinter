@@ -1,19 +1,23 @@
-<%= error_messages_for 'tmpl', :object_name => 'template' %>
-
-<% form_for(tmpl, :method => method, :html => {:id => "print_template_form"}) do |f| %>
+<% form_remote_for(tmpl, :method => method, :html => {:id => "print_template_form"}, :loading => "Status.show()") do |f| %>
   <div class="header">
     <%= f.label :name, "Name:" %>
     <%= f.text_field :name %>
   </div>
   
   <%= f.text_area :body %>
+
+  <div class="button-panel">
+    <p class="buttons">
+      <%= submit_tag(method == 'post' ? "Create" : "Update" )%>
+      or
+      <%= link_to_function "Cancel", "$('#modal-dialog').dialog('destroy')", :class => 'action' %>
+    </p>
+  </div>
 <% end %>
 
 
 <% content_for :javascript do %>
-  $(document).ready(function() {
-    <% if method == 'post' %>
-      $(":text:visible:enabled:first").focus().select();
-    <% end %>
-  });
+  <% if method == 'post' %>
+    $(":text:visible:enabled:first").focus().select();
+  <% end %>
 <% end %>
