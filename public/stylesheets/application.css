@@ -25,7 +25,7 @@ h3 { margin-top: 24px; }
   color: #ededed;
 }
 
-#login-link a { color: #ebff7c; }
+#login-link a { color: #000; }
 #login-link a:hover { text-decoration: underline; }
 #login-link a.shop_name { color: inherit; text-decoration: none; }
 #login-link a.shop_name:hover { text-decoration: underline; }
@@ -40,7 +40,10 @@ h3 { margin-top: 24px; }
 
 #container h1 { margin: 18px 0 27px 0; }
 
-#main { padding: 18px; }
+#main { 
+	padding: 18px;
+	margin-right: 290px;
+}
 
 #tabs {
   margin: 0;
@@ -165,10 +168,10 @@ code { font-size: 140%; }
   float: right; 
   width: 250px; 
   background: #f5fbfe; 
-  border-left: 1px solid #D7E4EA; 
   color: #003366; 
   padding: 0px 20px 20px 20px;
   margin-bottom: 18px;
+	border-left: 1px solid #D7E4EA; 
 }
 
 #sidebar ul {
@@ -323,7 +326,7 @@ h1.blue, h2.blue, h3.blue {
 #preview-status {
 	display: none;
 
-	border: 1px solid #666;
+	border: 1px solid #999;
 	background-color: #fff;
 	padding: 8px;
 	width: 200px;
@@ -411,4 +414,14 @@ a.action {
 
 #main-buttons {
 	
+}
+
+
+#html-editor {
+	font-family: "Courier New", "Courier", "monospace";
+	width: 100%;
+}
+
+#print-button {
+	display: none;
 }

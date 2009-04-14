@@ -24,33 +24,24 @@ class PrintTemplatesController < ApplicationController
   
   def new
     @tmpls = shop.templates
-    @tmpls.new
+    @tmpl = @tmpls.new
     if params[:id]
       original = shop.templates.find(params[:id])
       @tmpl.name = original.name + "--COPY"
       @tmpl.body = original.body
     end
+    render :template => 'print_templates/new', :layout => false
   end
 
   def create
     @tmpl = shop.templates.build(params[:print_template])
-    respond_to do |format|
-      if @tmpl.save
-        format.html do
-          flash[:notice] = "Successfully added printing template #{@tmpl.name}."
-          redirect_to @tmpl
-        end
-        format.xml do
-          render :xml => @tmpl, :status => :created, :location => [:admin, @tmpl]
-        end
-      else
-        format.html do
-          flash[:error] = "Error while trying to add a new printing template!"
-          render :action => 'new'
-        end
-        format.xml do
-          render :xml => @tmpl.errors, :status => :unprocessable_entity
-        end
+    if @tmpl.save
+      msg = "Successfully added printing template #{@tmpl.name}."
+    else
+      msg = "Error while trying to add a new printing template!"
+      render :update do |page|
+        errs = @tmpl.errors.full_messages.to_sentence
+        page.alert(errs)
       end
     end
   end
@@ -58,30 +49,21 @@ class PrintTemplatesController < ApplicationController
   def edit
     @tmpls = shop.templates
     @tmpl = @tmpls.find(params[:id])
+    render :template => 'print_templates/edit', :layout => false
   end
   
   def update
     @tmpl = shop.templates.find(params[:id])
 
-    respond_to do |format|
-      if @tmpl.update_attributes(params[:print_template])
-        format.html do
-          flash[:notice] = "Updated print template."
-          redirect_to @tmpl
-        end
-        format.xml do
-          render :xml => @tmpl
-        end 
-      else
-        format.html do
-          flash[:error] = "Error while trying to update print template: #{@tmpl.errors.full_messages.to_s}"
-          render :action => 'new'
-        end
-        format.xml do
-          render :xml => @tmpl.errors, :status => :unprocessable_entity
-        end
-      end
-    end   
+    if @tmpl.update_attributes(params[:print_template])
+      msg = "Updated print template."
+    else
+      msg = "Error while trying to update print template: #{@tmpl.errors.full_messages.to_s}"
+      render :update do |page|
+        errs = @tmpl.errors.full_messages.to_sentence
+        page.alert(errs)
+      end        
+    end
   end 
 
   def destroy

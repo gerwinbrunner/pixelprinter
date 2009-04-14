@@ -17,31 +17,35 @@ module ApplicationHelper
     %(<div id="title">#{title}</div>)
   end
 
+  def sidebar(&block)
+    @sidebar_enabled = true
+    content_for :sidebar, &block
+  end
+  
   def nav_link(url, label = "Go back", options = {})
     @links ||= []
     @links << link_to(label, url, options)
   end
 
-  def nav_linklist_html()
-    linklist = %(<ul class="linklist">\n)
+  def nav_linklist_html
+    linklist = ''
     if @links
+      linklist << %(<ul class="linklist">\n)
+    
       @links.each_with_index do |link, index|
         linklist << "<li>#{link}</li>"
         linklist << " | " if index < @links.size - 1
       end
+      linklist << "</ul>"
     end
-    linklist << "</ul>"
+    linklist
   end
   
   def preview_status
-    p = content_tag :div, :id => "preview-status" do
-      image_tag("status.gif") + " Generating preview..."
+    div = content_tag :div, :id => "preview-status" do
+      image_tag("status.gif") + " Loading..."
     end
-    p += javascript_tag do
-      %Q{
-        $('#preview-status').center();
-      }
-    end
+    div += javascript_tag { "$('#preview-status').center();" }
   end
   
   def preview_link(template=nil, order=nil, options={})

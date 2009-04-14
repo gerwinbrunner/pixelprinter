@@ -30,8 +30,13 @@ function toggleTemplatePreview(order, checkbox) {
     } else { 
 			checkbox.disabled = true;
 			$("#preview-status").show();
-      $("#preview-" + template).load("/print_templates/preview?id=" + template + "&order_id=" + order, 
-																		null, function() { $("#preview-status").hide(); checkbox.disabled = false;});
+      $("#preview-" + template).load("/print_templates/preview/" + template + "&order_id=" + order, 
+				null, 
+				function() { 
+					$("#preview-status").hide(); 
+					checkbox.disabled = false; 
+				}
+			);
     }
   } else { 
     templatePreview.hide();
@@ -66,3 +71,84 @@ function addTemplateSelectorOptions(selectedTemplate, order, templateIDs, templa
 		);
 	});
 }
+
+
+Template = function() {
+	/* private class variables */
+  var div      = "#modal-dialog"
+	var status   = "#preview-status"
+	var tmpl     = null
+	
+	/* private class methods */
+	var dialogOptions = function(type) {
+		var options = {
+		  modal: true,
+		  autoOpen: false,
+		  width: 500,
+		  height: 600,
+			title: type
+		}
+		return jQuery.extend(options, buttons(type));
+	}
+	
+	var formParams = function() {
+		return {
+			"print_template[name]": $("#print_template_name").val(), 
+			"print_template[body]": $("#print_template_body").val(), 
+			"authenticity_token":   $("#print_template_form input[name=authenticity_token]").val()
+		}
+	}
+	
+	var buttons = function(type) {
+		var buttonOptions = {}
+		if (type == "Preview") {
+			buttonOptions = {
+				"Print": function() { window.print() },
+	    	"Edit": function() {
+					$(div).dialog('close')
+					Template.edit()
+				}
+			} 
+		} else if (type == "Edit") {
+			buttonOptions = { 
+			  "Save": function() { 
+					$(status).show()
+					$.post("/print_templates/" + tmpl, $.extend(formParams(), {_method: "put"}), null, "script")
+				}
+			}	
+		}	else if (type == "Create") {
+			buttonOptions = {
+		  	"Save": function() { 
+					$(status).show()
+					$.post("/print_templates", formParams(), null, "script")
+				}
+			}
+		}
+		return { buttons: buttonOptions}
+ 	}
+	
+  var loadDialog = function(type, url) {
+		$(status).show()
+		$(div).load(url, function() { 
+			$(status).hide()
+			$(div).dialog('destroy') // builds dialog from the ground up (make sure there are no leftovers)
+			$(div).dialog(dialogOptions(type)).dialog('open')
+		})
+  }
+
+	/* public class methods */
+  return {
+    preview: function(template, order) {
+      tmpl = template
+      loadDialog("Preview", "/print_templates/" + tmpl + "/preview?order_id=" + order)
+    },
+
+		edit: function(template) {
+			loadDialog("Edit", "/print_templates/" + tmpl + "/edit")
+		},
+		
+		create: function(order) {
+			loadDialog("Create", "/print_templates/new")
+		}
+  }
+}()

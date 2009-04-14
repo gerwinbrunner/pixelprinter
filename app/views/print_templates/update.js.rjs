@@ -1,0 +1,7 @@
+page << "$('#modal-dialog').dialog('close')"
+page << "$('#preview-status').hide()"
+
+if @tmpl.name_changed?
+  page.replace_html("edit-link-#{@tmpl.id}", @tmpl.name)
+  page << "$('#edit-link-#{@tmpl.id}').effect('highlight')"
+end
