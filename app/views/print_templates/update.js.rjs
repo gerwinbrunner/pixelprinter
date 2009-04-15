@@ -1,5 +1,5 @@
 page << "Status.hide()"
-page << "$('#modal-dialog').dialog('close')"
+page << "Dialog.close()"
 
 page.replace_html("edit-link-#{@tmpl.id}", @tmpl.name)
 page << "$('#edit-link-#{@tmpl.id}').effect('pulsate')"

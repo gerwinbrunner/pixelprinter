@@ -1,5 +1,5 @@
 page << "Status.hide()"
-page << "$('#modal-dialog').dialog('close')"
+page << "Dialog.close()"
 
 page.insert_html(:before, 'template-create-link', :partial => 'orders/template_checkbox', :locals => {:tmpl => @tmpl})
 page << "$('.template-item:last').effect('bounce')"

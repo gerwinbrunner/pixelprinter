@@ -1,41 +1,43 @@
 // gives you: Templates.checkAll()
-Templates = function(order) {
+Templates = function() {
 	var _order = null
 	
 	/* private methods */
 	var togglePrintButton = function() {
-		var selected = $("#selected-templates :checkbox:checked").length;
+		var selected = $("#selected-templates :checkbox:checked").length
 	  if (selected > 0) {
-	    $("#print-button").show();
+	    $("#print-button").show()
 	  } else {
-	    $("#print-button").hide();
+	    $("#print-button").hide()
 	  }
 	}
 	
 	var showPreviewForSelectedTemplates = function() {
 		$("#selected-templates :checkbox").each(function() {
-			toggleTemplatePreview(this);
+			toggleTemplatePreview(this)
 		})
 	}
 	
 	var toggleTemplatePreview = function(checkbox) {
-		var	template = checkbox.value;
-		var templatePreview = $("#template-preview-" + template);
+		var	template = checkbox.value
+		var templatePreview = $("#template-preview-" + template)
 	  if (checkbox.checked == true && checkbox.disabled == false) {
 	    if (templatePreview.length == 1) { 
-	      templatePreview.show();
+	      templatePreview.show()
 	    } else { 
-				checkbox.disabled = true;
-				Status.show();
-	      $("#preview-" + template).load("/print_templates/" + template + "?order_id=" + _order + "&inline=true", null, 
-					function() { 
-						Status.hide(); 
-						checkbox.disabled = false; 
-					}
-				);
+				checkbox.disabled = true
+				Status.show()
+				
+				$.get("/print_templates/preview", {id: template, order_id: _order}, function(data) { 
+					checkbox.disabled = false
+					var preview = "<div id='template-preview-" + template + "'><div class='template-preview'>" + data + "</div></div>"
+		      $("#preview-" + template).html(preview)
+					Status.hide()
+				})
+
 	    }
 	  } else { 
-	    templatePreview.hide();
+	    templatePreview.hide()
 	  }
 	}
 	
@@ -43,8 +45,8 @@ Templates = function(order) {
 	return {
 		checkAll: function(order) {
 			_order = order
-			showPreviewForSelectedTemplates();
-			togglePrintButton();
+			showPreviewForSelectedTemplates()
+			togglePrintButton()
 		}
 	}
 }()
@@ -52,17 +54,29 @@ Templates = function(order) {
 
 // gives you: Dialog.options()
 Dialog = function() {
+	var dlg = "#modal-dialog"
+
+	var options = function(otherOptions) {
+		var dialogOptions = {
+	  	modal: true,
+	  	width: 500,
+			height: 550
+		}
+		
+		dialogOptions = jQuery.extend(dialogOptions, otherOptions)
+		return dialogOptions
+	}
+
 	return {
-		options: function(otherOptions) {
-			var dialogOptions = {
-		  	modal: true,
-		  	width: 500,
-				height: 550
-			}
-			if (typeof(otherOptions) != 'undefined') {
-				dialogOptions = jQuery.extend(dialogOptions, otherOptions);
-			}
-			return dialogOptions
+		open: function(title, otherOptions) {
+			var otherOptions = (typeof(otherOptions) != 'undefined') ? otherOptions : {}
+			var opts = options(otherOptions)
+			$(dlg).dialog(jQuery.extend(opts, {title: title}))
+			$(dlg).dialog('open')
+		},
+		
+		close: function() {
+			$(dlg).dialog('destroy')
 		}
 	}
 }()
@@ -82,22 +96,3 @@ Status = function() {
 		}
 	}
 }()
-
-
-// TODO: Maybe rewrite/reuse this function to add template selecting to preview box, else get rid of this code
-function addTemplateSelectorOptions(selectedTemplate, order, templateIDs, templateNames) {
-	var selecta = $("#template-selector");
-	var selections = jQuery.map(templateIDs, function(id, index){
-		return "<option value='" + id + "'" + (selectedTemplate == id ? " selected=true" : "") +  ">" + templateNames[index] + "</option>";
-	});
-	selecta.html(selections.join(" "));
-	
-	selecta.bind('change', function(e) {
-		var template = e.target.value;
-		Status.show();
-		selecta.disable();
-		$("#facebox .content").load("/print_templates?id=" + template + "&order_id=" + order, 
-			null, function() { Status.hide(); selecta.enable(); } 
-		);
-	});
-}

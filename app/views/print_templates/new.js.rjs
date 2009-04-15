@@ -1,5 +1,4 @@
+page << "Status.hide()"
 page.replace_html 'modal-dialog', :partial => "form", :locals => {:method => 'post', :tmpl => @tmpl}
-page << %Q[
-  $("#modal-dialog").dialog('destroy');
-  $("#modal-dialog").dialog(Dialog.options({title: 'Create new template'}))
-]
+page << "Dialog.close()"
+page << "Dialog.open('Create new template')"

@@ -1,17 +1,14 @@
-<% content_tag :div, :id => "template-preview-#{tmpl.id}" do %>
-  <div class="template-preview">
-    <%= rendered_template %>
-  </div>
-<% end %>
+<iframe src='<%= url_for(:action => 'preview', :id => @tmpl.id, :order_id => @order.id) %>' name="iframe-preview" scrolling='auto' height='80%' width='100%' frameborder='0'>
+</iframe>
 
 <% unless defined?(inline) %>
   <div class="button-panel">
     <p class="buttons">
-      <%= button_to_function "Print", "window.print()"%>
+      <%= button_to_function "Print", "frames['iframe-preview'].focus(); frames['iframe-preview'].print()"%>
       or
-      <%= button_to_remote "Edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl}, :method => 'get', :loading => "Status.show()", :complete => "Status.hide()" %>
+      <%= button_to_remote "Edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl}, :method => 'get', :loading => "Status.show()" %>
       or
-      <%= link_to_function "Cancel", "$('#modal-dialog').dialog('close')" %>
+      <%= link_to_function "Cancel", "Dialog.close()" %>
     </p>
   </div>
-<% end%>
+<% end %>

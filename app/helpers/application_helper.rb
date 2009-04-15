@@ -17,10 +17,12 @@ module ApplicationHelper
     %(<div id="title">#{title}</div>)
   end
 
+
   def sidebar(&block)
     @sidebar_enabled = true
     content_for :sidebar, &block
   end
+
   
   def nav_link(url, label = "Go back", options = {})
     @links ||= []
@@ -40,25 +42,7 @@ module ApplicationHelper
     end
     linklist
   end
-  
-  def preview_status
-    div = content_tag :div, :id => "preview-status" do
-      image_tag("status.gif") + " Loading..."
-    end
-    div += javascript_tag { "$('#preview-status').center();" }
-  end
-  
-  def preview_link(template=nil, order=nil, options={})
-    url = {:controller => 'print_templates', :action => 'preview'}
-    url.merge!(:id => template) if template
-    url.merge!(:order_id => order) if order
-    template_selector = add_template_selector_options(template, order, options.delete(:templates)) if options[:templates]
-    
-    link_to_remote("Preview", {:url => url, :submit => "print_template_form", 
-            :loading => "togglePreviewLinkStatus(true);",
-            :complete => "jQuery.facebox(request.responseText); togglePreviewLinkStatus(false); #{template_selector}", 
-            :html => {:id => "preview-link"}}.deep_merge(options))
-  end
+
   
   def add_template_selector_options(selected_template, order, tmpls)
     ids   = tmpls.map(&:id).map{|var| "'#{var}'"}.join(", ")

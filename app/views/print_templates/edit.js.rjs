@@ -1,5 +1,3 @@
 page.replace_html 'modal-dialog', :partial => "form", :locals => {:method => :put, :tmpl => @tmpl}
-page << %Q[
-  $("#modal-dialog").dialog('destroy');
-  $("#modal-dialog").dialog(Dialog.options({title: '#{@tmpl.name} &mdash; Edit'}))
-]
+page << "Dialog.close()"
+page << "Dialog.open('#{@tmpl.name} &mdash; Edit')"

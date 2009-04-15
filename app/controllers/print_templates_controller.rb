@@ -12,12 +12,8 @@ class PrintTemplatesController < ApplicationController
   end
   
   def show
-    @tmpl  = params[:id] ? shop.templates.find(params[:id]) : shop.templates.new(params[:print_template])
+    @tmpl  = shop.templates.find(params[:id])
     @order = params[:order_id].blank? ? ShopifyAPI::Order.example : ShopifyAPI::Order.find(params[:order_id])
-    @rendered_template = @tmpl.render(@order.to_liquid)
-    if params[:inline]
-      render :partial => 'preview', :locals => {:rendered_template => @rendered_template, :tmpl => @tmpl, :inline => true}
-    end
   end
 
   
@@ -35,10 +31,8 @@ class PrintTemplatesController < ApplicationController
     if @tmpl.save
       msg = "Successfully added printing template #{@tmpl.name}."
     else
-      msg = "Error: #{@tmpl.errors.full_messages.to_sentence}"
-      render :update do |page|
-        page << %Q[ Status.show("#{msg}", 'error') ]
-      end
+      msg = @tmpl.errors.full_messages.to_sentence
+      render :js => "Status.show('#{msg}.', 'error')"
     end
   end
 
@@ -51,14 +45,12 @@ class PrintTemplatesController < ApplicationController
   
   def update
     @tmpl = shop.templates.find(params[:id])
-
+    
     if @tmpl.update_attributes(params[:print_template])
       msg = "Updated print template."
     else
-      msg = "Error: #{@tmpl.errors.full_messages.to_sentence}"
-      render :update do |page|
-        page << %Q[ Status.show("#{msg}", 'error') ]
-      end        
+      msg = @tmpl.errors.full_messages.to_sentence
+      render :js => "Status.show('#{msg}.', 'error')"
     end
   end 
 
@@ -70,10 +62,21 @@ class PrintTemplatesController < ApplicationController
       format.html do
         redirect_to :action => 'index'
       end
+      format.js do
+        render :js => "Status.show('Deleted template #{@tmpl.name}.')"
+      end
       format.xml do
         head :ok
       end
     end
   end
-  
+
+  # basically the same as the show action but for raw html content without any JS
+  def preview
+    @tmpl  = params[:id] ? shop.templates.find(params[:id]) : shop.templates.first
+    @order = params[:order_id].blank? ? ShopifyAPI::Order.example : ShopifyAPI::Order.find(params[:order_id])
+    @rendered_template = @tmpl.render(@order.to_liquid)
+    
+    render :text => @rendered_template
+  end
 end

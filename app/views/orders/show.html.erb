@@ -4,7 +4,6 @@
 <div id="modal-dialog">
 </div>
 
-
 <% sidebar do %>
   <h4>Select the template you want to print:</h4>
   <% if @tmpls.blank? %>
@@ -15,7 +14,7 @@
     <% form_tag({:action => 'print'}, :id => "selected-templates") do %>
       <ul id="print-list">
       <% @tmpls.each do |tmpl| %>
-        <%= render :partial => 'template_checkbox', :locals => {:tmpl => tmpl} %>
+        <%= render :partial => 'template_checkbox', :locals => {:tmpl => tmpl, :order => @order} %>
       <% end %>
       <li id="template-create-link"><%= link_to_remote "Create new template", :url => {:controller => 'print_templates', :action => 'new'}, :loading => "Status.show()" %></li>
       </ul>
@@ -32,16 +31,27 @@
   by <span class="note"><%= @order.billing_address.name %></span>
 </div>
 
-
+<!-- Empty Containers in correct order, ready to be filled with AJAX previews -->
 <div id="preview">
   <% @tmpls.each do |tmpl| %> <div id="preview-<%= tmpl.id %>"></div> <% end %>
 </div>
 
 
 <% content_for :javascript do %>
-  Templates.checkAll('<%= @order.id %>');
+  Templates.checkAll('<%= @order.id %>')
   
   $("#selected-templates :checkbox").live("change", function() {
-    Templates.checkAll('<%= @order.id %>');
-  });
+    Templates.checkAll('<%= @order.id %>')
+  })
+  
+  $(".template-item a").live("click", function() {
+    // get the id of the template
+    var template = $(this).attr('id').match(/\d+/)[0]
+    $.ajax({
+      beforeSend: function(request) { Status.show('Generating preview...') }, 
+      dataType: 'script', 
+      type: 'get',
+      url: '/print_templates/' + template  + '?order_id=' + <%= @order.id %>
+    })
+  })
 <% end %>

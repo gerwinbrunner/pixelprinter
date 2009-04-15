@@ -1,5 +1,8 @@
 <% title "Your orders", :description => "Select the order you want to print. You can choose different templates for various purposes."%>
 
+<div id="modal-dialog"></div>
+
+
 <div class="itemlist">
   <% if @orders.blank? %>  
 
@@ -10,17 +13,17 @@
     <ul>
     <% @orders.each do |order| %>
       <li>
-        <div class="order box" onmouseover="$('#<%= "print-#{dom_id(order)}" %>').show();" onmouseout="$('#<%= "print-#{dom_id(order)}" %>').hide();">
+        <div class="order box" onmouseover="$('#<%= "preview-link-#{dom_id(order)}" %>').show();" onmouseout="$('#<%= "preview-link-#{dom_id(order)}" %>').hide();">
           <strong><%= link_to order.name, :action => 'show', :id => order %></strong>
           <span class="price"><%= order.total_price %> <%= order.currency %></span>
           <span class="highlight"><%= order.financial_status %></span>
           by <span class="note"><%= order.billing_address.name %></span>
-          
-          <%= preview_link(@default_template.id, order.id, :html => {:class => 'side-link action', :id => "print-#{dom_id(order)}"}, :templates => @tmpls) %>
+          <%= link_to_remote "Preview", :url => {:controller => 'print_templates', :action => 'show', :id => @default_template, :order_id => order.id}, :method => 'get',
+                                        :loading => "Status.show('Generating preview...')",
+                                        :html => {:id => "preview-link-#{dom_id(order)}", :class => 'side-link action'} %>
         </div>
       </li>
     <% end %>
     </ul>
-    <%= preview_status %>
   <% end %>
 </div>
