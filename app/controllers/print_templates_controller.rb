@@ -77,6 +77,6 @@ class PrintTemplatesController < ApplicationController
     @order = params[:order_id].blank? ? ShopifyAPI::Order.example : ShopifyAPI::Order.find(params[:order_id])
     @rendered_template = @tmpl.render(@order.to_liquid)
     
-    render :text => @rendered_template
+    render :text => @rendered_template+ "<script> "
   end
 end

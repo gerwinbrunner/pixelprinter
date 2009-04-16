@@ -53,5 +53,7 @@
       type: 'get',
       url: '/print_templates/' + template  + '?order_id=' + <%= @order.id %>
     })
+    return false
   })
+  
 <% end %>

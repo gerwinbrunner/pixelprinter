@@ -27,14 +27,13 @@ Templates = function() {
 	    } else { 
 				checkbox.disabled = true
 				Status.show()
-				
-				$.get("/print_templates/preview", {id: template, order_id: _order}, function(data) { 
-					checkbox.disabled = false
-					var preview = "<div id='template-preview-" + template + "'><div class='template-preview'>" + data + "</div></div>"
-		      $("#preview-" + template).html(preview)
-					Status.hide()
-				})
 
+				var url = "/print_templates/preview?id=" + template + "&order_id=" + _order
+				var preview = "<div id='template-preview-" + template + "'><div class='template-preview'><iframe src='" + url + "'id='iframe-preview-" + template + "' onload='IFrame.resize(this)' scrolling='no' width='100%' frameborder='0' ></iframe></div></div>"
+				
+				checkbox.disabled = false
+				Status.hide()
+	      $("#preview-" + template).html(preview)
 	    }
 	  } else { 
 	    templatePreview.hide()
@@ -93,6 +92,17 @@ Status = function() {
 		
 		hide: function() {
 			jQuery.noticeRemove($('.notice-item-wrapper'))
+		}
+	}
+}()
+
+
+// gives you: IFrame.resize()
+IFrame = function() {
+	return {
+		resize: function(iframe) {
+			var innerDoc = iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow.document
+			iframe.height = innerDoc.body.scrollHeight + 35
 		}
 	}
 }()

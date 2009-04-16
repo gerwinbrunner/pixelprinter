@@ -3,8 +3,13 @@
     <%= f.label :name, "Name:" %>
     <%= f.text_field :name %>
   </div>
+
+  <p><%= f.text_area :body %></p>
   
-  <%= f.text_area :body %>
+  <p class="default">
+    <%= f.check_box :default %>
+    <%= f.label :default, "This template should be selected for printing by default" %>
+  </p>
 
   <div class="button-panel">
     <p class="buttons">

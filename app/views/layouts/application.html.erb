@@ -15,6 +15,10 @@
   <% javascript_tag do %>
     $(document).ready(function() {
       <%= yield :javascript %>
+
+      <!-- Flash error & notice-->
+      <% if flash[:notice] %> Status.show('<%= flash[:notice] %>')          <% end %>
+      <% if flash[:error]  %> Status.show('<%= flash[:error]  %>', 'error') <% end %>
     })
   <% end %>
 </head>
@@ -22,10 +26,7 @@
 <body>
   
   <div id="container" class="clearfix">
-    <!-- Flash error & notice-->
-    <% if flash[:error] %> <div id="flasherrors"><%= flash[:error] %></div><% end %>
-    <% if flash[:notice] %><div id="flashnotices"><%= flash[:notice] %></div><% end %>
-    
+
     <!-- Sidebar -->
     <% if @sidebar_enabled %>
       <div id="sidebar">
@@ -41,6 +42,7 @@
       <%= @content_for_layout %>   
     </div>
     <!-- end div.main -->
+
   </div>
   
 </body>

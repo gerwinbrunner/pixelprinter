@@ -2,6 +2,7 @@ page << "Status.hide()"
 page << "Dialog.close()"
 
 page.replace_html("edit-link-#{@tmpl.id}", @tmpl.name)
+page << "$('#template-checkbox-#{@tmpl.id}').attr('checked', #{@tmpl.default})"
 page << "$('#edit-link-#{@tmpl.id}').effect('pulsate')"
 
 # remove old preview (which is kinda cached), so that it can be reloaded again

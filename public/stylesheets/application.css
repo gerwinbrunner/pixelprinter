@@ -422,6 +422,15 @@ a.action {
 	background: #eee;
 }
 
+#print_template_form textarea {
+	width: 100%;
+}
+
+#print_template_form .default * {
+	vertical-align: top;
+}
+
+
 #html-editor {
 	font-family: "Courier New", "Courier", "monospace";
 	width: 100%;
