@@ -16,9 +16,9 @@
       <% @tmpls.each do |tmpl| %>
         <%= render :partial => 'template_checkbox', :locals => {:tmpl => tmpl, :order => @order} %>
       <% end %>
-      <li id="template-create-link"><%= link_to_remote "Create new template", :url => {:controller => 'print_templates', :action => 'new'}, :loading => "Status.show()" %></li>
+      <li id="template-create-link"><%= link_to_remote "Create new template", :url => {:controller => 'print_templates', :action => 'new'}, :loading => "Status.loading()", :html => {:class => 'action'}%></li>
       </ul>
-      <%= button_to_function "Print", "window.print()", :id => "print-button" %>
+      <%= button_to_function "Print", "Templates.print()", :id => "print-button" %>
     <% end %>
   <% end %>
 <% end %>
@@ -38,22 +38,26 @@
 
 
 <% content_for :javascript do %>
-  Templates.checkAll('<%= @order.id %>')
+  Templates.initialize('<%= @order.id %>');
+
+  // load default template previews on start
+  $("#selected-templates :checkbox:checked").each(function() {
+    Templates.updateSelection($(this));
+  });
+  
+
+  // both live event handlers make sure the events also work for ajax inserted elements later on
   
   $("#selected-templates :checkbox").live("change", function() {
-    Templates.checkAll('<%= @order.id %>')
-  })
-  
+    Templates.updateSelection($(this));
+  });
+
   $(".template-item a").live("click", function() {
-    // get the id of the template
-    var template = $(this).attr('id').match(/\d+/)[0]
-    $.ajax({
-      beforeSend: function(request) { Status.show('Generating preview...') }, 
-      dataType: 'script', 
-      type: 'get',
-      url: '/print_templates/' + template  + '?order_id=' + <%= @order.id %>
-    })
-    return false
-  })
-  
+    // hacky, get the id of the template from the link-id
+    var template = $(this).attr('id').match(/\d+/)[0];
+  	Templates.preview(template);
+    return false;
+  });
+
+  $(window).bind('resize', function() { IFrame.resizeAll(); });
 <% end %>

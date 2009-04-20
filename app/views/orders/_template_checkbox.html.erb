@@ -1,4 +1,4 @@
 <li class="template-item">
-  <%= check_box_tag 'print', tmpl.id, tmpl.default, :id => "template-checkbox-#{tmpl.id}" %>
-  <%= link_to tmpl.name, "#", :id => "edit-link-#{tmpl.id}" %>
+  <%= check_box_tag 'print_templates[]', tmpl.id, tmpl.default, :id => "template-checkbox-#{tmpl.id}" %>
+  <%= link_to tmpl.name, "#", :id => "template-edit-link-#{tmpl.id}" %>
 </li>

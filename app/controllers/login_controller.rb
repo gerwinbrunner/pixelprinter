@@ -2,6 +2,7 @@ class LoginController < ApplicationController
   
   def index
     # Ask user for their #{shop}.myshopify.com address
+    flash[:notice] = "Please authenticate yourself first."
   end
 
   def authenticate
@@ -21,7 +22,7 @@ class LoginController < ApplicationController
       # save shop to local DB
       @shop = Shop.find_or_create_by_name(shopify_session.name)
       
-      flash[:notice] = "Logged in to shopify store."
+      flash[:notice] = "Successfully logged in to shopify store."
       
       return_address = session[:return_to] || '/orders'
       session[:return_to] = nil

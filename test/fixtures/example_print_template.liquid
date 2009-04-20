@@ -1,66 +1,79 @@
-You bought from shop_name:
+<h1>Hello from {{shop_name}}</h1>
 
-{{shop_name}}
+<p>
+  <b>Order name</b>:      {{order_name}}<br/>
+  <b>Order name</b>:      {{name}} (different variable, same content)<br/>
 
-Order name: {{order_name}}
-Name:       {{name}}
-Order #:    {{order_number}}
+  <b>Order Number</b>:    {{order_number}}
+</p>
 
-Email:   {{ email }}
-Gateway: {{ gateway }}
+<b>Gateway used</b>:    {{ gateway }}</br>
+<b>Shipping method</b>: {{ shipping_method.title }}
 
-Subtotal price: {{ subtotal_price | money }}
-Tax Price:      {{ tax_price | money }}
-Shipping price: {{ shipping_price | money }}
------------------------
-Total price:    {{ total_price | money }}
+<table>
+  <tr>
+    <td>Subtotal price</td><td>{{ subtotal_price | money }}</td>
+  </tr>
+  <tr>
+    <td>Tax Price</td><td>{{ tax_price | money }}</td>
+  </tr>
+  <tr>
+    <td>Shipping price</td><td>{{ shipping_price | money }}</td>
+  </tr>
+  <tr>
+    <td style="border-top: 2px solid black">Total price:</td><td style="border-top: 2px solid black">{{ total_price | money }}</td>
+  </tr>
+</table>
+
+<div style="border: 1px solid #999">
+  <b>Note</b>:       {{ note }}<br/>
+  <b>Attributes</b>: {{ attributes }}
+</div>
+
+<p>Customer name and email: <b>{{ customer.name }}</b> - <u>{{ customer.email }}</u></p>
+Customer Email: {{ email }} (different variable, same content)
 
 
-Shipping Address: 
-  {{ shipping_address.name }}
-  {{ shipping_address.street }}
-  {{ shipping_address.city }}, {{ shipping_address.province }}  {{ shipping_address.zip }} 
-  {{ shipping_address.country }}
-  {{ shipping_address.phone }}
+<h3>Shipping Address</h3>
+  {{ shipping_address.name }}<br/>
+  {{ shipping_address.street }}<br/>
+  {{ shipping_address.city }}, {{ shipping_address.province }}  {{ shipping_address.zip }}<br/>
+  {{ shipping_address.country }}<br/>
+  {{ shipping_address.phone }}<br/>
 
 
-Billing Address:
-{{ billing_address.last_name }}, {{ billing_address.first_name }}
-{{ billing_address.street }}
-{{ billing_address.city }}, {{ billing_address.province }}  {{ billing_address.zip }} 
-{{ billing_address.country }}
-{{ billing_address.phone }}
+<h3>Billing Address</h3>
+{{ billing_address.last_name }}, {{ billing_address.first_name }}<br/>
+{{ billing_address.street }}<br/>
+{{ billing_address.city }}, {{ billing_address.province }}  {{ billing_address.zip }}<br/>
+{{ billing_address.country }}<br/>
+{{ billing_address.phone }}<br/>
 
 
-Line Items:
+<h3>Line Items</h3>
 {% for line_item in line_items %}
-  {{ line_item.quantity }} x {{ line_item.title }}		(SKU: {{ line_item.sku }})
+  <p>{{ line_item.quantity }} x {{ line_item.title }}		(SKU: {{ line_item.sku }})</p>
 
-  ID:         {{ line_item.id }}
-  VARIANT:    {{ line_item.variant }}
-  PRODUCT:    {{ line_item.product }}
-  PRICE:      {{ line_item.price }}
-  LINE PRICE: {{ line_item.line_price }}
-  TAX:        {{ line_item.tax }}
-  GRAMS:      {{ line_item.grams }}
-  VENDOR:     {{ line_item.vendor }}
+  <ul>
+    <li>ID:         {{ line_item.id }}</li>
+    <li>VARIANT:    {{ line_item.variant }}</li>
+    <li>PRODUCT:    {{ line_item.product }}</li>
+    <li>PRICE:      {{ line_item.price }}</li>
+    <li>LINE PRICE: {{ line_item.line_price }}</li>
+    <li>TAX:        {{ line_item.tax }}</li>
+    <li>GRAMS:      {{ line_item.grams }}</li>
+    <li>VENDOR:     {{ line_item.vendor }}</li>
+  </ul>
 {% endfor %}
 
 
-Fulfilled line items: 
+<h4>Fulfilled line items</h4>
 {% for line in fulfilled_line_items %}
   {{ line.quantity }} x {{line.title }}		(sku: {{ line.sku }})
 {% endfor %}
 
 
-Unfulfilled line items:
+<h4>Unfulfilled line items</h4>
 {% for line in unfulfilled_line_items %}
   {{ line.quantity }} x {{line.title }}		(sku: {{ line.sku }})
 {% endfor %}
-
-Shipping method: {{ shipping_method.title }}
-
-Note:       {{ note }}
-Attributes: {{ attributes }}
-
-Customer name and email: {{ customer.name }}, {{ customer.email }}

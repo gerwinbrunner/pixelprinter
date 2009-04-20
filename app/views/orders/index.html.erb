@@ -19,7 +19,7 @@
           <span class="highlight"><%= order.financial_status %></span>
           by <span class="note"><%= order.billing_address.name %></span>
           <%= link_to_remote "Preview", :url => {:controller => 'print_templates', :action => 'show', :id => @default_template, :order_id => order.id}, :method => 'get',
-                                        :loading => "Status.show('Generating preview...')",
+                                        :loading => "Status.({text: 'Generating preview...', stay: true, id: 'preview-status-#{@default_template.id}'})",
                                         :html => {:id => "preview-link-#{dom_id(order)}", :class => 'side-link action'} %>
         </div>
       </li>

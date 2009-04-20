@@ -14,10 +14,6 @@
   <%= submit_tag 'Authenticate' %>
 <% end %>
 
-<script type="text/javascript">
-   $(":text:visible:enabled:first").focus();
-</script>
-
 <% content_for :javascript do %>
-  Status.show("Please authenticate yourself by logging into your shop here first.")
+   $(":text:visible:enabled:first").focus();
 <% end %>

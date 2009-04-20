@@ -1,28 +1,22 @@
-<% form_remote_for(tmpl, :method => method, :html => {:id => "print_template_form"}, :loading => "Status.show()") do |f| %>
+<% form_remote_for(tmpl, :method => method, :html => {:id => "print_template_form"}, :loading => "Status.loading()") do |f| %>
   <div class="header">
     <%= f.label :name, "Name:" %>
     <%= f.text_field :name %>
   </div>
 
   <p><%= f.text_area :body %></p>
-  
-  <p class="default">
-    <%= f.check_box :default %>
-    <%= f.label :default, "This template should be selected for printing by default" %>
-  </p>
 
   <div class="button-panel">
     <p class="buttons">
       <%= submit_tag(method == 'post' ? "Create" : "Update" )%>
       or
-      <%= link_to_function "Cancel", "$('#modal-dialog').dialog('destroy')", :class => 'action' %>
+      <%= link_to_function "Cancel", "Dialog.close()", :class => 'action' %>      
     </p>
   </div>
 <% end %>
 
-
-<% content_for :javascript do %>
-  <% if method == 'post' %>
+<% if method == 'post' %>
+  <% content_for :javascript do %>
     $(":text:visible:enabled:first").focus().select();
   <% end %>
 <% end %>

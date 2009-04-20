@@ -1,0 +1,3 @@
+page.replace_html "modal-dialog", :partial => 'orders/preview', :locals => {:tmpl => @tmpl, :order => @order}
+page << "Dialog.close();"
+page << "Dialog.open('#{@tmpl.name} &mdash; Preview');"

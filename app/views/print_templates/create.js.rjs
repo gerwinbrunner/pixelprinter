@@ -1,6 +1,6 @@
-page << "Status.hide()"
-page << "Dialog.close()"
+page << "Status.hide();"
+page << "Dialog.close();"
 
 page.insert_html(:before, 'template-create-link', :partial => 'orders/template_checkbox', :locals => {:tmpl => @tmpl})
 page.insert_html(:bottom, 'preview', "<div id='preview-#{@tmpl.id}'></div>")
-page << "$('.template-item:last').effect('bounce')"
+page << "$('.template-item:last').effect('bounce');"

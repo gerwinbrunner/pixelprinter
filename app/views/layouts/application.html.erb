@@ -15,11 +15,11 @@
   <% javascript_tag do %>
     $(document).ready(function() {
       <%= yield :javascript %>
-
+      
       <!-- Flash error & notice-->
-      <% if flash[:notice] %> Status.show('<%= flash[:notice] %>')          <% end %>
-      <% if flash[:error]  %> Status.show('<%= flash[:error]  %>', 'error') <% end %>
-    })
+      <% if flash[:notice] %> Status.notify('<%= flash[:notice] %>'); <% end %>
+      <% if flash[:error]  %> Status.error('<%= flash[:error]  %>');  <% end %>
+    });
   <% end %>
 </head>
 	

@@ -1,3 +1,4 @@
 page.replace_html 'modal-dialog', :partial => "form", :locals => {:method => :put, :tmpl => @tmpl}
-page << "Dialog.close()"
-page << "Dialog.open('#{@tmpl.name} &mdash; Edit')"
+page << "Dialog.close();"
+page << "Dialog.open('#{@tmpl.name} &mdash; Edit')";
+page << "Status.hideAll();"

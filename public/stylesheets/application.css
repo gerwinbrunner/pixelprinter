@@ -197,6 +197,10 @@ code { font-size: 140%; }
 	font-style: italic;
 }
 
+#print-list input {
+	margin-left: 0px;
+}
+
 #print-list * {
 	vertical-align: top;
 }

@@ -1,10 +1,10 @@
-page << "Status.hide()"
-page << "Dialog.close()"
+page << "Status.hideAll();"
+page << "Dialog.close();"
 
-page.replace_html("edit-link-#{@tmpl.id}", @tmpl.name)
-page << "$('#template-checkbox-#{@tmpl.id}').attr('checked', #{@tmpl.default})"
-page << "$('#edit-link-#{@tmpl.id}').effect('pulsate')"
+page.replace_html("template-edit-link-#{@tmpl.id}", @tmpl.name)
+page << "$('#template-edit-link-#{@tmpl.id}').effect('pulsate');"
+page << "$('#template-checkbox-#{@tmpl.id}').attr('checked', #{@tmpl.default});"
 
-# remove old preview (which is kinda cached), so that it can be reloaded again
+# remove old preview (which is cached on the current page), so that it can be reloaded again
 page.replace("template-preview-#{@tmpl.id}", "")
-page << "$('#template-checkbox-#{@tmpl.id}').attr('checked', false)"
+page << "Templates.update(#{@tmpl.id});"
