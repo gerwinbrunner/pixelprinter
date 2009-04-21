@@ -1,4 +1,8 @@
-<li class="template-item">
+<% content_tag('li', :class => 'template-item', :id => "template-item-#{tmpl.id}", :onmousemove => "$('#template-delete-link-#{tmpl.id}').show()", :onmouseout => "$('#template-delete-link-#{tmpl.id}').hide()") do %>
+
   <%= check_box_tag 'print_templates[]', tmpl.id, tmpl.default, :id => "template-checkbox-#{tmpl.id}" %>
-  <%= link_to tmpl.name, "#", :id => "template-edit-link-#{tmpl.id}" %>
-</li>
+  <%= link_to tmpl.name, "#", :id => "template-edit-link-#{tmpl.id}", :class => "preview-link" %>
+  
+  <%= link_to_remote image_tag('trash.gif'), :url => tmpl, :method => :delete, :confirm => "Are you sure you want to delete template #{tmpl.name}?", 
+                                             :html => {:class => "side-link", :id => "template-delete-link-#{tmpl.id}", :title => "Delete template #{tmpl.name}"} %>
+<% end %>

@@ -8,15 +8,16 @@
 
   <div class="button-panel">
     <p class="buttons">
-      <%= submit_tag(method == 'post' ? "Create" : "Update" )%>
+      <%= submit_tag(method.to_sym == :post ? "Create" : "Update" )%>
       or
       <%= link_to_function "Cancel", "Dialog.close()", :class => 'action' %>      
     </p>
   </div>
 <% end %>
 
-<% if method == 'post' %>
+<% if method.to_sym == :post %>
   <% content_for :javascript do %>
+    // select the first input field when creating a new template
     $(":text:visible:enabled:first").focus().select();
   <% end %>
 <% end %>

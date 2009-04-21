@@ -371,7 +371,13 @@ a.action {
 }
 
 .header {
-	margin-bottom: 16px;
+	border-bottom: 1px solid #EEEEEE;
+	color: #888888;
+	font-size: 175%;
+	font-weight: normal;
+	margin: 12px 0 5px 0;
+	padding: 0 0 2px;
+	text-align: center;
 }
 
 .header * {
@@ -395,6 +401,8 @@ a.action {
 .linklist {
 	list-style: none;
 	padding: 0px;
+	text-align: center;
+	margin: 0 0 30px;
 }
 
 .linklist li {
@@ -408,16 +416,16 @@ a.action {
 .template-preview {
 	width: 65%;
 	margin: 8px 0px 64px 0px;
+	border: 2px solid #;
 	padding: 8px;
 }
 
+.template-item {
+	position: relative;
+}
 
-#facebox .template-preview {
-	width: 90%;
-	height: 600px;
-	margin: 32px 32px;
-	padding: 8px;
-	overflow: auto;
+.template-item img {
+	border: none;
 }
 
 .help {
@@ -440,13 +448,33 @@ a.action {
 	width: 100%;
 }
 
+#modal-dialog {
+	background-color: #fff;
+	position: relative;
+}
+
 #print-button {
 	display: none;
 }
 
-#modal-dialog {
-	background-color: #fff;
-	position: relative;
+.print-box {
+	margin: 0px;
+	padding: 8px 0px;
+	border-bottom: 1px solid #aaa;
+}
+
+.print-box h3 {
+	padding: 0;
+	margin: 0 0 12px 0;
+}
+
+.print-box p {
+	padding: 0;
+	margin: 0;
+}
+
+.print-box p input {
+	margin: 12px 0 0 0;
 }
 
 .button-panel {

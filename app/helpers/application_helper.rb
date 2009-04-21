@@ -9,12 +9,12 @@ module ApplicationHelper
   
   def title_html
     if @title_url
-      title = %(<h2><a href="#{@title_url}" target="_blank">#{h(@title)}</a></h2>)
+      title = %(<h2 class="header"><a href="#{@title_url}" target="_blank">#{h(@title)}</a></h2>)
     else
-      title = %(<h2>#{h(@title)}</h2>)
+      title = %(<h2 class="header">#{h(@title)}</h2>)
     end
     title << %(\n<p class="description">#{@title_description}</p>) if @title_description
-    %(<div id="title">#{title}</div>)
+    title
   end
 
 

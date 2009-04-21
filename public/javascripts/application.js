@@ -4,18 +4,22 @@ Templates = function() {
 	
 	/* private methods */
 	var togglePrintButton = function() {
-		var selected = $("#selected-templates :checkbox:checked").length;
-	  if (selected > 0) {
+	  if (_templates.length > 0) {
+			$("#print-start").hide();
 	    $("#print-button").show();
+			var pluralize = _templates.length == 1 ? "template" : "templates"
+			$("#template-amount").html(_templates.length + " " + pluralize)
+
 	  } else {
 	    $("#print-button").hide();
+			$("#print-start").show();
 	  }
 	}
 
 	var toggleInlinePreview = function(template) {
-		// preview div with iframe, could be already inserted (cached in DOM)
-		var templatePreview = $("#template-preview-" + template);
-		// is templates selected?
+		// preview iframe, could be already inserted (cached in DOM)
+		var templatePreview = $("#iframe-preview-" + template);
+		// is template selected?
 		if (_templates.indexOf(template) > -1) {
 			if (templatePreview.length > 0) { 
 	      templatePreview.show();
@@ -39,12 +43,7 @@ Templates = function() {
 		});
 
 		var url = "/orders/" + _order + "/preview?template_id=" + template;
-		var iframeID = "iframe-preview-" + template;
-		var preview = "<div id='template-preview-" + template + "'> \
-			<div class='template-preview'> \
-				<iframe src='" + url + "' id='" + iframeID + "' onload='Callback.trigger(" + template +")' scrolling='no' width='100%' frameborder='0' ></iframe> \
-			</div> \
-		</div>";
+		var preview = "<iframe src='" + url + "' class='template-preview' id='" + "iframe-preview-" + template + "' onload='Callback.trigger(" + template +")' scrolling='no' width='100%' frameborder='0' ></iframe>";
 	  $("#preview-" + template).html(preview);
 	}
 	
@@ -55,7 +54,7 @@ Templates = function() {
 			_templates = [];
 		},
 		
-		update: function(template) {
+		templateChanged: function(template) {
 			togglePrintButton();
 			toggleInlinePreview(template);
 		},
@@ -64,12 +63,13 @@ Templates = function() {
 			var template = checkbox.val();
 
 			if (checkbox.attr('checked') == true) {
-				_templates.push(template);
+				if (_templates.indexOf(template) == -1)
+					_templates.push(template);
 			} else {
 				_templates.splice(_templates.indexOf(template), 1);
 			}
 
-			this.update(template);
+			this.templateChanged(template);
 		},
 	
 		preview: function(template) {
@@ -81,7 +81,6 @@ Templates = function() {
 	    });
 		},
 
-		
 		print: function() {
 			$.ajax({
 	      url: 	'/orders/' + _order + '/print',
@@ -89,7 +88,16 @@ Templates = function() {
 	      type: 'post'
 	    });
 			window.print();
-		}		
+		},
+		
+		removeInlinePreview: function(template) {
+	  	$("#preview-" + template).empty();
+
+			var checkbox = $("#template-checkbox-" + template);
+			if (checkbox.attr('checked')) {
+				loadInlinePreview(template);
+			}
+		}
 	}
 }();
 
@@ -139,8 +147,9 @@ Status = function() {
 		
 		if (statusCount == 0)
 			jQuery.noticeAdd(jQuery.extend(options, {text: text, type: type}));
-			
-		statusCount++;
+		
+		if (options['stay'] == true)	
+			statusCount++;
 		console.log("StatusCount: " + statusCount);
 	}
 
@@ -176,11 +185,8 @@ Status = function() {
 // Usage: IFrame.resizeAll()
 IFrame = function() {
 	var resize = function(iframe) {
-		// pretty hacky (i.e. unclean: extract template id from the iframe-id)
-		var id = iframe.id.match(/\d+/)[0];
-		var envelope = $("#template-preview-" + id);
-		// only resize if iframe (packed in div envelope) is visible
-		if (envelope.css('display') != 'none') {
+		// only resize if iframe is visible
+		if (iframe.style.display != 'none') {
 			var innerDoc = iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow.document;
 			iframe.height = innerDoc.body.scrollHeight;
 		}

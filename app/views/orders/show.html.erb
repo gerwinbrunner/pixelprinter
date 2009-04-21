@@ -1,3 +1,5 @@
+<% title "Order #{@order.name}" %>
+
 <% nav_link(@order.url, "Go back to original order", :title => "Open order in Shopify admin interface") %>
 
 <!-- This is populated later via AJAX and popped up with the dialog function of JQueryUI -->
@@ -5,12 +7,22 @@
 </div>
 
 <% sidebar do %>
-  <h4>Select the template you want to print:</h4>
+
   <% if @tmpls.blank? %>
-
     <em class="note">No templates found, you should create a new one.</em>
-
   <% else %>
+    <div class="print-box">
+      <h3>Templates</h3>
+      <p id="print-start" class="note">
+        Select the templates you want to print for this order.
+      </p>
+
+      <p id="print-button" class="note">
+        <span id="template-amount">The ollowing templates</span> will be printed.<br/>
+        <%= button_to_function "Print", "Templates.print()" %>
+      </p>
+    </div>
+    
     <% form_tag({:action => 'print'}, :id => "selected-templates") do %>
       <ul id="print-list">
       <% @tmpls.each do |tmpl| %>
@@ -18,9 +30,9 @@
       <% end %>
       <li id="template-create-link"><%= link_to_remote "Create new template", :url => {:controller => 'print_templates', :action => 'new'}, :loading => "Status.loading()", :html => {:class => 'action'}%></li>
       </ul>
-      <%= button_to_function "Print", "Templates.print()", :id => "print-button" %>
     <% end %>
   <% end %>
+  
 <% end %>
 
 
@@ -52,7 +64,7 @@
     Templates.updateSelection($(this));
   });
 
-  $(".template-item a").live("click", function() {
+  $(".template-item a.preview-link").live("click", function() {
     // hacky, get the id of the template from the link-id
     var template = $(this).attr('id').match(/\d+/)[0];
   	Templates.preview(template);

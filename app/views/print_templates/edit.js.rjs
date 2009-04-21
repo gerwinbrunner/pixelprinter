@@ -1,4 +1,9 @@
-page.replace_html 'modal-dialog', :partial => "form", :locals => {:method => :put, :tmpl => @tmpl}
+# prepare dialog for edit action
+page.replace_html 'modal-dialog', :partial => "form", :locals => {:method => 'put', :tmpl => @tmpl}
+
+# close preview dialog
 page << "Dialog.close();"
+# open edit dialog instead
 page << "Dialog.open('#{@tmpl.name} &mdash; Edit')";
+# hide all loading messages
 page << "Status.hideAll();"

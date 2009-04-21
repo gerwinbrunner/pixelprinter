@@ -63,7 +63,6 @@ class PrintTemplatesController < ApplicationController
         redirect_to :action => 'index'
       end
       format.js do
-        render :js => "Status.notify('Deleted template #{@tmpl.name}.')"
       end
       format.xml do
         head :ok
