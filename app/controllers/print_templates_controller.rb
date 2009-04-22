@@ -24,15 +24,15 @@ class PrintTemplatesController < ApplicationController
       @tmpl.name = original.name + "--COPY"
       @tmpl.body = original.body
     end
+    # render RJS template
   end
 
   def create
     @tmpl = shop.templates.build(params[:print_template])
     if @tmpl.save
-      msg = "Successfully added printing template #{@tmpl.name}."
+      # render RJS template
     else
-      msg = @tmpl.errors.full_messages.to_sentence
-      render :js => "Status.error('#{msg}.')"
+      render :js => "Messenger.error(\"#{@tmpl.errors.full_messages.to_sentence}.\");"
     end
   end
 
@@ -40,17 +40,17 @@ class PrintTemplatesController < ApplicationController
   def edit
     @tmpls = shop.templates
     @tmpl = @tmpls.find(params[:id])
-    render :template => 'print_templates/edit', :layout => false
+#    render :template => 'print_templates/edit', :layout => false
+    # render RJS template
   end
   
   def update
     @tmpl = shop.templates.find(params[:id])
     
     if @tmpl.update_attributes(params[:print_template])
-      msg = "Updated print template."
+      # render RJS template
     else
-      msg = @tmpl.errors.full_messages.to_sentence
-      render :js => "Status.error('#{msg}.')"
+      render :js => "Messenger.error(\"#{@tmpl.errors.full_messages.to_sentence}.\");"
     end
   end 
 
@@ -63,6 +63,7 @@ class PrintTemplatesController < ApplicationController
         redirect_to :action => 'index'
       end
       format.js do
+        # render RJS template
       end
       format.xml do
         head :ok

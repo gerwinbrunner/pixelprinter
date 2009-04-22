@@ -9,13 +9,6 @@ h1 a { color: #FFFAD5; text-decoration: none; }
 h2 { font-weight: normal; margin-top: 24px; }
 h3 { margin-top: 24px; }
 
-#header {
-  background: #2d3337 url('../images/shopify-logo.png') 20px 50% no-repeat;
-  padding: 25px 25px 25px 70px;
-  border-bottom: 1px solid #252a2e;
-}
-
-#header h1 { color: #fffad5; }
 
 #login-link {
   float: right;
@@ -364,13 +357,74 @@ h1.blue, h2.blue, h3.blue {
 	width: 75%;
 }
 
+#template-amount {
+	font-style: italic;
+}
+
+
+#print_template_form textarea {
+	width: 100%;
+}
+
+#print_template_form .default * {
+	vertical-align: top;
+}
+
+
+#html-editor {
+	font-family: "Courier New", "Courier", "monospace";
+	width: 100%;
+}
+
+#modal-dialog {
+	background-color: #fff;
+	position: relative;
+}
+
+#print-button {
+	display: none;
+}
+
+
+#flash-errors li {
+  padding-left: 24px;
+  background: url('../images/admin/icons/warning.gif') center left no-repeat;
+}
+
+#flashnotice, #flasherrors {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  list-style-type: none;
+  text-align: center;
+  background: #000;
+  padding: 10px;
+  font-size: 100%;
+  color: #fff;
+  z-index: 9999; 
+}
+
+#flashnotice {
+  background: #172830 url('../images/bubbles.gif') top left no-repeat;
+  border-top: 3px solid #000;
+  color: #fff;
+  vertical-align: center;
+}
+
+#flasherrors {
+  background: #8A1111 url('../images/bubbles_error.gif') top left no-repeat;
+  border-top: 3px solid #000;  
+  color: #fff;
+}
+
 /* CLASS */
 
 a.action {
 	color: #c00;
 }
 
-.header {
+#header {
 	border-bottom: 1px solid #EEEEEE;
 	color: #888888;
 	font-size: 175%;
@@ -434,33 +488,11 @@ a.action {
 	background: #eee;
 }
 
-#print_template_form textarea {
-	width: 100%;
-}
-
-#print_template_form .default * {
-	vertical-align: top;
-}
-
-
-#html-editor {
-	font-family: "Courier New", "Courier", "monospace";
-	width: 100%;
-}
-
-#modal-dialog {
-	background-color: #fff;
-	position: relative;
-}
-
-#print-button {
-	display: none;
-}
-
 .print-box {
 	margin: 0px;
 	padding: 8px 0px;
 	border-bottom: 1px solid #aaa;
+	height: 80px;
 }
 
 .print-box h3 {
@@ -495,4 +527,33 @@ a.action {
 
 .buttons a {
 	color: #c00 !important;
+}
+
+/* Growl-like notice in top right corner */
+#notice-item-wrapper {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	width: 250px;
+	z-index: 9999;
+}
+
+* html #notice-item-wrapper {
+	position: absolute;		
+}
+ 
+#notice-item {
+	height: 60px;
+	background: #333;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	color: #eee;
+	padding: 6px 6px 0 6px;
+	font-family: lucida Grande;
+	font-size: 11px;
+	border: 2px solid #999;
+	display: block;
+	position: relative;
+	margin: 0 0 12px 0;
+	text-align: center;
 }

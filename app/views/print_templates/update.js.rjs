@@ -1,6 +1,7 @@
 # hide loading status and close update dialog
-page << "Status.hideAll();"
+page << "Status.hide();"
 page << "Dialog.close();"
+page << "Messenger.notice('Successfully updated template #{@tmpl.name}.');"
 
 # update name of template in link
 page.replace_html("template-edit-link-#{@tmpl.id}", @tmpl.name)

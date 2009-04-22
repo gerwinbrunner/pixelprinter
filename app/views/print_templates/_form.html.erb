@@ -1,4 +1,4 @@
-<% form_remote_for(tmpl, :method => method, :html => {:id => "print_template_form"}, :loading => "Status.loading()") do |f| %>
+<% form_remote_for(tmpl, :method => method, :html => {:id => "print_template_form"}, :loading => "Status.show()", :complete => "Status.hide()") do |f| %>
   <div class="header">
     <%= f.label :name, "Name:" %>
     <%= f.text_field :name %>

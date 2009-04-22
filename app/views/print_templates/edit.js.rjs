@@ -6,4 +6,4 @@ page << "Dialog.close();"
 # open edit dialog instead
 page << "Dialog.open('#{@tmpl.name} &mdash; Edit')";
 # hide all loading messages
-page << "Status.hideAll();"
+page << "Status.hide();"

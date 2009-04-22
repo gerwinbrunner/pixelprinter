@@ -22,13 +22,13 @@ class LoginController < ApplicationController
       # save shop to local DB
       @shop = Shop.find_or_create_by_name(shopify_session.name)
       
-      flash[:notice] = "Successfully logged in to shopify store."
+      flash[:notice] = "Successfully logged into shopify store."
       
       return_address = session[:return_to] || '/orders'
       session[:return_to] = nil
       redirect_to return_address
     else
-      flash[:error] = "Could not log in to Shopify store."
+      flash[:error] = "Could not log into Shopify store."
       redirect_to :action => 'index'
     end
   end

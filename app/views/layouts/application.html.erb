@@ -1,3 +1,4 @@
+<div id="flashnotice" style="display:none;"></div>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -7,26 +8,30 @@
 
   <title><%= APP_NAME %></title>
 
-  <%= stylesheet_link_tag 'application', 'jquery-ui', 'jquery.notice', :media => 'screen' %>
+  <%= stylesheet_link_tag 'application', 'jquery-ui', :media => 'screen' %>
   <%= stylesheet_link_tag 'print', :media => 'print' %>
 
-  <%= javascript_include_tag :defaults, 'jquery.notice' %>
+  <%= javascript_include_tag :defaults, 'mygrowl' %>
+  
+  <%= content_tag :script, "window.onload = function() { Messenger.notice(#{h(flash[:notice]).inspect}); }", :type => "text/javascript"  if flash[:notice]%>
+  <%= content_tag :script, "window.onload = function() { Messenger.error(#{h(flash[:error]).inspect}); }", :type => "text/javascript"  if flash[:error]%>     
   
   <% javascript_tag do %>
     $(document).ready(function() {
       <%= yield :javascript %>
-      
-      <!-- Flash error & notice-->
-      <% if flash[:notice] %> Status.notify('<%= flash[:notice] %>'); <% end %>
-      <% if flash[:error]  %> Status.error('<%= flash[:error]  %>');  <% end %>
     });
   <% end %>
 </head>
 	
 <body>
-  
-  <div id="container" class="clearfix">
+  <!-- status message (growl-like) -->
+  <div id="notice-item-wrapper" style="display: none">
+    <div id="notice-item">
+    </div>
+  </div>
 
+	
+  <div id="container" class="clearfix">
     <!-- Sidebar -->
     <% if @sidebar_enabled %>
       <div id="sidebar">
@@ -43,6 +48,9 @@
     </div>
     <!-- end div.main -->
 
+    <!-- Flash error & notice-->
+    <div id="flashnotice" style="display:none;"></div>
+    <div id="flasherrors" style="display:none;"></div>
   </div>
   
 </body>

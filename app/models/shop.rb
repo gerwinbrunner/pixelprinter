@@ -10,6 +10,6 @@ class Shop < ActiveRecord::Base
   def create_base_templates
     templates.new.load_from_file!(:invoice)
     # TODO: add another default template and put it in the correct folder
-    templates.new.load_from_file!("../../test/fixtures/example_print_template")
+    templates.new.load_from_file!(:all_variables_used)
   end
 end

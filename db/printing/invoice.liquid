@@ -1,21 +1,19 @@
 <h1>{{ shop_name }}</h1>
 
-Thank you for your business.
+Thank you for your business with us.
 
 <br/>
-<br/>
-<br/>
+
 <h3>Payment Details</h3>
-
-<div>
-  <p>Amount: {{ total_price | money }}</p>
-  <p>Invoice: {{ name }}</p
-  <p>Payment method: {{ gateway }}</p>
+<p>
+  Amount: {{ total_price | money }}<br/>
+  Invoice: {{ name }}<br/>
+  Payment method: {{ gateway }}<br/>
   
-  {% if note %}
-    <p>Description: {{ note }}</p>
+  {% if !note.blank %}
+    Description: {{ note }}<br/>
   {% endif %}
-</div>
+</p>
 
 Buyer:
 <div>

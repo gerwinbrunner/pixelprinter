@@ -28,7 +28,10 @@
       <% @tmpls.each do |tmpl| %>
         <%= render :partial => 'template_checkbox', :locals => {:tmpl => tmpl, :order => @order} %>
       <% end %>
-      <li id="template-create-link"><%= link_to_remote "Create new template", :url => {:controller => 'print_templates', :action => 'new'}, :loading => "Status.loading()", :html => {:class => 'action'}%></li>
+      <li id="template-create-link">
+        <%= link_to_remote "Create new template", :url => {:controller => 'print_templates', :action => 'new'}, 
+                                                  :loading => "Status.show()", :complete => "Status.hide()", :html => {:class => 'action'} %>
+      </li>
       </ul>
     <% end %>
   <% end %>

@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
         @tmpls = shop.templates
       end
       format.js do
-        # AJAX preview, loads
+        # AJAX preview, loads in modal Dialog
         @tmpl  = shop.templates.find(params[:template_id])
       end
     end

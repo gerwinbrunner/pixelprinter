@@ -1,6 +1,7 @@
 <iframe src='<%= url_for(:controller => 'orders', :action => 'preview', :id => order, :template_id => tmpl) %>' 
         onload="Callback.trigger('<%= tmpl.id %>')" 
         name="iframe-preview" 
+        id="iframePreview<%= tmpl.id %>" 
         scrolling='auto' 
         height='80%' 
         width='100%' 
@@ -16,9 +17,9 @@
 <% unless defined?(inline) %>
   <div class="button-panel">
     <p class="buttons">
-      <%= button_to_function "Print this template", "frames['iframe-preview'].focus(); frames['iframe-preview'].print();"%>
+      <%= button_to_function "Print this template", "var iframe = frames[frames.length-1]; iframe.focus(); iframe.print();"%>
       or
-      <%= button_to_remote "Edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl}, :method => 'get', :loading => "Status.loading();" %>
+      <%= button_to_remote "Edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl}, :method => 'get', :loading => "Status.show();" %>
       or
       <%= link_to_function "Cancel", "Dialog.close()" %>
     </p>

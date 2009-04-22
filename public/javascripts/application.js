@@ -33,8 +33,12 @@ Templates = function() {
 	
 	var loadInlinePreview = function(template) {
 		var checkbox = $("#template-checkbox-" + template);
+
 		checkbox.disable();
-		Status.loading();
+		// this is a dirty fix, because the link doesn't listen to moveout-events any more, so it doesn't get hidden, which looks weird
+		$("#template-delete-link-" + template).hide();
+		
+		Status.show();
 
 		Callback.prepare(template, function() { 
 			checkbox.enable();
@@ -61,7 +65,7 @@ Templates = function() {
 
 		updateSelection: function(checkbox) {
 			var template = checkbox.val();
-
+			
 			if (checkbox.attr('checked') == true) {
 				if (_templates.indexOf(template) == -1)
 					_templates.push(template);
@@ -74,7 +78,7 @@ Templates = function() {
 	
 		preview: function(template) {
 			$.ajax({
-	      beforeSend: function(request) { Status.loading(); }, 
+	      beforeSend: function(request) { Status.show(); }, 
 	      dataType: 'script', 
 	      type: 'get',
 	      url: '/orders/' + _order + '?template_id=' + template
@@ -102,7 +106,8 @@ Templates = function() {
 }();
 
 
-// gives you: Dialog.open() and Dialog.close()
+// Usage: Dialog.open() and Dialog.close()
+// Opens a div as a modal dialog which you need to fill yourself first
 Dialog = function() {
 	var dlg = "#modal-dialog";
 
@@ -127,62 +132,46 @@ Dialog = function() {
 		
 		close: function() {
 			$(dlg).dialog('destroy');
+//			$(dlg).html('');
 		}
 	}
 }();
 
 
-// Status.loading(), Status.notify(), Status.error() and Status.hide()
+// Status.show() shows a permanent Growl-like notification.
+// Repeating calls to show() will leave the same first notification open.
+// Status.hide() closes it again. Make sure to call hide() for EACH time you call show()!
 Status = function() {
-	var statusCount = 0;
+	var count = 0;
 	
-	/* private methods */
-	var show = function(text, type, options) {
-		// set default options
-		var text    = (typeof(text) != 'undefined') ? text : 'Loading...';
-		var type    = (typeof(type) != 'undefined') ? type : 'notice';
-		var options = (typeof(options) != 'undefined') ? options : {};
-		if (typeof(options['stay']) == 'undefined')
-			options['stay'] = true;
-		
-		if (statusCount == 0)
-			jQuery.noticeAdd(jQuery.extend(options, {text: text, type: type}));
-		
-		if (options['stay'] == true)	
-			statusCount++;
-		console.log("StatusCount: " + statusCount);
-	}
-
-	/* public methods */	
 	return {
-		loading: function() {
-			show('Loading...', 'notice');
+		show: function(text) {
+			// don't show more than one notice at a time
+			if (count < 1) {
+				var text = (typeof(text) != 'undefined') ? text : 'Loading...';
+				$("#notice-item").html(text);
+				notice = $("#notice-item-wrapper");
+				notice.fadeIn();
+			
+				if(navigator.userAgent.match(/MSIE 6/i)) {
+			  	notice.css({top: document.documentElement.scrollTop});
+			  }
+			}
+			count++;
+			console.log("Called show, count is now: " + count)
 		},
-		
-		notify: function(text) {
-			show(text, 'notice', {stay: false});
-		},
-		
-		error: function(text) {
-			show(text, 'notice', {type: 'error'});
-		},
-		
+
 		hide: function() {
-			if (statusCount == 1)
-				jQuery.noticeRemove($('.notice-item-wrapper'));
-			statusCount--;
-			console.log("StatusCount: " + statusCount);
-		},
-		
-		hideAll: function() {
-			jQuery.noticeRemove($('.notice-item-wrapper'));
-			statusCount = 0;
+			if (count == 1) { notice.fadeOut(); }
+			count--;
+			console.log("Called hide, count is now: " + count)
 		}
 	}
 }();
 
 
 // Usage: IFrame.resizeAll()
+// Resizes iframe to automatically fit it's content
 IFrame = function() {
 	var resize = function(iframe) {
 		// only resize if iframe is visible
@@ -221,4 +210,50 @@ Callback = function() {
 			}
 		}
 	}
+}();
+
+
+// Shopify Javascript Messenger
+/*-------------------- Messenger Functions ------------------------------*/
+// Messenger is used to manage error messages and notices
+//
+Messenger = function() {
+	var effect = 'slide';
+	var effectOptions = {direction: 'down'};
+  
+	var autohide_error  = null;
+  var autohide_notice = null;
+	
+	// Responsible for fading notices level messages in the dom    
+  var fadeNotice = function() {
+    $('#flashnotice').hide(effect, effectOptions);
+    autohide_notice = null;
+  };
+  
+  // Responsible for fading error messages in the DOM
+  var fadeError = function() {
+    $('#flasherrors').hide(effect, effectOptions);
+    autohide_error = null;
+  };
+  
+	return {
+		// Notice-level messages.  See Messenger.error for full details.
+	  notice: function(message) {
+	    $('#flashnotice').html(message);
+	    $('#flashnotice').show(effect, effectOptions);
+
+	    if (autohide_notice != null) { clearTimeout(autohide_notice); }
+	    autohide_notice = setTimeout(fadeNotice, 5000);
+	  },		
+	  
+	  // When given an error message show it on the screen. 
+	  // This message will auto-hide after a specified amount of miliseconds
+	  error: function(message) {
+	    $('#flasherrors').html(message);
+	    $('#flasherrors').show(effect, effectOptions);
+
+	    if (autohide_error != null) { clearTimeout(autohide_error); }
+	    autohide_error = setTimeout(fadeError, 5000);
+	  }
+	}  
 }();

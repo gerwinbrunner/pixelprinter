@@ -1,5 +1,19 @@
 body {
+	font-size: 12pt;
 }
+
+a:link, a:visited {
+	color: #520;
+	background: transparent;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+a:link:after,a:visited:after {
+  content: " (" attr(href) ") ";
+  font-size: 90%;
+}
+
 
 /* HIDE ELEMENTS */
 #utils, #nav, #sbar, 
