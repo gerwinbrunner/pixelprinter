@@ -1,6 +1,8 @@
-<% title "Order #{@order.name}" %>
+<div class="order">
+  <h2>Order <%= @order.name %></h2>
+  <%= link_to "Go back to original order", @order.url, :title => "Open order in Shopify admin interface", :class => 'action' %>
+</div>
 
-<% nav_link(@order.url, "Go back to original order", :title => "Open order in Shopify admin interface") %>
 
 <!-- This is populated later via AJAX and popped up with the dialog function of JQueryUI -->
 <div id="modal-dialog">
@@ -38,13 +40,6 @@
   
 <% end %>
 
-
-<div class="order box">
-  <strong><%= @order.name %></strong>
-  <span class="price"><%= @order.total_price %> <%= @order.currency %></span>
-  <span class="highlight"><%= @order.financial_status %></span>
-  by <span class="note"><%= @order.billing_address.name %></span>
-</div>
 
 <!-- Empty Containers in correct order, ready to be filled with AJAX previews -->
 <div id="preview">

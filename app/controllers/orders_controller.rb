@@ -10,16 +10,16 @@ class OrdersController < ApplicationController
     @default_template = @tmpls.find(:first, :conditions => {:default => true}) || @tmpls.find(:first)
   end
   
+  
   def show
     @order = ShopifyAPI::Order.find(params[:id])
+    @tmpls = shop.templates
     
     respond_to do |format|
-      format.html do
-        @tmpls = shop.templates
-      end
+      format.html
       format.js do
         # AJAX preview, loads in modal Dialog
-        @tmpl  = shop.templates.find(params[:template_id])
+        @tmpl = shop.templates.find(params[:template_id])
       end
     end
   end

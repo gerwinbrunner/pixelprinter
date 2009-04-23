@@ -10,4 +10,7 @@ page << "$('#template-edit-link-#{@tmpl.id}').effect('pulsate');"
 # remove old preview (which is cached on the current page), so that it can be reloaded again
 page << "Templates.removeInlinePreview(#{@tmpl.id});"
 # Trigger checkbox change event to reload ajax preview if selected
-page << "$('template-checkbox-#{@tmpl.id}').trigger('change')"
+  # page << "$('template-checkbox-#{@tmpl.id}').trigger('change')"
+page << "$('template-checkbox-#{@tmpl.id}').attr('checked', false);"
+
+page << "Templates.preview(#{@tmpl.id});"

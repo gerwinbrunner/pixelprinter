@@ -10,7 +10,7 @@
     <p class="buttons">
       <%= submit_tag(method.to_sym == :post ? "Create" : "Update" )%>
       or
-      <%= link_to_function "Cancel", "Dialog.close()", :class => 'action' %>      
+      <%= link_to_function "Cancel", "Dialog.close();", :class => 'action' %>      
     </p>
   </div>
 <% end %>

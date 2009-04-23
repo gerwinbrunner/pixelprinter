@@ -12,8 +12,9 @@ class PrintTemplatesController < ApplicationController
   end
   
   def show
+    # Not used at the moment (see orders/show)
     @tmpl  = shop.templates.find(params[:id])
-    @order = params[:order_id].blank? ? ShopifyAPI::Order.example : ShopifyAPI::Order.find(params[:order_id])
+    @order = ShopifyAPI::Order.find(params[:order_id])
   end
 
   

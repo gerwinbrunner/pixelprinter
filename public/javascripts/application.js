@@ -38,7 +38,7 @@ Templates = function() {
 		// this is a dirty fix, because the link doesn't listen to moveout-events any more, so it doesn't get hidden, which looks weird
 		$("#template-delete-link-" + template).hide();
 		
-		Status.show();
+		Status.show("Loading preview...");
 
 		Callback.prepare(template, function() { 
 			checkbox.enable();
@@ -47,7 +47,7 @@ Templates = function() {
 		});
 
 		var url = "/orders/" + _order + "/preview?template_id=" + template;
-		var preview = "<iframe src='" + url + "' class='template-preview' id='" + "iframe-preview-" + template + "' onload='Callback.trigger(" + template +")' scrolling='no' width='100%' frameborder='0' ></iframe>";
+		var preview = "<iframe src='" + url + "' class='template-preview page page-border' id='" + "iframe-preview-" + template + "' onload='Callback.trigger(" + template +")' scrolling='no' width='100%' frameborder='0' ></iframe>";
 	  $("#preview-" + template).html(preview);
 	}
 	
@@ -78,7 +78,7 @@ Templates = function() {
 	
 		preview: function(template) {
 			$.ajax({
-	      beforeSend: function(request) { Status.show(); }, 
+	      beforeSend: function(request) { Status.show("Loading preview..."); }, 
 	      dataType: 'script', 
 	      type: 'get',
 	      url: '/orders/' + _order + '?template_id=' + template
@@ -116,11 +116,11 @@ Dialog = function() {
 	  	modal: true
 		};
 		
-		dialogOptions = jQuery.extend(dialogOptions, otherOptions, dimensions());
+		dialogOptions = jQuery.extend(dialogOptions, otherOptions, screenDimensions());
 		return dialogOptions;
 	}
 
-  var dimensions = function() {
+  var screenDimensions = function() {
 		content = $('#modal-dialog')[0];
 		var viewportwidth;
 		var viewportheight;
@@ -144,7 +144,8 @@ Dialog = function() {
 		// open dialog with -20% of maximal screen area
     var x = viewportwidth - (viewportwidth/10) * 2;
     var y = viewportheight - (viewportheight/10) * 2;
-
+		
+		x = '8.5in'
     return { width: x, height: y };
   }
 
@@ -190,7 +191,12 @@ Status = function() {
 			if (count <= 1) { notice.fadeOut(); count = 1 }
 			count--;
 			console.log("Called hide, count is now: " + count)
+		},
+		
+		reset: function() {
+			count = 0
 		}
+		
 	}
 }();
 

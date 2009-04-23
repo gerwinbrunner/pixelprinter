@@ -24,9 +24,9 @@ h3 { margin-top: 24px; }
 #login-link a.shop_name:hover { text-decoration: underline; }
 
 #container {
-  min-width: 800px;
-  margin: 40px 10%;
-  background: #fff;
+  min-width: 600px;
+  margin: 40px 20px;
+  background: #transparent;
   border-right: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
 }
@@ -35,7 +35,7 @@ h3 { margin-top: 24px; }
 
 #main { 
 	padding: 18px;
-	margin-right: 290px;
+	margin: 12px;;
 }
 
 #tabs {
@@ -158,13 +158,18 @@ code { font-size: 140%; }
 }
 
 #sidebar {
-  float: right; 
-  width: 250px; 
+  position: fixed;
+	top: 40px;
+	right: 40px;
+
+  width: 250px;
+ 	height: 500px;
   background: #f5fbfe; 
   color: #003366; 
   padding: 0px 20px 20px 20px;
   margin-bottom: 18px;
-	border-left: 1px solid #D7E4EA; 
+ 	border-left: 1px solid #D7E4EA;
+	overflow: auto;
 }
 
 #sidebar ul {
@@ -241,7 +246,6 @@ code { font-size: 140%; }
   background:#FAFAFA url('../images/box-bg2.gif') repeat-x scroll left top;
   border: 1px solid #CCCCCC;
 	padding: 8px;
-	width: 65%;
 }
 
 .wrapper {
@@ -468,11 +472,20 @@ a.action {
 	color: #c00;
 }
 
+.page {
+	width: 8.5in;
+	background-color: #fff;
+}
+
+.page-border {
+	border-bottom: 1px solid #ddd;
+	background: #fff url('/images/page-fold-overlay-graybg.gif') no-repeat top right;
+	padding: 40px 20px !important;
+}
+
 .template-preview {
-	width: 65%;
 	margin: 8px 0px 64px 0px;
-	border: 2px solid #;
-	padding: 8px;
+ 	padding: 8px;
 }
 
 .template-item {
@@ -528,6 +541,11 @@ a.action {
 
 .buttons a {
 	color: #c00 !important;
+}
+
+#template-selector {
+	position: absolute;
+	left: 24px;
 }
 
 /* Growl-like notice in top right corner */
