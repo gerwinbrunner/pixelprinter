@@ -113,14 +113,40 @@ Dialog = function() {
 
 	var options = function(otherOptions) {
 		var dialogOptions = {
-	  	modal: true,
-	  	width: 500,
-			height: 550
+	  	modal: true
 		};
 		
-		dialogOptions = jQuery.extend(dialogOptions, otherOptions);
+		dialogOptions = jQuery.extend(dialogOptions, otherOptions, dimensions());
 		return dialogOptions;
 	}
+
+  var dimensions = function() {
+		content = $('#modal-dialog')[0];
+		var viewportwidth;
+		var viewportheight;
+
+		// the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
+ 		if (typeof window.innerWidth != 'undefined') {
+	  	viewportwidth = window.innerWidth,
+			viewportheight = window.innerHeight
+		} else if (typeof document.documentElement != 'undefined'	&& typeof document.documentElement.clientWidth !=
+	     'undefined' && document.documentElement.clientWidth != 0) {
+			// IE6 in standards compliant mode (i.e. with a valid doctype as the first line in the document)
+      viewportwidth = document.documentElement.clientWidth,
+		  viewportheight = document.documentElement.clientHeight
+		} else {
+			// older versions of IE
+      viewportwidth = $('body')[0].clientWidth,
+      viewportheight = $('body')[0].clientHeight
+    }
+		console.log('Your viewport width is '+viewportwidth+'x'+viewportheight);
+		
+		// open dialog with -20% of maximal screen area
+    var x = viewportwidth - (viewportwidth/10) * 2;
+    var y = viewportheight - (viewportheight/10) * 2;
+
+    return { width: x, height: y };
+  }
 
 	return {
 		open: function(title, otherOptions) {
@@ -132,7 +158,6 @@ Dialog = function() {
 		
 		close: function() {
 			$(dlg).dialog('destroy');
-//			$(dlg).html('');
 		}
 	}
 }();
@@ -162,7 +187,7 @@ Status = function() {
 		},
 
 		hide: function() {
-			if (count == 1) { notice.fadeOut(); }
+			if (count <= 1) { notice.fadeOut(); count = 1 }
 			count--;
 			console.log("Called hide, count is now: " + count)
 		}

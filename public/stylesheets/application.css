@@ -373,6 +373,8 @@ h1.blue, h2.blue, h3.blue {
 
 #template-editor {
 	font-family: "Courier New", "Courier", "monospace";
+	height: 60%;
+	width: 100%;
 }
 
 #modal-dialog {
@@ -542,7 +544,7 @@ a.action {
 }
  
 #notice-item {
-	height: 60px;
+	height: 50px;
 	background: #333;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
@@ -555,6 +557,10 @@ a.action {
 	position: relative;
 	margin: 0 0 12px 0;
 	text-align: center;
+}
+
+#notice-item p {
+	margin: 4px;
 }
 
 #progressbar {
