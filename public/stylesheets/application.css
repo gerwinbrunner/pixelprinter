@@ -371,9 +371,8 @@ h1.blue, h2.blue, h3.blue {
 }
 
 
-#html-editor {
+#template-editor {
 	font-family: "Courier New", "Courier", "monospace";
-	width: 100%;
 }
 
 #modal-dialog {
@@ -556,4 +555,13 @@ a.action {
 	position: relative;
 	margin: 0 0 12px 0;
 	text-align: center;
+}
+
+#progressbar {
+	height: 12px;
+}
+
+/* animated background for progressbar */
+.ui-progressbar-value { 
+	background-image: url('/images/pbar-ani.gif') !important;
 }

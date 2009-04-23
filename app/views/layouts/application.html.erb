@@ -8,15 +8,19 @@
 
   <title><%= APP_NAME %></title>
 
-  <%= stylesheet_link_tag 'application', 'jquery-ui', :media => 'screen' %>
+  <%= stylesheet_link_tag 'application', 'jquery-ui-1.7.1.custom', :media => 'screen' %>
   <%= stylesheet_link_tag 'print', :media => 'print' %>
 
-  <%= javascript_include_tag :defaults, 'mygrowl' %>
+  <%= javascript_include_tag :defaults, 'jquery-ui-1.7.1.custom.min' %>
   
   <%= content_tag :script, "window.onload = function() { Messenger.notice(#{h(flash[:notice]).inspect}); }", :type => "text/javascript"  if flash[:notice]%>
   <%= content_tag :script, "window.onload = function() { Messenger.error(#{h(flash[:error]).inspect}); }", :type => "text/javascript"  if flash[:error]%>     
   
   <% javascript_tag do %>
+    $(function() {
+    	$("#progressbar").progressbar({value: 100});
+    });
+    
     $(document).ready(function() {
       <%= yield :javascript %>
     });
@@ -27,6 +31,8 @@
   <!-- status message (growl-like) -->
   <div id="notice-item-wrapper" style="display: none">
     <div id="notice-item">
+      <p></p>
+      <div id="progressbar"></div>
     </div>
   </div>
 

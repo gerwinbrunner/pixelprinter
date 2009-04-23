@@ -149,7 +149,7 @@ Status = function() {
 			// don't show more than one notice at a time
 			if (count < 1) {
 				var text = (typeof(text) != 'undefined') ? text : 'Loading...';
-				$("#notice-item").html(text);
+				$("#notice-item p").html(text);
 				notice = $("#notice-item-wrapper");
 				notice.fadeIn();
 			
