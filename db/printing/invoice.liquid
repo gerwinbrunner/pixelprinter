@@ -1,29 +1,51 @@
-<h1>{{ shop_name }}</h1>
-
-Thank you for your business with us.
-
-<br/>
-
-<h3>Payment Details</h3>
-<p>
-  Amount: {{ total_price | money }}<br/>
-  Invoice: {{ name }}<br/>
-  Payment method: {{ gateway }}<br/>
-  
-  {% if !note.blank %}
-    Description: {{ note }}<br/>
-  {% endif %}
+<p style="text-align: right">
+ {{ "now" | date: "%m/%d/%y" }}
 </p>
 
-Buyer:
-<div>
+<h1 style="font-family: Verdana, sans-serif">{{ shop_name }}</h1>
+
+<h3>Invoice</h3>
+
+<p>Thanks for buying the following products from our shop:</p>
+
+{% for line_item in line_items %}
+  {{ line_item.quantity }} x {{ line_item.title }} &mdash; {{ line_item.price | money }}<br/>
+{% endfor %}
+
+<h3>Payment Details</h3>
+<p><em>Payment method: {{ gateway }}</em></p>
+
+<table>
+  <tr>
+    <td>Subtotal price:</td>
+    <td>{{ subtotal_price | money }}</td>
+  </tr>
+ <tr>
+   <td>Total tax:</td>
+   <td>{{ tax_price | money }}</td>
+ </tr>
+ <tr><td>Shipping:</td><td>{{ shipping_price | money }}</td></tr>
+ <tr><td style="border-top: 1px solid #333"><strong>Total price:</strong></td><td style="border-top: 1px solid #333">{{ total_price | money }}</td></tr>
+</table>
+
+<p>
+{% if !note.blank %}
+  Description: {{ note }}<br/>
+{% endif %}
+</p>
+
+<h4>Your items will be shipped to:</h4>
+
+<div style="padding: 8px; border: 2px solid #ccc;">
   {{ customer.name }}<br/>
-  {{ billing_address.company }}<br/>
-  {{ billing_address.street }}<br/>
-  {{ billing_address.city }}<br/>
-  {{ billing_address.zip }}<br/>
-  {{ billing_address.country }}<br/>
+  {{ shipping_address.company }}<br/>
+  {{ shipping_address.street }}<br/>
+  {{ shipping_address.city }}<br/>
+  {{ shipping_address.zip }}<br/>
+  {{ shipping_address.country }}<br/>
 </div>
 
-If you have any questions, please send an email to 
-<a href="mailto:{{ shop_email }}">{{ shop_email }}</a>
+<p>
+  If you have any questions, please send an email to 
+  <u>Enter@YourEmail.com</u>
+</p>

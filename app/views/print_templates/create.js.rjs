@@ -2,7 +2,7 @@ page << "Dialog.close();"
 page << "Messenger.notice('Successfully created new template #{@tmpl.name}.');"
 
 # insert checkbox and preview link in sidebar
-page.insert_html(:before, 'template-create-link', :partial => 'orders/template_checkbox', :locals => {:tmpl => @tmpl})
+page.insert_html(:bottom, 'print-list', :partial => 'orders/template_checkbox', :locals => {:tmpl => @tmpl})
 page << "$('.template-item:last').effect('bounce');"
 
 # insert empty div for preview (will be populated later via ajax)

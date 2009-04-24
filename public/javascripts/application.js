@@ -1,3 +1,16 @@
+Debug = function() {
+	// set to true to print all important javascript debug messages
+	// set to false to skip all debug messages (for production)
+	var debug = false;
+	
+	return {
+		log: function(text) {
+			if (debug) { console.log(text); }
+		}
+	}
+}();
+
+
 Templates = function() {
 	var _order = null;
 	var _templates = null;
@@ -7,7 +20,7 @@ Templates = function() {
 	  if (_templates.length > 0) {
 			$("#print-start").hide();
 	    $("#print-button").show();
-			var pluralize = _templates.length == 1 ? "template" : "templates"
+			var pluralize = _templates.length == 1 ? "document" : "documents"
 			$("#template-amount").html(_templates.length + " " + pluralize)
 
 	  } else {
@@ -18,7 +31,7 @@ Templates = function() {
 
 	var toggleInlinePreview = function(template) {
 		// preview iframe, could be already inserted (cached in DOM)
-		var templatePreview = $("#iframe-preview-" + template);
+		var templatePreview = $("#iframe-inline-preview-" + template);
 		// is template selected?
 		if (_templates.indexOf(template) > -1) {
 			if (templatePreview.length > 0) { 
@@ -47,7 +60,7 @@ Templates = function() {
 		});
 
 		var url = "/orders/" + _order + "/preview?template_id=" + template;
-		var preview = "<iframe src='" + url + "' class='template-preview page page-border' id='" + "iframe-preview-" + template + "' onload='Callback.trigger(" + template +")' scrolling='no' width='100%' frameborder='0' ></iframe>";
+		var preview = "<iframe src='" + url + "' class='template-preview page page-border' id='" + "iframe-inline-preview-" + template + "' onload='Callback.trigger(" + template +")' scrolling='no' width='100%' frameborder='0' ></iframe>";
 	  $("#preview-" + template).html(preview);
 	}
 	
@@ -61,15 +74,18 @@ Templates = function() {
 		templateChanged: function(template) {
 			togglePrintButton();
 			toggleInlinePreview(template);
+			Debug.log("Template #" + template + " has changed.")
 		},
 
 		updateSelection: function(checkbox) {
 			var template = checkbox.val();
-			
+			Debug.log("Updating selection for template-checkbox-" + template + "...");
 			if (checkbox.attr('checked') == true) {
+				Debug.log("Checkbox selected");
 				if (_templates.indexOf(template) == -1)
 					_templates.push(template);
 			} else {
+				Debug.log("Checkbox deselected");
 				_templates.splice(_templates.indexOf(template), 1);
 			}
 
@@ -77,6 +93,7 @@ Templates = function() {
 		},
 	
 		preview: function(template) {
+			Debug.log("Previewing template: #" + template);
 			$.ajax({
 	      beforeSend: function(request) { Status.show("Loading preview..."); }, 
 	      dataType: 'script', 
@@ -92,15 +109,6 @@ Templates = function() {
 	      type: 'post'
 	    });
 			window.print();
-		},
-		
-		removeInlinePreview: function(template) {
-	  	$("#preview-" + template).empty();
-
-			var checkbox = $("#template-checkbox-" + template);
-			if (checkbox.attr('checked')) {
-				loadInlinePreview(template);
-			}
 		}
 	}
 }();
@@ -139,13 +147,11 @@ Dialog = function() {
       viewportwidth = $('body')[0].clientWidth,
       viewportheight = $('body')[0].clientHeight
     }
-		console.log('Your viewport width is '+viewportwidth+'x'+viewportheight);
 		
-		// open dialog with -20% of maximal screen area
-    var x = viewportwidth - (viewportwidth/10) * 2;
+		// open dialog with -20% of maximal screen height and fixed letter width
     var y = viewportheight - (viewportheight/10) * 2;
-		
-		x = '8.5in'
+    var x = '8.5in';
+
     return { width: x, height: y };
   }
 
@@ -158,87 +164,8 @@ Dialog = function() {
 		},
 		
 		close: function() {
+			$(dlg).empty();
 			$(dlg).dialog('destroy');
-		}
-	}
-}();
-
-
-// Status.show() shows a permanent Growl-like notification.
-// Repeating calls to show() will leave the same first notification open.
-// Status.hide() closes it again. Make sure to call hide() for EACH time you call show()!
-Status = function() {
-	var count = 0;
-	
-	return {
-		show: function(text) {
-			// don't show more than one notice at a time
-			if (count < 1) {
-				var text = (typeof(text) != 'undefined') ? text : 'Loading...';
-				$("#notice-item p").html(text);
-				notice = $("#notice-item-wrapper");
-				notice.fadeIn();
-			
-				if(navigator.userAgent.match(/MSIE 6/i)) {
-			  	notice.css({top: document.documentElement.scrollTop});
-			  }
-			}
-			count++;
-			console.log("Called show, count is now: " + count)
-		},
-
-		hide: function() {
-			if (count <= 1) { notice.fadeOut(); count = 1 }
-			count--;
-			console.log("Called hide, count is now: " + count)
-		},
-		
-		reset: function() {
-			count = 0
-		}
-		
-	}
-}();
-
-
-// Usage: IFrame.resizeAll()
-// Resizes iframe to automatically fit it's content
-IFrame = function() {
-	var resize = function(iframe) {
-		// only resize if iframe is visible
-		if (iframe.style.display != 'none') {
-			var innerDoc = iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow.document;
-			iframe.height = innerDoc.body.scrollHeight;
-		}
-	}
-	
-	return {
-		resizeAll: function() {
-			$('iframe').each(function(index, iframe) {
-				resize(iframe);
-			})
-		}
-	}
-}();
-
-
-// Prepare callbacks for a template (preview) which get triggered after an iframe is loaded
-// Usage example: Callback.prepare(1, function() { alert('yo') })
-//                Callback.trigger(1)
-Callback = function() {
-	var callbacks = {};
-
-	return {
-		prepare: function(id, func) {
-			callbacks[id] = func;
-		},
-		
-		trigger: function(id) {
-			if (typeof(callbacks[id]) != 'undefined' && callbacks[id]) {
-				console.log("Running callback for template #" + id);
-				callbacks[id].call();
-				callbacks[id] = null;
-			}
 		}
 	}
 }();
@@ -287,4 +214,85 @@ Messenger = function() {
 	    autohide_error = setTimeout(fadeError, 5000);
 	  }
 	}  
+}();
+
+
+// Status.show() shows a permanent Growl-like notification.
+// Repeating calls to show() will leave the same first notification open.
+// Status.hide() closes it again. Make sure to call hide() for EACH time you call show()!
+Status = function() {
+	var count = 0;
+	
+	return {
+		show: function(text) {
+			// don't show more than one notice at a time
+			if (count < 1) {
+				var text = (typeof(text) != 'undefined') ? text : 'Loading...';
+				$("#notice-item p").html(text);
+				notice = $("#notice-item-wrapper");
+				notice.fadeIn();
+			
+				if(navigator.userAgent.match(/MSIE 6/i)) {
+			  	notice.css({top: document.documentElement.scrollTop});
+			  }
+			}
+			count++;
+			Debug.log("Called Status.show, count is now: " + count)
+		},
+
+		hide: function() {
+			if (count <= 1) { notice.fadeOut(); count = 1 }
+			count--;
+			Debug.log("Called Status.hide, count is now: " + count)
+		},
+		
+		reset: function() {
+			count = 0
+		}
+		
+	}
+}();
+
+
+// Usage: IFrame.resizeAll()
+// Resizes iframe to automatically fit it's content
+IFrame = function() {
+	var resize = function(iframe) {
+		// only resize if iframe is visible
+		if (iframe.style.display != 'none') {
+			//Debug.log("Resizing visible iFrame " + iframe.id)
+			var innerDoc = iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow.document;
+			iframe.height = innerDoc.body.scrollHeight;
+		}
+	}
+	
+	return {
+		resizeAll: function() {
+			$('iframe').each(function(index, iframe) {
+				resize(iframe);
+			})
+		}
+	}
+}();
+
+
+// Prepare callbacks for a template (preview) which get triggered after an iframe is loaded
+// Usage example: Callback.prepare(1, function() { alert('yo') })
+//                Callback.trigger(1)
+Callback = function() {
+	var callbacks = {};
+
+	return {
+		prepare: function(id, func) {
+			callbacks[id] = func;
+		},
+		
+		trigger: function(id) {
+			if (typeof(callbacks[id]) != 'undefined' && callbacks[id]) {
+				Debug.log("Running callback for template #" + id);
+				callbacks[id].call();
+				callbacks[id] = null;
+			}
+		}
+	}
 }();

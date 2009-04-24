@@ -13,10 +13,14 @@
 
   <%= javascript_include_tag :defaults, 'jquery-ui' %>
   
-  <%= content_tag :script, "window.onload = function() { Messenger.notice(#{h(flash[:notice]).inspect}); }", :type => "text/javascript"  if flash[:notice]%>
-  <%= content_tag :script, "window.onload = function() { Messenger.error(#{h(flash[:error]).inspect}); }", :type => "text/javascript"  if flash[:error]%>     
-  
   <% javascript_tag do %>
+    <% if flash[:notice] %>
+      window.onload = function() { Messenger.notice(<%= h(flash[:notice]).inspect %>); }
+    <% end %>
+    <% if flash[:error] %>
+      window.onload = function() { Messenger.error(<%= h(flash[:error]).inspect %>); }
+    <% end %>
+    
     $(function() {
     	$("#progressbar").progressbar({value: 100});
     });
@@ -38,13 +42,6 @@
 
 	
   <div id="container" class="clearfix">
-    <!-- Sidebar -->
-    <% if @sidebar_enabled %>
-      <div id="sidebar">
-        <%= yield :sidebar %>
-      </div>
-    <% end %>
-    
     <!-- begin div.main-->
     <div id="main">
       <%= @content_for_layout %>   

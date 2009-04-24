@@ -98,7 +98,7 @@ module ShopifyAPI
       {
         'id'         => id, 
         'title'      => name, 
-        'price'      => price, 
+        'price'      => price.to_i * 100, 
         'line_price' => (price * quantity), 
         'quantity'   => quantity,
         'sku'        => sku,

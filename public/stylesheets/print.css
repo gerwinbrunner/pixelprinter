@@ -17,7 +17,7 @@ a:link:after,a:visited:after {
 
 /* HIDE ELEMENTS */
 #utils, #nav, #sbar, 
-#reportlink, #action-links, #secondary, .tools, .toolbox, . {
+#reportlink, #action-links, #secondary, .tools, .toolbox, .order-widget {
   display: none !important;
 }
 

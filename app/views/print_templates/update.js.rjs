@@ -1,16 +1,17 @@
+page << "Messenger.notice('Successfully updated template #{@tmpl.name}.');"
+
 # hide loading status and close update dialog
 page << "Status.hide();"
 page << "Dialog.close();"
-page << "Messenger.notice('Successfully updated template #{@tmpl.name}.');"
 
 # update name of template in link
 page.replace_html("template-edit-link-#{@tmpl.id}", @tmpl.name)
 page << "$('#template-edit-link-#{@tmpl.id}').effect('pulsate');"
 
 # remove old preview (which is cached on the current page), so that it can be reloaded again
-page << "Templates.removeInlinePreview(#{@tmpl.id});"
-# Trigger checkbox change event to reload ajax preview if selected
-  # page << "$('template-checkbox-#{@tmpl.id}').trigger('change')"
-page << "$('template-checkbox-#{@tmpl.id}').attr('checked', false);"
+page << "$('#template-checkbox-#{@tmpl.id}').attr('checked', false);"
+page << "$('#preview-#{@tmpl.id}').empty();"
+# Trigger checkbox change event to reload internal list of selected templates
+page << "$('#template-checkbox-#{@tmpl.id}').trigger('change');"
 
 page << "Templates.preview(#{@tmpl.id});"

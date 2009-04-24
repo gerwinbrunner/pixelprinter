@@ -7,7 +7,8 @@ module MoneyHelper
     end
   
     def money_with_currency_format
-      ShopifyAPI::Shop.current.money_with_currency_format.blank? ? '$ {{amount}} USD' : ShopifyAPI::Shop.current.money_with_currency_format
+      #ShopifyAPI::Shop.current.money_with_currency_format.blank? ? 
+      '$ {{amount}} USD'# : ShopifyAPI::Shop.current.money_with_currency_format
     end
 
     def money_in_emails_format
@@ -52,19 +53,19 @@ module MoneyHelper
   # taken from MoneyHelper in Shopify
   
   def money_with_currency(money)
-    MoneyHelper.format ShopifyAPI::Shop.current.money_with_currency_format, money, currency
+    MoneyHelper.format(MoneyHelper.money_with_currency_format, money, currency)
   end
   
   def money_with_currency_no_decimals(money)
-    MoneyHelper.format ShopifyAPI::Shop.current.money_with_currency_format, money, currency, true
+    MoneyHelper.format(MoneyHelper.money_with_currency_format, money, currency, true)
   end
   
   def money(money)
-    MoneyHelper.format ShopifyAPI::Shop.current.money_format, money, currency
+    MoneyHelper.format(MoneyHelper.money_format, money, currency)
   end    
 
   def money_no_decimals(money)
-    MoneyHelper.format ShopifyAPI::Shop.current.money_format, money, currency, true
+    MoneyHelper.format(MoneyHelper.money_format, money, currency, true)
   end  
   
   def currency

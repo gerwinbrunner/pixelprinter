@@ -1,45 +1,30 @@
 <h1>Hello from {{shop_name}}</h1>
 
-<p>
-  <b>Order name</b>:      {{order_name}}<br/>
-  <b>Order name</b>:      {{name}} (different variable, same content)<br/>
-
-  <b>Order Number</b>:    {{order_number}}
-</p>
+<b>Order name</b>:      {{order_name}}<br/>
+<b>Order name</b>:      {{name}} (different variable, same content)<br/>
+<b>Order Number</b>:    {{order_number}}<br/><br/>
 
 <b>Gateway used</b>:    {{ gateway }}</br>
-<b>Shipping method</b>: {{ shipping_method.title }}
+<b>Shipping method</b>: {{ shipping_method.title }}<br/><br/>
 
-<table>
-  <tr>
-    <td>Subtotal price</td><td>{{ subtotal_price | money }}</td>
-  </tr>
-  <tr>
-    <td>Tax Price</td><td>{{ tax_price | money }}</td>
-  </tr>
-  <tr>
-    <td>Shipping price</td><td>{{ shipping_price | money }}</td>
-  </tr>
-  <tr>
-    <td style="border-top: 2px solid black">Total price:</td><td style="border-top: 2px solid black">{{ total_price | money }}</td>
-  </tr>
-</table>
+<b>Subtotal price</b>:  {{ subtotal_price | money }}<br/>
+<b>Tax Price</b>:       {{ tax_price | money }}<br/>
+<b>Shipping price</b>:  {{ shipping_price | money }}<br/>
+<b>Total price:</b>     {{ total_price | money }}<br/><br/>
 
-<div style="border: 1px solid #999">
-  <b>Note</b>:       {{ note }}<br/>
-  <b>Attributes</b>: {{ attributes }}
-</div>
+<b>Note</b>:       {{ note }}<br/>
+<b>Attributes</b>: {{ attributes }}<br/><br/>
 
-<p>Customer name and email: <b>{{ customer.name }}</b> - <u>{{ customer.email }}</u></p>
-Customer Email: {{ email }} (different variable, same content)
+<b>Customer name and email:</b> {{ customer.name }} - <u>{{ customer.email }}</u><br/>
+<b>Customer Email:</b> {{ email }} <em>(different variable, same content)</em><br/><br/>
 
 
 <h3>Shipping Address</h3>
-  {{ shipping_address.name }}<br/>
-  {{ shipping_address.street }}<br/>
-  {{ shipping_address.city }}, {{ shipping_address.province }}  {{ shipping_address.zip }}<br/>
-  {{ shipping_address.country }}<br/>
-  {{ shipping_address.phone }}<br/>
+{{ shipping_address.name }}<br/>
+{{ shipping_address.street }}<br/>
+{{ shipping_address.city }}, {{ shipping_address.province }}  {{ shipping_address.zip }}<br/>
+{{ shipping_address.country }}<br/>
+{{ shipping_address.phone }}<br/>
 
 
 <h3>Billing Address</h3>

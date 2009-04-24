@@ -25,8 +25,8 @@ h3 { margin-top: 24px; }
 
 #container {
   min-width: 600px;
-  margin: 40px 20px;
-  background: #transparent;
+  margin: 20px 40px;
+  background: transparent;
   border-right: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
 }
@@ -34,8 +34,8 @@ h3 { margin-top: 24px; }
 #container h1 { margin: 18px 0 27px 0; }
 
 #main { 
-	padding: 18px;
-	margin: 12px;;
+	padding: 0px;
+	margin: 0px;;
 }
 
 #tabs {
@@ -157,51 +157,6 @@ code { font-size: 140%; }
   font-style: italic;
 }
 
-#sidebar {
-  position: fixed;
-	top: 40px;
-	right: 40px;
-
-  width: 250px;
- 	height: 500px;
-  background: #f5fbfe; 
-  color: #003366; 
-  padding: 0px 20px 20px 20px;
-  margin-bottom: 18px;
- 	border-left: 1px solid #D7E4EA;
-	overflow: auto;
-}
-
-#sidebar ul {
-  padding-left: 0px;
-  list-style-type: none;
-}
-
-#sidebar li { margin: 8px 0; }
-
-#sidebar dl {
-	margin: 8px 0 0 0;
-	font-size: 90%;
-	line-height: 120%;
-}
-
-#sidebar dt {
-	font-weight: bold;
-	margin: 0px;
-}
-
-#sidebar dd {
-	margin-left: 8px;
-	font-style: italic;
-}
-
-#print-list input {
-	margin-left: 0px;
-}
-
-#print-list * {
-	vertical-align: top;
-}
 
 /* STYLE OVERVIEW */
 
@@ -474,13 +429,13 @@ a.action {
 
 .page {
 	width: 8.5in;
+	padding: 40px 8px !important;
 	background-color: #fff;
 }
 
 .page-border {
 	border-bottom: 1px solid #ddd;
 	background: #fff url('/images/page-fold-overlay-graybg.gif') no-repeat top right;
-	padding: 40px 20px !important;
 }
 
 .template-preview {
@@ -499,28 +454,22 @@ a.action {
 .help {
 	margin: 8px;
 	padding: 8px;
-	background: #eee;
+	background: #e9e9ff;
+	font-size: 11px;
 }
 
-.print-box {
-	margin: 0px;
-	padding: 8px 0px;
-	border-bottom: 1px solid #aaa;
-	height: 80px;
+.help h3 {
+	margin: 0 0 8px 0;
 }
 
-.print-box h3 {
-	padding: 0;
-	margin: 0 0 12px 0;
-}
-
-.print-box p {
-	padding: 0;
+.help ul {
 	margin: 0;
+	padding: 0;
 }
 
-.print-box p input {
-	margin: 12px 0 0 0;
+.help ul li {
+	display: inline;
+	margin: 0 20px 0 0;
 }
 
 .button-panel {
@@ -588,4 +537,102 @@ a.action {
 /* animated background for progressbar */
 .ui-progressbar-value { 
 	background-image: url('/images/pbar-ani.gif') !important;
+}
+
+
+/* order box at top of show-order screen */
+
+.order-widget {
+  width: 8.5in;
+ 	height: 135px;
+  background: #f5fbfe; 
+  color: #003366; 
+  padding: 12px 8px;
+  margin: 0 0 24px 0;
+ 	border-bottom: 1px solid #D7E4EA;
+}
+
+.order-widget > div {
+	float: left;
+	height: 130px;
+	padding-right: 8px;
+	margin-right: 8px;
+}
+
+.order-widget .order {
+	border-right: 2px solid #ccc;
+}
+
+.order h2 {
+	margin: 12 0px;
+}
+
+.order-widget .templates {
+	border-right: 2px solid #ccc;
+	padding: 0;
+	margin-top: 0;
+}
+
+.order-widget .templates #print-list {
+	margin: 0px;
+}
+
+.order-widget #print-list {
+	width: 400px;
+}
+
+.order-widget #print-list li {
+	width: 175px;
+	float: left;
+	margin: 0 12px 0 0;
+}
+
+.order-widget #print-list li a {
+	font-size: 12px;
+}
+
+.order-widget #print-list input {
+	margin-left: 0px;
+}
+
+.order-widget * {
+	vertical-align: middle;
+}
+
+.order-widget #add-template-link {
+	clear: both;
+	padding: 0;
+	margin: 0;
+	padding-top: 12px;
+}
+
+.order-widget .print-box {
+	margin: 0px;
+	padding: 0px 0px;
+	width: 150px;
+}
+
+.order-widget .print-box h3 {
+	padding: 0;
+	margin: 0 0 12px 0;
+}
+
+.order-widget .print-box > p {
+	padding: 0;
+	margin: 0;
+}
+
+.order-widget .print-box input {
+	margin: 12px 0 0 0;
+	font-size: 120%;
+	font-weight: bold;
+}
+
+.order-widget ul {
+  padding-left: 0px;
+  list-style-type: none;
+}
+
+.order-widget li { 
+	margin: 8px 0;
 }
