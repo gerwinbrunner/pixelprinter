@@ -210,3 +210,7 @@ dd {
 .template-preview {
 	page-break-after: always;
 }
+
+iframe {
+	height: auto;
+}

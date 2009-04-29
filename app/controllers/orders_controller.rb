@@ -2,6 +2,12 @@ class OrdersController < ApplicationController
   protect_from_forgery :except => 'print'
   
   around_filter :shopify_session
+
+  # caches_action :preview, :cache_path => Proc.new { |controller| "orders/#{controller.params[:id]}?template_id=#{controller.params[:template_id]}" }
+  #
+  # Caching like this works, but it has 2 big problems:
+  #   1. The shop must be included in the cache key too
+  #   2. How to expire if a template changes (e.g. order id is not available in PrintTemplatesController) or worse an Order changes in Shopify
   
   def index
     @orders = ShopifyAPI::Order.find(:all)
@@ -26,8 +32,8 @@ class OrdersController < ApplicationController
 
   # return the raw rendered HTML content to refer to from an IFrame
   def preview
-    @order = ShopifyAPI::Order.find(params[:id])
     @tmpl  = shop.templates.find(params[:template_id])
+    @order = ShopifyAPI::Order.find(params[:id])
     @rendered_template = @tmpl.render(@order.to_liquid)
 
     render :text => @rendered_template

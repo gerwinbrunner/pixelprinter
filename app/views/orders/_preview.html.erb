@@ -9,13 +9,13 @@
 
 
 <% javascript_tag do %>
-  Callback.prepare(<%= tmpl.id %>, function() { Status.hide(); });
+  Callback.prepare(<%= tmpl.id %>, function() { Status.hide(); $('#dialog-print-button').enable(); });
 <% end %>
 
 
 <div class="button-panel">
   <p class="buttons">
-    <%= button_to_function "Print this template", "var iframe = frames[frames.length-1]; iframe.focus(); iframe.print();"%>
+    <%= button_to_function "Print this template", "var iframe = frames[frames.length-1]; iframe.focus(); iframe.print();", :disabled => true, :id => 'dialog-print-button' %>
     or
     <%= button_to_remote "Edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl}, :method => 'get', :loading => "Status.reset(); Status.show();" %>
     or

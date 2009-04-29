@@ -1,15 +1,16 @@
 <div class="order-widget">
   <div class="order">
-    <h2>Order <%= @order.name %></h2>
+    <h3>Order <%= @order.name %></h3>
     <p>
       <span class="price"><%= money_with_currency(@order.total_price) %></span>
-      <span class="highlight"><%= @order.financial_status %></span>
-      by <span class="note"><%= @order.billing_address.name %></span>
+      <span class="highlight"><%= @order.financial_status %></span><br/>
+      <span class="note"><%= @order.billing_address.name %> (<%= @order.billing_address.country %>)</span>
     </p>
     <%= link_to "Go back to original order", @order.url, :title => "Open order in Shopify admin interface", :class => 'action' %>
   </div>
   
   <div class="templates">
+    <h3>Templates</h3>
     <% if @tmpls.blank? %>
       <em class="note">No templates found, you should create a new one.</em>
     <% else %>
@@ -30,7 +31,7 @@
   </div>
 
   <div class="print-box">
-    <h3>Templates</h3>
+    <h3>Printing</h3>
     <p id="print-start" class="note">
       Select the templates you want to print for this order.
     </p>

@@ -561,6 +561,7 @@ a.action {
 
 .order-widget .order {
 	border-right: 2px solid #ccc;
+	width: 200px;
 }
 
 .order h2 {
@@ -591,12 +592,12 @@ a.action {
 	font-size: 12px;
 }
 
-.order-widget #print-list input {
-	margin-left: 0px;
+.order-widget #print-list * {
+	vertical-align: bottom;
 }
 
-.order-widget * {
-	vertical-align: middle;
+.order-widget #print-list input {
+	margin-left: 0px;
 }
 
 .order-widget #add-template-link {
@@ -612,7 +613,7 @@ a.action {
 	width: 150px;
 }
 
-.order-widget .print-box h3 {
+.order-widget h3 {
 	padding: 0;
 	margin: 0 0 12px 0;
 }
