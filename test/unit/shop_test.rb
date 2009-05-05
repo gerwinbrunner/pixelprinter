@@ -8,7 +8,6 @@ class ShopTest < ActiveSupport::TestCase
   end
   
   should "add default templates when created" do
-    # TODO: should be 3 templates when finished
-    assert_equal 2, @shop.templates.count
+    assert_equal 3, @shop.templates.count
   end
 end

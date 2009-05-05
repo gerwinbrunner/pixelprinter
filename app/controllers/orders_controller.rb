@@ -3,29 +3,31 @@ class OrdersController < ApplicationController
   
   around_filter :shopify_session
 
-  # caches_action :preview, :cache_path => Proc.new { |controller| "orders/#{controller.params[:id]}?template_id=#{controller.params[:template_id]}" }
-  #
-  # Caching like this works, but it has 2 big problems:
+  # Caching like the following works, but it has 2 big problems:
   #   1. The shop must be included in the cache key too
   #   2. How to expire if a template changes (e.g. order id is not available in PrintTemplatesController) or worse an Order changes in Shopify
+  #
+  # caches_action :preview, :cache_path => Proc.new { |controller| "orders/#{controller.params[:id]}?template_id=#{controller.params[:template_id]}" }
+  
   
   def index
     @orders = ShopifyAPI::Order.find(:all)
     @tmpls  = shop.templates
-    # TODO: make sure there is no error when all templates are deleted
-    @default_template = @tmpls.find(:first, :conditions => {:default => true}) || @tmpls.find(:first)
   end
   
   
   def show
     @order = ShopifyAPI::Order.find(params[:id])
-    @tmpls = shop.templates
     
     respond_to do |format|
-      format.html
+      format.html do
+        @tmpls = shop.templates
+      end
       format.js do
         # AJAX preview, loads in modal Dialog
         @tmpl = shop.templates.find(params[:template_id])
+        @rendered_template = @tmpl.render(@order.to_liquid)
+        render :partial => 'preview', :locals => {:tmpl => @tmpl, :rendered_template => @rendered_template}
       end
     end
   end

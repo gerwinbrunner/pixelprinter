@@ -1,5 +1,7 @@
+page << "Status.hide();"
+
 page << "Messenger.notice('Successfully deleted template #{@tmpl.name}.');"
 page << "$('#template-item-#{@tmpl.id}').effect('puff');"
 
 # remove old preview (which is cached on the current page)
-page << "$('#iframe-inline-preview-#{@tmpl.id}').effect('puff');"
+page << "$('#inline-preview-#{@tmpl.id}').effect('puff');"

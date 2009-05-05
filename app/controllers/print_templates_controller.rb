@@ -41,7 +41,6 @@ class PrintTemplatesController < ApplicationController
   def edit
     @tmpls = shop.templates
     @tmpl = @tmpls.find(params[:id])
-#    render :template => 'print_templates/edit', :layout => false
     # render RJS template
   end
   

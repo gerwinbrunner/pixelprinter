@@ -1,6 +1,3 @@
-# close preview dialog
-page << "Dialog.close();"
-
 # prepare dialog for edit action
 page.replace_html 'modal-dialog', :partial => "form", :locals => {:method => 'put', :tmpl => @tmpl}
 # open edit dialog

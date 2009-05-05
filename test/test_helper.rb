@@ -35,6 +35,7 @@ class ActiveSupport::TestCase
   fixtures :all
 
 
+
   # Checks if all the variables used in the +template+ are available in the +liquid_hash+.
   # Makes sure that the values for the variables from +liquid_hash+ occur (somewhere) in the rendered template.
   #
@@ -80,13 +81,20 @@ class ActiveSupport::TestCase
   private
 
   # Add additional filters to be used with liquid here
-  class AvailableFilters
+  module AvailableFilters
+    extend Liquid::StandardFilters
     extend EmailMoneyFilter
     extend MoneyFilter
   end
 
   def apply_filters(value, filters)
-    filters.inject(value) { |memo, filter| AvailableFilters.send(filter.strip, memo) }
+    filters.inject(value) do |memo, filter|
+      filter, arguments = filter.split(":")
+      args = [filter.strip, memo]
+      # TODO: probably insecure to use eval here to convert arbitrary arguments to objects
+      args << eval(arguments.strip) if arguments
+      AvailableFilters.send(*args)
+    end
   end
   
 end

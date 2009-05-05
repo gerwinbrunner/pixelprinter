@@ -1,7 +1,7 @@
 Debug = function() {
 	// set to true to print all important javascript debug messages
 	// set to false to skip all debug messages (for production)
-	var debug = false;
+	var debug = true;
 	
 	return {
 		log: function(text) {
@@ -31,37 +31,29 @@ Templates = function() {
 
 	var toggleInlinePreview = function(template) {
 		// preview iframe, could be already inserted (cached in DOM)
-		var templatePreview = $("#iframe-inline-preview-" + template);
+		var templatePreview = $("#inline-preview-" + template);
+		var templateLabel = $("#template-label-" + template);
 		// is template selected?
 		if (_templates.indexOf(template) > -1) {
+			templateLabel.addClass("selected");
 			if (templatePreview.length > 0) { 
 	      templatePreview.show();
 	    } else {
 				loadInlinePreview(template);
 			}			
 		} else {
+			templateLabel.removeClass("selected");
 			templatePreview.hide();
 		}
 	}
 	
 	var loadInlinePreview = function(template) {
-		var checkbox = $("#template-checkbox-" + template);
-
-		checkbox.disable();
+		var checkbox = $("#template-checkbox-" + template).disable();
 		// this is a dirty fix, because the link doesn't listen to moveout-events any more, so it doesn't get hidden, which looks weird
 		$("#template-delete-link-" + template).hide();
 		
 		Status.show("Loading preview...");
-
-		Callback.prepare(template, function() { 
-			checkbox.enable();
-			Status.hide();
-			IFrame.resizeAll();
-		});
-
-		var url = "/orders/" + _order + "/preview?template_id=" + template;
-		var preview = "<iframe src='" + url + "' class='template-preview page page-border' id='" + "iframe-inline-preview-" + template + "' onload='Callback.trigger(" + template +")' scrolling='no' width='100%' frameborder='0' ></iframe>";
-	  $("#preview-" + template).html(preview);
+		$("#preview-" + template).load("/orders/" + _order + "?template_id=" + template, null, function() { checkbox.enable(); Status.hide(); });
 	}
 	
 	/* public methods */
@@ -92,16 +84,6 @@ Templates = function() {
 			this.templateChanged(template);
 		},
 	
-		preview: function(template) {
-			Debug.log("Previewing template: #" + template);
-			$.ajax({
-	      beforeSend: function(request) { Status.show("Loading preview..."); }, 
-	      dataType: 'script', 
-	      type: 'get',
-	      url: '/orders/' + _order + '?template_id=' + template
-	    });
-		},
-
 		print: function() {
 			$.ajax({
 	      url: 	'/orders/' + _order + '/print',
@@ -176,21 +158,18 @@ Dialog = function() {
 // Messenger is used to manage error messages and notices
 //
 Messenger = function() {
-	var effect = 'slide';
-	var effectOptions = {direction: 'down'};
-  
 	var autohide_error  = null;
   var autohide_notice = null;
 	
 	// Responsible for fading notices level messages in the dom    
   var fadeNotice = function() {
-    $('#flashnotice').hide(effect, effectOptions);
+    $('#flashnotice').fadeOut();
     autohide_notice = null;
   };
   
   // Responsible for fading error messages in the DOM
   var fadeError = function() {
-    $('#flasherrors').hide(effect, effectOptions);
+    $('#flasherrors').fadeOut();
     autohide_error = null;
   };
   
@@ -198,7 +177,7 @@ Messenger = function() {
 		// Notice-level messages.  See Messenger.error for full details.
 	  notice: function(message) {
 	    $('#flashnotice').html(message);
-	    $('#flashnotice').show(effect, effectOptions);
+	    $('#flashnotice').fadeIn()
 
 	    if (autohide_notice != null) { clearTimeout(autohide_notice); }
 	    autohide_notice = setTimeout(fadeNotice, 5000);
@@ -208,7 +187,7 @@ Messenger = function() {
 	  // This message will auto-hide after a specified amount of miliseconds
 	  error: function(message) {
 	    $('#flasherrors').html(message);
-	    $('#flasherrors').show(effect, effectOptions);
+	    $('#flasherrors').fadeIn()
 
 	    if (autohide_error != null) { clearTimeout(autohide_error); }
 	    autohide_error = setTimeout(fadeError, 5000);

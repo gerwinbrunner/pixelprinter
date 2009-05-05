@@ -1,24 +1,11 @@
-<iframe src='<%= url_for(:controller => 'orders', :action => 'preview', :id => order, :template_id => tmpl) %>' 
-        onload="Callback.trigger('<%= tmpl.id %>')" 
-        name="iframe-popup-preview" 
-        scrolling="auto" 
-        height="80%"
-        width="100%" 
-        frameborder="0">
-</iframe>
-
-
-<% javascript_tag do %>
-  Callback.prepare(<%= tmpl.id %>, function() { Status.hide(); $('#dialog-print-button').enable(); });
-<% end %>
-
-
-<div class="button-panel">
-  <p class="buttons">
-    <%= button_to_function "Print this template", "var iframe = frames[frames.length-1]; iframe.focus(); iframe.print();", :disabled => true, :id => 'dialog-print-button' %>
-    or
-    <%= button_to_remote "Edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl}, :method => 'get', :loading => "Status.reset(); Status.show();" %>
-    or
-    <%= link_to_function "Cancel", "Status.hide(); Dialog.close();" %>
-  </p>
+<div id="inline-preview-<%= tmpl.id %>" class="page page-border">
+  <h3><%= tmpl.name %></h3>
+  <ul class="preview-buttons">
+    <li><%= link_to_remote "Edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl.id}, :method => 'get', :loading => "Status.show();" %></li>
+    <li><%= link_to_remote "Remove", :url => tmpl, :method => :delete, :confirm => "Are you sure you want to delete template #{tmpl.name}?", :loading => "Status.show();" %></li>
+  </ul>
+  
+  <div class="strip-all-css">
+    <%= rendered_template %>
+  </div>
 </div>

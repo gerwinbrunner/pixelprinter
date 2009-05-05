@@ -11,7 +11,7 @@
     <ul>
     <% @orders.each do |order| %>
       <li>
-        <div class="order box" onmouseover="$('#<%= "preview-link-#{dom_id(order)}" %>').show();" onmouseout="$('#<%= "preview-link-#{dom_id(order)}" %>').hide();">
+        <div class="order">
           <strong><%= link_to order.name, :action => 'show', :id => order %></strong>
           <span class="price"><%= order.total_price %> <%= order.currency %></span>
           <span class="highlight"><%= order.financial_status %></span>
