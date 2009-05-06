@@ -1,7 +1,8 @@
-page << "Status.hide();"
-
-page << "Messenger.notice('Successfully deleted template #{@tmpl.name}.');"
+page << "Messenger.notice('Successfully deleted template \"#{@tmpl.name}\".');"
 page << "$('#template-item-#{@tmpl.id}').effect('puff');"
 
 # remove old preview (which is cached on the current page)
 page << "$('#inline-preview-#{@tmpl.id}').effect('puff');"
+
+# remove template from internal list of selected templates on page
+page << "Templates.select(#{@tmpl.id}, false);"

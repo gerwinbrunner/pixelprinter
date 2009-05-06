@@ -7,3 +7,5 @@ page << "$('.template-item:last').effect('bounce');"
 
 # insert empty div for preview (will be populated later via ajax)
 page.insert_html(:bottom, 'preview', "<div id='preview-#{@tmpl.id}'></div>")
+
+page << "Templates.select(#{@tmpl.id}, true);"

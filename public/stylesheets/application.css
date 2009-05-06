@@ -307,6 +307,10 @@ code { font-size: 140%; }
 	font-weight: bold;
 }
 
+.template-preview {
+	/* STRIP ALL CSS HERE */
+}
+
 
 /* General reusable styling */
 

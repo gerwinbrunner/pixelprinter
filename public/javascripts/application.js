@@ -55,6 +55,13 @@ Templates = function() {
 		Status.show("Loading preview...");
 		$("#preview-" + template).load("/orders/" + _order + "?template_id=" + template, null, function() { checkbox.enable(); Status.hide(); });
 	}
+
+	var templateChanged = function(template) {
+		togglePrintButton();
+		toggleInlinePreview(template);
+		Debug.log("Template #" + template + " has changed.")
+	}
+
 	
 	/* public methods */
 	return {
@@ -63,12 +70,12 @@ Templates = function() {
 			_templates = [];
 		},
 		
-		templateChanged: function(template) {
-			togglePrintButton();
-			toggleInlinePreview(template);
-			Debug.log("Template #" + template + " has changed.")
+		select: function(template, selection) {
+			var checkbox = $('#template-checkbox-' + template);
+			checkbox.attr('checked', selection)
+			this.updateSelection(checkbox);
 		},
-
+		
 		updateSelection: function(checkbox) {
 			var template = checkbox.val();
 			Debug.log("Updating selection for template-checkbox-" + template + "...");
@@ -81,7 +88,7 @@ Templates = function() {
 				_templates.splice(_templates.indexOf(template), 1);
 			}
 
-			this.templateChanged(template);
+			templateChanged(template);
 		},
 	
 		print: function() {

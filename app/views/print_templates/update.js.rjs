@@ -1,7 +1,6 @@
-page << "Messenger.notice('Successfully updated template #{@tmpl.name}.');"
+page << "Messenger.notice('Successfully updated template \"#{@tmpl.name}\".');"
 
-# hide loading status and close update dialog
-page << "Status.hide();"
+# close update dialog
 page << "Dialog.close();"
 
 # update name of template in link
@@ -11,5 +10,6 @@ page << "$('#template-label-#{@tmpl.id}').effect('pulsate');"
 # remove old preview (which is cached on the current page), so that it can be reloaded again
 # page << "$('#template-checkbox-#{@tmpl.id}').attr('checked', false);"
 page << "$('#preview-#{@tmpl.id}').empty();"
+
 # Trigger checkbox change event to reload internal list of selected templates
-page << "$('#template-checkbox-#{@tmpl.id}').trigger('change');"
+page << "Templates.select(#{@tmpl.id}, true);"

@@ -1,11 +1,13 @@
 <div id="inline-preview-<%= tmpl.id %>" class="page page-border">
-  <h3><%= tmpl.name %></h3>
-  <ul class="preview-buttons">
-    <li><%= link_to_remote "Edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl.id}, :method => 'get', :loading => "Status.show();" %></li>
-    <li><%= link_to_remote "Remove", :url => tmpl, :method => :delete, :confirm => "Are you sure you want to delete template #{tmpl.name}?", :loading => "Status.show();" %></li>
-  </ul>
+  <div class="preview-header">
+    <h3><%= tmpl.name %></h3>
+    <ul class="preview-buttons">
+      <li><%= link_to_remote "Edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl.id}, :method => 'get' %></li>
+      <li><%= link_to_remote "Remove", :url => tmpl, :method => :delete, :confirm => "Are you sure you want to delete template \"#{tmpl.name}\"?", :loading => "Status.show();", :complete => "Status.hide();" %></li>
+    </ul>
+  </div>
   
-  <div class="strip-all-css">
+  <div class="template-preview">
     <%= rendered_template %>
   </div>
 </div>

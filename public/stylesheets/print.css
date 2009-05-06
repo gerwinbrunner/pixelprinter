@@ -2,98 +2,6 @@ body {
 	font-size: 12pt;
 }
 
-a:link, a:visited {
-	color: #520;
-	background: transparent;
-	font-weight: bold;
-	text-decoration: underline;
-}
-
-a:link:after,a:visited:after {
-  content: " (" attr(href) ") ";
-  font-size: 90%;
-}
-
-
-/* HIDE ELEMENTS */
-#utils, #nav, #sbar, 
-#reportlink, #action-links, #secondary, .tools, .toolbox, .order-widget {
-  display: none !important;
-}
-
-#header, #sidebar, #footer, 
-#conclude, .comment-box, .comment-list,
-.hd, #copy, #order-status, #risk-analysis, #testorder, #tabs, #title {
-  display: none;
-}
-
-#facebox .footer {
-	display: none !important;
-}
-
-form {
-	display: none;
-}
-
-.order, .linklist, .itemlist, .action {
-	display: none;
-}
-
-#cc-logo {
-  margin-bottom: 0.5em;
-}
-
-#order {
-  margin: 2em 0;
-  font-size: 90%;
-}
-
-#order-date, #order-history-print {
-  display: block !important;
-}
-
-#order-history-print {
-  clear: left;
-}
-
-#order-history-print h4 {
-  padding-top: 1.5em;
-}
-
-#order-history-print td {
-  text-align: left;
-}
-
-#ordered {
-  margin: 5em 0;
-}
-
-#bill-addr, #ship-addr {
-  display: block !important;
-  margin-bottom: 1em;
-}
-
-#bill-addr h4, #ship-addr h4 {
-  font-size: 110%;
-}
-
-#ship-addr {
-  float: left;
-}
-
-#bill-addr {
-  float:left;
-  margin-left: 10em;
-}
-
-#ship-info {
-  clear: left;
-}
-
-.map-link {
-  display: none;
-}
-
 /*
  *=HEADERS
  */
@@ -127,7 +35,19 @@ a {
  color:black;
  text-decoration:none;
 }
- 
+
+a:link, a:visited {
+	color: #520;
+	background: transparent;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+a:link:after,a:visited:after {
+  content: " (" attr(href) ") ";
+  font-size: 90%;
+}
+
 a img {
  border-width:0;
 }
@@ -206,11 +126,28 @@ dd {
   padding:0;
 }
 
+
+/* HIDE ELEMENTS */
+#order-widget, .preview-header {
+  display: none;
+}
+
+form {
+	display: none;
+}
+
+
+#cc-logo {
+  margin-bottom: 0.5em;
+}
+
+
+
 /* Always print each template on a new page */  
-.template-preview {
+.page {
 	page-break-after: always;
 }
 
-iframe {
-	height: auto;
+.template-preview {
+	display: block !important;
 }
