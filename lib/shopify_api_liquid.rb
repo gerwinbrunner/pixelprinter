@@ -1,9 +1,22 @@
 module ShopifyAPI
-  class Shop
-    def settings
-      {:money_format => "whatever"}
-    end
+  class Shop < ActiveResource::Base
+#    def settings
+#      {:money_format => "whatever"}
+#    end
     
+    def to_liquid
+      {
+        'name'     => name,
+        'email'    => email,
+        'address'  => address1,
+        'city'     => city,
+        'zip'      => zip,
+        'country'  => country,
+        'phone'    => phone,
+        'province' => province,
+        'owner'    => shop_owner
+      }
+    end
   end               
 
   class Address < ActiveResource::Base
@@ -28,11 +41,6 @@ module ShopifyAPI
   class Order < ActiveResource::Base
     include OrderCalculations
     
-    def self.example(file = '/db/example_order.xml')
-      order_xml = File.read(RAILS_ROOT + file)
-      ShopifyAPI::Order.new(Hash.from_xml(order_xml)['order'])
-    end
-
     def to_liquid
       fulfilled, unfulfilled = line_items.partition {|item| item.fulfilled?}
       { 
@@ -54,7 +62,8 @@ module ShopifyAPI
         'shipping_method'   => shipping_line,
         'note'              => note_body,
         'attributes'        => note_attributes, 
-        'customer'          => {'email' => email, 'name' => billing_address.name}
+        'customer'          => {'email' => email, 'name' => billing_address.name},
+        'shop'              => Shop.current.to_liquid
       }
     end
 

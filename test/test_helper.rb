@@ -33,68 +33,10 @@ class ActiveSupport::TestCase
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
   # -- they do not yet inherit this setting
   fixtures :all
-
-
-
-  # Checks if all the variables used in the +template+ are available in the +liquid_hash+.
-  # Makes sure that the values for the variables from +liquid_hash+ occur (somewhere) in the rendered template.
-  #
-  def assert_render_liquid(template, liquid_hash)
-    # extract all the variable names and filters from the template
-    used_variables_with_filters = template.body.scan(/\{\{ *([^\}]*) *\}\}/).flatten
-    
-    # map variable names to applied filters
-    variables_to_filters = {}
-    used_variables_with_filters.each do |variable_with_filter|
-      variable_and_filters = variable_with_filter.split(/ ?\| ?/)
-      variables_to_filters[variable_and_filters.first] = variable_and_filters[1..-1]
-    end
-
-    # resolve nested variables, e.g. 'order.customer.name' to ['order', 'customer', 'name']
-    used_variables = {}
-    variables_to_filters.keys.each do |variable|
-      resolved_variable = (variable =~ /\./ ? variable.scan(/(\w+)\.?/).flatten : variable)
-      used_variables[variable] = resolved_variable
-    end
-    
-    rendered_template = template.render(liquid_hash)
-
-    errors = {}
-    used_variables.each do |variable, resolved|
-      # get the value for the variable name from liquid_hash (also for nested variables)
-      value = \
-        if resolved.is_a?(Enumerable)
-          resolved.inject(liquid_hash){|memo, name| memo[name] rescue memo.send(name) rescue nil}
-        else
-          liquid_hash[resolved]
-        end
-      value = apply_filters(value.to_s, variables_to_filters[variable])
-      # check if (filtered) value occurs anywhere in template
-      errors[variable] = value unless rendered_template.include?(value)
-    end
-    error_string = errors.map { |var, value| "<#{var.to_a.join('.')} = #{value}>" }.join(", ")
-    assert_block("Expected template to render #{error_string}\n\nRendered template:\n\n#{rendered_template}\n\nOriginal template:\n\n#{template.body}") do
-      errors.empty?
-    end
-  end
   
-  private
-
-  # Add additional filters to be used with liquid here
-  module AvailableFilters
-    extend Liquid::StandardFilters
-    extend EmailMoneyFilter
-    extend MoneyFilter
+protected
+  def order(file = '/db/example_order.xml')
+    order_xml = File.read(RAILS_ROOT + file)
+    ShopifyAPI::Order.new(Hash.from_xml(order_xml)['order'])
   end
-
-  def apply_filters(value, filters)
-    filters.inject(value) do |memo, filter|
-      filter, arguments = filter.split(":")
-      args = [filter.strip, memo]
-      # TODO: probably insecure to use eval here to convert arbitrary arguments to objects
-      args << eval(arguments.strip) if arguments
-      AvailableFilters.send(*args)
-    end
-  end
-  
 end

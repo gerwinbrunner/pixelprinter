@@ -43,17 +43,8 @@ class PrintTemplateTest < ActiveSupport::TestCase
       @template = @shop.templates.new
       @template.load_from_file!(:invoice)
       @order = ShopifyAPI::Order.example
-      shop = stub(:name => "My Store", :currency => "USD", :money_format => "$ {{amount}}")
+      shop = stub(:name => "My Store", :currency => "USD", :money_format => "$ {{amount}}", :to_liquid => {})
       ShopifyAPI::Shop.stubs(:current).returns(shop)
     end
-    
-    should "successfully insert all used variables from template" do
-      assert_render_liquid(@template, @order.to_liquid)
-    end
-    
-    should "successfully render all variables available from order" do
-      @template.load_from_file!('../../test/fixtures/example_print_template')
-      assert_render_liquid(@template, @order.to_liquid)
-    end 
   end
 end

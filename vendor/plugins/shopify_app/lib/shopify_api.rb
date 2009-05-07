@@ -81,9 +81,9 @@ module ShopifyAPI
   # the shop. Since you can only ever reference your own
   # shop this model does not have a .find method.
   #
-  class Shop
+  class Shop < ActiveResource::Base
     def self.current
-      ActiveResource::Base.find(:one, :from => "/admin/shop.xml")
+      find(:one, :from => "/admin/shop.xml")
     end
   end               
 
