@@ -26,9 +26,11 @@ module ShopifyAPI
       address_hash[address_hash.keys.first].merge('street' => street)
     end
     
+    # TODO: remove Address#street as it will get exported from Shopify
     def street
       street  = address1
-      street += ", #{address2}" unless address2.blank?  
+      street += ", #{address2}" unless address2.blank?
+      street  
     end
   end
   

@@ -1,20 +1,18 @@
-<h2>From</h2>
-<div>
+<h4>From</h4>
+<div style="margin: 0px 0px 30px 30px">
   <strong>{{ shop.name }}</strong></br>
   {{ shop.owner }}</br>
   {{ shop.address }}</br>
   {{ shop.zip }} {{ shop.city }}
   {% if shop.province %}, {{ shop.province }} {% endif %}
-  <br/>
-  {% if shop.country != shipping_address.country %} {{ shop.country }} {% endif %}<br/>
 </div>
 
 
-<div style="padding: 8px; border: 2px solid #ccc;">
+<div style="font-size: 120%; padding: 8px; border: 2px solid #ccc; margin: 20px">
   {{ shipping_address.name }}<br/>
   {{ shipping_address.company }}<br/>
   {{ shipping_address.street }}<br/>
   {{ shipping_address.city }}<br/>
   {{ shipping_address.zip }}<br/>
-  {% if shop.country != shipping_address.country %} {{ shipping_address.country }} {% endif %}<br/>
+  {{ shipping_address.country }}<br/>
 </div>
