@@ -24,8 +24,7 @@
       <% end %>
       <p id="add-template-link">
         <%= image_tag "add.gif "%>
-        <%= link_to_remote "Add new template", :url => {:controller => 'print_templates', :action => 'new'}, 
-                                                  :loading => "Status.show()", :complete => "Status.hide()", :html => {:class => 'action'} %>
+        <%= link_to_remote "Add new template", :url => {:controller => 'print_templates', :action => 'new'}, :html => {:class => 'action'} %>
       </p>
     <% end %>
   </div>
