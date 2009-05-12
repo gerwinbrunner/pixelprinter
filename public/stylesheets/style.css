@@ -1,0 +1,78 @@
+/* css was done by mark */
+/* ============ */
+/* = Swatches = */
+/* ============ */
+/*
+text #4d441c (brown)
+text #da6391 (pink)
+href #265d8b (blue)
+*/
+img {border:0;}
+*{margin:0;padding:0;}
+body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Arial',sans-serif;}
+
+.clearfix:after {
+	content: "."; display:block; height:0; clear:both; visibility:hidden; 
+}
+
+/* ============= */
+/* = Structure = */
+/* ============= */
+#wrapper{width:940px;margin:auto;}
+#sidebar{width:220px;position:fixed; background: url('../images/sidebar-top-ribbon.png') repeat-x ; margin-top:40px; padding:7px 0 0 0; }
+.sidebar-block { padding:10px 20px 10px 20px; background:#fff9d3  url('../images/sidebar-block-repeat.png') 0 0px repeat-x}
+
+.sidebar-block:first-child {background-position: 0 -17px;}
+#wrapper #sidebar .logo  {position:fixed; margin:0 0 0 -4px;  padding:0px 0 0 0;}
+
+#print-preview {padding-bottom:70px; clear:both;zoom:1;}
+.preview-top{background:url('../images/paper-top.png')  no-repeat  ; float:right; height:70px;width:712px; margin:45px 0 0 0;}
+.preview-wrapper {background:url('../images/paper-middle.png') ;width:711px; float:right;}
+.preview-content {float:right;   float:right; margin:-40px 0 0 0; padding:0 20px;}
+.preview-bottom {background:url('../images/paper-bottom.png') no-repeat; width:712px; height:70px; margin-bottom:0px; float:right;} 
+
+
+
+
+	
+/* ============== */
+/* = Typography = */
+/* ============== */
+#sidebar h1 {color:#4d441c; font-size:20px; text-transform:uppercase;}
+#sidebar h2 {color:#cd317a; font-size:18px;}
+#sidebar p,#sidebar li {color:#4d441c; font-size:14px;}
+#sidebar .order-price {font-weight:bold; letter-spacing:-1px; font-size:15px;}
+#sidebar .order-price .paid {color:#15ae17; font-weight:bold;}
+#sidebar .order-price .unpaid  {color:#d90e0e; font-weight:bold;}
+#sidebar .customer-name {color:#a69b68;font-size:12px; margin:-3px 0 0 0;}
+
+#print-preview .template-actions {float:right; background:#FFF; position:relative; margin:10px 77px 0 0; padding:13px 9px 9px 9px}
+#print-preview .template-actions img.aesthetic-clip { position:absolute; top:-20px; right:25px}
+#print-preview .template-actions p {margin:0; padding:0; line-height:15px;}
+#print-preview .template-actions .template-name {color:#cd317a; font-size:14px;padding-top:10px;}
+
+/* ============== */
+/* = Form Elements = */
+/* ============== */
+
+/* ========= */
+/* = Lists = */
+/* ========= */
+.preview-top ul {float:right; margin:-10px 60px 0 0; }
+.preview-top ul li {float:left; list-style-type:none; }
+.preview-top ul li.edit {background:  url('../images/button-edit.png') no-repeat; width:56px;height:42px;text-indent:-9999px; margin-right:-10px;}
+.preview-top ul li.delete {background:  url('../images/button-delete.png') no-repeat; width:68px;height:42px; text-indent:-9999px;}
+
+#sidebar ul.list-templates {padding:3px 0 0 0;}
+#sidebar ul.list-templates li {color:#da6391; list-style-type:none; margin:1px 0 0 0;}
+#sidebar ul.list-templates li input {margin:0px 5px 0 0; }
+
+/* ========= */
+/* = Links = */
+/* ========= */
+a, a:link,  a:visited {color:#265d8b;text-decoration:underline; font-size:13px;}
+a:hover, a:focus, a:active {color:#265d8b;}
+
+#sidebar .new-template {background: url('../images/button-new-template.png') no-repeat; margin:7px 0 0  -25px;}
+#sidebar .new-template a {background: url('../images/button-newtemplate.png') no-repeat 30px 1px ;color:#FFF; position:relative; left:-5px; width:180px; padding:3px 0 6px 52px; font-size:11px;  text-transform:uppercase; font-weight:bold; display:inline-block; text-decoration:none;}
+#sidebar .new-template a:hover {color:#f2b1d6;}
