@@ -47,7 +47,10 @@ body{background:url('images/body-bg-wood.jpg');font-family:'Trebuchet MS','Arial
 #sidebar .order-price .unpaid  {color:#d90e0e; font-weight:bold;}
 #sidebar .order-name {color:#a69b68;font-size:12px; margin:-3px 0 0 0;}
 
-
+#print-preview .template-actions {float:right; background:#FFF; position:relative; margin:10px 77px 0 0; padding:13px 9px 9px 9px}
+#print-preview .template-actions img.aesthetic-clip { position:absolute; top:-20px; right:25px}
+#print-preview .template-actions p {margin:0; padding:0; line-height:15px;}
+#print-preview .template-actions .template-name {color:#cd317a; font-size:14px;padding-top:10px;}
 
 /* ============== */
 /* = Form Elements = */
