@@ -4,8 +4,11 @@
     <%= f.text_field :name %>
   </div>
 
-  <p><%= f.text_area :body, :id => 'template-editor' %></p>
+ <%= f.text_area :body, :id => 'template-editor', :rows => 15 %>
 
+
+  <%= render :partial => 'editor_help' %>
+  
   <div class="button-panel">
     <p class="buttons">
       <%= submit_tag(method.to_sym == :post ? "Create" : "Update" )%>

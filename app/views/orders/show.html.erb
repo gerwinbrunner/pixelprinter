@@ -28,18 +28,12 @@
 	<img src="../images/logo.png" width="229" height="176" alt="Logo" class="logo"  />
 </div><!--sidebar-->
 
-
-
-
-
-
-
 <!-- This is populated later via AJAX and popped up with the dialog function of JQueryUI -->
 <div id="modal-dialog">
 </div>
 
 <!-- Empty Containers in correct order, ready to be filled with AJAX previews -->
-<div id="preview">
+<div id="preview" class="clearfix">
   <% @tmpls.each do |tmpl| %> <div id="preview-<%= tmpl.id %>"></div> <% end %>
 </div>
 

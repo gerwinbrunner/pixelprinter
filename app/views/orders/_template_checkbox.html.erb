@@ -1,4 +1,4 @@
-<% content_tag('li', :id => "template-item-#{tmpl.id}") do %>
+<% content_tag(:li, :class => "template-item") do %>
   <%= check_box_tag 'print_templates[]', tmpl.id, tmpl.default, :id => "template-checkbox-#{tmpl.id}" %>
   <%= label_tag "template-checkbox-#{tmpl.id}", tmpl.name, :id => "template-label-#{tmpl.id}" %>
 <% end %>

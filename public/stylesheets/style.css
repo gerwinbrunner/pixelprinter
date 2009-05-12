@@ -8,7 +8,7 @@ text #da6391 (pink)
 href #265d8b (blue)
 */
 img {border:0;}
-*{margin:0;padding:0;}
+
 body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Arial',sans-serif;}
 
 .clearfix:after {
@@ -25,16 +25,12 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 .sidebar-block:first-child {background-position: 0 -17px;}
 #wrapper #sidebar .logo  {position:fixed; margin:0 0 0 -4px;  padding:0px 0 0 0;}
 
-#print-preview {padding-bottom:70px; clear:both;zoom:1;}
-.preview-top{background:url('../images/paper-top.png')  no-repeat  ; float:right; height:70px;width:712px; margin:45px 0 0 0;}
-.preview-wrapper {background:url('../images/paper-middle.png') ;width:711px; float:right;}
-.preview-content {float:right;   float:right; margin:-40px 0 0 0; padding:0 20px;}
-.preview-bottom {background:url('../images/paper-bottom.png') no-repeat; width:712px; height:70px; margin-bottom:0px; float:right;} 
+#preview {padding-bottom:70px; clear:both;zoom:1;}
+#preview .preview-top{background:url('../images/paper-top.png')  no-repeat  ; float:right; height:70px;width:712px; margin:45px 0 0 0;}
+#preview .preview-wrapper {background:url('../images/paper-middle.png') ;width:711px; float:right;}
+#preview .preview-content { margin:-40px 0 0 0; padding:50px 40px 0 40px; clear:both;}
+#preview  .preview-bottom {background:url('../images/paper-bottom.png') no-repeat; width:712px; height:70px; margin-bottom:0px; float:right;} 
 
-
-
-
-	
 /* ============== */
 /* = Typography = */
 /* ============== */
@@ -46,10 +42,10 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 #sidebar .order-price .unpaid  {color:#d90e0e; font-weight:bold;}
 #sidebar .customer-name {color:#a69b68;font-size:12px; margin:-3px 0 0 0;}
 
-#print-preview .template-actions {float:right; background:#FFF; position:relative; margin:10px 77px 0 0; padding:13px 9px 9px 9px}
-#print-preview .template-actions img.aesthetic-clip { position:absolute; top:-20px; right:25px}
-#print-preview .template-actions p {margin:0; padding:0; line-height:15px;}
-#print-preview .template-actions .template-name {color:#cd317a; font-size:14px;padding-top:10px;}
+#preview .template-actions {float:right; background:#fdf4bd; position:relative; margin:10px 77px 0 0; padding:13px 9px 9px 9px}
+#preview .template-actions img.aesthetic-clip { position:absolute;  right:50%}
+#preview .template-actions p {margin:0; padding:0; line-height:15px;float:left; padding-top:7px;font-size:14px;}
+#preview .template-actions .template-name {color:#cd317a; float:left;}
 
 /* ============== */
 /* = Form Elements = */
@@ -76,3 +72,122 @@ a:hover, a:focus, a:active {color:#265d8b;}
 #sidebar .new-template {background: url('../images/button-new-template.png') no-repeat; margin:7px 0 0  -25px;}
 #sidebar .new-template a {background: url('../images/button-newtemplate.png') no-repeat 30px 1px ;color:#FFF; position:relative; left:-5px; width:180px; padding:3px 0 6px 52px; font-size:11px;  text-transform:uppercase; font-weight:bold; display:inline-block; text-decoration:none;}
 #sidebar .new-template a:hover {color:#f2b1d6;}
+
+/* ======== */
+/*  Dennis  */
+/* ======== */
+
+#modal-dialog {
+
+}
+
+#print-template-form textarea {
+	width: 100%;
+
+}
+
+#print-template-form .default * {
+	vertical-align: top;
+}
+
+
+#template-editor {
+	font-family: "Courier New", "Courier", "monospace";
+
+}
+
+
+/* Flash errors and notices */
+
+#flash-errors li {
+  padding-left: 24px;
+  background: url('../images/admin/icons/warning.gif') center left no-repeat;
+}
+
+#flashnotice, #flasherrors {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  list-style-type: none;
+  text-align: center;
+  background: #000;
+  padding: 10px;
+  font-size: 100%;
+  color: #fff;
+  z-index: 9999; 
+}
+
+#flashnotice {
+  background: #172830 url('../images/bubbles.gif') top left no-repeat;
+  border-top: 3px solid #000;
+  color: #fff;
+  vertical-align: center;
+}
+
+#flasherrors {
+  background: #8A1111 url('../images/bubbles_error.gif') top left no-repeat;
+  border-top: 3px solid #000;  
+  color: #fff;
+}
+
+
+/* Growl-like notice in top right corner */
+#notice-item-wrapper {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	width: 250px;
+	z-index: 9999;
+}
+
+* html #notice-item-wrapper {
+	position: absolute;		
+}
+ 
+#notice-item {
+	height: 50px;
+	background: #333;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	color: #eee;
+	padding: 6px 6px 0 6px;
+	font-family: lucida Grande;
+	font-size: 11px;
+	border: 2px solid #999;
+	display: block;
+	position: relative;
+	margin: 0 0 12px 0;
+	text-align: center;
+}
+
+#notice-item p {
+	margin: 4px;
+}
+
+#progressbar {
+	height: 12px;
+}
+
+/* animated background for jquery progressbar */
+.ui-progressbar-value { 
+	background-image: url('/images/pbar-ani.gif') !important;
+}
+
+/* Template editing form */
+.button-panel {
+	width: 100%;
+	text-align: center;
+}
+
+.buttons {
+	background-color: #eee;
+	border: 1px solid #ccc;
+	text-align: center;
+	padding: 12px 16px;
+	margin: 16px;
+}
+
+.buttons a {
+	color: #c00 !important;
+}

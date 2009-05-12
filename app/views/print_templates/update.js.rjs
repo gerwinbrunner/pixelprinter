@@ -1,4 +1,4 @@
-page << "Messenger.notice('Successfully updated template \"#{@tmpl.name}\".');"
+page << %Q[Messenger.notice("Successfully updated template \"#{@tmpl.name}\".");]
 
 # close update dialog
 page << "Dialog.close();"
