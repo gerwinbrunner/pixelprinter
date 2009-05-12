@@ -7,8 +7,8 @@
 	<meta name="MSSmartTagsPreventParsing" content="true" />
 
   <title><%= APP_NAME %></title>
-
-  <%= stylesheet_link_tag 'application', 'jquery-ui-1.7.1.custom', :media => 'screen' %>
+ <%= stylesheet_link_tag 'jquery-ui-1.7.1.custom', 'style', :media => 'screen' %>
+ 
   <%= stylesheet_link_tag 'print', :media => 'print' %>
 
   <%= javascript_include_tag :defaults, 'jquery-ui' %>
@@ -41,17 +41,15 @@
   </div>
 
 	
-  <div id="container" class="clearfix">
-    <!-- begin div.main-->
-    <div id="main">
+	<div id="wrapper">
+		<div id="container">
       <%= @content_for_layout %>   
-    </div>
-    <!-- end div.main -->
-
+    </div> <!-- container -->
+   
     <!-- Flash error & notice-->
     <div id="flashnotice" style="display:none;"></div>
     <div id="flasherrors" style="display:none;"></div>
-  </div>
+  </div><!-- wrapper -->
   
 </body>
 </html>

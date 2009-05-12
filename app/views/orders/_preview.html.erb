@@ -1,13 +1,22 @@
-<div id="inline-preview-<%= tmpl.id %>" class="page page-border">
-  <div class="preview-header">
-    <h3><%= tmpl.name %></h3>
-    <ul class="preview-buttons">
-      <li><%= link_to_remote "Edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl.id}, :method => 'get' %></li>
-      <li><%= link_to_remote "Remove", :url => tmpl, :method => :delete, :confirm => "Are you sure you want to delete template \"#{tmpl.name}\"?", :loading => "Status.show();", :complete => "Status.hide();" %></li>
-    </ul>
-  </div>
+<div id="inline-preview-<%= tmpl.id %>">
   
-  <div class="template-preview">
-    <%= rendered_template %>
+  <!-- new preview -->
+  <div class="preview-top" >
+    <div class="template-actions">
+      <img src="images/button-edit.png" width="56" height="42" alt="Button Edit" class="aesthetic-clip"/>
+      <p class="template-name" ><%= tmpl.name %></p>
+      <p>
+        <%= link_to_remote "Edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl.id}, :method => 'get' %> | 
+        <%= link_to_remote "X", :url => tmpl, :method => :delete, :confirm => "Are you sure you want to delete template \"#{tmpl.name}\"?", :loading => "Status.show();", :complete => "Status.hide();" %>
+      </p>
+    </div>
   </div>
+
+  <div class="preview-wrapper">
+    <div class="preview-content">
+      <%= rendered_template %>
+    </div>
+  </div> <!-- preview-wrapper -->
+
+  <div class="preview-bottom"></div>
 </div>

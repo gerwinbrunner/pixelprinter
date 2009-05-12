@@ -1,51 +1,42 @@
-<div id="order-widget">
-  <div class="order">
-    <h3>Order <%= @order.name %></h3>
-    <p>
-      <span class="price"><%= money_with_currency(@order.total_price) %></span>
-      <span class="highlight"><%= @order.financial_status %></span><br/>
-      <span class="note"><%= @order.billing_address.name %> (<%= @order.billing_address.country %>)</span>
-    </p>
-    <%= link_to "Go back to original order", @order.url, :title => "Open order in Shopify admin interface", :class => 'action' %>
+<div id="sidebar">
+  <div class="sidebar-block " > <!-- order details -->
+    <h1>Order <%= @order.name %></h1>
+    <p class="customer-name"><%= @order.billing_address.name %> (<%= @order.billing_address.country %>)</p>
+    <p class="order-price"><%= money_with_currency(@order.total_price) %> <span class="<%= @order.financial_status %>"><%= @order.financial_status %></span></p>
+    <p><%= link_to "Go back to original order", @order.url, :title => "Open order in Shopify admin interface", :class => 'action' %></p>  
   </div>
-  
-  <div class="templates">
-    <h3>Templates</h3>
+
+  <div class="sidebar-block"> <!-- templates -->
+    <h2>Templates</h2>
     <% if @tmpls.blank? %>
       <em class="note">No templates found, you should create a new one.</em>
     <% else %>
-
       <% form_tag({:action => 'print'}, :id => "selected-templates") do %>
-        <ul id="print-list">
-          <% @tmpls.each do |tmpl| %>
-            <%= render :partial => 'template_checkbox', :locals => {:tmpl => tmpl, :order => @order} %>
-          <% end %>
-        </ul>
+      <ul class="list-templates">
+        <% @tmpls.each do |tmpl| %>
+          <%= render :partial => 'template_checkbox', :locals => {:tmpl => tmpl, :order => @order} %>
+        <% end %>
+      </ul>
       <% end %>
-      <p id="add-template-link">
-        <%= image_tag "add.gif "%>
-        <%= link_to_remote "Add new template", :url => {:controller => 'print_templates', :action => 'new'}, :html => {:class => 'action'} %>
-      </p>
+      <p class="new-template"><%= link_to_remote " Add template", :url => {:controller => 'print_templates', :action => 'new'} %></p>
     <% end %>
   </div>
 
-  <div class="print-box">
-    <h3>Printing</h3>
-    <p id="print-start" class="note">
-      Select the templates you want to print for this order.
-    </p>
+  <div class="sidebar-block "> <!-- print -->
+    <%= link_to_function image_tag("button-print.png"), "Templates.print()", :style => "margin: 10px 0 -10px 0" %>
+	</div><!-- last sidebar block -->
+	<img src="../images/logo.png" width="229" height="176" alt="Logo" class="logo"  />
+</div><!--sidebar-->
 
-    <div id="print-button" class="note">
-      <p><span id="template-amount">The following documents</span> will be printed.</p>
-      <%= button_to_function "Print", "Templates.print()" %>
-    </div>
-  </div>
-</div>
+
+
+
+
+
 
 <!-- This is populated later via AJAX and popped up with the dialog function of JQueryUI -->
 <div id="modal-dialog">
 </div>
-
 
 <!-- Empty Containers in correct order, ready to be filled with AJAX previews -->
 <div id="preview">
@@ -54,15 +45,15 @@
 
 
 <% content_for :javascript do %>
-  Templates.initialize('<%= @order.id %>');
+Templates.initialize('<%= @order.id %>');
 
-  // load default template previews on start
-  $("#selected-templates :checkbox:checked").each(function() {
-    Templates.updateSelection($(this));
-  });
-  
-  // live event handlers make sure the events also work for ajax inserted elements later on
-  $("#selected-templates :checkbox").live("change", function() {
-    Templates.updateSelection($(this));
-  });
+// load default template previews on start
+$("#selected-templates :checkbox:checked").each(function() {
+  Templates.updateSelection($(this));
+});
+
+// live event handlers make sure the events also work for ajax inserted elements later on
+$("#selected-templates :checkbox").live("change", function() {
+  Templates.updateSelection($(this));
+});
 <% end %>
