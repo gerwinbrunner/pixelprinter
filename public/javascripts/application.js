@@ -169,14 +169,14 @@ Dialog = function() {
 		      elementsPx += e.height();
 		    })
 		    
-		    $(event.target).children('textarea').height(dialogHeight - elementsPx - 20 /*margin*/)		    
+		    $(event.target).select('textarea').height(dialogHeight - elementsPx - 20 /*margin*/)		    
 		  );
 		  
 			var otherOptions = (typeof(otherOptions) != 'undefined') ? otherOptions : {};
 			var opts = options(otherOptions);
 			$(dlg).dialog(jQuery.extend(opts, {title: title }));
 			$(dlg).dialog('open')
-			$(dlg).bind("resize", resizeMethod);
+			$(dlg).bind("resize", f8);
 			$(dlg).trigger("resize");
 		},
 		
