@@ -1,0 +1,83 @@
+--- !ruby/object:Gem::Specification 
+name: jeremymcanally-context
+version: !ruby/object:Gem::Version 
+  version: 0.5.5
+platform: ruby
+authors: 
+- Jeremy McAnally
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2008-10-03 00:00:00 -04:00
+default_executable: 
+dependencies: []
+
+description: If you've ever wanted contexts in your Test::Unit tests, then context is for you.  Your tests will be easier to read and write without all the magic and extra code smell!
+email: jeremy@entp.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- History.txt
+- Manifest.txt
+- README.rdoc
+files: 
+- README.rdoc
+- Rakefile
+- context.gemspec
+- History.txt
+- License.txt
+- Manifest.txt
+- PostInstall.txt
+- config/hoe.rb
+- config/requirements.rb
+- lib/context.rb
+- lib/context/version.rb
+- lib/context/lifecycle.rb
+- lib/context/suite.rb
+- lib/context/context.rb
+- lib/context/shared_behavior.rb
+- lib/context/test.rb
+- lib/context/core_ext/string.rb
+- lib/context/core_ext/rails_hacks.rb
+- setup.rb
+- test/test_context.rb
+- test/test_core_ext.rb
+- test/test_lifecycle.rb
+- test/test_test.rb
+- test/test_helper.rb
+has_rdoc: true
+homepage: http://github.com/jeremymcanally/context
+post_install_message: 
+rdoc_options: 
+- --main
+- README.rdoc
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.1
+signing_key: 
+specification_version: 2
+summary: Contexts and DSL sugar for your tests
+test_files: 
+- test/test_context.rb
+- test/test_core_ext.rb
+- test/test_lifecycle.rb
+- test/test_test.rb
+- test/test_helper.rb

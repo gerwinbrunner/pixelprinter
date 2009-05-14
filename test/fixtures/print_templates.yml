@@ -1,0 +1,14 @@
+invoice:
+  shop: germanbrownies
+  name: Invoice
+  body: "Thanks for buying from {{ shop_name }}"
+  
+package_slip:
+  shop: germanbrownies
+  name: Package Slip
+  body: "The package will be sent to {{ shipping_address.street }}..."
+  
+quotation_mark_in_title:
+  shop: germanbrownies
+  name: Template's stuff
+  body: "The body is not problematic"

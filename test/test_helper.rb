@@ -33,10 +33,22 @@ class ActiveSupport::TestCase
   # Note: You'll currently still have to declare fixtures explicitly in integration tests
   # -- they do not yet inherit this setting
   fixtures :all
-  
+
 protected
-  def order(file = '/db/example_order.xml')
+  def example_order(file = '/db/example_order.xml')
     order_xml = File.read(RAILS_ROOT + file)
     ShopifyAPI::Order.new(Hash.from_xml(order_xml)['order'])
+  end
+
+
+  def login_session(shop_name)
+    Shop.stubs(:find_by_name).returns(shops(shop_name))
+    {:shopify => ShopifyAPI::Session.new(shop_name.to_s, 'somerandomtoken')}
+  end
+
+  def assert_response_include(code)
+    assert_block("Expected the response <#{@response.body}> to include the following content: <#{code}>") do
+      @response.body.include?(code)
+    end
   end
 end

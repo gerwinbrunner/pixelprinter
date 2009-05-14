@@ -1,5 +1,5 @@
 page << "Dialog.close();"
-page << %Q[Messenger.notice("Successfully created new template \"#{@tmpl.name}\".);]
+page << "Messenger.notice(\"Successfully created new template named #{@tmpl.name}.\");"
 
 # insert checkbox and preview link in sidebar
 page.insert_html(:bottom, 'list-templates', :partial => 'orders/template_checkbox', :locals => {:tmpl => @tmpl})

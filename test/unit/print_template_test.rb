@@ -1,11 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class PrintTemplateTest < ActiveSupport::TestCase
-  should_belong_to :shop
-  should_validate_presence_of :body
-  should_ensure_length_in_range :name, 2..32
-  should_not_allow_mass_assignment_of :shop_id
-
   def setup
     ActiveResource::Base.site = 'http://any-url-for-testing'
     @shop = Shop.create(:name => "My Shop")

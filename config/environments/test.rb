@@ -27,3 +27,4 @@ config.action_mailer.delivery_method = :test
 # config.active_record.schema_format = :sql
 
 config.gem "mocha"
+config.gem "jeremymcanally-context", :lib => "context"

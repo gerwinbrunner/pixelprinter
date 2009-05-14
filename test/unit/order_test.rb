@@ -1,18 +1,20 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class OrderTest < ActiveSupport::TestCase
-  def setup
+  before do
     ActiveResource::Base.site = 'http://any-url-for-testing'
   end
+  
   
   should "respond to #to_liquid" do
     @order = ShopifyAPI::Order.new
     assert_respond_to(@order, :to_liquid)
   end
   
+  
   context "generating an example order" do
-    setup do
-      @order = order
+    before do
+      @order = example_order()
     end
     
     should "be an instance of ShopifyAPI::Order" do
@@ -29,9 +31,10 @@ class OrderTest < ActiveSupport::TestCase
     end
   end
   
+  
   context "#to_liquid" do
-    setup do
-      @order = order
+    before do
+      @order = example_order
       shop = stub(:name => "My Store", :currency => "USD", :money_format => "$ {{amount}}", :to_liquid => {'name' => "My Store"})
       ShopifyAPI::Shop.stubs(:current).returns(shop)
       @liquid = @order.to_liquid
