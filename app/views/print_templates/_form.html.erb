@@ -1,23 +1,22 @@
 <% form_remote_for(tmpl, :method => method, :html => {:id => "print-template-form"}, :loading => "Status.show()", :complete => "Status.hide();") do |f| %>
-<div class="header fixed">
-  <%= f.label :name, "Name:" %>
-  <%= f.text_field :name %>
-</div>
-<div class="template-code fixed">    
-  <%= f.label :name, "Edit Template" %>
-  <%= f.text_area :body, :id => 'template-editor', :rows => "40%" %>  
-</div>
+  <div class="header fixed">
+    <%= f.label :name, "Name:" %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="template-code">    
+    <%= f.label :name, "Edit Template", :class => 'fixed' %>
+    <%= f.text_area :body, :id => 'template-editor' %>  
+  </div>
 
-<%= render :partial => 'editor_help' %>
+  <%= render :partial => 'editor_help' %>
 
-<div class="button-panel fixed">
-  <p class="buttons">
-    <%= submit_tag(method.to_sym == :post ? "Create" : "Update" )%>
-    or
-    <%= link_to_function "Cancel", "Dialog.close();", :class => 'action' %>
-  </p>
-</div>
-
+  <div class="button-panel fixed">
+    <p class="buttons">
+      <%= submit_tag(method.to_sym == :post ? "Create" : "Update" )%>
+      or
+      <%= link_to_function "Cancel", "Dialog.close();", :class => 'action' %>
+    </p>
+  </div>
 <% end %>
 
 <% if method.to_sym == :post %>

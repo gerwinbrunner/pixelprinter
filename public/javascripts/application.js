@@ -131,6 +131,17 @@ Dialog = function() {
 		return dialogOptions;
 	}
 
+	var resizeTextArea = function() {
+		var elementsHeight = 0;
+   	$("#modal-dialog .fixed").each(function(index, elem){
+      elementsHeight += parseInt($(elem).height());
+    });
+    
+		var dialogHeight   = $("#modal-dialog").height();
+		var textAreaHeight = parseInt(dialogHeight) - elementsHeight - 60 /*margin*/
+    $("#template-editor").css("height", textAreaHeight);   
+	}
+	
   var screenDimensions = function() {
 		content = $('#modal-dialog')[0];
 		var viewportwidth;
@@ -159,24 +170,12 @@ Dialog = function() {
   }
 
 	return {                      
-		
-		
 		open: function(title, otherOptions) {
-		  
-		  var resizeMethod = function(event,ui) {
-		    var elementsPx = 0;
-		    $(event.target).children('.fixed').each(function(e){
-		      elementsPx += e.height();
-		    })
-		    
-		    $(event.target).select('textarea').height(dialogHeight - elementsPx - 20 /*margin*/)		    
-		  );
 		  
 			var otherOptions = (typeof(otherOptions) != 'undefined') ? otherOptions : {};
 			var opts = options(otherOptions);
-			$(dlg).dialog(jQuery.extend(opts, {title: title }));
+			$(dlg).dialog(jQuery.extend(opts, {title: title, resize: resizeTextArea}));
 			$(dlg).dialog('open')
-			$(dlg).bind("resize", f8);
 			$(dlg).trigger("resize");
 		},
 		
