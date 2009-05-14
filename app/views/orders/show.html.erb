@@ -39,7 +39,6 @@
   <% @tmpls.each do |tmpl| %> <div id="preview-<%= tmpl.id %>"></div> <% end %>
 </div>
 
-
 <% content_for :javascript do %>
 Templates.initialize('<%= @order.id %>');
 
