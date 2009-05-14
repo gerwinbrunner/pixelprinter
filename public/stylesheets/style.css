@@ -200,13 +200,15 @@ e
 /* =========================== */
 /* = Stuff mark edited/added for the lightbox = */
 /* =========================== */
-.button-panel {background:#fff9d4; border:1px solid #cdc69f; margin-top:10px;}
-p.buttons {background:none; border:none; margin:0;}
-.ui-widget  #template-editor {font-family: "Courier New", "Courier", "monospace"; font-size:14px; margin:auto; margin-top:6px;}  
-.ui-widget  #print_template_name   {font-size:14px;}
-.ui-widget-content .header {color:#cd317a; font-family:'Trebuchet MS'; margin-top:10px;}
-.ui-widget-content .template-code label {color:#cd317a; font-family:'Trebuchet MS'; margin-top:11px; display:block; }
+.button-panel {background:#fff9d4; border:1px solid #cdc69f; margin-top:10px;} /* for "Create" and "Cancel" */
+p.buttons {background:none; border:none; margin:0;}      
 
+.ui-widget  #template-editor {font-family: "Courier New", "Courier", "monospace"; font-size:14px; margin:auto; margin-top:6px;} /* for the template textarea */         
+
+.ui-widget-content .header label {color:#cd317a; font-family:'Trebuchet MS'; margin-top:10px;}  /* template name */
+.ui-widget-content .template-code label {color:#cd317a; font-family:'Trebuchet MS'; margin-top:11px; display:block; } /* edit template */
+
+/* for the help menu */
 .help h3 {padding:10px 0 0 0; font-size:15px; margin:0;}
 .help ul {padding-top:0; margin-top:0; padding-left:20px;}
 .help p {margin:2px 0 3px 0; font-size:13px;}
