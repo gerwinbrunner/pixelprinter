@@ -12,7 +12,7 @@
       <em class="note">No templates found, you should create a new one.</em>
     <% else %>
       <% form_tag({:action => 'print'}, :id => "selected-templates") do %>
-      <ul class="list-templates">
+      <ul id="list-templates">
         <% @tmpls.each do |tmpl| %>
           <%= render :partial => 'template_checkbox', :locals => {:tmpl => tmpl, :order => @order} %>
         <% end %>

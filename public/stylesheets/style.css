@@ -62,9 +62,9 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 .preview-top ul {float:right; margin:-10px 60px 0 0; }
 .preview-top ul li {float:left; list-style-type:none; }
 
-#sidebar ul.list-templates {padding:3px 0 0 0; margin:0;}
-#sidebar ul.list-templates li {color:#da6391; list-style-type:none; margin:1px 0 0 0;}
-#sidebar ul.list-templates li input {margin:0px 5px 0 0; }
+#sidebar ul#list-templates {padding:3px 0 0 0; margin:0;}
+#sidebar ul#list-templates li {color:#da6391; list-style-type:none; margin:1px 0 0 0;}
+#sidebar ul#list-templates li input {margin:0px 5px 0 0; }
 
 /* ========= */
 /* = Links = */
