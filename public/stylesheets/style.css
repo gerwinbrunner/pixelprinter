@@ -95,7 +95,7 @@ a:hover, a:focus, a:active {color:#265d8b;}
 
 #modal-dialog {}
 
-#print-template-form textarea {	width: 100%; overflow:visible;}
+#print-template-form textarea {	width: 100%;}
 
 #print-template-form .default * {
 	vertical-align: top;

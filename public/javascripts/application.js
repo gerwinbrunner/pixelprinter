@@ -158,12 +158,26 @@ Dialog = function() {
     return { width: x, height: y };
   }
 
-	return {
+	return {                      
+		
+		
 		open: function(title, otherOptions) {
+		  
+		  var resizeMethod = function(event,ui) {
+		    var elementsPx = 0;
+		    $(event.target).children('.fixed').each(function(e){
+		      elementsPx += e.height();
+		    })
+		    
+		    $(event.target).children('textarea').height(dialogHeight - elementsPx - 20 /*margin*/)		    
+		  );
+		  
 			var otherOptions = (typeof(otherOptions) != 'undefined') ? otherOptions : {};
 			var opts = options(otherOptions);
-			$(dlg).dialog(jQuery.extend(opts, {title: title}));
-			$(dlg).dialog('open');
+			$(dlg).dialog(jQuery.extend(opts, {title: title }));
+			$(dlg).dialog('open')
+			$(dlg).bind("resize", resizeMethod);
+			$(dlg).trigger("resize");
 		},
 		
 		close: function() {
