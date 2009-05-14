@@ -32,7 +32,7 @@ Templates = function() {
 	var toggleInlinePreview = function(template) {
 		// preview iframe, could be already inserted (cached in DOM)
 		var templatePreview = $("#inline-preview-" + template);
-		var templateLabel = $("#template-label-" + template);
+		var templateLabel = $("#template-item-" + template + " label");
 		// is template selected?
 		if (_templates.indexOf(template) > -1) {
 			templateLabel.addClass("selected");
@@ -48,7 +48,7 @@ Templates = function() {
 	}
 	
 	var loadInlinePreview = function(template) {
-		var checkbox = $("#template-checkbox-" + template).disable();
+		var checkbox = $("#template-item-" + template + " :checkbox").disable();
 		// this is a dirty fix, because the link doesn't listen to moveout-events any more, so it doesn't get hidden, which looks weird
 		$("#template-delete-link-" + template).hide();
 		
@@ -71,7 +71,7 @@ Templates = function() {
 		},
 		
 		select: function(template, selection) {
-			var checkbox = $('#template-checkbox-' + template);
+			var checkbox = $('#template-item-' + template + " :checkbox");
 			checkbox.attr('checked', selection)
 			this.updateSelection(checkbox);
 		},

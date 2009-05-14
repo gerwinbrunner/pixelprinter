@@ -4,7 +4,9 @@
     <%= f.text_field :name %>
   </div>
 
- <%= f.text_area :body, :id => 'template-editor', :rows => 15 %>
+  <%= f.text_area :body, :id => 'template-editor', :rows => 15 %>
+
+  <%= render :partial => 'editor_help' %>
 
   <div class="button-panel">
     <p class="buttons">
@@ -13,7 +15,6 @@
       <%= link_to_function "Cancel", "Dialog.close();", :class => 'action' %>
     </p>
   </div>
-   <%= render :partial => 'editor_help' %>
 <% end %>
 
 <% if method.to_sym == :post %>

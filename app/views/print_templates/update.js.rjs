@@ -4,8 +4,8 @@ page << "Messenger.notice(\"Successfully updated template named #{@tmpl.name}.\"
 page << "Dialog.close();"
 
 # update name of template in link
-page.replace_html("template-label-#{@tmpl.id}", @tmpl.name)
-page << "$('#template-label-#{@tmpl.id}').effect('pulsate');"
+page << "$('#template-item-#{@tmpl.id} label').html(#{@tmpl.name.inspect});"
+page << "$('#template-item-#{@tmpl.id}').effect('pulsate');"
 
 # remove old preview (which is cached on the current page), so that it can be reloaded again
 # page << "$('#template-checkbox-#{@tmpl.id}').attr('checked', false);"
