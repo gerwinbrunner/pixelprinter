@@ -32,20 +32,25 @@
 </head>
 	
 <body>
-  <!-- status message (growl-like) -->
-  <div id="notice-item-wrapper" style="display: none">
-    <div id="notice-item">
-      <p></p>
-      <div id="progressbar"></div>
-    </div>
-  </div>
+
 
 	
 	<div id="wrapper">
 		<div id="container">
-      <%= @content_for_layout %>   
+      <%= @content_for_layout %> 
+      
+      <!-- status message (growl-like) -->
+      <div id="notice-item-wrapper" style="display: none">
+        <div id="notice-item">
+          <p></p>
+          <div id="progressbar"></div>
+        </div>
+      </div>
+      
+        
     </div> <!-- container -->
-   
+
+    
     <!-- Flash error & notice-->
     <div id="flashnotice" style="display:none;"></div>
     <div id="flasherrors" style="display:none;"></div>

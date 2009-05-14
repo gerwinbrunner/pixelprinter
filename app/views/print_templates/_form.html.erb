@@ -16,6 +16,7 @@
       <%= link_to_function "Cancel", "Dialog.close();", :class => 'action' %>
     </p>
   </div>
+   <%= render :partial => 'editor_help' %>
 <% end %>
 
 <% if method.to_sym == :post %>

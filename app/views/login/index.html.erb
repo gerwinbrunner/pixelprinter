@@ -1,19 +1,24 @@
-<h1>Login</h1>
 
-<p>
-  First you have to register this app with a shop to allow access to its private admin data.
-</p>
+<div id="login">
+  <div id="login-wrapper">
+    <h1>Login</h1>
 
-<% form_tag '/login/authenticate' do %>
-  <label for='shop'><strong>The URL of the Shop</strong>
-    <span class="hint">(or just the subdomain if it's at myshopify.com)</span>
-  </label>
-  <p>
-    <%= text_field_tag 'shop' %>
-  </p>
-  <%= submit_tag 'Authenticate' %>
-<% end %>
+    <% form_tag '/login/authenticate' do %>
 
+    <div class="sidebar-block" >
+      <p>
+        <%= text_field_tag 'shop', nil, :size => 11 %><label for="shop"><strong>.myshopify.com</strong></label> </p>
+        <p><input type="image" value="login" name="login" src="images/button-login.png"></p>  
+      </div>      
+      <div class="sidebar-block" 
+      <p class="low-em">
+        First you have to register this app with a shop to allow access to its private admin data.
+      </p>
+    </div>
+    <% end %>
+  </div>
+  <img src="../images/logo.png" width="229" height="176" alt="Logo" class="logo" style="margin-top:-5px; margin-left:-4px" />
+</div>     
 <% content_for :javascript do %>
-   $(":text:visible:enabled:first").focus();
+$(":text:visible:enabled:first").focus();
 <% end %>
