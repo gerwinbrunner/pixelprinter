@@ -5,7 +5,7 @@
     <div class="template-actions">
      
       <p class="template-name"><%= tmpl.name %> &nbsp;</p>
-      <p> <%= image_tag "button-edit.png", :alt => "Button Edit", :class => "aesthetic-clip" %>
+      <p class="template-options"> <%= image_tag "button-clip.png", :alt => "Button Edit", :class => "aesthetic-clip" %>
         <%= link_to_remote "Edit template", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl.id}, :method => 'get' %> | 
         <%= link_to_remote image_tag("trash.gif"), :url => tmpl, :method => :delete, :confirm => "Are you sure you want to delete template \"#{tmpl.name}\"?", :loading => "Status.show();", :complete => "Status.hide();" %>
       </p>
