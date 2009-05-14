@@ -18,7 +18,9 @@
         <% end %>
       </ul>
       <% end %>
-      <p class="new-template"><%= link_to_remote " Add template", :url => {:controller => 'print_templates', :action => 'new'} %></p>
+      <p class="new-template" style="display: none"><%= link_to_remote "Add template", :url => {:controller => 'print_templates', :action => 'new'} %></p>
+      
+      <p class="template-editmode"><%= link_to_function "Edit templates", "Templates.toggleEditMode();" %></p>
     <% end %>
   </div>
 

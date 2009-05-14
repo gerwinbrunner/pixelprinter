@@ -12,8 +12,9 @@ Debug = function() {
 
 
 Templates = function() {
-	var _order = null;
+	var _order     = null;
 	var _templates = null;
+	var editmode  = false;
 	
 	/* private methods */
 	var togglePrintButton = function() {
@@ -98,6 +99,19 @@ Templates = function() {
 	      type: 'post'
 	    });
 			window.print();
+		},
+		
+		toggleEditMode: function() {
+			editmode = !editmode;
+			$(".template-options").toggle();
+			$(".new-template").toggle();
+			
+			if (editmode) {
+				var editmodeLabel = "Stop editing";		
+			} else {
+				var editmodeLabel = "Edit templates";
+			}
+			$(".template-editmode a").html(editmodeLabel);
 		}
 	}
 }();
