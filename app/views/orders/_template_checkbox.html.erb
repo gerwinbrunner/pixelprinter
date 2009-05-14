@@ -1,5 +1,5 @@
 <% content_tag(:li, :class => "template-item", :id => "template-item-#{tmpl.id}") do %>
-  <%= check_box_tag 'print_templates[]', tmpl.id, tmpl.default %>
+  <%= check_box_tag 'print_templates[]', tmpl.id, tmpl.default, :id => "template-checkbox-#{tmpl.id}" %>
   <%= label_tag "template-checkbox-#{tmpl.id}", tmpl.name %>
   <span class="template-options" style="display: none;"> 
     <%= link_to_remote "Edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl.id}, :method => 'get' %> | 
