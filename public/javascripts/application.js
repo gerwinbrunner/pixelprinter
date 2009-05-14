@@ -120,27 +120,8 @@ Templates = function() {
 // Usage: Dialog.open() and Dialog.close()
 // Opens a div as a modal dialog which you need to fill yourself first
 Dialog = function() {
-	var dlg = "#modal-dialog";
-
-	var options = function(otherOptions) {
-		var dialogOptions = {
-	  	modal: true
-		};
-		
-		dialogOptions = jQuery.extend(dialogOptions, otherOptions, screenDimensions());
-		return dialogOptions;
-	}
-
-	var resizeTextArea = function() {
-		var elementsHeight = 0;
-   	$("#modal-dialog .fixed").each(function(index, elem){
-      elementsHeight += parseInt($(elem).height());
-    });
-    
-		var dialogHeight   = $("#modal-dialog").height();
-		var textAreaHeight = parseInt(dialogHeight) - elementsHeight - 60 /*margin*/
-    $("#template-editor").css("height", textAreaHeight);   
-	}
+	var dlg     = "#modal-dialog";
+	var options = { modal: true	};
 	
   var screenDimensions = function() {
 		content = $('#modal-dialog')[0];
@@ -170,19 +151,31 @@ Dialog = function() {
   }
 
 	return {                      
-		open: function(title, otherOptions) {
+		open: function(title) {
 		  
-			var otherOptions = (typeof(otherOptions) != 'undefined') ? otherOptions : {};
-			var opts = options(otherOptions);
-			$(dlg).dialog(jQuery.extend(opts, {title: title, resize: resizeTextArea}));
+			$(dlg).dialog(jQuery.extend(options, screenDimensions(), {title: title, resize: this.resizeTextArea, open: this.resizeTextArea}));
 			$(dlg).dialog('open')
-			$(dlg).trigger("resize");
 		},
 		
 		close: function() {
 			$(dlg).empty();
 			$(dlg).dialog('destroy');
+		},
+		
+		resizeTextArea: function() {
+			Debug.log("Resizing");
+			var elementsHeight = 0;
+	   	$("#modal-dialog .fixed").each(function(index, elem){
+				var height = parseInt($(elem).css("height"));
+				var height2 = parseInt($(elem).height());
+	      elementsHeight += height;
+	    });
+
+			var dialogHeight   = $(dlg).height();
+			var textAreaHeight = parseInt(dialogHeight) - elementsHeight - 60 /*margin*/
+	    $("#template-editor").css("height", textAreaHeight);   
 		}
+		
 	}
 }();
 
@@ -267,45 +260,23 @@ Status = function() {
 }();
 
 
-// Usage: IFrame.resizeAll()
-// Resizes iframe to automatically fit it's content
-IFrame = function() {
-	var resize = function(iframe) {
-		// only resize if iframe is visible
-		if (iframe.style.display != 'none') {
-			//Debug.log("Resizing visible iFrame " + iframe.id)
-			var innerDoc = iframe.contentDocument ? iframe.contentDocument : iframe.contentWindow.document;
-			iframe.height = innerDoc.body.scrollHeight;
-		}
-	}
-	
-	return {
-		resizeAll: function() {
-			$('iframe').each(function(index, iframe) {
-				resize(iframe);
-			})
-		}
-	}
-}();
-
-
-// Prepare callbacks for a template (preview) which get triggered after an iframe is loaded
-// Usage example: Callback.prepare(1, function() { alert('yo') })
-//                Callback.trigger(1)
-Callback = function() {
-	var callbacks = {};
+Help = function() {
+	var showing = false;
 
 	return {
-		prepare: function(id, func) {
-			callbacks[id] = func;
-		},
-		
-		trigger: function(id) {
-			if (typeof(callbacks[id]) != 'undefined' && callbacks[id]) {
-				Debug.log("Running callback for template #" + id);
-				callbacks[id].call();
-				callbacks[id] = null;
+		toggle: function() {
+			$('#editor-help-links').toggle('fast');
+			var link = $(".help > a");
+
+			showing = !showing;
+			if (showing) {
+				link.data("old-title", link.html()); /* Remember original link title */
+				link.html('Hide')
+			} else {
+				link.html(link.data("old-title"));   /* Restore original link title */
 			}
+			
+ 			setTimeout("Dialog.resizeTextArea()", 250);
 		}
-	}
+	};
 }();
