@@ -7,9 +7,9 @@
   </div>
 
   <div class="sidebar-block"> <!-- templates -->
-    <h2>Templates</h2>
+    <h2>Templates</h2>  
     <% if @tmpls.blank? %>
-      <em class="note">No templates found, you should create a new one.</em>
+      <p>No templates found, you should create a new one.</p>
     <% else %>
       <% form_tag({:action => 'print'}, :id => "selected-templates") do %>
       <ul id="list-templates">

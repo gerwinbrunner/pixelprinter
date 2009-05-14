@@ -47,7 +47,7 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 #preview .template-actions {float:right; background:transparent url('../images/sticky-template-bg.png') repeat-x; position:relative; margin:12px 77px 0 0; height:50px; }
 #preview .template-actions img.aesthetic-clip { position:absolute;  right:30%; top:-24px;}
 #preview .template-actions p {margin:0; padding:0; line-height:15px;float:left; padding-top:7px;font-size:14px;  }
-#preview .template-actions .template-name {color:#cd317a; float:left;  background:url('../images/sticky-template-left.png') no-repeat left; padding: 17px 0 11px 20px; margin:2px 0 0 -4px;}  
+#preview .template-actions .template-name {color:#cd317a; float:left;  background:url('../images/sticky-template-left.png') no-repeat left; padding: 17px 0 11px 20px; margin:2px 0 0 -4px; min-width:50px;}  
 #preview .template-actions .template-options  {background:url('../images/sticky-template-right.png') no-repeat right;padding:17px 20px 12px 0; margin:1px -4px 0 0; }    
 #preview .template-actions .template-options a {font-size:12px;} 
 #preview .template-actions .template-options a img {vertical-align:middle;}
@@ -88,11 +88,11 @@ a:hover, a:focus, a:active {color:#265d8b;}
     
 #login p strong   {font-size:12px;margin-left:3px;}
 #login p.low-em {font-size:13px; font-style:italic;color:#a69b68;}   
-#login .sidebar-block {padding:15px 12px 0 12px;}
+#login .sidebar-block {padding:15px 12px 0 12px;}        
+
 /* ======== */
 /*  Lightbox  */
 /* ======== */
-
 #modal-dialog {}
 
 #print-template-form textarea {	width: 100%;}
