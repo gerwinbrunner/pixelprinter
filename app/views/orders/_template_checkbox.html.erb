@@ -5,5 +5,4 @@
     <%= link_to_remote "Edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl.id}, :method => 'get' %> | 
     <%= link_to_remote image_tag("trash.gif"), :url => tmpl, :method => :delete, :confirm => "Are you sure you want to delete template \"#{tmpl.name}\"?", :loading => "Status.show();", :complete => "Status.hide();" %>
   </span>
-  
 <% end %>
