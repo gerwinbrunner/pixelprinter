@@ -4,9 +4,9 @@ module ShopifyAPI
     def method_missing(name, *args)
       case name.to_sym
       when :money_format
-        super || "${{amount}}"
+        "${{amount}}"
       when :money_with_currency_format
-        super || "${{amount}} USD"
+        "${{amount}} USD"
       else
         super
       end
