@@ -4,7 +4,7 @@
 /* ============ */
 /*
 text #4d441c (brown)
-text #a69b68 (light brown)
+text #87772c (light brown)
 text #da6391 (pink)
 href #265d8b (blue)
 */
@@ -14,8 +14,10 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 
 .clearfix:after {
 	content: "."; display:block; height:0; clear:both; visibility:hidden; 
-}
+}                                                
 
+.left {float:left;}
+.right {float:right;}
 /* ============= */
 /* = Structure = */
 /* ============= */
@@ -36,25 +38,23 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 /* = Typography = */
 /* ============== */
 #sidebar h1 {color:#4d441c; font-size:20px; text-transform:uppercase; margin:10px 0 0px 0;}
-#sidebar h2 {color:#cd317a; font-size:18px; margin:0px;}
+#sidebar h2 {color:#cd317a; font-size:18px; margin:0px; float:left;}
 #sidebar p,#sidebar li {color:#4d441c; font-size:14px;}
 #sidebar p {margin-top:3px;;}
 #sidebar .order-price {font-weight:bold; letter-spacing:-1px; font-size:15px; margin:0 0 8px 0; }
 #sidebar .order-price .paid {color:#15ae17; font-weight:bold;}
 #sidebar .order-price .unpaid  {color:#d90e0e; font-weight:bold;}
-#sidebar .customer-name {color:#a69b68;font-size:12px; margin:0px 0 2px 0;}
+#sidebar .customer-name {color:#87772c;font-size:12px; margin:0px 0 2px 0;}
 
-#preview .template-actions {float:right; background:transparent url('../images/sticky-template-bg.png') repeat-x; position:relative; margin:12px 77px 0 0; height:50px; }
-#preview .template-actions img.aesthetic-clip { position:absolute;  right:30%; top:-24px;}
-#preview .template-actions p {margin:0; padding:0; line-height:15px;float:left; padding-top:7px;font-size:14px;  }
-#preview .template-actions .template-name {color:#cd317a; float:left;  background:url('../images/sticky-template-left.png') no-repeat left; padding: 17px 0 11px 20px; margin:2px 0 0 -4px;}  
-#preview .template-actions .template-options  {background:url('../images/sticky-template-right.png') no-repeat right;padding:17px 20px 12px 0; margin:1px -4px 0 0; }    
-#preview .template-actions .template-options a {font-size:12px;} 
-#preview .template-actions .template-options a img {vertical-align:middle;}
+#preview .template-actions {float:right; position:relative; margin:12px 77px 0 0; height:50px; }
+#preview .template-actions img.aesthetic-clip { position:absolute;  right:40px; top:-24px;}
 
-/* ============== */
-/* = Form Elements = */
-/* ============== */
+#preview .template-actions p.template-name {color:#cd317a; float:left;   /*padding: 17px 0 11px 20px;*/ line-height:47px; margin:2px 0 0 -4px; min-width:150px; background:transparent url('../images/sticky-template-bg.png') repeat-x; padding-bottom:10px; font-size:13.5px; text-align:center; }   
+
+/* adds the right and left shadows to the note */
+#preview .template-actions .template-name em {background:url('../images/sticky-template-left.png') no-repeat left; display:block; padding-left:20px; font-style:normal;}                 
+#preview .template-actions .template-name strong {background:url('../images/sticky-template-right.png') no-repeat right; display:block; padding-right:10px; font-weight:normal;}
+
 
 /* ========= */
 /* = Lists = */
@@ -62,9 +62,14 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 .preview-top ul {float:right; margin:-10px 60px 0 0; }
 .preview-top ul li {float:left; list-style-type:none; }
 
-#sidebar ul#list-templates {padding:3px 0 0 0; margin:0;}
-#sidebar ul#list-templates li {color:#da6391; list-style-type:none; margin:1px 0 0 0;}
-#sidebar ul#list-templates li input {margin:0px 5px 0 0; }
+#sidebar ul#list-templates {padding:3px 0 0 0; margin:0 0 0px 0 ;}
+#sidebar ul#list-templates li {color:#da6391; list-style-type:none; margin:1px 0 4px 0;font-size:13px; }
+#sidebar ul#list-templates li input {margin:0px 1px 0 0; vertical-align:text-top;}       
+
+#sidebar ul#list-templates  .template-options  {background: url('../images/button-edit-bg.png') no-repeat left; padding:1px 0 5px 10px; margin:0px 0 0 -55px; vertical-align:middle;}    
+#sidebar ul#list-templates  .template-options a img { vertical-align:middle;}    
+#sidebar ul#list-templates  .template-options a {font-size:11.5px; margin-right:2px;}
+#sidebar  p.template-editmode { text-align:right; margin:0 0 5px 0; }
 
 /* ========= */
 /* = Links = */
@@ -72,7 +77,7 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 a, a:link,  a:visited {color:#265d8b;text-decoration:underline; font-size:13px;}
 a:hover, a:focus, a:active {color:#265d8b;}
 
-#sidebar .new-template {background: url('../images/button-new-template.png') no-repeat; margin:7px 0 0  -25px;}
+#sidebar .new-template {background: url('../images/button-new-template.png') no-repeat; margin:10px 0 0  -25px;}
 #sidebar .new-template a {background: url('../images/button-newtemplate.png') no-repeat 30px 1px ;color:#FFF; position:relative; left:-5px; width:180px; padding:3px 0 6px 52px; font-size:11px;  text-transform:uppercase; font-weight:bold; display:inline-block; text-decoration:none;}
 #sidebar .new-template a:hover {color:#f2b1d6;}
 
@@ -85,14 +90,14 @@ a:hover, a:focus, a:active {color:#265d8b;}
 #login-wrapper { background:#fff9d3; padding-top:10px;  }
 #login h1 {margin:0px 0 10px 0;color:#4d441c; font-size:25px; }
 #login p {margin:0 0 5px 0; font-size:15px;text-align:center; ;color:#4d441c; font-weight:lighter; padding-bottom:5px;}
-    
-#login p strong   {font-size:12px;margin-left:3px;}
-#login p.low-em {font-size:13px; font-style:italic;color:#a69b68;}   
-#login .sidebar-block {padding:15px 12px 0 12px;}
+#login p em {  font-style:normal; } /* instructions */
+#login p strong   {font-size:12px; color:#87772c;} /* for the www */
+#login p.low-em {font-size:13px; font-style:italic;color:#87772c;} /* for the register note */  
+#login .sidebar-block {padding:15px 12px 0 12px;}        
+
 /* ======== */
 /*  Lightbox  */
 /* ======== */
-
 #modal-dialog {}
 
 #print-template-form textarea {	width: 100%;}
