@@ -7,7 +7,7 @@
   </div>
 
   <div class="sidebar-block"> <!-- templates -->
-    <h2>Templates</h2>  
+    <h2>Templates</h2>   <p class="template-editmode"><%= link_to_function image_tag("button-edit.png"), "Templates.toggleEditMode();" %></p>       
     <% if @tmpls.blank? %>
       <p>No templates found, you should create a new one.</p>
     <% else %>
@@ -19,20 +19,17 @@
       </ul>
       <% end %>
       <p class="new-template" style="display: none"><%= link_to_remote "Add template", :url => {:controller => 'print_templates', :action => 'new'}, :method => :get %></p>
-      
-      <p class="template-editmode"><%= link_to_function "Edit templates", "Templates.toggleEditMode();" %></p>
     <% end %>
   </div>
 
   <div class="sidebar-block "> <!-- print -->
-    <%= link_to_function image_tag("button-print.png"), "Templates.print()", :style => "margin: 10px 0 0px 0" %>
+    <%= link_to image_tag("button-print.png"), "Templates.print()", :style => "margin: 10px 0 0px 0" %>
 	</div><!-- last sidebar block -->
 	<img src="../images/logo.png" width="229" height="176" alt="Logo" class="logo" style="margin-top:-10px" />
 </div><!--sidebar-->
 
 <!-- This is populated later via AJAX and popped up with the dialog function of JQueryUI -->
-<div id="modal-dialog">
-</div>
+<div id="modal-dialog"></div>
 
 <!-- Empty Containers in correct order, ready to be filled with AJAX previews -->
 <div id="preview" class="clearfix">

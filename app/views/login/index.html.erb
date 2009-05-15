@@ -5,9 +5,9 @@
 
     <% form_tag '/login/authenticate' do %>
 
-    <div class="sidebar-block" >
-      <p>
-        <%= text_field_tag 'shop', nil, :size => 11 %><label for="shop"><strong>.myshopify.com</strong></label> </p>
+    <div class="sidebar-block" >   
+      <p><em>Enter your shop's URL</em></p>
+      <p><label for="shop"><strong>http://www. </strong></label><%= text_field_tag 'shop', nil, :size => 14 %></p>
         <p><input type="image" value="login" name="login" src="images/button-login.png"></p>  
       </div>      
       <div class="sidebar-block" 

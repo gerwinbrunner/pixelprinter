@@ -4,7 +4,7 @@
 /* ============ */
 /*
 text #4d441c (brown)
-text #a69b68 (light brown)
+text #87772c (light brown)
 text #da6391 (pink)
 href #265d8b (blue)
 */
@@ -14,8 +14,10 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 
 .clearfix:after {
 	content: "."; display:block; height:0; clear:both; visibility:hidden; 
-}
+}                                                
 
+.left {float:left;}
+.right {float:right;}
 /* ============= */
 /* = Structure = */
 /* ============= */
@@ -36,22 +38,22 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 /* = Typography = */
 /* ============== */
 #sidebar h1 {color:#4d441c; font-size:20px; text-transform:uppercase; margin:10px 0 0px 0;}
-#sidebar h2 {color:#cd317a; font-size:18px; margin:0px;}
+#sidebar h2 {color:#cd317a; font-size:18px; margin:0px; float:left;}
 #sidebar p,#sidebar li {color:#4d441c; font-size:14px;}
 #sidebar p {margin-top:3px;;}
 #sidebar .order-price {font-weight:bold; letter-spacing:-1px; font-size:15px; margin:0 0 8px 0; }
 #sidebar .order-price .paid {color:#15ae17; font-weight:bold;}
 #sidebar .order-price .unpaid  {color:#d90e0e; font-weight:bold;}
-#sidebar .customer-name {color:#a69b68;font-size:12px; margin:0px 0 2px 0;}
+#sidebar .customer-name {color:#87772c;font-size:12px; margin:0px 0 2px 0;}
 
 #preview .template-actions {float:right; position:relative; margin:12px 77px 0 0; height:50px; }
-#preview .template-actions img.aesthetic-clip { position:absolute;  right:30%; top:-24px;}
-/*#preview .template-actions p {margin:0; padding:0; line-height:15px;float:left; padding-top:7px;font-size:14px;  }   */
-#preview .template-actions p.template-name {color:#cd317a; float:left;   /*padding: 17px 0 11px 20px;*/ line-height:52px; margin:2px 0 0 -4px; min-width:50px; background:transparent url('../images/sticky-template-bg.png') repeat-x; padding-bottom:10px; }   
+#preview .template-actions img.aesthetic-clip { position:absolute;  right:40px; top:-24px;}
 
+#preview .template-actions p.template-name {color:#cd317a; float:left;   /*padding: 17px 0 11px 20px;*/ line-height:47px; margin:2px 0 0 -4px; min-width:150px; background:transparent url('../images/sticky-template-bg.png') repeat-x; padding-bottom:10px; font-size:13.5px; text-align:center; }   
 
-#preview .template-actions .template-name em {background:url('../images/sticky-template-left.png') no-repeat left; display:block; padding-left:10px;}                 
-#preview .template-actions .template-name strong {background:url('../images/sticky-template-right.png') no-repeat right; display:block; padding-right:10px;}
+/* adds the right and left shadows to the note */
+#preview .template-actions .template-name em {background:url('../images/sticky-template-left.png') no-repeat left; display:block; padding-left:20px; font-style:normal;}                 
+#preview .template-actions .template-name strong {background:url('../images/sticky-template-right.png') no-repeat right; display:block; padding-right:10px; font-weight:normal;}
 
 
 /* ========= */
@@ -64,9 +66,10 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 #sidebar ul#list-templates li {color:#da6391; list-style-type:none; margin:1px 0 4px 0;font-size:13px; }
 #sidebar ul#list-templates li input {margin:0px 1px 0 0; vertical-align:text-top;}       
 
-#sidebar ul#list-templates  .template-options  {background: url('../images/button-edit-bg.png') no-repeat left; padding:0 0 5px 10px; margin:0px 0 0 -55px; vertical-align:middle; }    
+#sidebar ul#list-templates  .template-options  {background: url('../images/button-edit-bg.png') no-repeat left; padding:1px 0 5px 10px; margin:0px 0 0 -55px; vertical-align:middle;}    
 #sidebar ul#list-templates  .template-options a img { vertical-align:middle;}    
-#sidebar ul#list-templates  .template-options a {font-size:11.5px; margin-right:2px; }
+#sidebar ul#list-templates  .template-options a {font-size:11.5px; margin-right:2px;}
+#sidebar  p.template-editmode { text-align:right; margin:0 0 5px 0; }
 
 /* ========= */
 /* = Links = */
@@ -87,9 +90,9 @@ a:hover, a:focus, a:active {color:#265d8b;}
 #login-wrapper { background:#fff9d3; padding-top:10px;  }
 #login h1 {margin:0px 0 10px 0;color:#4d441c; font-size:25px; }
 #login p {margin:0 0 5px 0; font-size:15px;text-align:center; ;color:#4d441c; font-weight:lighter; padding-bottom:5px;}
-    
-#login p strong   {font-size:12px;margin-left:3px;}
-#login p.low-em {font-size:13px; font-style:italic;color:#a69b68;}   
+#login p em {  font-style:normal; } /* instructions */
+#login p strong   {font-size:12px; color:#87772c;} /* for the www */
+#login p.low-em {font-size:13px; font-style:italic;color:#87772c;} /* for the register note */  
 #login .sidebar-block {padding:15px 12px 0 12px;}        
 
 /* ======== */
