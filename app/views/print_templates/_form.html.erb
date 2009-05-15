@@ -4,7 +4,7 @@
     <%= f.text_field :name %>
   </div>
   <div class="template-code">    
-    <%= render :partial => 'editor_help' %>
+    <%= link_to "Open help", "http://wiki.shopify.com/Printing", :target => 'wiki' %>
     <%= f.text_area :body, :id => 'template-editor' %>  
   </div>
 

@@ -105,13 +105,14 @@ Templates = function() {
 			editmode = !editmode;
 			$(".template-options").toggle();
 			$(".new-template").toggle();
+			var linkImage = $(".template-editmode a img");
 			
 			if (editmode) {
-				var editmodeLabel = "Stop editing";		
+				linkImage.data("old-image", linkImage.attr('src')); /* Remember original link image */
+				linkImage.attr('src', '/images/button-done.png')
 			} else {
-				var editmodeLabel = "Edit templates";
+				linkImage.attr("src", linkImage.data("old-image"));   /* Restore original link image */
 			}
-			$(".template-editmode a").html(editmodeLabel);
 		}
 	}
 }();
@@ -257,26 +258,4 @@ Status = function() {
 		}
 		
 	}
-}();
-
-
-Help = function() {
-	var showing = false;
-
-	return {
-		toggle: function() {
-			$('#editor-help-links').toggle('fast');
-			var link = $(".help > a");
-
-			showing = !showing;
-			if (showing) {
-				link.data("old-title", link.html()); /* Remember original link title */
-				link.html('Hide')
-			} else {
-				link.html(link.data("old-title"));   /* Restore original link title */
-			}
-			
- 			setTimeout("Dialog.resizeTextArea()", 250);
-		}
-	};
 }();
