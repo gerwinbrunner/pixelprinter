@@ -14,7 +14,7 @@ class OrderTest < ActiveSupport::TestCase
   
   context "generating an example order" do
     before do
-      @order = example_order()
+      @order = order
     end
     
     should "be an instance of ShopifyAPI::Order" do
@@ -34,7 +34,7 @@ class OrderTest < ActiveSupport::TestCase
   
   context "#to_liquid" do
     before do
-      @order = example_order
+      @order = order
       shop = stub(:name => "My Store", :currency => "USD", :money_format => "$ {{amount}}", :to_liquid => {'name' => "My Store"})
       ShopifyAPI::Shop.stubs(:current).returns(shop)
       @liquid = @order.to_liquid

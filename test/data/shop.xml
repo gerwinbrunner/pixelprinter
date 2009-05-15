@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- XML response from a shop -->
+<shop>
+  <active-subscription-id type="integer">601552</active-subscription-id>
+  <address1>My Street 120</address1>
+  <city>Berlin</city>
+  <country>DE</country>
+  <created-at type="datetime">2008-05-30T17:43:51+02:00</created-at>
+  <domain>testshop.myshopify.com</domain>
+  <email>bobbobsen@gmail.com</email>
+  <id type="integer">968</id>
+  <name>Test Shop</name>
+  <phone>+049 123 4567890</phone>
+  <province/>
+  <public type="boolean">false</public>
+  <source nil="true"/>
+  <zip>56070</zip>
+  <taxes-included nil="true"/>
+  <currency>EUR</currency>
+  <timezone>(GMT+01:00) Berlin</timezone>
+  <shop-owner>Bob Bobsen</shop-owner>
+  <money-format>&euro;{{amount}}</money-format>
+  <money-with-currency-format>&euro;{{amount}} EUR</money-with-currency-format>  
+</shop>

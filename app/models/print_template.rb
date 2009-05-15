@@ -19,7 +19,7 @@ class PrintTemplate < ActiveRecord::Base
   end
   
   def render(assigns)
-    parse.render(assigns, EmailMoneyFilter)
+    parse.render(assigns, MoneyFilter)
   end
 
   def load_from_file!(template_name)

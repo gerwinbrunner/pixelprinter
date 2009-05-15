@@ -34,21 +34,37 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :all
 
-protected
-  def example_order(file = '/db/example_order.xml')
-    order_xml = File.read(RAILS_ROOT + file)
+
+  protected
+  
+  def order(file = 'example_order.xml')
+    order_xml = load_data(file)
     ShopifyAPI::Order.new(Hash.from_xml(order_xml)['order'])
   end
 
-
+  def shop(file = 'shop.xml', overwrites = {})
+    shop_xml = load_data(file)
+    hash = Hash.from_xml(shop_xml)['shop'].merge(overwrites)
+    p hash
+    ShopifyAPI::Shop.new(hash)
+  end
+  
   def login_session(shop_name)
     Shop.stubs(:find_by_name).returns(shops(shop_name))
     {:shopify => ShopifyAPI::Session.new(shop_name.to_s, 'somerandomtoken')}
   end
 
+  # Custom Assertions
   def assert_response_include(code)
     assert_block("Expected the response <#{@response.body}> to include the following content: <#{code}>") do
       @response.body.include?(code)
     end
+  end
+  
+  
+  private
+
+  def load_data(file)
+    File.read("#{Rails.root}/test/data/#{file}")
   end
 end

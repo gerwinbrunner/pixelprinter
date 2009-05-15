@@ -27,7 +27,7 @@ class PrintTemplatesControllerTest < ActionController::TestCase
 
       # make sure the quotes are escaped (via inspect), and remove the very first and last quote
       assert_response_include "<input id=\"template-checkbox-#{tmpl.id}\" name=\"print_templates[]\" type=\"checkbox\" value=\"#{tmpl.id}\" />".inspect[1..-2]
-      assert_response_include "<label for=\"template-checkbox-#{tmpl.id}\" id=\"template-label-#{tmpl.id}\">Quotation mark's test</label>".inspect[1..-2]
+      assert_response_include "<label for=\"template-checkbox-#{tmpl.id}\">Quotation mark's test</label>".inspect[1..-2]
     end    
     
     should "insert an empty preview container at the end of the preview div on the page" do

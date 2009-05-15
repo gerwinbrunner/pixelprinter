@@ -1,8 +1,16 @@
 module ShopifyAPI
   class Shop < ActiveResource::Base
-#    def settings
-#      {:money_format => "whatever"}
-#    end
+    # TODO: remove this as soon as money_format gets exported in Shopify
+    def method_missing(name, *args)
+      case name.to_sym
+      when :money_format
+        super || "${{amount}}"
+      when :money_with_currency_format
+        super || "${{amount}} USD"
+      else
+        super
+      end
+    end
     
     def to_liquid
       {
