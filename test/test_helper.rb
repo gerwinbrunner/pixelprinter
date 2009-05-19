@@ -44,7 +44,8 @@ class ActiveSupport::TestCase
 
   def shop(file = 'shop.xml', overwrites = {})
     shop_xml = load_data(file)
-    ShopifyAPI::Shop.new(Hash.from_xml(shop_xml)['shop'].merge(overwrites))
+    shop_hash = Hash.from_xml(shop_xml)['shop'].merge(overwrites)
+    ShopifyAPI::Shop.new(shop_hash)
   end
   
   def login_session(shop_name)

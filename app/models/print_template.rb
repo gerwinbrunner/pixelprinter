@@ -2,7 +2,7 @@ class PrintTemplate < ActiveRecord::Base
   belongs_to :shop
   
   validates_presence_of :body, :shop_id
-  validates_length_of   :name, :within => 2..32
+  validates_length_of   :name, :within => 2..24
   validates_uniqueness_of :name, :scope => :shop_id
   
   attr_protected :shop_id
