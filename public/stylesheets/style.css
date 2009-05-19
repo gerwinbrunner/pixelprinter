@@ -23,7 +23,7 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 /* ============= */
 #wrapper{width:940px;margin:auto;}
 #sidebar{width:220px;position:fixed; background: url('../images/sidebar-top-ribbon.png') repeat-x ; margin-top:40px; padding:7px 0 0 0; }
-.sidebar-block { padding:10px 20px 10px 20px; background:#fff9d3  url('../images/sidebar-block-repeat.png') 0 0px repeat-x}
+.sidebar-block { padding:8px 20px 10px 20px; background:#fff9d3  url('../images/sidebar-block-repeat.png') 0 0px repeat-x}
 
 .sidebar-block:first-child {background-position: 0 -17px;}
 #wrapper #sidebar .logo  {position:fixed; margin:0 0 0 -4px;  padding:0px 0 0 0;}
@@ -208,9 +208,10 @@ e
 .button-panel {background:#fff9d4; border:1px solid #cdc69f; margin-top:10px;} /* for "Create" and "Cancel" */
 p.buttons {background:none; border:none; margin:0;}      
 
-.ui-widget  #template-editor {font-family: "Courier New", "Courier", "monospace"; font-size:14px; margin:auto; margin-top:6px;} /* for the template textarea */         
-
-.ui-widget-content .header label {color:#cd317a; font-family:'Trebuchet MS'; margin-top:10px;}  /* template name */
+.ui-widget  #template-editor {font-family: "Courier New", "Courier", "monospace"; font-size:14px; margin:auto; margin-top:6px;} /* for the template textarea */  
+       
+.ui-widget-content .header {margin:10px 0 10px 0;}
+.ui-widget-content .header label {color:#cd317a; font-family:'Trebuchet MS'; }  /* template name */
 .ui-widget-content .template-code label {color:#cd317a; font-family:'Trebuchet MS'; margin-top:11px; display:block; } /* edit template */
 
 /* for the help menu */

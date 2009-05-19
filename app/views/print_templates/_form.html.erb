@@ -1,13 +1,12 @@
 <% form_remote_for(tmpl, :method => method, :html => {:id => "print-template-form"}, :loading => "Status.show()", :complete => "Status.hide();") do |f| %>
   <div class="header fixed">
-    <%= f.label :name, "Name:" %>
+    <%= f.label :name, "Name" %>
     <%= f.text_field :name %>
   </div>
   <div class="template-code">    
-    <%= link_to "Open help", "http://wiki.shopify.com/Printing", :target => 'wiki' %>
+    <%= link_to "Need help?", "http://wiki.shopify.com/Printing", :target => 'wiki' %>
     <%= f.text_area :body, :id => 'template-editor' %>  
   </div>
-
 
   <div class="button-panel fixed">
     <p class="buttons">

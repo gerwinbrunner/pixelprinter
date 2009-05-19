@@ -1,7 +1,7 @@
 Debug = function() {
 	// set to true to print all important javascript debug messages
 	// set to false to skip all debug messages (for production)
-	var debug = true;
+	var debug = false;
 	
 	return {
 		log: function(text) {
