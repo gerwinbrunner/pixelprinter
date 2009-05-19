@@ -66,7 +66,7 @@ code { font-size: 140%; }
 
 
 #template-editor {
-	font-family: "Courier New", "Courier", "monospace";
+	font-family: "CourierNew", Courier, monospace;
 	height: 60%;
 	width: 100%;
 }
@@ -170,7 +170,7 @@ code { font-size: 140%; }
 }
 
 .order h2 {
-	margin: 12 0px;
+	margin: 12px 0px;
 }
 
 #order-widget .templates {
@@ -260,7 +260,6 @@ code { font-size: 140%; }
 .ta-left { text-align: left; }
 .ta-right { text-align: right; }
 .ta-center { text-align: center; }
-
 
 /* CLASSES */
 
