@@ -9,3 +9,9 @@
   <%= label_tag "template-checkbox-#{tmpl.id}", tmpl.name %>
  
 <% end %>
+
+<% content_for :javascript do %>
+$("#template-checkbox-<%= tmpl.id %>").bind("change", function() {
+  Templates.updateSelection($(this));
+});
+<% end %>

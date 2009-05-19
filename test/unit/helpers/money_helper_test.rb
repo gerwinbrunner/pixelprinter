@@ -7,13 +7,11 @@ end
 class MoneyHelperTest < ActiveSupport::TestCase
   before do  
     ActiveResource::Base.site = 'http://any-url-for-testing'
-
-    @european_shop = shop
-    @us_shop = shop('shop.xml', {'money_format' => "${{amount}}", 'money_with_currency_format' => "${{amount}} USD", 'currency' => "USD"})
   end
   
   context "European shop" do
     before do
+      @european_shop = shop('shop.xml', {'money_format' => "&euro;{{amount}}", 'money_with_currency_format' => "&euro;{{amount}} EUR"})
       ShopifyAPI::Shop.stubs(:current).returns(@european_shop)
     end
     
@@ -37,6 +35,7 @@ class MoneyHelperTest < ActiveSupport::TestCase
   
   context "US Shop" do
     before do
+      @us_shop       = shop('shop.xml', {'money_format' => "${{amount}}", 'money_with_currency_format' => "${{amount}} USD", 'currency' => "USD"})
       ShopifyAPI::Shop.stubs(:current).returns(@us_shop)
     end
     

@@ -45,9 +45,4 @@ Templates.initialize('<%= @order.id %>');
 $("#selected-templates :checkbox:checked").each(function() {
   Templates.updateSelection($(this));
 });
-
-// live event handlers make sure the events also work for ajax inserted elements later on
-$("#selected-templates :checkbox").live("change", function() {
-  Templates.updateSelection($(this));
-});
 <% end %>

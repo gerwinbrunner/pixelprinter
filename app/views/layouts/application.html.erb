@@ -6,13 +6,11 @@
 	<meta name="MSSmartTagsPreventParsing" content="true" />
 
   <title><%= APP_NAME %></title>
- <%= stylesheet_link_tag 'jquery-ui-1.7.1.custom', 'style', :media => 'screen' %>
- 
+  <%= stylesheet_link_tag 'jquery-ui-1.7.1.custom', 'style', :media => 'screen' %>
   <%= stylesheet_link_tag 'print', :media => 'print' %>
 
-  <%= javascript_include_tag :defaults, 'jquery-ui' %> 
+  <%= javascript_include_tag 'ie-fixes', :defaults, 'jquery-ui' %> 
    
-  
   <% javascript_tag do %>
     <% if flash[:notice] %>
       window.onload = function() { Messenger.notice(<%= h(flash[:notice]).inspect %>); }
@@ -28,6 +26,7 @@
     $(document).ready(function() {
       <%= yield :javascript %>
     });
+    
   <% end %> 
 
 

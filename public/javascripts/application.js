@@ -1,13 +1,13 @@
 Debug = function() {
 	// set to true to print all important javascript debug messages
 	// set to false to skip all debug messages (for production)
-	var debug = true;
+	var debug = false;
 	
 	return {
 		log: function(text) {
 			if (debug) { console.log(text); }
 		}
-	}
+	};
 }();
 
 
@@ -21,14 +21,14 @@ Templates = function() {
 	  if (_templates.length > 0) {
 			$("#print-start").hide();
 	    $("#print-button").show();
-			var pluralize = _templates.length == 1 ? "document" : "documents"
-			$("#template-amount").html(_templates.length + " " + pluralize)
+			var pluralize = _templates.length == 1 ? "document" : "documents";
+			$("#template-amount").html(_templates.length + " " + pluralize);
 
 	  } else {
 	    $("#print-button").hide();
 			$("#print-start").show();
 	  }
-	}
+	};
 
 	var toggleInlinePreview = function(template) {
 		// preview iframe, could be already inserted (cached in DOM)
@@ -46,7 +46,7 @@ Templates = function() {
 			templateLabel.removeClass("selected");
 			templatePreview.hide();
 		}
-	}
+	};
 	
 	var loadInlinePreview = function(template) {
 		var checkbox = $("#template-item-" + template + " :checkbox").disable();
@@ -54,14 +54,14 @@ Templates = function() {
 		$("#template-delete-link-" + template).hide();
 		
 		Status.show("Loading preview...");
-		$("#preview-" + template).load("/orders/" + _order + "?template_id=" + template, null, function() { checkbox.enable(); Status.hide(); });
-	}
+		$.get("/orders/" + _order + "?template_id=" + template, null, function(data) { checkbox.enable(); Status.hide(); $("#preview-" + template).html(data); });
+	};
 
 	var templateChanged = function(template) {
 		togglePrintButton();
 		toggleInlinePreview(template);
-		Debug.log("Template #" + template + " has changed.")
-	}
+		Debug.log("Template #" + template + " has changed.");
+	};
 
 	
 	/* public methods */
@@ -73,17 +73,18 @@ Templates = function() {
 		
 		select: function(template, selection) {
 			var checkbox = $('#template-item-' + template + " :checkbox");
-			checkbox.attr('checked', selection)
+			checkbox.attr('checked', selection);
 			this.updateSelection(checkbox);
 		},
 		
 		updateSelection: function(checkbox) {
 			var template = checkbox.val();
 			Debug.log("Updating selection for template-checkbox-" + template + "...");
-			if (checkbox.attr('checked') == true) {
+			if (checkbox.attr('checked')) {
 				Debug.log("Checkbox selected");
-				if (_templates.indexOf(template) == -1)
+				if (_templates.indexOf(template) == -1) {
 					_templates.push(template);
+				}
 			} else {
 				Debug.log("Checkbox deselected");
 				_templates.splice(_templates.indexOf(template), 1);
@@ -109,12 +110,12 @@ Templates = function() {
 			
 			if (editmode) {
 				linkImage.data("old-image", linkImage.attr('src')); /* Remember original link image */
-				linkImage.attr('src', '/images/button-done.png')
+				linkImage.attr('src', '/images/button-done.png');
 			} else {
 				linkImage.attr("src", linkImage.data("old-image"));   /* Restore original link image */
 			}
 		}
-	}
+	};
 }();
 
 
@@ -131,17 +132,17 @@ Dialog = function() {
 
 		// the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
  		if (typeof window.innerWidth != 'undefined') {
-	  	viewportwidth = window.innerWidth,
-			viewportheight = window.innerHeight
+	  	viewportwidth = window.innerWidth;
+			viewportheight = window.innerHeight;
 		} else if (typeof document.documentElement != 'undefined'	&& typeof document.documentElement.clientWidth !=
 	     'undefined' && document.documentElement.clientWidth != 0) {
 			// IE6 in standards compliant mode (i.e. with a valid doctype as the first line in the document)
-      viewportwidth = document.documentElement.clientWidth,
-		  viewportheight = document.documentElement.clientHeight
+      viewportwidth = document.documentElement.clientWidth;
+		  viewportheight = document.documentElement.clientHeight;
 		} else {
 			// older versions of IE
-      viewportwidth = $('body')[0].clientWidth,
-      viewportheight = $('body')[0].clientHeight
+      viewportwidth = $('body')[0].clientWidth;
+      viewportheight = $('body')[0].clientHeight;
     }
 		
 		// open dialog with -20% of maximal screen height and fixed letter width
@@ -149,13 +150,13 @@ Dialog = function() {
     var x = '8.5in';
 
     return { width: x, height: y };
-  }
+  };
 
 	return {                      
 		open: function(title) {
 		  
 			$(dlg).dialog(jQuery.extend(options, screenDimensions(), {title: title, resize: this.resizeTextArea, open: this.resizeTextArea}));
-			$(dlg).dialog('open')
+			$(dlg).dialog('open');
 		},
 		
 		close: function() {
@@ -167,17 +168,17 @@ Dialog = function() {
 			Debug.log("Resizing");
 			var elementsHeight = 0;
 	   	$("#modal-dialog .fixed").each(function(index, elem){
-				var height = parseInt($(elem).css("height"));
-				var height2 = parseInt($(elem).height());
+				var height = parseInt($(elem).css("height"), 10);
+				var height2 = parseInt($(elem).height(), 10);
 	      elementsHeight += height;
 	    });
 
 			var dialogHeight   = $(dlg).height();
-			var textAreaHeight = parseInt(dialogHeight) - elementsHeight - 60 /*margin*/
+			var textAreaHeight = parseInt(dialogHeight, 10) - elementsHeight - 60; /*margin*/
 	    $("#template-editor").css("height", textAreaHeight);   
 		}
 		
-	}
+	};
 }();
 
 
@@ -205,7 +206,7 @@ Messenger = function() {
 		// Notice-level messages.  See Messenger.error for full details.
 	  notice: function(message) {
 	    $('#flashnotice').html(message);
-	    $('#flashnotice').fadeIn()
+	    $('#flashnotice').fadeIn();
 
 	    if (autohide_notice != null) { clearTimeout(autohide_notice); }
 	    autohide_notice = setTimeout(fadeNotice, 5000);
@@ -215,12 +216,12 @@ Messenger = function() {
 	  // This message will auto-hide after a specified amount of miliseconds
 	  error: function(message) {
 	    $('#flasherrors').html(message);
-	    $('#flasherrors').fadeIn()
+	    $('#flasherrors').fadeIn();
 
 	    if (autohide_error != null) { clearTimeout(autohide_error); }
 	    autohide_error = setTimeout(fadeError, 5000);
 	  }
-	}  
+	};
 }();
 
 
@@ -234,7 +235,7 @@ Status = function() {
 		show: function(text) {
 			// don't show more than one notice at a time
 			if (count < 1) {
-				var text = (typeof(text) != 'undefined') ? text : 'Loading...';
+				text = (typeof(text) != 'undefined') ? text : 'Loading...';
 				$("#notice-item p").html(text);
 				notice = $("#notice-item-wrapper");
 				notice.fadeIn();
@@ -244,18 +245,21 @@ Status = function() {
 			  }
 			}
 			count++;
-			Debug.log("Called Status.show, count is now: " + count)
+			Debug.log("Called Status.show, count is now: " + count);
 		},
 
 		hide: function() {
-			if (count <= 1) { notice.fadeOut(); count = 1 }
+			if (count <= 1) { 
+				notice.fadeOut();
+				count = 1;
+			}
 			count--;
-			Debug.log("Called Status.hide, count is now: " + count)
+			Debug.log("Called Status.hide, count is now: " + count);
 		},
 		
 		reset: function() {
-			count = 0
+			count = 0;
 		}
 		
-	}
+	};
 }();
