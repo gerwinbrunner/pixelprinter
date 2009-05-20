@@ -1,5 +1,14 @@
 module MoneyHelper
   
+  def money(money)
+    MoneyHelper.format(shop.money_format, money, shop.currency)
+  end    
+
+  def money_with_currency(money)
+    MoneyHelper.format(shop.money_with_currency_format, money, shop.currency)
+  end
+  
+  
   def self.format(args, amount, currency = nil, strip_precision = false)    
     cents = case amount
     when Money then amount.cents
@@ -36,6 +45,10 @@ module MoneyHelper
     parts = sprintf("%.#{precision}f", cents / 100.0).split('.')
     parts[0].gsub!(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1#{thousands}")
     parts.join(decimal)
+  end
+  
+  def shop
+    ShopifyAPI::Shop.current
   end
   
 end
