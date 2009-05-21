@@ -92,8 +92,9 @@ a:hover, a:focus, a:active {color:#265d8b;}
 #login p {margin:0 0 5px 0; font-size:15px;text-align:center; ;color:#4d441c; font-weight:lighter; padding-bottom:5px;}
 #login p em {  font-style:normal; } /* instructions */
 #login p strong   {font-size:12px; color:#87772c;} /* for the www */
-#login p.low-em {font-size:13px; font-style:italic;color:#87772c; } /* for the register note */  
-#login .sidebar-block {padding:15px 12px 0 12px;}        
+#login p.low-em {font-size:13px; font-style:italic;color:#87772c; padding-bottom:30px;  } /* for the register note */  
+#login .sidebar-block {padding:15px 12px 0 12px;}
+#login .logo { position:relative;  margin-top:-27px; margin-left:-4px;   }        
 
 /* ======== */
 /*  Lightbox  */

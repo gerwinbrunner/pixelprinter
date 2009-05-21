@@ -1,10 +1,8 @@
 
 <div id="login">
-  <div id="login-wrapper">
+  <div id="login-wrapper" >
     <h1>Login</h1>
-
     <% form_tag '/login/authenticate' do %>
-
     <div class="sidebar-block" >   
       <p><em>Enter your shop's URL</em></p>
       <p><label for="shop"><strong>http://www. </strong></label><%= text_field_tag 'shop', nil, :size => 14 %></p>
@@ -17,8 +15,10 @@
     </div>
     <% end %>
   </div>
-  <img src="../images/logo.png" width="229" height="176" alt="Logo" class="logo" style="margin-top:-5px; margin-left:-4px" />
+   <div> </div>
+  <img src="../images/logo.png" width="229" height="176" alt="Logo" class="logo"   />
+  
 </div>     
 <% content_for :javascript do %>
 $(":text:visible:enabled:first").focus();
-<% end %>
+<% end %>              

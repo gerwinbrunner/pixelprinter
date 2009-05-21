@@ -26,8 +26,7 @@
     <%= link_to_function image_tag("button-print.png"), "Templates.print()", :style => "margin: 10px 0 0px 0" %>
     <p style="font-size: 12px; 	text-align: center;"><%= content_tag :span, "0 documents", :id => "template-amount" %> will be printed.</p>
 	</div><!-- last sidebar block -->
-	
-	<img src="../images/logo.png" width="229" height="176" alt="Logo" class="logo" style="margin-top:-10px" />
+	<img src="../images/logo.png" width="229" height="176" alt="Logo" class="logo" style="margin-top:-10px; background:red; margin:0;padding:0" />
 </div><!--sidebar-->
 
 <!-- This is populated later via AJAX and popped up with the dialog function of JQueryUI -->
@@ -40,7 +39,6 @@
 
 <% content_for :javascript do %>
 Templates.initialize('<%= @order.id %>');
-
 // load default template previews on start
 $("#selected-templates :checkbox:checked").each(function() {
   Templates.updateSelection($(this));
