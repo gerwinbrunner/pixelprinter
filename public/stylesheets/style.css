@@ -24,9 +24,10 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 #wrapper{width:940px;margin:auto;}
 #sidebar{width:220px;position:fixed; background: url('../images/sidebar-top-ribbon.png') repeat-x ; margin-top:40px; padding:7px 0 0 0; }
 .sidebar-block { padding:8px 20px 10px 20px; background:#fff9d3  url('../images/sidebar-block-repeat.png') 0 0px repeat-x}
+#sidebar #print-button {padding-top:20px;}
 
 .sidebar-block:first-child {background-position: 0 -17px;}
-#wrapper #sidebar .logo  {position:fixed; margin:0 0 0 -4px;  padding:0px 0 0 0;}
+#wrapper #sidebar .logo  {margin:-20px 0 0px -4px;}
 
 #preview {padding-bottom:70px; clear:both;zoom:1;}
 #preview .preview-top{background:url('../images/paper-top.png')  no-repeat  ; float:right; height:70px;width:712px; margin:45px 0 0 0;}
@@ -63,14 +64,15 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 .preview-top ul li {float:left; list-style-type:none; }
 
 #sidebar ul#list-templates {padding:3px 0 0 0; margin:0 0 0px 0 ;}
-#sidebar ul#list-templates li {color:#da6391; list-style-type:none; margin:1px 0 4px 0;font-size:13px; }
-#sidebar ul#list-templates li input {margin:0px 1px 0 0; vertical-align:text-top;}       
+#sidebar ul#list-templates li {color:#da6391; list-style-type:none;font-size:13px; }
+#sidebar ul#list-templates li input {margin:0px 0px 0 0; vertical-align:middle; padding:0;} 
+#sidebar ul#list-templates li label {line-height:25px;}          
 
-#sidebar ul#list-templates  .template-options  {background: url('../images/button-edit-bg.png') no-repeat left; padding:1px 0 5px 10px; margin:0px 0 0 -55px; vertical-align:middle;}    
+#sidebar ul#list-templates  .template-options  {background: url('../images/button-edit-bg.png') no-repeat left; padding:0px 0 0px 10px; margin:4px 0 0 0px; float:left; margin-left:-45px; }    
 #sidebar ul#list-templates  .template-options a img { vertical-align:middle;}    
-#sidebar ul#list-templates  .template-options a {font-size:11.5px; margin-right:2px;}
+#sidebar ul#list-templates  .template-options a {font-size:11.5px; margin-right:2px; }   
 #sidebar  p.template-editmode { text-align:right; margin:0 0 5px 0; }
-
+                                                                                    
 /* ========= */
 /* = Links = */
 /* ========= */
