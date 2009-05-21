@@ -16,9 +16,3 @@
     </p>
   </div>
 <% end %>
-
-<% if method.to_sym == :post %>
-  <% content_for :javascript do %>
-    $(":text:visible:enabled:first").focus().select();
-  <% end %>
-<% end %>
