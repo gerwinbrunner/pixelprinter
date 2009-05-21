@@ -50,13 +50,14 @@ module ShopifyAPI
     
     def to_liquid
       fulfilled, unfulfilled = line_items.partition {|item| item.fulfilled?}
+      shop = ShopifyAPI::Shop.current
       { 
         'name'              => name, 
         'email'             => email,
         'gateway'           => gateway,
         'order_name'        => name, 
         'order_number'      => number, 
-        'shop_name'         => Shop.current.name,
+        'shop_name'         => shop.name,
         'subtotal_price'    => cents(subtotal_price),
         'total_price'       => cents(total_price),
         'tax_price'         => cents(total_tax),
@@ -70,7 +71,7 @@ module ShopifyAPI
         'note'              => note_body,
         'attributes'        => note_attributes, 
         'customer'          => {'email' => email, 'name' => billing_address.name},
-        'shop'              => Shop.current.to_liquid
+        'shop'              => shop.to_liquid
       }
     end
 

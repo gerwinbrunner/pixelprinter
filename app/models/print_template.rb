@@ -7,6 +7,7 @@ class PrintTemplate < ActiveRecord::Base
   
   attr_protected :shop_id
 
+
   def parse
     Liquid::Template.parse(body)
   end
@@ -19,7 +20,7 @@ class PrintTemplate < ActiveRecord::Base
   end
   
   def render(assigns)
-    parse.render(assigns, MoneyFilter)
+    parse.render!(assigns, MoneyFilter)
   end
 
   def load_from_file!(template_name)

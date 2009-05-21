@@ -1,5 +1,14 @@
 module MoneyHelper
   
+  def money(money)
+    MoneyHelper.format(shop.money_format, money, shop.currency)
+  end    
+
+  def money_with_currency(money)
+    MoneyHelper.format(shop.money_with_currency_format, money, shop.currency)
+  end
+  
+  
   def self.format(args, amount, currency = nil, strip_precision = false)    
     cents = case amount
     when Money then amount.cents
@@ -28,36 +37,7 @@ module MoneyHelper
       end
     end    
   end
-
-
-  def money(money)
-    MoneyHelper.format(money_format, money, currency)
-  end    
-
-  def money_no_decimals(money)
-    MoneyHelper.format(money_format, money, currency, true)
-  end  
-  
-  def money_with_currency(money)
-    MoneyHelper.format(money_with_currency_format, money, currency)
-  end
-  
-  def money_with_currency_no_decimals(money)
-    MoneyHelper.format(money_with_currency_format, money, currency, true)
-  end
-  
-  def currency
-    shop.currency    
-  end    
-  
-  def money_prefix(with_currency = false)
-    format_chunks(with_currency).first
-  end
-  
-  def money_suffix(with_currency = false)
-    format_chunks(with_currency).last
-  end
-  
+   
   
   private
 
@@ -67,22 +47,8 @@ module MoneyHelper
     parts.join(decimal)
   end
   
-  
-  def format_chunks(with_currency = false)
-    chunks = (with_currency ? shop.money_with_currency_format : shop.money_format).split(/\{\{[^\{\}]*\}\}/)
-    chunks[1] ||= ''
-    chunks
-  end
-  
   def shop
     ShopifyAPI::Shop.current
   end
   
-  def money_format
-    shop.money_format.blank? ? "$ {{amount}}" : shop.money_format
-  end
-  
-  def money_with_currency_format
-    shop.money_with_currency_format.blank? ? "$ {{amount}} USD" : shop.money_with_currency_format
-  end
 end

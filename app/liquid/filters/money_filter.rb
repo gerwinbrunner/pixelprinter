@@ -1,15 +1,11 @@
 module MoneyFilter
-  def money_with_currency(money)
-    MoneyHelper.format(shop.money_with_currency_format, money, shop.currency)
-  end
-
-  def money(money)
-    MoneyHelper.format(shop.money_format, money, shop.currency)
-  end                  
-  
   def money(money)
     MoneyHelper.format(shop.money_format, money, shop.currency)
   end    
+
+  def money_with_currency(money)
+    MoneyHelper.format(shop.money_with_currency_format, money, shop.currency)
+  end
 
   def money_no_decimals(money)
     MoneyHelper.format(shop.money_format, money, shop.currency, true)
@@ -22,6 +18,6 @@ module MoneyFilter
   private
   
   def shop
-    ShopifyAPI::Shop.current
+    @shop ||= ShopifyAPI::Shop.current
   end
 end
