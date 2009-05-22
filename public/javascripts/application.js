@@ -1,6 +1,6 @@
 Debug = function() {
 	// set to true to print all important javascript debug messages
-	// set to false to skip all debug messages (for production)
+	// set to false to skip all debug messages (for production and browsers without Firebug)
 	var debug = false;
 	
 	return {
@@ -23,7 +23,6 @@ Templates = function() {
 	    $("#print-button").show();
 			var pluralize = _templates.length == 1 ? "document" : "documents";
 			$("#template-amount").html(_templates.length + " " + pluralize);
-
 	  } else {
 	    $("#print-button").hide();
 			$("#print-start").show();
@@ -31,7 +30,7 @@ Templates = function() {
 	};
 
 	var toggleInlinePreview = function(template) {
-		// preview iframe, could be already inserted (cached in DOM)
+		// preview div, which could be already inserted (cached in DOM)
 		var templatePreview = $("#inline-preview-" + template);
 		var templateLabel = $("#template-item-" + template + " label");
 		// is template selected?
@@ -125,38 +124,19 @@ Dialog = function() {
 	var dlg     = "#modal-dialog";
 	var options = { modal: true	};
 	
-  var screenDimensions = function() {
-		content = $('#modal-dialog')[0];
-		var viewportwidth;
-		var viewportheight;
-
-		// the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
- 		if (typeof window.innerWidth != 'undefined') {
-	  	viewportwidth = window.innerWidth;
-			viewportheight = window.innerHeight;
-		} else if (typeof document.documentElement != 'undefined'	&& typeof document.documentElement.clientWidth !=
-	     'undefined' && document.documentElement.clientWidth != 0) {
-			// IE6 in standards compliant mode (i.e. with a valid doctype as the first line in the document)
-      viewportwidth = document.documentElement.clientWidth;
-		  viewportheight = document.documentElement.clientHeight;
-		} else {
-			// older versions of IE
-      viewportwidth = $('body')[0].clientWidth;
-      viewportheight = $('body')[0].clientHeight;
-    }
-		
-		// open dialog with -20% of maximal screen height and fixed letter width
-    var y = viewportheight - (viewportheight/10) * 2;
-    var x = '8.5in';
-
-    return { width: x, height: y };
-  };
-
+	var percent = function(amount, percentage) {
+		return (amount / 100) * percentage;
+	};
+ 
 	return {                      
 		open: function(title) {
-		  
-			$(dlg).dialog(jQuery.extend(options, screenDimensions(), {title: title, resize: this.resizeTextArea, open: this.resizeTextArea}));
+		  var width  = $(window).width();
+		  var height = $(window).height();
+		
+			// open with 80% width and height
+			$(dlg).dialog(jQuery.extend(options, {width: percent(width, 80), height: percent(height, 80)}, {title: title}));
 			$(dlg).dialog('open');
+			$(dlg).bind("resize dialogopen", this.resizeTextArea);
 		},
 		
 		close: function() {
@@ -165,17 +145,16 @@ Dialog = function() {
 		},
 		
 		resizeTextArea: function() {
-			Debug.log("Resizing");
+			var dialogHeight = parseInt($(dlg).height());
 			var elementsHeight = 0;
 	   	$("#modal-dialog .fixed").each(function(index, elem){
-				var height = parseInt($(elem).css("height"), 10);
-				var height2 = parseInt($(elem).height(), 10);
+				var height = parseInt($(elem).height());
 	      elementsHeight += height;
 	    });
 
-			var dialogHeight   = $(dlg).height();
-			var textAreaHeight = parseInt(dialogHeight, 10) - elementsHeight - 60; /*margin*/
-	    $("#template-editor").css("height", textAreaHeight);   
+			var textAreaHeight =  dialogHeight - elementsHeight - 60; /*margin*/
+			Debug.log("DialogHeight: " + dialogHeight + "\nElementsHeight: " + elementsHeight + "\nTextAreaHeight: " + textAreaHeight);
+	    $("#template_editor").height(textAreaHeight);   
 		}
 		
 	};

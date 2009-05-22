@@ -4,13 +4,13 @@
     <%= f.text_field :name %>
   </div>
   <div class="template-code">    
-    <%= link_to "Need help?", "http://wiki.shopify.com/Printing", :target => 'wiki' %>
-    <%= f.text_area :body, :id => 'template-editor' %>  
+    <%= link_to "Show help", "http://wiki.shopify.com/Printing", :target => 'wiki' %>
+    <%= f.text_area :body, :id => 'template_editor' %>  
   </div>
 
   <div class="button-panel fixed">
     <p class="buttons">
-      <%= submit_tag(method.to_sym == :post ? "Create" : "Update" )%>
+      <%= submit_tag(method.to_sym == :post ? "Create" : "Update" ) %>
       or
       <%= link_to_function "Cancel", "Dialog.close();", :class => 'action' %>
     </p>
