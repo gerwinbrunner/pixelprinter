@@ -1,14 +1,15 @@
-<h4>From</h4>
 <div style="margin: 0px 0px 30px 30px">
-  <strong>{{ shop.name }}</strong></br>
-  {{ shop.owner }}</br>
-  {{ shop.address }}</br>
+  <h4>Sender</h4>
+  <strong>{{ shop.name }}</strong><br/>
+  {{ shop.owner }}<br/>
+  {{ shop.address }}<br/>
   {{ shop.zip }} {{ shop.city }}
   {% if shop.province %}, {{ shop.province }} {% endif %}
 </div>
 
 
 <div style="font-size: 120%; padding: 8px; border: 2px solid #ccc; margin: 20px">
+  <h3>Recipient</h3>
   {{ shipping_address.name }}<br/>
   {{ shipping_address.company }}<br/>
   {{ shipping_address.street }}<br/>

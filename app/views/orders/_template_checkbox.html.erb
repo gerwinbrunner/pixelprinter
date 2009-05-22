@@ -11,7 +11,8 @@
 <% end %>
 
 <% content_for :javascript do %>
-$("#template-checkbox-<%= tmpl.id %>").bind("change", function() {
+<!-- click and keypress are also explicitly listed here, as IE does not behave properly for change events only :( -->
+$("#template-checkbox-<%= tmpl.id %>").bind("click keypress", function() {
   Templates.updateSelection($(this));
 });
 <% end %>
