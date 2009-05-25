@@ -122,12 +122,28 @@ Templates = function() {
 // Opens a div as a modal dialog which you need to fill yourself first
 Dialog = function() {
 	var dlg     = "#modal-dialog";
-	var options = { modal: true	};
+	var options = { modal: true, resizable: false	};
 	
 	var percent = function(amount, percentage) {
 		return (amount / 100) * percentage;
 	};
  
+	var	resizeTextArea = function() {
+		var dialogHeight = parseInt($(dlg).height());
+		var elementsHeight = 0;
+   	$(dlg + " .fixed").each(function(index, elem){
+			var height = parseInt($(elem).height());
+      elementsHeight += height;
+    });
+
+		var heightModifier = 100;
+		
+		var textAreaHeight = dialogHeight - elementsHeight - heightModifier; /*margin*/
+		
+		Debug.log("DialogHeight: " + dialogHeight + "\nElementsHeight: " + elementsHeight + "\nTextAreaHeight: " + textAreaHeight);
+    $("#template_editor").height(textAreaHeight);   
+	};
+
 	return {                      
 		open: function(title) {
 		  var width  = $(window).width();
@@ -135,28 +151,13 @@ Dialog = function() {
 		
 			// open with 80% width and height
 			$(dlg).dialog(jQuery.extend(options, {width: percent(width, 80), height: percent(height, 80)}, {title: title}));
-			$(dlg).dialog('open');
-			$(dlg).bind("resize dialogopen", this.resizeTextArea);
+			$(dlg).dialog('open').bind("dialogopen", resizeTextArea);
 		},
 		
 		close: function() {
 			$(dlg).empty();
 			$(dlg).dialog('destroy');
-		},
-		
-		resizeTextArea: function() {
-			var dialogHeight = parseInt($(dlg).height());
-			var elementsHeight = 0;
-	   	$("#modal-dialog .fixed").each(function(index, elem){
-				var height = parseInt($(elem).height());
-	      elementsHeight += height;
-	    });
-
-			var textAreaHeight =  dialogHeight - elementsHeight - 60; /*margin*/
-			Debug.log("DialogHeight: " + dialogHeight + "\nElementsHeight: " + elementsHeight + "\nTextAreaHeight: " + textAreaHeight);
-	    $("#template_editor").height(textAreaHeight);   
-		}
-		
+		}	
 	};
 }();
 
