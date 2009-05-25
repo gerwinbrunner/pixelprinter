@@ -122,7 +122,7 @@ Templates = function() {
 // Opens a div as a modal dialog which you need to fill yourself first
 Dialog = function() {
 	var dlg     = "#modal-dialog";
-	var options = { modal: true	};
+	var options = { modal: true, resizable: false	};
 	
 	var percent = function(amount, percentage) {
 		return (amount / 100) * percentage;
@@ -136,7 +136,10 @@ Dialog = function() {
       elementsHeight += height;
     });
 
-		var textAreaHeight =  dialogHeight - elementsHeight - 60; /*margin*/
+		var heightModifier = 100;
+		
+		var textAreaHeight = dialogHeight - elementsHeight - heightModifier; /*margin*/
+		
 		Debug.log("DialogHeight: " + dialogHeight + "\nElementsHeight: " + elementsHeight + "\nTextAreaHeight: " + textAreaHeight);
     $("#template_editor").height(textAreaHeight);   
 	};
@@ -147,8 +150,8 @@ Dialog = function() {
 		  var height = $(window).height();
 		
 			// open with 80% width and height
-			$(dlg).dialog(jQuery.extend(options, {width: percent(width, 80), height: percent(height, 80)}, {title: title, resize: resizeTextArea}));
-			$(dlg).dialog('open').bind("resize dialogopen", resizeTextArea);
+			$(dlg).dialog(jQuery.extend(options, {width: percent(width, 80), height: percent(height, 80)}, {title: title}));
+			$(dlg).dialog('open').bind("dialogopen", resizeTextArea);
 		},
 		
 		close: function() {
