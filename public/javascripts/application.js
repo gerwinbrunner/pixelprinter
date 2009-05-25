@@ -1,7 +1,7 @@
 Debug = function() {
 	// set to true to print all important javascript debug messages
 	// set to false to skip all debug messages (for production and browsers without Firebug)
-	var debug = false;
+	var debug = true;
 	
 	return {
 		log: function(text) {
@@ -128,35 +128,33 @@ Dialog = function() {
 		return (amount / 100) * percentage;
 	};
  
+	var	resizeTextArea = function() {
+		var dialogHeight = parseInt($(dlg).height());
+		var elementsHeight = 0;
+   	$(dlg + " .fixed").each(function(index, elem){
+			var height = parseInt($(elem).height());
+      elementsHeight += height;
+    });
+
+		var textAreaHeight =  dialogHeight - elementsHeight - 60; /*margin*/
+		Debug.log("DialogHeight: " + dialogHeight + "\nElementsHeight: " + elementsHeight + "\nTextAreaHeight: " + textAreaHeight);
+    $("#template_editor").height(textAreaHeight);   
+	};
+
 	return {                      
 		open: function(title) {
 		  var width  = $(window).width();
 		  var height = $(window).height();
 		
 			// open with 80% width and height
-			$(dlg).dialog(jQuery.extend(options, {width: percent(width, 80), height: percent(height, 80)}, {title: title}));
-			$(dlg).dialog('open');
-			$(dlg).bind("resize dialogopen", this.resizeTextArea);
+			$(dlg).dialog(jQuery.extend(options, {width: percent(width, 80), height: percent(height, 80)}, {title: title, resize: resizeTextArea}));
+			$(dlg).dialog('open').bind("resize dialogopen", resizeTextArea);
 		},
 		
 		close: function() {
 			$(dlg).empty();
 			$(dlg).dialog('destroy');
-		},
-		
-		resizeTextArea: function() {
-			var dialogHeight = parseInt($(dlg).height());
-			var elementsHeight = 0;
-	   	$("#modal-dialog .fixed").each(function(index, elem){
-				var height = parseInt($(elem).height());
-	      elementsHeight += height;
-	    });
-
-			var textAreaHeight =  dialogHeight - elementsHeight - 60; /*margin*/
-			Debug.log("DialogHeight: " + dialogHeight + "\nElementsHeight: " + elementsHeight + "\nTextAreaHeight: " + textAreaHeight);
-	    $("#template_editor").height(textAreaHeight);   
-		}
-		
+		}	
 	};
 }();
 
