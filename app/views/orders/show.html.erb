@@ -39,9 +39,6 @@
 </div>
 
 <% content_for :javascript do %>
-Templates.initialize('<%= @order.id %>');
-// load default template previews on start
-$("#selected-templates :checkbox:checked").each(function() {
-  Templates.updateSelection($(this));
-});
+  Templates.initialize('<%= @order.id %>');
+  $("#selected-templates :checkbox").each(function() { Templates.updateSelection($(this)); });
 <% end %>
