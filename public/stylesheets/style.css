@@ -22,12 +22,13 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 /* = Structure = */
 /* ============= */
 #wrapper{width:940px;margin:auto;}
-#sidebar{width:220px;position:fixed; background: url('../images/sidebar-top-ribbon.png') repeat-x ; margin-top:40px; padding:7px 0 0 0; }
-.sidebar-block { padding:8px 20px 10px 20px; background:#fff9d3  url('../images/sidebar-block-repeat.png') 0 0px repeat-x}
+#sidebar{width:220px;position:fixed; background: url('../images/sidebar-top-ribbon.png') repeat-x ; margin-top:30px; padding:7px 0 0 0; }
+.sidebar-block { padding:8px 20px 10px 20px; background:#fff9d3  url('../images/sidebar-block-repeat.png') 0 0px repeat-x}  
 #sidebar #print-button {padding-top:20px;}
+#sidebar #print-button a, #sidebar #print-button p {position:relative; z-index:5;}
 
 .sidebar-block:first-child {background-position: 0 -17px;}
-#wrapper #sidebar .logo  {margin:-20px 0 0px -4px;}
+#wrapper #sidebar .logo  {margin:0px 0 0px -4px;}
 
 #preview {padding-bottom:70px; clear:both;zoom:1;}
 #preview .preview-top{background:url('../images/paper-top.png')  no-repeat  ; float:right; height:70px;width:712px; margin:45px 0 0 0;}
@@ -45,7 +46,9 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 #sidebar .order-price {font-weight:bold; letter-spacing:-1px; font-size:15px; margin:0 0 8px 0; }
 #sidebar .order-price .paid {color:#15ae17; font-weight:bold;}
 #sidebar .order-price .unpaid  {color:#d90e0e; font-weight:bold;}
-#sidebar .customer-name {color:#87772c;font-size:12px; margin:0px 0 2px 0;}
+#sidebar .customer-name {color:#87772c;font-size:12px; margin:0px 0 2px 0;}       
+#sidebar p.action  { margin:-2px 0 3px 0;}
+
 
 #preview .template-actions {float:right; position:relative; margin:12px 77px 0 0; height:50px; }
 #preview .template-actions img.aesthetic-clip { position:absolute;  right:40px; top:-24px;}
@@ -60,16 +63,16 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 /* ========= */
 /* = Lists = */
 /* ========= */
-.preview-top ul {float:right; margin:-10px 60px 0 0; }
-.preview-top ul li {float:left; list-style-type:none; }
+.preview-top ul {float:right; margin:0px 60px 0 0; padding:0;}
+.preview-top ul li {float:left; list-style-type:none;}
 
 #sidebar ul#list-templates {padding:3px 0 0 0; margin:0 0 0px 0 ;}
-#sidebar ul#list-templates li {color:#da6391; list-style-type:none;font-size:13px; margin:0 0 3px 0;}
+#sidebar ul#list-templates li {color:#da6391; list-style-type:none;font-size:13px; margin:0 0 3px 0; }
 #sidebar ul#list-templates li input {margin:0px 0px 0 0; vertical-align:middle; padding:0;}  
 
-#sidebar ul#list-templates  .template-options  {background: url('../images/button-edit-bg.png') no-repeat left; padding:0px 0 2px 10px; margin:0px 0 1px -56px; float:left;  }    
-#sidebar ul#list-templates  .template-options a img { vertical-align:middle;}    
-#sidebar ul#list-templates  .template-options a {font-size:12px;}   
+#sidebar ul#list-templates  .template-options  {background: url('../images/button-edit-bg.png') no-repeat left; padding:1px 0 4px 10px; margin:0px 0 0px -55px; float:left;  }    
+#sidebar ul#list-templates  .template-options a img { margin:4px 5px 0 0; display:block; float:left;}    
+#sidebar ul#list-templates  .template-options a {font-size:12px;display:block;float:left;}   
 #sidebar  p.template-editmode { text-align:right; margin:0 0 5px 0; }
                                                                                     
 /* ========= */
@@ -78,9 +81,11 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 a, a:link,  a:visited {color:#265d8b;text-decoration:underline; font-size:13px;}
 a:hover, a:focus, a:active {color:#265d8b;}
 
-#sidebar .new-template {background: url('../images/button-new-template.png') no-repeat; margin:10px 0 0  -25px;}
-#sidebar .new-template a {background: url('../images/button-newtemplate.png') no-repeat 30px 1px ;color:#FFF; position:relative; left:-5px; width:180px; padding:3px 0 6px 52px; font-size:11px;  text-transform:uppercase; font-weight:bold; display:inline-block; text-decoration:none;}
-#sidebar .new-template a:hover {color:#f2b1d6;}
+#sidebar a.new-template {background: url('../images/button-new-template.png') no-repeat; margin:10px 0 0  -25px;position:relative; z-index:5; height:25px; width:142px; display:block; }  
+#sidebar a.new-template:hover {background: url('../images/button-new-template.png') no-repeat 0 -25px;}
+
+/*#sidebar .new-template a {background: url('../images/button-newtemplate.png') no-repeat 30px 1px ;color:#FFF; position:relative; z-index:5; left:-5px; width:180px; line-height:30px; font-size:11px;  text-transform:uppercase; font-weight:bold; display:inline-block; text-decoration:none; margin:0;}
+#sidebar .new-template a:hover {color:#f2b1d6;}     */
 
 #sidebar a {margin:0; padding:0;}
 
@@ -110,7 +115,7 @@ a:hover, a:focus, a:active {color:#265d8b;}
 
 
 /* Flash errors and notices */
-e
+
 #flash-errors li {
   padding-left: 24px;
   background: url('../images/admin/icons/warning.gif') center left no-repeat;
@@ -159,18 +164,19 @@ e
  
 #notice-item {
 	height: 50px;
-	background: #333;
+	/*background: #333;*/
 	-moz-border-radius: 0px;
 	-webkit-border-radius: 0px;
 	color: #eee;
 	padding: 6px 6px 0 6px;
 	font-family: lucida Grande;
 	font-size: 11px;
-	border: 2px solid #999;
+	/*border: 2px solid #999; */
 	display: block;
 	position: relative;
 	margin: 0 0 12px 0;
-	text-align: center;
+	text-align: center; 
+	font-family: helvetica, arial, serif;
 }
 
 #notice-item p {
@@ -178,14 +184,14 @@ e
 }
 
 #progressbar {
-	height: 12px;
+	height: 31px; width:31px; background:none; border:0px; margin:0; padding:0; float:right;
 }
 
 /* animated background for jquery progressbar */
 .ui-progressbar-value { 
-	background-image: url('/images/pbar-ani.gif') !important;
+	background: url('/images/pbar-ani.gif') !important;
 }
-
+                                                                                                                                                                                                                         
 /* Template editing form */
 .button-panel {
 	width: 100%;

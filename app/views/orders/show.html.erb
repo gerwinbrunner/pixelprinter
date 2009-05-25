@@ -3,7 +3,7 @@
     <h1>Order <%= @order.name %></h1>
     <p class="customer-name"><%= @order.billing_address.name %> (<%= @order.billing_address.country %>)</p>
     <p class="order-price"><%= money_with_currency(@order.total_price) %> <span class="<%= @order.financial_status %>"><%= @order.financial_status %></span></p>
-    <p><%= link_to "Go back to original order", @order.url, :title => "Open order in Shopify admin interface", :class => 'action' %></p>  
+    <p class="action"><%= link_to "Go back to original order", @order.url, :title => "Open order in Shopify admin interface" %></p>  
   </div>
 
   <div class="sidebar-block"> <!-- templates -->
@@ -18,16 +18,16 @@
         <% end %>
       </ul>
       <% end %>
-      <p class="new-template" style="display: none"><%= link_to_remote "Add template", :url => {:controller => 'print_templates', :action => 'new'}, :method => :get %></p>
+      <%= link_to_remote "", :url => {:controller => 'print_templates', :action => 'new'}, :method => :get, :html => {:class => "new-template", :style => "display: none"} %>
     <% end %>
   </div>
 
-  <div class="sidebar-block clearfix" id="print-button"> <!-- print -->
+  <div class="sidebar-block clearfix" id="print-button" > <!-- print -->
     <%= link_to_function image_tag("button-print.png"), "Templates.print()", :style => "margin: 10px 0 0px 0" %>
     <p style="font-size: 12px; 	text-align: center;"><%= content_tag :span, "0 documents", :id => "template-amount" %> will be printed.</p>
 	</div><!-- last sidebar block -->
 
-	<img src="../images/logo.png" width="229" height="176" alt="Logo" class="logo" />
+	<img src="../images/logo.png" width="229" height="176" alt="Logo" class="logo"  style="position:relative; z-index:0; top:-30px" />
 </div><!--sidebar-->
 
 <!-- This is populated later via AJAX and popped up with the dialog function of JQueryUI -->

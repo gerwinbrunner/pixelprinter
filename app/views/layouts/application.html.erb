@@ -8,7 +8,9 @@
   <title><%= APP_NAME %></title>
   <%= stylesheet_link_tag 'jquery-ui-1.7.1.custom', 'style', :media => 'screen' %>
   <%= stylesheet_link_tag 'print', :media => 'print' %>
-
+  <!--[if IE 7]>
+	 <%= stylesheet_link_tag 'style-ie7', :media => 'screen' %>   
+	<![endif]-->
   <%= javascript_include_tag 'ie-fixes', :defaults, 'jquery-ui' %> 
    
   <% javascript_tag do %>
@@ -29,7 +31,6 @@
     
   <% end %> 
 
-
 </head>
 	
 <body>
@@ -42,10 +43,10 @@
       
       <!-- status message (growl-like) -->
       <div id="notice-item-wrapper" style="display: none">
-        <div id="notice-item">
-          <p></p>
+
+
           <div id="progressbar"></div>
-        </div>
+
       </div>
       
         

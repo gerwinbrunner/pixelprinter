@@ -1,6 +1,6 @@
 <% content_tag(:li, :class => "template-item", :id => "template-item-#{tmpl.id}") do %>
  
-  <span class="template-options" <%= 'style="display: none"' unless defined?(show) && show %> ;">   
+  <span class="template-options" <%= 'style="display: none"' unless defined?(show) && show %>">   
        <%= link_to_remote image_tag("trash.gif"), :url => tmpl, :method => :delete, :confirm => "Are you sure you want to delete template \"#{tmpl.name}\"?", :loading => "Status.show();", :complete => "Status.hide();" %>
     <%= link_to_remote "edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl.id}, :method => 'get' %>
   </span>

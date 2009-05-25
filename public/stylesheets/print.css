@@ -1,6 +1,4 @@
-
-
-
+body {font-family: helvetica, arial, serif;}
 /* HIDE ELEMENTS */
 #sidebar, .preview-top, #notice-item-wrapper {
 	display: none;

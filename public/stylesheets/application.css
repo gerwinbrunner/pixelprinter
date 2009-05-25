@@ -101,7 +101,7 @@ code { font-size: 140%; }
   border-top: 3px solid #000;
   color: #fff;
   vertical-align: center;
-}
+}                                                                                        
 
 #flasherrors {
   background: #8A1111 url('../images/bubbles_error.gif') top left no-repeat;
@@ -125,7 +125,7 @@ code { font-size: 140%; }
  
 #notice-item {
 	height: 50px;
-	background: #333;
+
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
 	color: #eee;
