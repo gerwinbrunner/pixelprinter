@@ -40,5 +40,5 @@
 
 <% content_for :javascript do %>
   Templates.initialize('<%= @order.id %>');
-  $("#selected-templates :checkbox").each(function() { Templates.updateSelection($(this)); });
+  Templates.checkAll();
 <% end %>

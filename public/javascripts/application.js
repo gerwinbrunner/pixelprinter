@@ -1,7 +1,7 @@
 Debug = function() {
 	// set to true to print all important javascript debug messages
 	// set to false to skip all debug messages (for production and browsers without Firebug)
-	var debug = false;
+	var debug = true;
 	
 	return {
 		log: function(text) {
@@ -56,13 +56,6 @@ Templates = function() {
 		$.get("/orders/" + _order + "?template_id=" + template, null, function(data) { checkbox.enable(); Status.hide(); $("#preview-" + template).html(data); });
 	};
 
-	var templateChanged = function(template) {
-		togglePrintButton();
-		toggleInlinePreview(template);
-		Debug.log("Template #" + template + " has changed.");
-	};
-
-	
 	/* public methods */
 	return {
 		initialize: function(order) {
@@ -70,28 +63,28 @@ Templates = function() {
 			_templates = [];
 		},
 		
-		select: function(template, selection) {
-			var checkbox = $('#template-item-' + template + " :checkbox");
-			checkbox.attr('checked', selection);
-			this.updateSelection(checkbox);
+		checkAll: function() {
+		  $("#selected-templates :checkbox").each(function() { 
+				Templates.updateSelection($(this));
+			});	
 		},
 		
 		updateSelection: function(checkbox) {
 			var template = checkbox.val();
-			Debug.log("Updating selection for template-checkbox-" + template + "...");
 			if (checkbox.attr('checked')) {
-				Debug.log("Checkbox selected");
+				Debug.log("template-checkbox-" + template + " selected.");
 				if (_templates.indexOf(template) == -1) {
 					_templates.push(template);
 				}
 			} else {
-				Debug.log("Checkbox deselected");
-				_templates.splice(_templates.indexOf(template), 1);
+				Debug.log("template-checkbox-" + template + " deselected.");
+				var position = _templates.indexOf(template);
+				if (position > -1) { _templates.splice(position, 1); }
 			}
-
-			templateChanged(template);
+			togglePrintButton();
+			toggleInlinePreview(template);
 		},
-	
+		
 		print: function() {
 			$.ajax({
 	      url: 	'/orders/' + _order + '/print',
@@ -100,11 +93,17 @@ Templates = function() {
 	    });
 			window.print();
 		},
+
+		select: function(template, selection) {
+			var checkbox = $('#template-item-' + template + " :checkbox");
+			checkbox.attr('checked', selection);
+			Templates.updateSelection(checkbox);
+		},
 		
 		toggleEditMode: function() {
 			editmode = !editmode;
-			$(".template-options").toggle();
-			$(".new-template").toggle();
+			$(".template-options").toggle("normal");
+			$(".new-template").slideToggle();
 			var linkImage = $(".template-editmode a img");
 			
 			if (editmode) {
@@ -122,7 +121,7 @@ Templates = function() {
 // Opens a div as a modal dialog which you need to fill yourself first
 Dialog = function() {
 	var dlg     = "#modal-dialog";
-	var options = { modal: true, resizable: false	};
+	var options = { modal: true};
 	
 	var percent = function(amount, percentage) {
 		return (amount / 100) * percentage;
@@ -136,7 +135,7 @@ Dialog = function() {
       elementsHeight += height;
     });
 
-		var heightModifier = 100;
+		var heightModifier = 60;
 		
 		var textAreaHeight = dialogHeight - elementsHeight - heightModifier; /*margin*/
 		
@@ -150,8 +149,8 @@ Dialog = function() {
 		  var height = $(window).height();
 		
 			// open with 80% width and height
-			$(dlg).dialog(jQuery.extend(options, {width: percent(width, 80), height: percent(height, 80)}, {title: title}));
-			$(dlg).dialog('open').bind("dialogopen", resizeTextArea);
+			$(dlg).dialog(jQuery.extend(options, {width: percent(width, 80), height: percent(height, 80)}, {title: title, resize: resizeTextArea, open: resizeTextArea}));
+			$(dlg).dialog('open').bind("dialogopen resize", resizeTextArea);
 		},
 		
 		close: function() {

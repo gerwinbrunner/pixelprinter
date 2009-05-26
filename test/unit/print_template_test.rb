@@ -18,18 +18,23 @@ class PrintTemplateTest < ActiveSupport::TestCase
     assert Shop.create(:name => "My other Shop").templates.create(:name => "My name", :body => "something else").valid?
   end
   
+  should "not allow more than 10 templates per shop" do
+    @local_shop.templates.each { |t| t.destroy }
+    10.times do |i|
+      assert @local_shop.templates.create(:name => "Template ##{i}", :body => "something").valid?
+    end
+    tmpl = @local_shop.templates.create(:name => "Template ", :body => "something")
+    assert !tmpl.valid?
+  end
   
-  context "#load_from_file!" do
+  context "#create_from_file" do
     should "not create new record if saved already with same name" do
-      template = @local_shop.templates.new
-      assert template.new_record?
       # saving should fail, because other tests already created an instance in the DB (no duplicate names!)
-      assert !template.load_from_file!(:invoice)
+      assert_not @local_shop.templates.create_from_file(:invoice).valid?
     end
     
     should "save body and name from that serialized template" do
-      template = @local_shop.templates.new
-      template.load_from_file!(:invoice)
+      template = @local_shop.templates.create_from_file(:invoice)
       assert_equal 'invoice', template.name
       assert_equal File.read("#{RAILS_ROOT}/db/printing/invoice.liquid"), template.body
     end

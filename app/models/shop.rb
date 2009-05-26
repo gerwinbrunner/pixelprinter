@@ -8,8 +8,8 @@ class Shop < ActiveRecord::Base
   
   # Create 3 templates as a starting point for the user
   def create_base_templates
-    templates.new.load_from_file!(:invoice)
-    templates.new.load_from_file!(:package_slip)
-    templates.new.load_from_file!(:all_variables_used)
+    templates.create_from_file(:invoice)
+    templates.create_from_file(:package_slip)
+    templates.create_from_file(:all_variables_used)
   end
 end
