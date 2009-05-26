@@ -104,7 +104,7 @@ a:hover, a:focus, a:active {color:#265d8b;}
 /* ======== */
 /*  Lightbox  */
 /* ======== */
-#modal-dialog {}
+#modal-dialog {overflow:hidden;}
 
 #print-template-form textarea {	width: 100%;}
 
