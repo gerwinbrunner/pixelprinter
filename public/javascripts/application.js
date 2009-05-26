@@ -102,15 +102,18 @@ Templates = function() {
 		
 		toggleEditMode: function() {
 			editmode = !editmode;
-			$(".template-options").toggle("normal");
+			$(".template-options").toggle(350);
 			$(".new-template").slideToggle();
 			var linkImage = $(".template-editmode a img");
 			
 			if (editmode) {
 				linkImage.data("old-image", linkImage.attr('src')); /* Remember original link image */
+				linkImage.data("old-title", linkImage.attr('title'));
 				linkImage.attr('src', '/images/button-done.png');
+				linkImage.attr('title', 'Done with editing templates');
 			} else {
 				linkImage.attr("src", linkImage.data("old-image"));   /* Restore original link image */
+				linkImage.attr("title", linkImage.data("old-title"));   /* Restore original link image */
 			}
 		}
 	};

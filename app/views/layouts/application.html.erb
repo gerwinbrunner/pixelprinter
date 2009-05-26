@@ -8,10 +8,12 @@
   <title><%= APP_NAME %></title>
   <%= stylesheet_link_tag 'jquery-ui-1.7.1.custom', 'style', :media => 'screen' %>
   <%= stylesheet_link_tag 'print', :media => 'print' %>
+  <%= javascript_include_tag :defaults, 'jquery-ui' %> 
+
   <!--[if IE 7]>
-	 <%= stylesheet_link_tag 'style-ie7', :media => 'screen' %>   
+	  <%= stylesheet_link_tag 'style-ie7', :media => 'screen' %>
+	  <%= javascript_include_tag 'ie-fixes' %> 
 	<![endif]-->
-  <%= javascript_include_tag 'ie-fixes', :defaults, 'jquery-ui' %> 
    
   <% javascript_tag do %>
     <% if flash[:notice] %>
