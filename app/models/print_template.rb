@@ -7,14 +7,13 @@ class PrintTemplate < ActiveRecord::Base
   
   attr_protected :shop_id
 
-  MAX_AMOUNT_PER_SHOP = 10
-
+  MAX_TEMPLATES_PER_SHOP   = 10
+  TOO_MUCH_TEMPLATES_ERROR = "Maximum number of templates is #{MAX_TEMPLATES_PER_SHOP}! You need to delete another template before you are able to create a new one."
 
   def self.create_from_file(template_name)
     content = File.read("#{RAILS_ROOT}/db/printing/#{template_name}.liquid")
     create(:name => template_name.to_s, :body => content)
   end
-  
   
   def parse
     Liquid::Template.parse(body)
@@ -28,16 +27,17 @@ class PrintTemplate < ActiveRecord::Base
   end
   
   def render(assigns)
+    # render! will not silently ignore errors, but raise an Exception
     parse.render!(assigns, MoneyFilter)
   end
 
 protected 
   def validate
-    if shop.templates.size > MAX_AMOUNT_PER_SHOP
-      errors.add_to_base "Maximum number of templates reached! You need to delete another template before you are able to create a new one."
+    if shop.templates.count > MAX_TEMPLATES_PER_SHOP
+      errors.add_to_base(TOO_MUCH_TEMPLATES_ERROR)
     else
       success, message = check_syntax
-      errors.add_to_base message unless success
+      errors.add_to_base(message) unless success
     end
   end
   

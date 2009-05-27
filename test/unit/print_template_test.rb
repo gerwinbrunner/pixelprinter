@@ -10,7 +10,7 @@ class PrintTemplateTest < ActiveSupport::TestCase
 
   should "not allow the same name for the same shop" do
     assert @local_shop.templates.create(:name => "My name", :body => "whatever").valid?
-    assert !@local_shop.templates.create(:name => "My name", :body => "something else").valid?
+    assert_not @local_shop.templates.create(:name => "My name", :body => "something else").valid?
   end
 
   should "allow the same name for different shops" do
@@ -19,12 +19,11 @@ class PrintTemplateTest < ActiveSupport::TestCase
   end
   
   should "not allow more than 10 templates per shop" do
-    @local_shop.templates.each { |t| t.destroy }
+    @local_shop.templates.destroy_all
     10.times do |i|
       assert @local_shop.templates.create(:name => "Template ##{i}", :body => "something").valid?
     end
-    tmpl = @local_shop.templates.create(:name => "Template ", :body => "something")
-    assert !tmpl.valid?
+    assert_not @local_shop.templates.create(:name => "Template #11", :body => "something").valid?
   end
   
   context "#create_from_file" do

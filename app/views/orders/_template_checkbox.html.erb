@@ -1,18 +1,9 @@
 <% content_tag(:li, :class => "template-item", :id => "template-item-#{tmpl.id}") do %>
- 
-  <span class="template-options" <%= 'style="display: none"' unless defined?(show) && show %>">   
-       <%= link_to_remote image_tag("trash.gif"), :url => tmpl, :method => :delete, :confirm => "Are you sure you want to delete template \"#{tmpl.name}\"?", :loading => "Status.show();", :complete => "Status.hide();" %>
-    <%= link_to_remote "edit", :url => {:controller => 'print_templates', :action => 'edit', :id => tmpl.id}, :method => 'get' %>
+  <span class="template-options" style="display: <%= defined?(options_hidden) ? 'none' : 'inline' %>">   
+    <%= link_to_remote image_tag("trash.gif"), :url => tmpl, :method => :delete, :confirm => "Are you sure you want to delete the template named #{tmpl.name}?" %>
+    <%= link_to_remote "edit", :url => [:edit, tmpl], :method => 'get' %>
   </span>
 
-  <%= check_box_tag 'print_templates[]', tmpl.id, tmpl.default, :id => "template-checkbox-#{tmpl.id}" %>
+  <%= check_box_tag 'print_templates[]', tmpl.id, tmpl.default, :id => "template-checkbox-#{tmpl.id}", :onclick => "Templates.updateSelection($(this));" %>
   <%= label_tag "template-checkbox-#{tmpl.id}", tmpl.name %>
- 
-<% end %>
-
-<% content_for :javascript do %>
-<!-- click and keypress are explicitly listed here (instead of change), as IE does not behave properly for change events only :( -->
-$("#template-checkbox-<%= tmpl.id %>").bind("click keypress", function() {
-  Templates.updateSelection($(this));
-});
 <% end %>

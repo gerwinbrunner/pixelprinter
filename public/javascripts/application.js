@@ -102,15 +102,18 @@ Templates = function() {
 		
 		toggleEditMode: function() {
 			editmode = !editmode;
-			$(".template-options").toggle("normal");
+			$(".template-options").toggle(350);
 			$(".new-template").slideToggle();
 			var linkImage = $(".template-editmode a img");
 			
 			if (editmode) {
 				linkImage.data("old-image", linkImage.attr('src')); /* Remember original link image */
+				linkImage.data("old-title", linkImage.attr('title'));
 				linkImage.attr('src', '/images/button-done.png');
+				linkImage.attr('title', 'Done with editing templates');
 			} else {
 				linkImage.attr("src", linkImage.data("old-image"));   /* Restore original link image */
+				linkImage.attr("title", linkImage.data("old-title"));   /* Restore original link image */
 			}
 		}
 	};
@@ -121,7 +124,7 @@ Templates = function() {
 // Opens a div as a modal dialog which you need to fill yourself first
 Dialog = function() {
 	var dlg     = "#modal-dialog";
-	var options = { modal: true};
+	var options = { modal: true, open: 'scale', close: 'fold'};
 	
 	var percent = function(amount, percentage) {
 		return (amount / 100) * percentage;

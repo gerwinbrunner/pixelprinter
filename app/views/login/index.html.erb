@@ -1,14 +1,18 @@
 
 <div id="login">
   <div id="login-wrapper" >
-    <h1>Login</h1>
+    <h1>Pixel Printer</h1>
+    <p class="description">Invoices, Package Slips and other customizable templates for your orders in <%= link_to "Shopify", "http://www.shopify.com" %>.</p>
     <% form_tag '/login/authenticate' do %>
     <div class="sidebar-block" >   
-      <p><em>Enter your shop's URL</em></p>
-      <p><label for="shop"><strong>http://www. </strong></label><%= text_field_tag 'shop', nil, :size => 14 %></p>
-        <p><input type="image" value="login" name="login" src="images/button-login.png"></p>  
-      </div>      
-      <div class="sidebar-block"> 
+      <p><em>Enter your shop's address</em></p>
+      <p class="textfield"><label for="shop"><strong>http:// </strong></label><%= text_field_tag 'shop', nil, :size => 14 %></p>
+      <p class="description">
+        <span><em>Example:</em> teslamotors.myshopify.com
+      </p>
+      <p><input type="image" value="login" name="login" src="images/button-login.png"></p>  
+    </div>      
+    <div class="sidebar-block"> 
       <p class="low-em">
         First you have to register this app with a shop to allow access to its private admin data.
       </p>

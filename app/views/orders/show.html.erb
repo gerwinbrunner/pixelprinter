@@ -7,18 +7,21 @@
   </div>
 
   <div class="sidebar-block"> <!-- templates -->
-    <h2>Templates</h2>   <p class="template-editmode"><%= link_to_function image_tag("button-edit.png"), "Templates.toggleEditMode();" %></p>       
+    <h2>Templates</h2>
+    <p class="template-editmode">
+      <%= link_to_function image_tag("button-edit.png", :title => "Edit the templates"), "Templates.toggleEditMode();" %>
+    </p>
     <% if @tmpls.blank? %>
       <p>No templates found, you should create a new one.</p>
     <% else %>
       <% form_tag({:action => 'print'}, :id => "selected-templates") do %>
       <ul id="list-templates">
         <% @tmpls.each do |tmpl| %>
-          <%= render :partial => 'template_checkbox', :locals => {:tmpl => tmpl, :order => @order} %>
+          <%= render :partial => 'template_checkbox', :locals => {:tmpl => tmpl, :options_hidden => true} %>
         <% end %>
       </ul>
       <% end %>
-      <%= link_to_remote "", :url => {:controller => 'print_templates', :action => 'new'}, :method => :get, :html => {:class => "new-template", :style => "display: none"} %>
+      <%= link_to_remote '', :url => new_print_template_path, :method => :get, :html => {:class => "new-template", :style => "display: none"} %>
     <% end %>
   </div>
 

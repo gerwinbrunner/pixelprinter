@@ -11,7 +11,9 @@ class OrdersController < ApplicationController
   
   
   def index
-    @orders = ShopifyAPI::Order.find(:all)
+    # get latest 3 orders
+    @orders = ShopifyAPI::Order.find(:all, :params => {:limit => 3, :order => "created_at DESC" })
+    # get all printing templates for the current shop
     @tmpls  = shop.templates
   end
   
