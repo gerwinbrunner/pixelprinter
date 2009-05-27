@@ -37,13 +37,14 @@ Templates = function() {
 		if (_templates.indexOf(template) > -1) {
 			templateLabel.addClass("selected");
 			if (templatePreview.length > 0) { 
-	      templatePreview.show();
+	      templatePreview.fadeIn();
 	    } else {
 				loadInlinePreview(template);
 			}			
 		} else {
 			templateLabel.removeClass("selected");
 			templatePreview.hide();
+			
 		}
 	};
 	

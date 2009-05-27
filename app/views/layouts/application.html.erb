@@ -6,13 +6,13 @@
 	<meta name="MSSmartTagsPreventParsing" content="true" />
 
   <title><%= APP_NAME %></title>
-  <%= stylesheet_link_tag 'jquery-ui-1.7.1.custom', 'style', :media => 'screen' %>
+  <%= stylesheet_link_tag 'application', 'jquery-ui-1.7.1.custom', :media => 'screen' %>
   <%= stylesheet_link_tag 'print', :media => 'print' %>
   <%= javascript_include_tag :defaults, 'jquery-ui' %> 
 
   <!--[if IE 7]>
-	  <%= stylesheet_link_tag 'style-ie7', :media => 'screen' %>
-	  <%= javascript_include_tag 'ie-fixes' %> 
+	  <%= stylesheet_link_tag 'ie7-fixes', :media => 'screen' %>
+	  <%= javascript_include_tag 'ie7-fixes' %> 
 	<![endif]-->
    
   <% javascript_tag do %>
