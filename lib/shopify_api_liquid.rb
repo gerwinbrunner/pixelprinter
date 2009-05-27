@@ -1,10 +1,12 @@
 module ShopifyAPI
   class Shop < ActiveResource::Base
     
+    # TODO: remove Shop#money_format as it will get exported from Shopify
     def money_format
       super rescue "${{amount}}"
     end
-    
+
+    # TODO: remove Shop#money_with_currency_format as it will get exported from Shopify
     def money_with_currency_format
       super rescue "${{amount}} USD"
     end
@@ -75,13 +77,8 @@ module ShopifyAPI
       }
     end
 
-    def url
-      "#{ShopifyAPI::Session.protocol}://#{ShopifyAPI::Shop.current.domain}/admin/orders/#{id}"
-    end
-
+    # TODO: remove Order#note_body and Order#note_attributes IF they get exported from Shopify
     private
-
-    # additional methods from original Ordel model in shopify, needed for to_liquid
 
     def note_body 
       note.to_s.gsub(/^\t.*$/, '').strip
@@ -94,7 +91,9 @@ module ShopifyAPI
       end
       values
     end
-   
+
+    # needed because Shopify API exports prices in decimals (dollar amounts), 
+    # but we want integers (cent amounts) for consistency
     def cents(amount)
       (amount * 100).to_i
     end
@@ -102,16 +101,6 @@ module ShopifyAPI
   
   class LineItem < ActiveResource::Base 
     def to_liquid
-      hash = as_hash
-      hash['variant_id'] = variant_id    
-      #hash['variant'] = Proc.new { Variant.find(variant_id) rescue nil }         
-      #hash['product'] = Proc.new { Product.find(hash['variant'].product_id) rescue nil } 
-      hash.to_liquid
-    end
-    
-    private
-    
-    def as_hash
       {
         'id'         => id, 
         'title'      => name, 
@@ -120,7 +109,8 @@ module ShopifyAPI
         'quantity'   => quantity,
         'sku'        => sku,
         'grams'      => grams,
-        'vendor'     => vendor
+        'vendor'     => vendor,
+        'variant_id' => variant_id
       }
     end
   end       

@@ -3,7 +3,7 @@
     <h1>Order <%= @order.name %></h1>
     <p class="customer-name"><%= @order.billing_address.name %> (<%= @order.billing_address.country %>)</p>
     <p class="order-price"><%= money_with_currency(@order.total_price) %> <span class="<%= @order.financial_status %>"><%= @order.financial_status %></span></p>
-    <p class="action"><%= link_to "Go back to original order", @order.url, :title => "Open order in Shopify admin interface" %></p>  
+    <p><%= link_to "Go back to original order", shopify_order_url(@order), :title => "Open order in Shopify admin interface" %></p>  
   </div>
 
   <div class="sidebar-block"> <!-- templates -->
