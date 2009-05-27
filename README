@@ -1,5 +1,11 @@
-== Shopify printing application
+== Pixel Printer
+
+A Shopify printing application
 
 This is a Rails application built using the shopify_app generator to integrate into Shopify.
+It adds functionality for shop owners to print customizable invoices or similar documents related to orders.
 
-It adds functionality for shop owners to print customizable invoices or similar documents related to incoming orders.
+=== TODO:
+
+* Batch printing for multiple orders on the same page
+* Automatically send HTML email to customer on incoming orders (requires web hook or other means of notification)
