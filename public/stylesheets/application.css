@@ -32,6 +32,7 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 #preview .preview-wrapper {background:url('../images/paper-middle.png') ;width:711px; float:right;}
 #preview .preview-content { margin:-40px 0 0 0; padding:40px 40px 0 40px; clear:both;}
 #preview  .preview-bottom {background:url('../images/paper-bottom.png') no-repeat; width:712px; height:70px; margin-bottom:0px; float:right;} 
+#preview .description { font-size: 14px; color: #666;}
 
 /* ============== */
 /* = Typography = */
