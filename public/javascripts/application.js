@@ -38,6 +38,7 @@ Templates = function() {
 			templateLabel.addClass("selected");
 			if (templatePreview.length > 0) { 
 	      templatePreview.fadeIn();
+				scrollToPreview(template);
 	    } else {
 				loadInlinePreview(template);
 			}			
@@ -54,9 +55,15 @@ Templates = function() {
 		$("#template-delete-link-" + template).hide();
 		
 		Status.show("Loading preview...");
-		$.get("/orders/" + _order + "?template_id=" + template, null, function(data) { checkbox.enable(); Status.hide(); $("#preview-" + template).html(data); });
+		$.get("/orders/" + _order + "?template_id=" + template, null, function(data) { checkbox.enable(); Status.hide(); $("#preview-" + template).html(data); scrollToPreview(template)});
 	};
 
+	var scrollToPreview = function(id) {
+		var targetOffset = $("#preview-" + id + " .preview-content").offset().top;
+	  $('html,body').animate({scrollTop: targetOffset - 40}, 500);
+	};
+	
+	
 	/* public methods */
 	return {
 		initialize: function(order) {
@@ -103,8 +110,14 @@ Templates = function() {
 		
 		toggleEditMode: function() {
 			editmode = !editmode;
-			$(".template-options").toggle(350);
-			$(".new-template").slideToggle();
+			// disable animations for Internet Explorer < 8
+			if(navigator.userAgent.match(/MSIE (5|6|7)/i)) {
+				$(".template-options").toggle();
+				$(".new-template").toggle();
+			} else {
+				$(".template-options").toggle(350);
+				$(".new-template").slideToggle();
+			}
 			var linkImage = $(".template-editmode a img");
 			
 			if (editmode) {
@@ -125,7 +138,7 @@ Templates = function() {
 // Opens a div as a modal dialog which you need to fill yourself first
 Dialog = function() {
 	var dlg     = "#modal-dialog";
-	var options = { modal: true, open: 'scale', close: 'fold'};
+	var options = {modal: true};
 	
 	var percent = function(amount, percentage) {
 		return (amount / 100) * percentage;
@@ -154,12 +167,12 @@ Dialog = function() {
 		
 			// open with 80% width and height
 			$(dlg).dialog(jQuery.extend(options, {width: percent(width, 80), height: percent(height, 80)}, {title: title, resize: resizeTextArea, open: resizeTextArea}));
-			$(dlg).dialog('open').bind("dialogopen resize", resizeTextArea);
+			$(dlg).dialog('open');//.bind("dialogopen resize", resizeTextArea);
 		},
 		
 		close: function() {
 			$(dlg).empty();
-			$(dlg).dialog('destroy');
+			$(dlg).dialog('close');
 		}	
 	};
 }();

@@ -12,7 +12,10 @@
 
   <!--[if IE 7]>
 	  <%= stylesheet_link_tag 'ie7-fixes', :media => 'screen' %>
-	  <%= javascript_include_tag 'ie7-fixes' %> 
+	<![endif]-->
+  
+  <!--[if IE]>
+    <%= javascript_include_tag 'ie-fixes' %> 
 	<![endif]-->
    
   <% javascript_tag do %>
