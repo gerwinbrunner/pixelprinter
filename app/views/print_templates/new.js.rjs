@@ -1,5 +1,5 @@
-if shop.templates.count >= PrintTemplate::MAX_TEMPLATES_PER_SHOP
-  page << "Messenger.error(#{Shop::TOO_MUCH_TEMPLATES_ERROR.inspect});"
+if @tmpl.shop.templates.count >= PrintTemplate::MAX_TEMPLATES_PER_SHOP
+  page << "Messenger.error(#{PrintTemplate::TOO_MUCH_TEMPLATES_ERROR.inspect});"
 else
   # prepare dialog for new action
   page.replace_html 'modal-dialog', :partial => "form", :locals => {:method => 'post', :tmpl => @tmpl}
