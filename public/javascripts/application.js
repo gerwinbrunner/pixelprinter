@@ -124,7 +124,7 @@ Templates = function() {
 // Opens a div as a modal dialog which you need to fill yourself first
 Dialog = function() {
 	var dlg     = "#modal-dialog";
-	var options = { modal: true};
+	var options = { modal: true, open: 'scale', close: 'fold'};
 	
 	var percent = function(amount, percentage) {
 		return (amount / 100) * percentage;

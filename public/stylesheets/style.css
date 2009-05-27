@@ -96,7 +96,12 @@ a:hover, a:focus, a:active {color:#265d8b;}
 #login h1 {margin:0px   0 10px 0;color:#4d441c; font-size:25px; }
 #login p {margin:0 0 5px 0; font-size:15px;text-align:center; ;color:#4d441c; font-weight:lighter; padding-bottom:5px;}
 #login p em {  font-style:normal; } /* instructions */
-#login p strong   {font-size:12px; color:#87772c;} /* for the www */
+#login p strong   {font-size:12px; color:#111;} /* for the www */
+#login p.textfield { margin-bottom: 4px; padding-bottom: 0px;}
+#login p.description {margin-top: 0px; font-size: 11px; color:#87772c;}
+#login p.description a {color:#97873c; text-decoration: none;}
+#login p.description a:hover {color:#97873c; text-decoration: underline;}
+#login p.description span {margin-top: 12px;}
 #login p.low-em {font-size:13px; font-style:italic;color:#87772c; padding-bottom:30px;  } /* for the register note */  
 #login .sidebar-block {padding:15px 12px 0 12px;}
 #login .logo { position:relative;  margin-top:-27px; margin-left:-4px;   }        
