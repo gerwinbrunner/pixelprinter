@@ -7,15 +7,12 @@ text #4d441c (brown)
 text #87772c (light brown)
 text #da6391 (pink)
 href #265d8b (blue)
-*/
+*/       
+
 img {border:0;}
+body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Arial',sans-serif; }
 
-body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Arial',sans-serif;}
-
-.clearfix:after {
-	content: "."; display:block; height:0; clear:both; visibility:hidden; 
-}                                                
-
+.clearfix:after {content: "."; display:block; height:0; clear:both; visibility:hidden; }                                                
 .left {float:left;}
 .right {float:right;}
 /* ============= */
@@ -30,7 +27,7 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 .sidebar-block:first-child {background-position: 0 -17px;}
 #wrapper #sidebar .logo  {margin:-20px 0 0px -4px; }
 
-#preview {padding-bottom:70px; clear:both;zoom:1;}
+#preview {padding-bottom:70px; clear:both;zoom:1;} /* the preview element has inline css for order-index */
 #preview .preview-top{background:url('../images/paper-top.png')  no-repeat  ; float:right; height:70px;width:712px; margin:45px 0 0 0;}
 #preview .preview-wrapper {background:url('../images/paper-middle.png') ;width:711px; float:right;}
 #preview .preview-content { margin:-40px 0 0 0; padding:40px 40px 0 40px; clear:both;}

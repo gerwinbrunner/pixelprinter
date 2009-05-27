@@ -1,25 +1,41 @@
-<h1>Your orders</h1>
-<p class="note">Select the order you want to print. You can choose different templates for various purposes.</p>
+
 
 <!-- The dialog is going to be populated via AJAX and opened via JQueryUI -->
 <div id="modal-dialog"></div>
 
 
-<div class="itemlist">
-  <% if @orders.blank? %>  
-    <em class="note">There are no orders in your store.</em>
-  <% else %>
-    <ul>
-    <% @orders.each do |order| %>
-      <li>
-        <div class="order">
-          <strong><%= link_to order.name, :action => 'show', :id => order %></strong>
-          <span class="price"><%= order.total_price %> <%= order.currency %></span>
-          <span class="highlight"><%= order.financial_status %></span>
-          by <span class="note"><%= order.billing_address.name %></span>
-        </div>
-      </li>
-    <% end %>
-    </ul>
-  <% end %>
-</div>
+
+
+	
+
+<div id="preview" style="width:600px; margin:auto" >
+<div class="preview-top" style="float:left"></div>
+<div class="preview-wrapper" style="float:left; margin-left:1px">
+  <div class="preview-content">
+    
+		<h1>Your orders</h1>
+		<p class="note">Select the order you want to print. You can choose different templates for various purposes.</p>
+		<div class="itemlist">
+		  <% if @orders.blank? %>  
+		  <em class="note">There are no orders in your store.</em>
+		  <% else %>
+		  <ul>
+		    <% @orders.each do |order| %>
+		    <li>
+		      <div class="order">
+		        <strong><%= link_to order.name, :action => 'show', :id => order %></strong>
+		        <span class="price"><%= order.total_price %> <%= order.currency %></span>
+		        <span class="highlight"><%= order.financial_status %></span>
+		        by <span class="note"><%= order.billing_address.name %></span>
+		      </div>
+		    </li>
+		    <% end %>
+		  </ul>
+		  <% end %>
+		</div>
+		
+  </div>
+</div> <!-- preview-wrapper -->
+<div class="preview-bottom" style="float:left"></div> 
+</div> <!-- preview -->     
+
