@@ -1,5 +1,9 @@
+function usingOldIE() {
+	return navigator.userAgent.match(/MSIE [567]/i) != null 
+}
+
 Debug = function() {
-	// set to true to print all important javascript debug messages
+	// set to true to print all insertedportant javascript debug messages
 	// set to false to skip all debug messages (for production and browsers without Firebug)
 	var debug = false;
 	
@@ -36,8 +40,8 @@ Templates = function() {
 		// is template selected?
 		if (_templates.indexOf(template) > -1) {
 			templateLabel.addClass("selected");
-			if (templatePreview.length > 0) { 
-	      templatePreview.fadeIn();
+			if (templatePreview.length > 0) {
+				templatePreview.show();	
 				scrollToPreview(template);
 	    } else {
 				loadInlinePreview(template);
@@ -55,7 +59,7 @@ Templates = function() {
 		$("#template-delete-link-" + template).hide();
 		
 		Status.show("Loading preview...");
-		$.get("/orders/" + _order + "?template_id=" + template, null, function(data) { checkbox.enable(); Status.hide(); $("#preview-" + template).html(data); scrollToPreview(template)});
+		$.get("/orders/" + _order + "?template_id=" + template, null, function(data) { checkbox.enable(); Status.hide(); $("#preview-" + template).html(data); scrollToPreview(template); });
 	};
 
 	var scrollToPreview = function(id) {
@@ -111,7 +115,7 @@ Templates = function() {
 		toggleEditMode: function() {
 			editmode = !editmode;
 			// disable animations for Internet Explorer < 8
-			if(navigator.userAgent.match(/MSIE (5|6|7)/i)) {
+			if(usingOldIE()) {
 				$(".template-options").toggle();
 				$(".new-template").toggle();
 			} else {
@@ -172,7 +176,7 @@ Dialog = function() {
 		
 		close: function() {
 			$(dlg).empty();
-			$(dlg).dialog('close');
+			$(dlg).dialog('destroy');
 		}	
 	};
 }();
@@ -235,10 +239,6 @@ Status = function() {
 				$("#notice-item p").html(text);
 				notice = $("#notice-item-wrapper");
 				notice.fadeIn();
-			
-				if(navigator.userAgent.match(/MSIE 6/i)) {
-			  	notice.css({top: document.documentElement.scrollTop});
-			  }
 			}
 			count++;
 			Debug.log("Called Status.show, count is now: " + count);
