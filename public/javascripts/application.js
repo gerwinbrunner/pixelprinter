@@ -36,10 +36,8 @@ Templates = function() {
 	var toggleInlinePreview = function(template) {
 		// preview div, which could be already inserted (cached in DOM)
 		var templatePreview = $("#inline-preview-" + template);
-		var templateLabel = $("#template-item-" + template + " label");
 		// is template selected?
 		if (_templates.indexOf(template) > -1) {
-			templateLabel.addClass("selected");
 			if (templatePreview.length > 0) {
 				templatePreview.show();	
 				scrollToPreview(template);
@@ -47,9 +45,7 @@ Templates = function() {
 				loadInlinePreview(template);
 			}			
 		} else {
-			templateLabel.removeClass("selected");
 			templatePreview.hide();
-			
 		}
 	};
 	
