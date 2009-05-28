@@ -2,7 +2,10 @@
 <div id="login">
   <div id="login-wrapper" >
     <h1>Pixel Printer</h1>
-    <p class="description">Invoices, Package Slips and other customizable templates for your orders in <%= link_to "Shopify", "http://www.shopify.com" %>.</p>
+    <p class="description">
+      Invoices, Package Slips and other customizable templates for<br/>
+      your orders in <%= link_to "Shopify", "http://www.shopify.com" %>.
+    </p>
     <% form_tag '/login/authenticate' do %>
     <div class="sidebar-block" >   
       <p><em>Enter your shop's address</em></p>
@@ -10,13 +13,8 @@
       <p class="description">
         <span><em>Example:</em> teslamotors.myshopify.com
       </p>
-      <p><input type="image" value="login" name="login" src="images/button-login.png"></p>  
+      <p class="low-em"><input type="image" value="login" name="login" src="images/button-login.png"></p>  
     </div>      
-    <div class="sidebar-block"> 
-      <p class="low-em">
-        First you have to register this app with a shop to allow access to its private admin data.
-      </p>
-    </div>
     <% end %>
   </div>
    <div> </div>
