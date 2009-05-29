@@ -11,6 +11,7 @@
   <id type="integer">6001882</id>
   <name>#1011</name>
   <note nil="true"></note>
+  <note-attributes />  
   <number type="integer">11</number>
   <subtotal-price type="decimal">13.95</subtotal-price>
   <taxes-included type="boolean">false</taxes-included>
