@@ -3,15 +3,22 @@
     <div class="preview-wrapper" style="float:left; margin-left:1px">
       <div class="preview-content">
   
-    		<h1>Your orders</h1>
+    		<h1>Recent orders</h1>
     		<p class="description">
-    		  Usually you won't see this page, because you select the order from your Shopify admin interface and then get redirected directly to the order preview on this application.
+    		  You got redirected to this screen because there is no order selected yet.
+    		  To get to the order preview screen either select an order in the 
+    		  <%= link_to "Shopify admin interface", session[:shopify] %>
+    		  or click on one of the latest orders below.
     		</p>
     		<div class="itemlist">
     		  <% if @orders.blank? %>  
-    		  <em class="note">There are no orders in your store. You need a visible order first to see a preview of any template.</em>
+    		  <em class="note">
+            There are no orders in your store. You need a visible order first to see a preview of any template.
+    		  </em>
     		  <% else %>
-    		  <em>For convenience we fetched your latest <%= pluralize(@orders.size, 'order') %>. Please select the one you want to preview:
+    		  <em class="note">  		    
+    		    For convenience we fetched your latest <%= pluralize(@orders.size, 'order') %>:
+    		  </em>
     		  <ul>
     		    <% @orders.each do |order| %>
     		    <li>
@@ -29,6 +36,5 @@
 		
       </div>
     </div> <!-- preview-wrapper -->
-  <div class="preview-bottom" style="float:left"></div> 
-</div> <!-- preview -->     
-
+  <div class="preview-bottom" style="float:left"></div>
+</div> <!-- preview -->

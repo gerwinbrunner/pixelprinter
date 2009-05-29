@@ -1,1 +1,1 @@
-APP_NAME = "Shopify Invoicing"
+APP_NAME = "Pixel Printer"
