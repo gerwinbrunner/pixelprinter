@@ -31,7 +31,7 @@ body{background:url('../images/body-bg-wood.jpg');font-family:'Trebuchet MS','Ar
 #preview .preview-top{background:url('../images/paper-top.png')  no-repeat  ; float:right; height:70px;width:712px; margin:45px 0 0 0;}
 #preview .preview-wrapper {background:url('../images/paper-middle.png') ;width:711px; float:right;}
 #preview .preview-content { margin:-40px 0 0 0; padding:40px 40px 0 40px; clear:both;}
-#preview  .preview-bottom {background:url('../images/paper-bottom.png') no-repeat; width:712px; height:70px; margin-bottom:0px; float:right;} 
+#preview  .preview-bottom {background:url('../images/paper-bottom.png') no-repeat; width:712px; height:70px; margin-bottom:12px; float:right;} 
 #preview .description { font-size: 14px; color: #666;}
 
 /* ============== */

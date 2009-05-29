@@ -5,8 +5,14 @@ class LoginController < ApplicationController
     flash[:notice] = "Please authenticate yourself first."
   end
 
+
   def authenticate
-    redirect_to ShopifyAPI::Session.new(params[:shop]).create_permission_url
+    if params[:shop].blank?
+      flash[:error] = "You entered a blank domain, please try again."
+      redirect_to(:back)
+    else
+      redirect_to ShopifyAPI::Session.new(params[:shop]).create_permission_url('r') # only need read access
+    end
   end
 
   # Shopify redirects the logged-in user back to this action along with
@@ -21,7 +27,7 @@ class LoginController < ApplicationController
       
       # save shop to local DB
       @shop = Shop.find_or_create_by_name(shopify_session.name)
-      
+
       flash[:notice] = "Successfully logged into shopify store."
       
       return_address = session[:return_to] || '/orders'

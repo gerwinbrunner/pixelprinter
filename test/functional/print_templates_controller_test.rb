@@ -4,10 +4,13 @@ class PrintTemplatesControllerTest < ActionController::TestCase
   tests PrintTemplatesController
  
   before do
-     @session = login_session(:germanbrownies)
-     @tmpl = print_templates(:quotation_mark_in_title)
-     @tmpl_params = {:print_template => {:name => @tmpl.name, :body => @tmpl.body, :shop_id => @tmpl.shop_id}}
-     @params = {:format => :js}
+    ActiveResource::Base.site = 'http://any-url-for-testing'
+    ShopifyAPI::Shop.stubs(:current).returns(shop)
+    
+    @session = login_session(:germanbrownies)
+    @tmpl = print_templates(:quotation_mark_in_title)
+    @tmpl_params = {:print_template => {:name => @tmpl.name, :body => @tmpl.body, :shop_id => @tmpl.shop_id}}
+    @params = {:format => :js}
   end
   
   

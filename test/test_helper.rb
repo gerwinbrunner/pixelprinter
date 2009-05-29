@@ -53,11 +53,13 @@ class ActiveSupport::TestCase
     {:shopify => ShopifyAPI::Session.new(shop_name.to_s, 'somerandomtoken')}
   end
 
+  # ====================
+  # Custom Assertions
+  #
   def assert_not(expression)
     assert_block("Expected <#{expression}> to be false!") { not expression }
   end
   
-  # Custom Assertions
   def assert_response_include(code)
     assert_block("Expected the response <#{@response.body}> to include the following content: <#{code}>") do
       @response.body.include?(code)

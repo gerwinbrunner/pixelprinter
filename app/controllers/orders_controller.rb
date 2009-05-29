@@ -3,13 +3,7 @@ class OrdersController < ApplicationController
   
   around_filter :shopify_session
 
-  # Caching like the following works, but it has 2 big problems:
-  #   1. The shop must be included in the cache key too
-  #   2. How to expire if a template changes (e.g. order id is not available in PrintTemplatesController) or worse an Order changes in Shopify
-  #
-  # caches_action :preview, :cache_path => Proc.new { |controller| "orders/#{controller.params[:id]}?template_id=#{controller.params[:template_id]}" }
-  
-  
+
   def index
     # get latest 3 orders
     @orders = ShopifyAPI::Order.find(:all, :params => {:limit => 3, :order => "created_at DESC" })

@@ -1,5 +1,6 @@
 module ShopifyAPI
   class Shop < ActiveResource::Base
+    cattr_accessor :cached
     
     # TODO: remove Shop#money_format as it will get exported from Shopify
     def money_format
@@ -52,7 +53,7 @@ module ShopifyAPI
     
     def to_liquid
       fulfilled, unfulfilled = line_items.partition {|item| item.fulfilled?}
-      shop = ShopifyAPI::Shop.current
+      shop = Shop.cached
       { 
         'name'              => name, 
         'email'             => email,

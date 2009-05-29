@@ -48,7 +48,7 @@ module MoneyHelper
   end
   
   def shop
-    ShopifyAPI::Shop.current
+    ShopifyAPI::Shop.cached
   end
   
 end

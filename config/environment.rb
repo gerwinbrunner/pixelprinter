@@ -44,3 +44,4 @@ Rails::Initializer.run do |config|
 end
 
 require 'shopify_api_liquid'
+require 'shopify_login_protection_ext'

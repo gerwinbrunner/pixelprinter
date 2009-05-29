@@ -36,7 +36,7 @@ class OrderTest < ActiveSupport::TestCase
     before do
       @order = order
       shop = stub(:name => "My Store", :currency => "USD", :money_format => "$ {{amount}}", :to_liquid => {'name' => "My Store"})
-      ShopifyAPI::Shop.stubs(:current).returns(shop)
+      ShopifyAPI::Shop.stubs(:cached).returns(shop)
       @liquid = @order.to_liquid
     end
     

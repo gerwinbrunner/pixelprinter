@@ -10,16 +10,16 @@ class MoneyHelperTest < ActiveSupport::TestCase
   
 
   should "cache the shop in MoneyFilter and not fetch the shop twice via ActiveResource" do
-    ShopifyAPI::Shop.expects(:current).once.returns(@european_shop)
+    ShopifyAPI::Shop.stubs(:cached).returns(@european_shop)
     @filter.money(1000)
   end
   
   should "invalidate the cached shop in MoneyFilter when a money filter is called " do
     # get Shop once in order#to_liquid and once in MoneyHelper#shop
-    ShopifyAPI::Shop.expects(:current).once.returns(@us_shop)
+    ShopifyAPI::Shop.stubs(:cached).returns(@us_shop)
     assert_equal "$10.00", @filter.money(1000)
     
-    ShopifyAPI::Shop.expects(:current).once.returns(@european_shop)
+    ShopifyAPI::Shop.stubs(:cached).returns(@european_shop)
     # simulate a new liquid render action by including the filter again in a new object
     # this will reset the instance variables (i.e. the cached remote shop)
     @filter = Object.new.extend(MoneyFilter)
@@ -29,7 +29,7 @@ class MoneyHelperTest < ActiveSupport::TestCase
   
   context "European shop" do
     before do
-      ShopifyAPI::Shop.stubs(:current).returns(@european_shop)
+      ShopifyAPI::Shop.stubs(:cached).returns(@european_shop)
     end
 
     should "render money for Fixnum value in Euros" do
@@ -51,7 +51,7 @@ class MoneyHelperTest < ActiveSupport::TestCase
   
   context "US Shop" do
     before do
-      ShopifyAPI::Shop.stubs(:current).returns(@us_shop)
+      ShopifyAPI::Shop.stubs(:cached).returns(@us_shop)
     end
     
     should "render money for fixnum values in $" do

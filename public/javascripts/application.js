@@ -60,7 +60,7 @@ Templates = function() {
 
 	var scrollToPreview = function(id) {
 		var targetOffset = $("#preview-" + id + " .preview-content").offset().top;
-	  $('html,body').animate({scrollTop: targetOffset - 40}, 500);
+	  $('html,body').animate({scrollTop: targetOffset - 50}, 500);
 	};
 	
 	

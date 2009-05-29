@@ -18,6 +18,6 @@ module MoneyFilter
   private
   
   def shop
-    @shop ||= ShopifyAPI::Shop.current
+    ShopifyAPI::Shop.cached
   end
 end
