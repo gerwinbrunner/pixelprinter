@@ -48,9 +48,10 @@ class ActiveSupport::TestCase
     ShopifyAPI::Shop.new(shop_hash)
   end
   
-  def login_session(shop_name)
-    Shop.stubs(:find_by_name).returns(shops(shop_name))
-    {:shopify => ShopifyAPI::Session.new(shop_name.to_s, 'somerandomtoken')}
+  def login_session(shop_fixture)
+    shop = shops(shop_fixture)
+    Shop.stubs(:find_by_url).returns(shop)
+    {:shopify => ShopifyAPI::Session.new(shop.url, 'somerandomtoken')}
   end
 
   # ====================

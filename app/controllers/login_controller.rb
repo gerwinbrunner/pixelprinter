@@ -26,7 +26,7 @@ class LoginController < ApplicationController
       session[:shopify] = shopify_session
       
       # save shop to local DB
-      @shop = Shop.find_or_create_by_name(shopify_session.name)
+      @shop = Shop.find_or_create_by_url(shopify_session.url)
 
       flash[:notice] = "Successfully logged into shopify store."
       

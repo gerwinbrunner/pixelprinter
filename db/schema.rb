@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090527192110) do
+ActiveRecord::Schema.define(:version => 20090529202856) do
 
   create_table "print_templates", :force => true do |t|
     t.integer  "shop_id"
@@ -23,11 +23,11 @@ ActiveRecord::Schema.define(:version => 20090527192110) do
   add_index "print_templates", ["shop_id"], :name => "index_print_templates_on_shop_id"
 
   create_table "shops", :force => true do |t|
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "url"
   end
 
-  add_index "shops", ["name"], :name => "index_shops_on_name"
+  add_index "shops", ["url"], :name => "index_shops_on_url"
 
 end

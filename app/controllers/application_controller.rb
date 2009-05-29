@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   protected
   
   def shop
-    Shop.find_by_name(session[:shopify].name)
+    Shop.find_or_create_by_url(current_shop.url)
   end
   
 end

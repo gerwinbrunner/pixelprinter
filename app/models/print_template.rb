@@ -12,7 +12,7 @@ class PrintTemplate < ActiveRecord::Base
 
   def self.create_from_file(template_name)
     content = File.read("#{RAILS_ROOT}/db/printing/#{template_name}.liquid")
-    create(:name => template_name.to_s, :body => content)
+    create(:name => template_name.to_s.capitalize, :body => content)
   end
   
   def parse
