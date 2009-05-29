@@ -2,16 +2,6 @@ module ShopifyAPI
   class Shop < ActiveResource::Base
     cattr_accessor :cached
     
-    # TODO: remove Shop#money_format as it will get exported from Shopify
-    def money_format
-      super rescue "${{amount}}"
-    end
-
-    # TODO: remove Shop#money_with_currency_format as it will get exported from Shopify
-    def money_with_currency_format
-      super rescue "${{amount}} USD"
-    end
-    
     def to_liquid
       {
         'name'     => name,
@@ -32,13 +22,6 @@ module ShopifyAPI
       address_hash = Hash.from_xml(to_xml)
       # is either shipping address or billing address
       address_hash[address_hash.keys.first].merge('street' => street)
-    end
-    
-    # TODO: remove Address#street as it will get exported from Shopify
-    def street
-      street  = address1
-      street += ", #{address2}" unless address2.blank?
-      street  
     end
   end
   
@@ -71,27 +54,14 @@ module ShopifyAPI
         'fulfilled_line_items' => fulfilled,
         'unfulfilled_line_items' => unfulfilled,
         'shipping_method'   => shipping_line,
-        'note'              => note_body,
+        'note'              => note,
         'attributes'        => note_attributes, 
         'customer'          => {'email' => email, 'name' => billing_address.name},
         'shop'              => shop.to_liquid
       }
     end
 
-    # TODO: remove Order#note_body and Order#note_attributes IF they get exported from Shopify
     private
-
-    def note_body 
-      note.to_s.gsub(/^\t.*$/, '').strip
-    end
-
-    def note_attributes
-      values = {}
-      note.to_s.scan(/^\t([^\:]+)\:\ (.*)$/) do |matches|
-        values[matches[0]] = matches[1].to_s.strip
-      end
-      values
-    end
 
     # needed because Shopify API exports prices in decimals (dollar amounts), 
     # but we want integers (cent amounts) for consistency
