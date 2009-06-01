@@ -14,7 +14,7 @@ When you visit the PixelPrinter application for the first time, it will show thr
 
 The Invoice template is already selected per default. Notice how you see a live preview of every selected template in the center part:
 
-!http://blog.shopify.com/assets/2009/6/1/Pixel_Printer_overview.png!
+!http://blog.shopify.com/assets/2009/6/1/Pixel_Printer_overview_halfsize.png!
 
 To print all selected templates just click that big green button on the left! This will open the print dialog of your operating system from where you can either directly print the templates or save them to PDF (see below).
 
@@ -24,12 +24,12 @@ To start editing the templates click the *edit* button in the sidebar. This will
 
 PixelPrinter in edit mode:
 
-!http://blog.shopify.com/assets/2009/6/1/Pixel_Printer_editmode.png!
+!http://blog.shopify.com/assets/2009/6/1/Pixel_Printer_editmode_halfsize.png!
 
 
 After clicking *edit* for a template, a dialog will popup that looks like this:
 
-!http://blog.shopify.com/assets/2009/6/1/Pixel_Printer_editing.png!
+!http://blog.shopify.com/assets/2009/6/1/Pixel_Printer_editing_halfsize.png!
 
 h3. Saving as PDF
 
