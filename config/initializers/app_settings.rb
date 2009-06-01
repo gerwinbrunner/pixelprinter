@@ -1,1 +1,1 @@
-APP_NAME = "Pixel Printer"
+APP_NAME = "PixelPrinter"

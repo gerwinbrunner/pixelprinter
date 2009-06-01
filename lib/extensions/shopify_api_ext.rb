@@ -2,6 +2,9 @@ module ShopifyAPI
   class Shop < ActiveResource::Base
     cattr_accessor :cached
     
+    def money_format; "${{amount}}" ;end
+    def money_with_currency_format; "${{amount}} USD";end
+    
     def to_liquid
       {
         'name'     => name,
