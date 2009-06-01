@@ -23,6 +23,12 @@ module ShopifyAPI
       # is either shipping address or billing address
       address_hash[address_hash.keys.first].merge('street' => street)
     end
+    
+    def street
+      string = address1
+      string += " #{address2}" if address2
+      string
+    end
   end
   
   class ShippingAddress < Address
