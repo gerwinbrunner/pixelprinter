@@ -57,6 +57,8 @@ module ShopifyAPI
       fulfilled, unfulfilled = line_items.partition {|item| item.fulfilled?}
       shop = Shop.cached
       { 
+        'id'                => id,
+        'created_at'        => created_at,
         'name'              => name, 
         'email'             => email,
         'gateway'           => gateway,
@@ -66,6 +68,7 @@ module ShopifyAPI
         'subtotal_price'    => cents(subtotal_price),
         'total_price'       => cents(total_price),
         'tax_price'         => cents(total_tax),
+        'tax_lines'         => tax_lines,
         'shipping_price'    => cents(shipping_line.price),
         'shipping_address'  => shipping_address, 
         'billing_address'   => billing_address, 

@@ -10,12 +10,11 @@
   <gateway>Bank Deposit</gateway>
   <id type="integer">6001882</id>
   <name>#1011</name>
-  <note nil="true"></note>
-  <note-attributes />  
+  <note></note>
   <number type="integer">11</number>
   <subtotal-price type="decimal">13.95</subtotal-price>
   <taxes-included type="boolean">false</taxes-included>
-  <token>0957514ab578d99239b6b8de7df626b2</token>
+  <token>1234514ab578d99239b6b8de7df626b2</token>
   <total-discounts type="decimal">0.00</total-discounts>
   <total-line-items-price type="decimal">13.95</total-line-items-price>
   <total-price type="decimal">19.60</total-price>
@@ -65,9 +64,20 @@
       <product-title>Shopify T-Shirt</product-title>
     </line-item>
   </line-items>
-  <shipping-line>
-    <code>Standard Shipping</code>
-    <price type="decimal">3.00</price>
-    <title>Standard Shipping</title>
-  </shipping-line>
+  <shipping-lines type="array">
+    <shipping-line>
+      <code>Standard Shipping</code>
+      <price type="decimal">3.00</price>
+      <title>Standard Shipping</title>
+    </shipping-line>    
+  </shipping-lines>
+  <tax-lines type="array">
+    <tax-line>
+      <price type="decimal">2.65</price>
+      <rate type="float">0.1563</rate>
+      <title>Taxes</title>
+    </tax-line>
+  </tax-lines>
+  <note_attributes>
+  </note_attributes>  
 </order>
