@@ -45,8 +45,10 @@ h2. How to integrate PixelPrinter into your store
 Just like any other Shopify application, PixelPrinter will be activated through the app store at
 "http://apps.shopify.com":http://apps.shopify.com.
 
-The PixelPrinter application will add a link to the sidebar of an order's details page in the Shopify admin interface. Clicking that link will take you directly to the order print preview screen in PixelPrinter.
-"Add image that displays link in order show page":TODO
+The PixelPrinter application will add a link to the sidebar of an order's details page in the Shopify admin interface. Clicking that link will take you directly to the order print preview screen in PixelPrinter:
+
+!http://blog.shopify.com/assets/2009/6/2/ShopifyAdmin-OrderDetailsText-halfsize.png!
+
 
 
 h2. Background
