@@ -42,8 +42,8 @@ If you need to save a template as PDF, we recommend using the built in functiona
 
 h2. How to integrate PixelPrinter into your store
 
-Just like any other Shopify application, PixelPrinter will be activated through the app store at:
-"Insert app store URL":TODO
+Just like any other Shopify application, PixelPrinter will be activated through the app store at
+"http://apps.shopify.com":http://apps.shopify.com.
 
 The PixelPrinter application will add a link to the sidebar of an order's details page in the Shopify admin interface. Clicking that link will take you directly to the order print preview screen in PixelPrinter.
 "Add image that displays link in order show page":TODO
