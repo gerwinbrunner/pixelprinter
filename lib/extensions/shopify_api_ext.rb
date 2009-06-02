@@ -2,9 +2,6 @@ module ShopifyAPI
   class Shop < ActiveResource::Base
     cattr_accessor :cached
     
-    def money_format; "${{amount}}" ;end
-    def money_with_currency_format; "${{amount}} USD";end
-    
     def to_liquid
       {
         'name'     => name,
@@ -69,14 +66,14 @@ module ShopifyAPI
         'subtotal_price'    => cents(subtotal_price),
         'total_price'       => cents(total_price),
         'tax_price'         => cents(total_tax),
-        'shipping_price'    => cents(shipping_line[:price]),
+        'shipping_price'    => cents(shipping_line.price),
         'shipping_address'  => shipping_address, 
         'billing_address'   => billing_address, 
         'line_items'        => line_items,
         'fulfilled_line_items' => fulfilled,
         'unfulfilled_line_items' => unfulfilled,
         'shipping_methods'  => shipping_lines,
-        'shipping_method'   => shipping_line[:title],
+        'shipping_method'   => shipping_line.title,
         'note'              => note,
         'attributes'        => note_attributes, 
         'customer'          => {'email' => email, 'name' => billing_address.name},
