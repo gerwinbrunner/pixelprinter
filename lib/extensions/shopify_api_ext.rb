@@ -43,6 +43,10 @@ module ShopifyAPI
   class Order < ActiveResource::Base
     include OrderCalculations
     
+    def shipping_line
+      shipping_lines.map(&:title).join(', ')
+    end
+    
     def to_liquid
       fulfilled, unfulfilled = line_items.partition {|item| item.fulfilled?}
       shop = Shop.cached
@@ -56,12 +60,13 @@ module ShopifyAPI
         'subtotal_price'    => cents(subtotal_price),
         'total_price'       => cents(total_price),
         'tax_price'         => cents(total_tax),
-        'shipping_price'    => cents(shipping_line.price),
+        'shipping_price'    => cents(shipping_lines.sum(&:price)),
         'shipping_address'  => shipping_address, 
         'billing_address'   => billing_address, 
         'line_items'        => line_items,
         'fulfilled_line_items' => fulfilled,
         'unfulfilled_line_items' => unfulfilled,
+        'shipping_methods'  => shipping_lines,
         'shipping_method'   => shipping_line,
         'note'              => note,
         'attributes'        => note_attributes, 
