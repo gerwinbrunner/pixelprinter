@@ -24,8 +24,8 @@
     		    <li>
     		      <div class="order">
     		        <strong><%= link_to order.name, :action => 'show', :id => order %></strong>
-    		        <span class="price"><%= order.total_price %> <%= order.currency %></span>
-    		        <span class="highlight"><%= order.financial_status %></span>
+    		        <span class="price"><%=  money_with_currency(order.total_price, true) %></span>
+    		        <%= order_status(order) %>
     		        by <span class="note"><%= order.billing_address.name %></span>
     		      </div>
     		    </li>

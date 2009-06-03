@@ -65,11 +65,11 @@ module ShopifyAPI
         'order_name'        => name, 
         'order_number'      => number, 
         'shop_name'         => shop.name,
-        'subtotal_price'    => cents(subtotal_price),
-        'total_price'       => cents(total_price),
-        'tax_price'         => cents(total_tax),
+        'subtotal_price'    => to_cents(subtotal_price),
+        'total_price'       => to_cents(total_price),
+        'tax_price'         => to_cents(total_tax),
         'tax_lines'         => tax_lines,
-        'shipping_price'    => cents(shipping_line.price),
+        'shipping_price'    => to_cents(shipping_line.price),
         'shipping_address'  => shipping_address, 
         'billing_address'   => billing_address, 
         'line_items'        => line_items,
@@ -83,12 +83,11 @@ module ShopifyAPI
         'shop'              => shop.to_liquid
       }
     end
-
+    
+    
     private
-
-    # needed because Shopify API exports prices in decimals (dollar amounts), 
-    # but we want integers (cent amounts) for consistency
-    def cents(amount)
+    
+    def to_cents(amount)
       (amount * 100).to_i
     end
   end
@@ -98,14 +97,21 @@ module ShopifyAPI
       {
         'id'         => id, 
         'title'      => name, 
-        'price'      => price.to_i * 100, 
-        'line_price' => (price * quantity), 
+        'price'      => to_cents(price), 
+        'line_price' => (to_cents(price) * quantity), 
         'quantity'   => quantity,
         'sku'        => sku,
         'grams'      => grams,
         'vendor'     => vendor,
         'variant_id' => variant_id
       }
+    end
+    
+    
+    private
+    
+    def to_cents(amount)
+      (amount * 100).to_i
     end
   end       
 
