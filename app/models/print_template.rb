@@ -7,6 +7,8 @@ class PrintTemplate < ActiveRecord::Base
   
   attr_protected :shop_id
 
+  default_scope :order => "id ASC"
+
   MAX_TEMPLATES_PER_SHOP   = 10
   TOO_MUCH_TEMPLATES_ERROR = "Maximum number of templates is #{MAX_TEMPLATES_PER_SHOP}! You need to delete another template before you are able to create a new one."
 
