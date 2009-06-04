@@ -22,7 +22,9 @@
 <h3>Shipping Address</h3>
 {{ shipping_address.name }}<br/>
 {{ shipping_address.street }}<br/>
-{{ shipping_address.city }}, {{ shipping_address.province }}  {{ shipping_address.zip }}<br/>
+{{ shipping_address.city }}
+{{ shipping_address.province }}
+{{ shipping_address.zip | upcase }}<br/>
 {{ shipping_address.country }}<br/>
 {{ shipping_address.phone }}<br/>
 
@@ -30,7 +32,9 @@
 <h3>Billing Address</h3>
 {{ billing_address.last_name }}, {{ billing_address.first_name }}<br/>
 {{ billing_address.street }}<br/>
-{{ billing_address.city }}, {{ billing_address.province }}  {{ billing_address.zip }}<br/>
+{{ billing_address.city }}
+{{ billing_address.province }}
+{{ billing_address.zip | upcase }}<br/>
 {{ billing_address.country }}<br/>
 {{ billing_address.phone }}<br/>
 

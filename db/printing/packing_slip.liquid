@@ -3,8 +3,10 @@
   <strong>{{ shop.name }}</strong><br/>
   {{ shop.owner }}<br/>
   {{ shop.address }}<br/>
-  {{ shop.zip }} {{ shop.city }}
-  {% if shop.province %}, {{ shop.province }} {% endif %}
+  {{ shop.city }}
+  {{ shop.province }}
+  {{ shop.zip | upcase }}<br/>
+  {{ shop.country }}
 </div>
 
 
@@ -13,7 +15,8 @@
   {{ shipping_address.name }}<br/>
   {{ shipping_address.company }}<br/>
   {{ shipping_address.street }}<br/>
-  {{ shipping_address.city }}<br/>
-  {{ shipping_address.zip }}<br/>
+  {{ shipping_address.city }}
+  {{ shipping_address.province }}
+  {{ shipping_address.zip | upcase }}<br/>
   {{ shipping_address.country }}<br/>
 </div>
