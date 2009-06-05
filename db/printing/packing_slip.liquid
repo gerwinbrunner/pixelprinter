@@ -13,7 +13,9 @@
 <div style="font-size: 120%; padding: 8px; border: 2px solid #ccc; margin: 20px">
   <h3>Recipient</h3>
   {{ shipping_address.name }}<br/>
-  {{ shipping_address.company }}<br/>
+  {% if shipping_address.company %}
+    {{ shipping_address.company }}<br/>
+  {% endif %}
   {{ shipping_address.street }}<br/>
   {{ shipping_address.city }}
   {{ shipping_address.province }}

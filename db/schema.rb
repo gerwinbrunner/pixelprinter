@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090529202856) do
+ActiveRecord::Schema.define(:version => 20090605160611) do
+
+  create_table "print_template_versions", :force => true do |t|
+    t.integer  "print_template_id"
+    t.text     "body"
+    t.datetime "created_at"
+    t.integer  "version",           :default => 0
+    t.string   "snapshot"
+  end
 
   create_table "print_templates", :force => true do |t|
     t.integer  "shop_id"
