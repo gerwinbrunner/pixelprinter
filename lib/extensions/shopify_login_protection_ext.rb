@@ -2,6 +2,7 @@ module ShopifyLoginProtection
 
   def shopify_session
     if params[:shop].present?
+      session[:return_to] = request.path
       redirect_to :controller => 'login', :action => 'authenticate', :shop => params[:shop]
       yield
     elsif session[:shopify]
