@@ -1,14 +1,22 @@
 invoice:
+  id: 1
   shop: germanbrownies
   name: Invoice
   body: "Thanks for buying from {{ shop_name }}"
   
 packing_slip:
+  id: 2
   shop: germanbrownies
   name: Packing Slip
   body: "The package will be sent to {{ shipping_address.street }}..."
   
 quotation_mark_in_title:
+  id: 3
   shop: germanbrownies
   name: Template's stuff
   body: "The body is not problematic"
+  
+custom_invoice:
+  shop: othershop
+  name: Custom invoice
+  body: "Thanks for buying from {{ shop_name }}"

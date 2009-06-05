@@ -2,7 +2,6 @@ class LoginController < ApplicationController
   
   def index
     # Ask user for their #{shop}.myshopify.com address
-    flash[:notice] = "Please authenticate yourself first."
   end
 
 

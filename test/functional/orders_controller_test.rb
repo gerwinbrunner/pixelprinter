@@ -18,7 +18,6 @@ class OrdersControllerTest < ActionController::TestCase
 
       templates = assigns(:tmpls)
       assert_equal 3, templates.size
-      p templates.collect(&:id)
       assert_equal "Invoice", templates.first.name
     end
   end

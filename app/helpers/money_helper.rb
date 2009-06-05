@@ -1,19 +1,19 @@
 module MoneyHelper
   
-  def money(money, convert_to_cents = false)
-    MoneyHelper.format(shop.money_format, money, shop.currency, convert_to_cents)
+  def money(money, convert_from_cents = false)
+    MoneyHelper.format(shop.money_format, money, shop.currency, convert_from_cents)
   end    
 
-  def money_with_currency(money, convert_to_cents = false)
-    MoneyHelper.format(shop.money_with_currency_format, money, shop.currency, convert_to_cents)
+  def money_with_currency(money, convert_from_cents = false)
+    MoneyHelper.format(shop.money_with_currency_format, money, shop.currency, convert_from_cents)
   end
   
   
-  def self.format(args, amount, currency = nil, convert_to_cents = false)
+  def self.format(args, amount, currency = nil, convert_from_cents = false)
     cents = amount.is_a?(String) ? amount.to_f : amount
     return '' unless cents
     
-    cents = (cents * 100).to_i if convert_to_cents
+    cents = (cents * 100).to_i if convert_from_cents
     
     args.gsub(/\{\{\s*\w+\s*\}\}/) do |format|
       case format

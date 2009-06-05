@@ -70,4 +70,21 @@ class PrintTemplatesController < ApplicationController
       end
     end
   end
+  
+  def fetch_versions
+    @tmpl = shop.templates.find_by_name(params[:template_name])
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def rollback_template
+    @tmpl = shop.templates.find_by_name(params[:template_name])
+    @tmpl.rollback(params[:template_version]) if params[:template_version].present?
+    
+    render :update do |page|
+      page << "$('#template_editor').val(#{@tmpl.body.inspect});"
+    end
+  end
 end

@@ -5,7 +5,9 @@
 	<meta http-equiv="imagetoolbar" content="no" />
 	<meta name="MSSmartTagsPreventParsing" content="true" />
 
+  <link rel="shortcut icon" href="/favicon.ico" />
   <title><%= APP_NAME %></title>
+  
   <%= stylesheet_link_tag 'application', 'jquery-ui-1.7.1.custom', :media => 'screen' %>
   <%= stylesheet_link_tag 'print', :media => 'print' %>
   <%= javascript_include_tag :defaults, 'jquery-ui' %> 
@@ -19,23 +21,13 @@
 	<![endif]-->
    
   <% javascript_tag do %>
-    <% if flash[:notice] %>
-      window.onload = function() { Messenger.notice(<%= h(flash[:notice]).inspect %>); }
-    <% end %>
-    <% if flash[:error] %>
-      window.onload = function() { Messenger.error(<%= h(flash[:error]).inspect %>); }
-    <% end %>
-    
-    $(function() {
-    	$("#progressbar").progressbar({value: 100});
-    });
+    <% if flash[:notice] %> window.onload = function() { Messenger.notice(<%= h(flash[:notice]).inspect %>); } <% end %>
+    <% if flash[:error] %>  window.onload = function() { Messenger.error(<%= h(flash[:error]).inspect %>); }   <% end %>
     
     $(document).ready(function() {
       <%= yield :javascript %>
     });
-    
   <% end %> 
-
 </head>
 	
 <body>

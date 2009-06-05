@@ -208,10 +208,6 @@ a:hover, a:focus, a:active {color:#265d8b;}
 	margin: 16px;
 }
 
-.buttons a {
-	color: #c00 !important;
-}
-
 /* =========================== */
 /* = Stuff mark edited/added for the lightbox = */
 /* =========================== */
@@ -223,6 +219,8 @@ p.buttons {background:none; border:none; margin:0;}
 .ui-widget-content .header {margin:10px 0 10px 0;}
 .ui-widget-content .header label {color:#cd317a; font-family:'Trebuchet MS'; }  /* template name */
 .ui-widget-content .template-code label {color:#cd317a; font-family:'Trebuchet MS'; margin-top:11px; display:block; } /* edit template */
+
+.normal-link { color:#265D8B !important; }
 
 /* for the help menu */
 .help h3 {padding:10px 0 0 0; font-size:15px; margin:0;}
@@ -245,4 +243,14 @@ p.buttons {background:none; border:none; margin:0;}
 .o-paid, .o-authorized, .o-shipped, .o-partial {
 	background-color: #6AB32F;
 	color: #fff;
+}
+
+/* Rollback link in template editor */
+.rollback {
+	font-size: 70%;
+	text-align: center;
+}
+
+#rollback-link {
+	color: #c00;
 }

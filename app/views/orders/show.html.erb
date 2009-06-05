@@ -6,7 +6,7 @@
       <%= money_with_currency(@order.total_price, true) %>
       <%= order_status(@order) %>
     </p>
-    <p><%= link_to "Go back to original order", shopify_order_url(@order), :title => "Open order in Shopify admin interface" %></p>  
+    <p><%= link_to "Go back to original order", shopify_order_url(@order), :title => "Open order in Shopify admin interface" %></p> 
   </div>
 
   <div class="sidebar-block"> <!-- templates -->

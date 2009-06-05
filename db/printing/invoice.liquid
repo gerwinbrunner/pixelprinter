@@ -6,6 +6,8 @@
 
 <h3>Invoice</h3>
 
+<p>Your order: {{ order_name }}</p>
+
 <p>Thanks for buying the following products from our shop:</p>
 
 {% for line_item in line_items %}
@@ -20,17 +22,23 @@
     <td>Subtotal price:</td>
     <td>{{ subtotal_price | money }}</td>
   </tr>
- <tr>
-   <td>Total tax:</td>
-   <td>{{ tax_price | money }}</td>
- </tr>
- <tr><td>Shipping:</td><td>{{ shipping_price | money }}</td></tr>
- <tr><td style="border-top: 1px solid #333"><strong>Total price:</strong></td><td style="border-top: 1px solid #333">{{ total_price | money }}</td></tr>
+  <tr>
+    <td>Total tax:</td>
+    <td>{{ tax_price | money }}</td>
+  </tr>
+  <tr>
+    <td>Shipping:</td>
+    <td>{{ shipping_price | money }}</td>
+  </tr>
+  <tr>
+    <td style="border-top: 1px solid #333"><strong>Total price:</strong></td>
+    <td style="border-top: 1px solid #333">{{ total_price | money }}</td>
+  </tr>
 </table>
 
 <p>
-{% if !note.blank %}
-  Description: {{ note }}<br/>
+{% if note %}
+  Note: {{ note }}<br/>
 {% endif %}
 </p>
 

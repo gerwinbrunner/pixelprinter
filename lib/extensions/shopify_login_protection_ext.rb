@@ -1,7 +1,10 @@
 module ShopifyLoginProtection
 
   def shopify_session
-    if session[:shopify]
+    if params[:shop].present?
+      redirect_to :controller => 'login', :action => 'authenticate', :shop => params[:shop]
+      yield
+    elsif session[:shopify]
       begin
         # session[:shopify] set in LoginController#finalize
         ActiveResource::Base.site = session[:shopify].site
@@ -13,7 +16,7 @@ module ShopifyLoginProtection
       end
     else            
       session[:return_to] = request.path
-      redirect_to :controller => 'login'      
+      redirect_to :controller => 'login'
     end
   end
 end

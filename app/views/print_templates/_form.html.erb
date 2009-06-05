@@ -1,10 +1,15 @@
 <% form_remote_for(tmpl, :method => method, :html => {:id => "print-template-form"}, :loading => "Status.show()", :complete => "Status.hide();") do |f| %>
+  <div class="rollback fixed">
+    <%= rollback_link(tmpl.name) %>
+    <%= select_tag 'rollback-selectbox', [], :style => "display: none" %> |
+    <%= link_to "Show help", "http://wiki.shopify.com/PixelPrinter#Template_editing", :target => 'wiki', :class => 'normal-link' %>
+    
+  </div>
   <div class="header fixed">
-    <%= f.label :name, "Name" %>
-    <%= f.text_field :name %>
+    <%= f.label :name, "Name:" %>
+    <%= f.text_field :name %>    
   </div>
   <div class="template-code">    
-    <%= link_to "Show help", "http://wiki.shopify.com/PixelPrinter#Template_editing", :target => 'wiki' %>
     <%= f.text_area :body, :id => 'template_editor' %>  
   </div>
 
@@ -12,7 +17,12 @@
     <p class="buttons">
       <%= submit_tag(method.to_sym == :post ? "Create" : "Update" ) %>
       or
-      <%= link_to_function "Cancel", "Dialog.close();", :class => 'action' %>
+      <%= link_to_function "Cancel", "Dialog.close()", :class => 'normal-link' %>
     </p>
   </div>
 <% end %>
+
+<%= observe_field 'rollback-selectbox', 
+      :url    => { :action => :rollback_template },
+      :with   => "'template_version=' + value + '&template_name=#{tmpl.name}'", 
+      :before => "$('#template_editor').val('Loading your template...');" %>

@@ -1,0 +1,22 @@
+# == Schema Information
+# Schema version: 20090121201400
+#
+# Table name: theme_template_versions
+#
+#  id                :integer(4)      not null, primary key
+#  print_template_id :integer(4)
+#  body              :text
+#  created_at        :datetime
+#  version           :integer(4)      default(0)
+#  snapshot          :string(255)
+#
+
+invoice_v1:
+  print_template: custom_invoice
+  body: '<h1>Version 1</h1>{{ shop_name }}'
+  version: 1
+  
+invoice_v2:
+  print_template: custom_invoice
+  body: '<h1>Version 2</h1>{{ shop_name }}'
+  version: 2

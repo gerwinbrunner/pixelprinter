@@ -4,4 +4,5 @@ else
   # prepare dialog for new action
   page.replace_html 'modal-dialog', :partial => "form", :locals => {:method => 'post', :tmpl => @tmpl}
   page << "Dialog.open('Create new template');"
+  page << "$(':text').select();"
 end
