@@ -7,7 +7,7 @@ class OrdersController < ApplicationController
   def index
     # this is needed for Shopify's application links, because they append the id param with 
     # a question mark (/orders?id=123) instead of rails nested style (/orders/123)
-    redirect_to :action => 'show', :id => params[:id] unless params[:id].blank?
+    redirect_to :action => 'show', :id => params[:id] if params[:id].present?
     
     # get latest 3 orders
     @orders = ShopifyAPI::Order.find(:all, :params => {:limit => 3, :order => "created_at DESC" })

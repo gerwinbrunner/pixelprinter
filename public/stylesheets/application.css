@@ -163,36 +163,12 @@ a:hover, a:focus, a:active {color:#265d8b;}
 * html #notice-item-wrapper {
 	position: absolute;		
 }
- 
-#notice-item {
-	height: 50px;
-	/*background: #333;*/
-	-moz-border-radius: 0px;
-	-webkit-border-radius: 0px;
-	color: #eee;
-	padding: 6px 6px 0 6px;
-	font-family: lucida Grande;
-	font-size: 11px;
-	/*border: 2px solid #999; */
-	display: block;
-	position: relative;
-	margin: 0 0 12px 0;
-	text-align: center; 
-	font-family: helvetica, arial, serif;
-}
 
-#notice-item p {
-	margin: 4px;
-}
-
+/* animated background for status */
 #progressbar {
-	height: 31px; width:31px; background:none; border:0px; margin:0; padding:0; float:right;
+	background: url('/images/pbar-ani.gif') !important; height: 31px; width:31px; background:none; border:0px; margin:0; padding:0; float:right;;
 }
 
-/* animated background for jquery progressbar */
-.ui-progressbar-value { 
-	background: url('/images/pbar-ani.gif') !important;
-}
                                                                                                                                                                                                                          
 /* Template editing form */
 .button-panel {

@@ -54,7 +54,7 @@ Templates = function() {
 		// this is a dirty fix, because the link doesn't listen to moveout-events any more, so it doesn't get hidden, which looks weird
 		$("#template-delete-link-" + template).hide();
 		
-		Status.show("Loading preview...");
+		Status.show();
 		$.get("/orders/" + _order + "?template_id=" + template, null, function(data) { checkbox.enable(); Status.hide(); $("#preview-" + template).html(data); scrollToPreview(template); });
 	};
 
@@ -231,10 +231,7 @@ Status = function() {
 		show: function(text) {
 			// don't show more than one notice at a time
 			if (count < 1) {
-				text = (typeof(text) != 'undefined') ? text : 'Loading...';
-				$("#notice-item p").html(text);
-				notice = $("#notice-item-wrapper");
-				notice.fadeIn();
+				$("#notice-item-wrapper").fadeIn();
 			}
 			count++;
 			Debug.log("Called Status.show, count is now: " + count);
@@ -242,7 +239,7 @@ Status = function() {
 
 		hide: function() {
 			if (count <= 1) { 
-				notice.fadeOut();
+				$("#notice-item-wrapper").fadeOut();
 				count = 1;
 			}
 			count--;

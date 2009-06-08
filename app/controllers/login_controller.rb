@@ -1,7 +1,8 @@
 class LoginController < ApplicationController
   
   def index
-    # Ask user for their #{shop}.myshopify.com address
+    # don't ask user for his #{shop}.myshopify.com address if it is already provided
+    redirect_to :controller => 'login', :action => "authenticate", :shop => params[:shop] if params[:shop].present?
   end
 
 
@@ -10,7 +11,7 @@ class LoginController < ApplicationController
       flash[:error] = "You entered a blank domain, please try again."
       redirect_to(:back)
     else
-      redirect_to ShopifyAPI::Session.new(params[:shop]).create_permission_url('r') # only need read access
+      redirect_to ShopifyAPI::Session.new(params[:shop]).create_permission_url
     end
   end
 
