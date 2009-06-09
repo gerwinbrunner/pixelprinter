@@ -27,5 +27,5 @@ test:
   secret: 0097fecade04110b5c7e20a7e9fdd5a7
 
 production:
-  api_key: <%= ENV[:SHOPIFY_API_KEY] %>
-  secret: <%= ENV[:SHOPIFY_API_KEY] %>
+  api_key: <%= ENV['SHOPIFY_API_KEY'] %>
+  secret: <%= ENV['SHOPIFY_API_SECRET'] %>
