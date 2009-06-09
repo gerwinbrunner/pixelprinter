@@ -22,6 +22,6 @@ module ShopifyLoginProtection
   def shop_overwritten?
     return false if params[:shop].blank?
 
-    params[:shop] != session[:shopify].url
+    params[:shop] != session[:shopify].url && "#{params[:shop]}.myshopify.com" != session[:shopify].url
   end
 end
