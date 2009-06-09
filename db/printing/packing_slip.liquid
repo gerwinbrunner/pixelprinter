@@ -6,7 +6,9 @@
   {{ shop.city }}
   {{ shop.province }}
   {{ shop.zip | upcase }}<br/>
-  {{ shop.country }}
+  {% if shop.country != shipping_address.country_code %}
+    {{ shop.country }}
+  {% endif %}
 </div>
 
 
@@ -18,7 +20,9 @@
   {% endif %}
   {{ shipping_address.street }}<br/>
   {{ shipping_address.city }}
-  {{ shipping_address.province }}
+  {{ shipping_address.province_code }}
   {{ shipping_address.zip | upcase }}<br/>
-  {{ shipping_address.country }}<br/>
+  {% if shop.country != shipping_address.country_code %}
+    {{ shipping_address.country }}<br/>
+  {% endif %}  
 </div>

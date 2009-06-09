@@ -51,9 +51,11 @@
   {% endif %}
   {{ shipping_address.street }}<br/>
   {{ shipping_address.city }}
-  {{ shipping_address.province }}
-  {{ shipping_address.zip | upcase }}
-  {{ shipping_address.country }}<br/>
+  {{ shipping_address.province_code }}
+  {{ shipping_address.zip | upcase }}<br/>
+  {% if shop.country != if shipping_address.country_code %}
+    {{ shipping_address.country }}
+  {% endif %}
 </div>
 
 <p>
