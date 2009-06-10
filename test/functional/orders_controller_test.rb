@@ -46,9 +46,9 @@ class OrdersControllerTest < ActionController::TestCase
       assert_template 'show'
     end
 
-    should "fail when only the shop name (without full url) is supplied" do
+    should "render show action if same shop name (without full url) is supplied" do
       get :show, {:id => 1, :shop => "german-brownies"}, @session
-      assert_redirected_to :controller => 'login', :action => 'index', :shop => "german-brownies"
+      assert_template 'show'
     end
     
     should "redirect to authenticate action if different shop is provided" do

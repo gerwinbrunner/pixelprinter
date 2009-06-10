@@ -29,10 +29,7 @@ class LoginController < ApplicationController
       @shop = Shop.find_or_create_by_url(shopify_session.url)
 
       flash[:notice] = "Successfully logged into shopify store."
-      
-      return_address = session[:return_to] || '/orders'
-      session[:return_to] = nil
-      redirect_to return_address
+      redirect_to session.delete(:return_to) || '/orders'
     else
       flash[:error] = "Could not log into Shopify store."
       redirect_to :action => 'index'
