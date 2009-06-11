@@ -22,4 +22,10 @@ class ApplicationController < ActionController::Base
       super
     end
   end
+  
+  before_filter :down_for_maintenance
+  
+  def down_for_maintenance
+     render :file => "#{RAILS_ROOT}/public/maintenance.html"
+  end
 end
