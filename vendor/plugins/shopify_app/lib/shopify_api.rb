@@ -127,7 +127,7 @@ module ShopifyAPI
     # and then calculating a MD5 hexdigest. 
     def computed_password
       pw = Digest::MD5.hexdigest(secret + token.to_s)
-      console.info("Computing password from '#{secret}' + '#{token.to_s}' = '#{pw}'")
+      logger.info("Computing password from '#{secret}' + '#{token.to_s}' = '#{pw}'")
       pw 
     end
   end
