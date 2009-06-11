@@ -17,7 +17,7 @@
 #
 # If you are deploying to Heroku, you use config vars (http://docs.heroku.com/config-vars) for this purpose:
 #
-#   heroku config:add SHOPIFY_API_KEY=<%= api_key %> SHOPIFY_API_SECRET=<%= secret %>
+#   heroku config:add SHOPIFY_API_KEY=YOUR_API_KEY SHOPIFY_API_SECRET=YOUR_API_SECRET
 development:
   api_key: 8b90be81b08ea5cc10bf208909d2f89e
   secret: 1e6c9f71751bbb2efb9de89959a7945e

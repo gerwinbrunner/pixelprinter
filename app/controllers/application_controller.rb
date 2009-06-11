@@ -16,10 +16,14 @@ class ApplicationController < ActionController::Base
 
   # Show 404 page with better error explanation when an Order or Template can't be found
   def rescue_action_in_public(exception)
-    if ActiveResource::ResourceNotFound || ActiveRecord::RecordNotFound
+    if exception.is_a?(ActiveResource::ResourceNotFound) || exception.is_a?(ActiveRecord::RecordNotFound)
       render :file => "#{RAILS_ROOT}/public/404.html", :status => 404
     else
       super
     end
   end
+
+  # Remove for production, as it will block all requests !!!
+#  before_filter { render :file => "#{RAILS_ROOT}/public/maintenance.html" }
+
 end
