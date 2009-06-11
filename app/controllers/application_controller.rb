@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Remove for production, as it will block all requests !!!
-#  before_filter { render :file => "#{RAILS_ROOT}/public/maintenance.html" }
+  # Maintenance screen - remove for production, as it will block all requests !!!
+  # before_filter { render :file => "#{RAILS_ROOT}/public/maintenance.html" }
 
 end

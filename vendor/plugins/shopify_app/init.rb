@@ -10,8 +10,8 @@ else
   
   if File.exist?(config)
     Rails.logger.info "[Shopify App] Loading API credentials from config/shopify.yml"
-
-    credentials = YAML::load(ERB.new(File.read(config)).result)[Rails.env]
+    
+    credentials = YAML.load(File.read(config))[Rails.env]
     ShopifyAPI::Session.setup(credentials)
   else
     Rails.logger.warn '[Shopify App] Shopify App plugin installed but no config/shopify.yml found.'
