@@ -26,6 +26,4 @@ test:
   api_key: 40c16a5e2baa8a9607201afc0c2a2f31
   secret: 0097fecade04110b5c7e20a7e9fdd5a7
 
-production:
-  api_key: 410f012da1a66227d7a926416b3f8fae
-  secret: <%= ENV['SHOPIFY_API_SECRET'] %>
+# production set via heroko config

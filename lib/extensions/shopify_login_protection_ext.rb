@@ -9,7 +9,6 @@ module ShopifyLoginProtection
     end
 
     ActiveResource::Base.site = session[:shopify].site
-    logger.info "Base site set to: '#{session[:shopify].site}'"
     ShopifyAPI::Shop.cached = session[:shopify].shop 
     yield
   ensure

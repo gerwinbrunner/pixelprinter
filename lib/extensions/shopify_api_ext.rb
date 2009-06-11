@@ -1,15 +1,4 @@
 module ShopifyAPI
-  class Session
-    private
-
-    def computed_password
-      pw = Digest::MD5.hexdigest(secret + token.to_s)
-      Rails.logger.info("Computing password from '#{secret}' + '#{token.to_s}' = '#{pw}'")
-      pw 
-    end    
-  end
-  
-  
   class Shop < ActiveResource::Base
     cattr_accessor :cached
     
