@@ -1,5 +1,3 @@
-ActiveRecord::Base.logger = Logger.new(STDOUT)
-
 class UpdateContentOfUnmodifiedDefaultTemplates < ActiveRecord::Migration
   TEMPLATES    = %w( invoice packing_slip variable_reference )
 
