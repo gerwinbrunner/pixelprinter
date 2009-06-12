@@ -1,3 +1,5 @@
+ActiveRecord::Base.logger = Logger.new(STDOUT)
+
 class UpdateContentOfUnmodifiedDefaultTemplates < ActiveRecord::Migration
   TEMPLATES    = %w( invoice packing_slip variable_reference )
 
@@ -15,8 +17,7 @@ class UpdateContentOfUnmodifiedDefaultTemplates < ActiveRecord::Migration
   def self.up
     transaction do
       TEMPLATES.each do |template|
-        hashes = ORIGINAL_MD5[template].join(",")
-        PrintTemplate.update_all(["body = ?", NEW_CONTENTS[template]], ["MD5(body) IN (?)", hashes])
+        PrintTemplate.update_all(["body = ?", NEW_CONTENTS[template]], ["md5(body) IN (?)", ORIGINAL_MD5[template]])
       end
     end    
   end
