@@ -92,6 +92,7 @@ module ShopifyAPI
     end
     
     def note_attributes
+      return nil if super.is_a?(String)
       super.attributes['note_attribute'].inject({}) do |memo, attr|
         memo[attr.name] = attr.value
         memo
