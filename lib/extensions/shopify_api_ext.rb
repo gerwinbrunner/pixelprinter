@@ -90,6 +90,13 @@ module ShopifyAPI
     def to_cents(amount)
       (amount * 100).to_i
     end
+    
+    def note_attributes
+      super.attributes['note_attribute'].inject({}) do |memo, attr|
+        memo[attr.name] = attr.value
+        memo
+      end
+    end
   end
   
   class LineItem < ActiveResource::Base 

@@ -10,7 +10,7 @@
   <gateway>Bank Deposit</gateway>
   <id type="integer">6001882</id>
   <name>#1011</name>
-  <note></note>
+  <note>My note</note>
   <number type="integer">11</number>
   <subtotal-price type="decimal">13.95</subtotal-price>
   <taxes-included type="boolean">false</taxes-included>
@@ -79,5 +79,13 @@
     </tax-line>
   </tax-lines>
   <note_attributes>
+    <note-attribute>
+      <name>First attribute</name>
+      <value>first attr value</value>
+    </note-attribute>
+    <note-attribute>
+      <name>Second attribute</name>
+      <value>second attr value</value>
+    </note-attribute>
   </note_attributes>  
 </order>

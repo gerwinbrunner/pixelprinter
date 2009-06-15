@@ -59,6 +59,16 @@ class OrderTest < ActiveSupport::TestCase
     should "return customer email with customer.email" do
       assert_equal 'johnsmith@shopify.com', @liquid['customer']['email']
     end
+
+    should "return note" do
+      assert_instance_of Hash, @liquid['attributes']
+      assert_equal "My note", @liquid['note']
+    end
     
+    should "return all attributes as a Hash" do
+      assert_instance_of Hash, @liquid['attributes']
+      assert_equal "first attr value", @liquid['attributes']['First attribute']
+      assert_equal "second attr value", @liquid['attributes']['Second attribute']
+    end 
   end
 end
