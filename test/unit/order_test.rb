@@ -38,6 +38,8 @@ class OrderTest < ActiveSupport::TestCase
       shop = stub(:name => "My Store", :currency => "USD", :money_format => "$ {{amount}}", :to_liquid => {'name' => "My Store"})
       ShopifyAPI::Shop.stubs(:cached).returns(shop)
       @liquid = @order.to_liquid
+      @order_with_one_note_attribute = order('example_order_one_note_attribute.xml')
+      @order_with_no_note_attribute = order('example_order_no_note_attribute.xml')
     end
     
     should "return the current shop with shop_name" do
@@ -69,6 +71,15 @@ class OrderTest < ActiveSupport::TestCase
       assert_instance_of Hash, @liquid['attributes']
       assert_equal "first attr value", @liquid['attributes']['First attribute']
       assert_equal "second attr value", @liquid['attributes']['Second attribute']
-    end 
+    end
+    
+    should "return nil if Order doesn't have note attributes" do
+      assert_equal nil, @order_with_no_note_attribute.to_liquid['attributes']
+    end
+
+    should "return a Hash with one key if Order has only one note attribute" do
+      assert_equal "first attr value", @order_with_one_note_attribute.to_liquid['attributes']['First attribute']
+    end
+
   end
 end
