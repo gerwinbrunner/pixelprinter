@@ -2,3 +2,4 @@ log/*.log
 tmp/**/*
 *.tmproj
 config/shopify.yml
+db/backup/*
