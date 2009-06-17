@@ -1,5 +1,5 @@
 module Liquid
-  
+
   # Holds variables. Variables are only loaded "just in time"
   # and are not evaluated as part of the render stage
   #
@@ -10,33 +10,31 @@ module Liquid
   #
   #   {{ user | link }}
   #
-  class Variable    
+  class Variable
     attr_accessor :filters, :name
-    
+
     def initialize(markup)
-      @markup  = markup                            
+      @markup  = markup
       @name    = nil
       @filters = []
       if match = markup.match(/\s*(#{QuotedFragment})/)
         @name = match[1]
-        if markup.match(/#{FilterSperator}\s*(.*)/)
-          filters = Regexp.last_match(1).split(/#{FilterSperator}/)
-        
-          filters.each do |f|    
+        if markup.match(/#{FilterSeparator}\s*(.*)/)
+          filters = Regexp.last_match(1).split(/#{FilterSeparator}/)
+          filters.each do |f|
             if matches = f.match(/\s*(\w+)/)
               filtername = matches[1]
-              filterargs = f.scan(/(?:#{FilterArgumentSeparator}|#{ArgumentSeparator})\s*(#{QuotedFragment})/).flatten            
+              filterargs = f.scan(/(?:#{FilterArgumentSeparator}|#{ArgumentSeparator})\s*(#{QuotedFragment})/).flatten
               @filters << [filtername.to_sym, filterargs]
             end
           end
         end
       end
-    end                        
+    end
 
-    def render(context)      
+    def render(context)
       return '' if @name.nil?
-      output = context[@name]
-      @filters.inject(output) do |output, filter|
+      @filters.inject(context[@name]) do |output, filter|
         filterargs = filter[1].to_a.collect do |a|
          context[a]
         end
@@ -45,8 +43,7 @@ module Liquid
         rescue FilterNotFound
           raise FilterNotFound, "Error - filter '#{filter[0]}' in '#{@markup.strip}' could not be found."
         end
-      end  
-      output
+      end
     end
   end
 end

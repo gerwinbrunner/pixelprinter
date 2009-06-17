@@ -27,6 +27,10 @@ end
 
 class ProductDrop < Liquid::Drop
 
+  def initialize(object=nil)
+    @object = object
+  end
+  
   class TextDrop < Liquid::Drop
     def array
       ['text1', 'text2']
@@ -59,6 +63,19 @@ class ProductDrop < Liquid::Drop
     def callmenot
       "protected"
     end
+end                   
+
+class EnumerableDrop < Liquid::Drop   
+  
+  def size
+    3
+  end
+  
+  def each
+    yield 1
+    yield 2
+    yield 3
+  end          
 end
 
 
@@ -132,9 +149,19 @@ class DropsTest < Test::Unit::TestCase
   
   def test_access_context_from_drop
     assert_equal '123', Liquid::Template.parse( '{%for a in dummy%}{{ context.loop_pos }}{% endfor %}'  ).render('context' => ContextDrop.new, 'dummy' => [1,2,3])            
+  end             
+  
+  def test_enumerable_drop         
+    assert_equal '123', Liquid::Template.parse( '{% for c in collection %}{{c}}{% endfor %}').render('collection' => EnumerableDrop.new)
+  end
+
+  def test_enumerable_drop_size         
+    assert_equal '3', Liquid::Template.parse( '{{collection.size}}').render('collection' => EnumerableDrop.new)
   end
   
-  
+  def test_drops_containing_same_objects_be_equal
+    assert_equal ProductDrop.new(1), ProductDrop.new(1)
+  end
   
 end
 

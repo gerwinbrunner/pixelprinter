@@ -63,9 +63,27 @@ module Liquid
     end
 
     # Sort elements of the array
-    def sort(input)
-      [input].flatten.sort
+    # provide optional property with which to sort an array of hashes or drops
+    def sort(input, property = nil)
+      ary = [input].flatten
+      if property.nil?
+        ary.sort
+      elsif ary.first.respond_to?('[]') and !ary.first[property].nil?
+        ary.sort {|a,b| a[property] <=> b[property] }
+      elsif ary.first.respond_to?(property)
+        ary.sort {|a,b| a.send(property) <=> b.send(property) }
+      end
     end               
+    
+    # map/collect on a given property
+    def map(input, property)
+      ary = [input].flatten
+      if ary.first.respond_to?('[]') and !ary.first[property].nil?
+        ary.map {|e| e[property] }
+      elsif ary.first.respond_to?(property)
+        ary.map {|e| e.send(property) }
+      end
+    end
             
     # Replace occurrences of a string with another
     def replace(input, string, replacement = '')
@@ -85,7 +103,17 @@ module Liquid
     # remove the first occurrences of a substring
     def remove_first(input, string)
       input.to_s.sub(string, '')      
-    end            
+    end             
+                              
+    # add one string to another
+    def append(input, string)
+      input.to_s + string.to_s
+    end
+                                
+    # prepend a string to another
+    def prepend(input, string)
+      string.to_s + input.to_s
+    end
                                              
     # Add <br /> tags in front of all newlines in input string
     def newline_to_br(input)        
@@ -126,16 +154,13 @@ module Liquid
         return input.to_s
       end
       
-      date = case input
-      when String
-        Time.parse(input)
-      when Date, Time, DateTime
-        input
+      date = input.is_a?(String) ? Time.parse(input) : input
+      
+      if date.respond_to?(:strftime)
+        date.strftime(format.to_s)
       else
-        return input
+        input
       end
-              
-      date.strftime(format.to_s)
     rescue => e 
       input
     end
@@ -162,21 +187,22 @@ module Liquid
     def plus(input, operand)
       input + operand if input.respond_to?('+')
     end
-
+    
     # subtraction
     def minus(input, operand)
       input - operand if input.respond_to?('-')
     end
-
+    
     # multiplication
     def times(input, operand)
       input * operand if input.respond_to?('*')
     end
-
+    
     # division
     def divided_by(input, operand)
       input / operand if input.respond_to?('/')
     end
+    
   end
    
   Template.register_filter(StandardFilters)

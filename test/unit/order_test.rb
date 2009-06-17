@@ -5,13 +5,7 @@ class OrderTest < ActiveSupport::TestCase
     ActiveResource::Base.site = 'http://any-url-for-testing'
   end
   
-  
-  should "respond to #to_liquid" do
-    @order = ShopifyAPI::Order.new
-    assert_respond_to(@order, :to_liquid)
-  end
-  
-  
+
   context "generating an example order" do
     before do
       @order = order
@@ -40,6 +34,12 @@ class OrderTest < ActiveSupport::TestCase
       @liquid = @order.to_liquid
       @order_with_one_note_attribute = order('example_order_one_note_attribute.xml')
       @order_with_no_note_attribute = order('example_order_no_note_attribute.xml')
+    end
+
+  
+    should "respond to #to_liquid" do
+      @order = ShopifyAPI::Order.new
+      assert_respond_to(@order, :to_liquid)
     end
     
     should "return the current shop with shop_name" do

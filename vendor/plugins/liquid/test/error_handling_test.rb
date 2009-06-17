@@ -57,7 +57,18 @@ class ErrorHandlingTest < Test::Unit::TestCase
       
     end
     
+  end            
+  
+  def test_missing_endtag_parse_time_error
+    
+    assert_raise(Liquid::SyntaxError) do
+      
+      template = Liquid::Template.parse(' {% for a in b %} ... ')
+      
+    end
+    
   end
+  
   
   def test_unrecognized_operator
     

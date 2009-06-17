@@ -2,6 +2,13 @@ require File.dirname(__FILE__) + '/helper'
 
 class ConditionTest < Test::Unit::TestCase
   include Liquid
+
+  class AnyDrop < Liquid::Drop
+    def initialize(object)
+      @object = object
+    end
+  end
+  
   
   def test_basic_condition
     assert_equal false, Condition.new('1', '==', '2').evaluate
@@ -60,6 +67,17 @@ class ConditionTest < Test::Unit::TestCase
     
   end  
 
+  def test_contains_works_for_different_drops_of_the_same_object
+    @context = Liquid::Context.new
+    @context['array'] = [AnyDrop.new(1), AnyDrop.new(2)]
+    @context['any_1'], @context['any_2'], @context['any_3'] = AnyDrop.new(1), AnyDrop.new(2), AnyDrop.new(3)
+
+    assert_evalutes_false "array", 'contains', "1"
+    assert_evalutes_true "array", 'contains', "any_1"
+    assert_evalutes_true "array", 'contains', "any_2"
+    assert_evalutes_false "array", 'contains', "any_3"
+  end
+
   def test_or_condition     
     condition = Condition.new('1', '==', '2')
 
@@ -100,10 +118,10 @@ class ConditionTest < Test::Unit::TestCase
 
   private
     def assert_evalutes_true(left, op, right)
-      assert Condition.new(left, op, right).evaluate(@context || Liquid::Context.new), "Evaluated false: #{left} #{op} #{right}"
+      assert_block("Evaluated false: #{left} #{op} #{right}") { Condition.new(left, op, right).evaluate(@context || Liquid::Context.new) }
     end
     
     def assert_evalutes_false(left, op, right)
-      assert !Condition.new(left, op, right).evaluate(@context || Liquid::Context.new), "Evaluated true: #{left} #{op} #{right}"
+      assert_block("Evaluated true: #{left} #{op} #{right}") { !Condition.new(left, op, right).evaluate(@context || Liquid::Context.new) }
     end
 end
