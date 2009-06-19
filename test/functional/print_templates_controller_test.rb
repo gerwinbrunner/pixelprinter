@@ -7,7 +7,7 @@ class PrintTemplatesControllerTest < ActionController::TestCase
     ActiveResource::Base.site = 'http://any-url-for-testing'
     ShopifyAPI::Shop.stubs(:current).returns(shop)
     
-    @session = login_session(:germanbrownies)
+    login_session(:germanbrownies)
     @tmpl = print_templates(:quotation_mark_in_title)
     @tmpl_params = {:print_template => {:name => @tmpl.name, :body => @tmpl.body, :shop_id => @tmpl.shop_id}}
     @params = {:format => :js}
@@ -20,12 +20,12 @@ class PrintTemplatesControllerTest < ActionController::TestCase
     end
     
     should "have no problems with single quotation marks in title" do
-      post :create, @params.merge(@new_template_params), @session
+      post :create, @params.merge(@new_template_params)
       assert_response_include "Messenger.notice(\"Successfully created new template named Quotation mark's test.\");"
     end
   
     should "insert a checkbox and a label via JS" do
-      post :create, @params.merge(@new_template_params), @session
+      post :create, @params.merge(@new_template_params)
       tmpl = assigns(:tmpl)
 
       # make sure the quotes are escaped (via inspect), and remove the very first and last quote
@@ -34,7 +34,7 @@ class PrintTemplatesControllerTest < ActionController::TestCase
     end    
     
     should "insert an empty preview container at the end of the preview div on the page" do
-      post :create, @params.merge(@new_template_params), @session
+      post :create, @params.merge(@new_template_params)
       tmpl = assigns(:tmpl)
 
       assert_response_include "$(\"#preview\").append(\"<div id='preview-#{tmpl.id}'></div>\");"
@@ -45,7 +45,7 @@ class PrintTemplatesControllerTest < ActionController::TestCase
 
   context "update" do
     should "have no problems with single quotation marks in title" do
-      put :update, @params.merge(@tmpl_params.merge(:id => @tmpl.id)), @session
+      put :update, @params.merge(@tmpl_params.merge(:id => @tmpl.id))
       assert_response_include "Messenger.notice(\"Successfully updated template named #{@tmpl.name}.\");"
     end
   end

@@ -20,3 +20,13 @@ custom_invoice:
   shop: othershop
   name: Custom invoice
   body: "Thanks for buying from {{ shop_name }}"
+  
+javascript_content:
+  shop: germanbrownies
+  name: Javascript stuff
+  body: "<h1>Hello</h1><script type=\"text/javascript\">document.write(\"Hi\");</script><p>It's me</p>"
+  
+unclosed_tags:
+  shop: germanbrownies
+  name: Unclosed tags
+  body: "<div>Blabla"

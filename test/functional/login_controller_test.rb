@@ -37,17 +37,17 @@ class LoginControllerTest < ActionController::TestCase
   
   context "when logged in" do
     before do
-      @session = login_session(:germanbrownies)
+      login_session(:germanbrownies)
     end
     
     context "authenticate" do
       should "redirect back if no shop is provided" do
-        get :authenticate, {}, @session
+        get :authenticate
         assert_redirected_to @request_origin
       end
       
       should "redirect to shop's permission url if a shop is provided" do
-        get :authenticate, {:shop => 'german-brownies'}, @session
+        get :authenticate, {:shop => 'german-brownies'}
         assert_redirected_to ShopifyAPI::Session.new('german-brownies').create_permission_url
       end
     end
@@ -55,11 +55,10 @@ class LoginControllerTest < ActionController::TestCase
     context "finalize" do
       before do
         @return_url = "/orders?id=123&shop=german-brownies"
-        @session = @session.merge(:return_to => @return_url)
       end
 
       should "redirect to stored return url in session" do
-        get :finalize, {:shop => 'german-brownies', :t => '1234'}, @session
+        get :finalize, {:shop => 'german-brownies', :t => '1234'}, @request.session.merge(:return_to => @return_url)
         assert_redirected_to @return_url
       end
     end

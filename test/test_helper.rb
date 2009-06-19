@@ -45,13 +45,13 @@ class ActiveSupport::TestCase
   def shop(file = 'shop.xml', overwrites = {})
     shop_xml = load_data(file)
     shop_hash = Hash.from_xml(shop_xml)['shop'].merge(overwrites)
-    ActiveResource::Base.new(shop_hash)
+    ShopifyAPI::Shop.new(shop_hash)
   end
   
   def login_session(shop_fixture)
     shop = shops(shop_fixture)
     Shop.stubs(:find_by_url).returns(shop)
-    {:shopify => ShopifyAPI::Session.new(shop.url, 'somerandomtoken')}
+    @request.session[:shopify] = ShopifyAPI::Session.new(shop.url, 'somerandomtoken')
   end
 
   # ====================

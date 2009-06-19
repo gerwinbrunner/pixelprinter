@@ -8,22 +8,49 @@ class PrintTemplateTest < ActiveSupport::TestCase
     @remote_european_shop = shop('shop.xml', {'currency' => "EUR", 'money_format' => "&euro;{{amount}}"})
   end
 
-  should "not allow the same name for the same shop" do
-    assert @local_shop.templates.create(:name => "My name", :body => "whatever").valid?
-    assert_not @local_shop.templates.create(:name => "My name", :body => "something else").valid?
-  end
 
-  should "allow the same name for different shops" do
-    assert @local_shop.templates.create(:name => "My name", :body => "whatever").valid?
-    assert Shop.create(:url => "www.differentshop.com").templates.create(:name => "My name", :body => "something else").valid?
-  end
-  
-  should "not allow more than 10 templates per shop" do
-    @local_shop.templates.destroy_all
-    10.times do |i|
-      assert @local_shop.templates.create(:name => "Template ##{i}", :body => "something").valid?
+  context "validate" do
+    should "not allow the same name for the same shop" do
+      assert @local_shop.templates.create(:name => "My name", :body => "whatever").valid?
+      assert_not @local_shop.templates.create(:name => "My name", :body => "something else").valid?
     end
-    assert_not @local_shop.templates.create(:name => "Template #11", :body => "something").valid?
+
+    should "allow the same name for different shops" do
+      assert @local_shop.templates.create(:name => "My name", :body => "whatever").valid?
+      assert Shop.create(:url => "www.differentshop.com").templates.create(:name => "My name", :body => "something else").valid?
+    end
+
+    should "not allow more than 10 templates per shop" do
+      @local_shop.templates.destroy_all
+      10.times do |i|
+        assert @local_shop.templates.create(:name => "Template ##{i}", :body => "something").valid?
+      end
+      assert_not @local_shop.templates.create(:name => "Template #11", :body => "something").valid?
+    end
+
+    context "body" do
+      should "not be valid when larger than 64 kb" do
+        template = shops(:germanbrownies).templates.build(
+                     :name => 'too_large_test',
+                     :body => '0' * 65.kilobytes
+                   )
+        assert !template.valid?
+        assert template.errors.on(:body)
+      end
+
+      should "not be saved when providing not well-formed HTML (unclosed elements)" do
+        tmpl = print_templates(:unclosed_tags)
+        assert_not tmpl.valid?
+      end
+      
+      should "provide detailed error message for non well-formed HTML" do
+        tmpl = print_templates(:unclosed_tags)
+        tmpl.save
+        assert 1, tmpl.errors.size
+        assert_equal "Missing end tag for 'div'", tmpl.errors.full_messages.to_sentence
+      end
+    end
+    
   end
   
   
@@ -56,16 +83,6 @@ class PrintTemplateTest < ActiveSupport::TestCase
     end
   end
     
-  context "#body" do
-    should "not be valid when larger than 64 kb" do
-      template = shops(:germanbrownies).templates.build(
-                   :name => 'too_large_test',
-                   :body => '0' * 65.kilobytes
-                 )
-      assert !template.valid?
-      assert template.errors.on(:body)
-    end
-  end
 
   context "#versions" do
     before do

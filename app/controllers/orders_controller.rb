@@ -27,19 +27,12 @@ class OrdersController < ApplicationController
         # AJAX preview, loads in modal Dialog
         @tmpl = shop.templates.find(params[:template_id])
         @rendered_template = @tmpl.render(@order.to_liquid)
+
         render :partial => 'preview', :locals => {:tmpl => @tmpl, :rendered_template => @rendered_template}
       end
     end
   end
 
-  # return the raw rendered HTML content to refer to from an IFrame
-  def preview
-    @tmpl  = shop.templates.find(params[:template_id])
-    @order = ShopifyAPI::Order.find(params[:id])
-    @rendered_template = @tmpl.render(@order.to_liquid)
-
-    render :text => @rendered_template
-  end
 
   def print
     @all_templates = shop.templates

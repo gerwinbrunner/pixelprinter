@@ -26,15 +26,18 @@ class PrintTemplate < ActiveRecord::Base
   end
     
   def check_syntax
+    REXML::Document.new("<body>#{body}</body>")
     parse
     return true
+  rescue REXML::ParseException => e
+    rexml_msg = e.message.split("\n").first.gsub("#<REXML::ParseException: ", '').gsub(" (got \"body\")", '')
+    return false, rexml_msg
   rescue Liquid::SyntaxError => e
-    return false, e.message
+    return false, e
   end
   
   def render(assigns)
-    # render! will not silently ignore errors, but raise an Exception
-    parse.render!(assigns, MoneyFilter)
+    parse.render(assigns, MoneyFilter)
   end
 
   
@@ -73,5 +76,5 @@ class PrintTemplate < ActiveRecord::Base
     return unless body_changed?
     
     versions.create(:body => body_was, :version => highest_version_number + 1)
-  end  
+  end
 end
