@@ -18,6 +18,10 @@ class OrdersController < ApplicationController
   
   def show
     @safe = params[:safe]
+    if @safe
+      flash[:notice] = "Safe mode allows you to edit templates that would normally cause the application to break."
+    end
+    
     @order = ShopifyAPI::Order.find(params[:id])
     
     respond_to do |format|
