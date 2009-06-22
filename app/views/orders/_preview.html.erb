@@ -9,7 +9,11 @@
   </div>
   <div class="preview-wrapper">
     <div class="preview-content">
-      <%= rendered_template %>
+      <% if safe %>
+        <%= sanitize(rendered_template) %>
+      <% else %>
+        <%= rendered_template %>
+      <% end %>
     </div>
   </div> <!-- preview-wrapper -->
 

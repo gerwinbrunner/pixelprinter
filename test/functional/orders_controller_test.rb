@@ -6,10 +6,12 @@ class OrdersControllerTest < ActionController::TestCase
   before do
     ActiveResource::Base.site = 'http://any-url-for-testing'
 
+    @invoice = print_templates(:invoice)
+    @js_template = print_templates(:javascript_content)
+    
     ShopifyAPI::Shop.stubs(:current).returns(shop)
     ShopifyAPI::Order.stubs(:find).with('1').returns(order)
-    @invoice = print_templates(:invoice)
-
+    
     login_session(:germanbrownies)
   end
 
@@ -33,6 +35,7 @@ class OrdersControllerTest < ActionController::TestCase
     end
   end
   
+  
   context "not logged in" do
     should "redirect to index action if no shop is provided" do
       get :show, {:id => 1}, {}
@@ -44,6 +47,7 @@ class OrdersControllerTest < ActionController::TestCase
       assert_redirected_to :controller => 'login', :action => 'index', :shop => "german-brownies.myshopify.com"
     end
   end
+  
   
   context "already logged in" do
     should "render show action if no different shop is provided" do
@@ -67,6 +71,32 @@ class OrdersControllerTest < ActionController::TestCase
       get :show, {:id => 1, :shop => "american-brownies.myshopify.com"}
       assert_redirected_to :controller => 'login', :action => 'index', :shop => "american-brownies.myshopify.com"
     end
+  end
+  
+  
+  context "without safe param" do
+    should "NOT set save mode in controller" do
+      get :show, {:id => 1}
+      assert_not assigns(:safe)
+    end
+    
+    should "should render javascript in templates" do
+      get :show, {:id => 1, :template_id => @js_template, :format => 'js'}
+      assert_response_include "<script type=\"text/javascript\">"
+    end
+  end
+
+
+  context "with safe param" do
+    should "set save mode in controller" do
+      get :show, {:id => 1, :safe => true}
+      assert assigns(:safe)
+    end
+    
+    should "should NOT render javascript in templates" do
+      get :show, {:id => 1, :template_id => @js_template, :safe => true, :format => 'js'}
+      assert_not @response.body.include?("<script type=\"text/javascript\">")
+    end    
   end
   
 end

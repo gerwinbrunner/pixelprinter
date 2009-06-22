@@ -18,7 +18,8 @@ Debug = function() {
 Templates = function() {
 	var _order     = null;
 	var _templates = null;
-	var editmode  = false;
+	var editmode   = false;
+	var safemode   = false;
 	
 	/* private methods */
 	var togglePrintButton = function() {
@@ -55,7 +56,11 @@ Templates = function() {
 		$("#template-delete-link-" + template).hide();
 		
 		Status.show();
-		$.get("/orders/" + _order + "?template_id=" + template, null, function(data) { checkbox.enable(); Status.hide(); $("#preview-" + template).html(data); scrollToPreview(template); });
+		var requestUrl = "/orders/" + _order + "?template_id=" + template;
+		if (safemode) {
+			requestUrl += "&safe=true";
+		}
+		$.get(requestUrl, null, function(data) { checkbox.enable(); Status.hide(); $("#preview-" + template).html(data); scrollToPreview(template); });
 	};
 
 	var scrollToPreview = function(id) {
@@ -69,6 +74,7 @@ Templates = function() {
 		initialize: function(order) {
 			_order = order;
 			_templates = [];
+			safemode = false;
 		},
 		
 		checkAll: function() {
@@ -129,6 +135,10 @@ Templates = function() {
 				linkImage.attr("src", linkImage.data("old-image"));   /* Restore original link image */
 				linkImage.attr("title", linkImage.data("old-title"));   /* Restore original link image */
 			}
+		},
+		
+		safeMode: function () {
+			safemode = true;
 		}
 	};
 }();
