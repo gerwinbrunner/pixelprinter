@@ -228,12 +228,9 @@ module ShopifyAPI
   end
   
   class Variant < ActiveResource::Base
-    self.prefix = "/admin/products/:product_id/"
   end
   
-  class Image < ActiveResource::Base
-    self.prefix = "/admin/products/:product_id/"
-    
+  class Image < ActiveResource::Base    
     # generate a method for each possible image variant
     [:pico, :icon, :thumb, :small, :medium, :large, :original].each do |m|
       reg_exp_match = "/\\1_#{m}.\\2"

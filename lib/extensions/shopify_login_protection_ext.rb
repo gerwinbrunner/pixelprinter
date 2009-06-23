@@ -9,7 +9,7 @@ module ShopifyLoginProtection
     end
 
     ActiveResource::Base.site = session[:shopify].site
-    ShopifyAPI::Shop.cached = session[:shopify].shop 
+    ShopifyAPI::Shop.cached = Rails.cache.fetch("shops/#{session[:shopify].url}", :expires_in => 5.minutes) { session[:shopify].shop }
     yield
   ensure
     ActiveResource::Base.site = nil

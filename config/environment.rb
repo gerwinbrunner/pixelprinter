@@ -43,5 +43,6 @@ Rails::Initializer.run do |config|
   
 end
 
+require 'extensions/string_ext'
 require 'extensions/shopify_api_ext'
 require 'extensions/shopify_login_protection_ext'

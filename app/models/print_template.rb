@@ -37,7 +37,7 @@ class PrintTemplate < ActiveRecord::Base
   end
   
   def render(assigns)
-    parse.render(assigns, MoneyFilter)
+    parse.render(assigns, [MoneyFilter, StringProcessingFilter, ShopFilter, TagFilter, WeightFilter, JsonFilter])
   end
 
   

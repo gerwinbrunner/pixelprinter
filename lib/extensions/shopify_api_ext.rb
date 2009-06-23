@@ -1,4 +1,11 @@
 module ShopifyAPI
+  module PriceConversion
+    def to_cents(amount)
+      (amount.to_f * 100).to_i
+    end  
+  end
+
+  
   class Shop < ActiveResource::Base
     cattr_accessor :cached
     
@@ -39,7 +46,8 @@ module ShopifyAPI
 
   class Order < ActiveResource::Base
     include OrderCalculations
-
+    include PriceConversion
+    
     def shipping_line
       case shipping_lines.size
       when 0
@@ -49,7 +57,7 @@ module ShopifyAPI
       else
         title = shipping_lines.collect(&:title).to_sentence
         price = shipping_lines.to_ary.sum(&:price)
-        {:title => title, :price => price}
+        {:title => title, :price => to_cents(price)}
       end
     end
           
@@ -82,14 +90,9 @@ module ShopifyAPI
         'customer'          => {'email' => email, 'name' => billing_address.name},
         'shop'              => shop.to_liquid
       }
-    end
-    
+    end    
     
     private
-    
-    def to_cents(amount)
-      (amount * 100).to_i
-    end
     
     def note_attributes
       return nil unless super.is_a?(ActiveResource::Base)
@@ -100,7 +103,9 @@ module ShopifyAPI
     end
   end
   
-  class LineItem < ActiveResource::Base 
+  class LineItem < ActiveResource::Base
+    include PriceConversion
+
     def to_liquid
       {
         'id'         => id, 
@@ -111,20 +116,29 @@ module ShopifyAPI
         'sku'        => sku,
         'grams'      => grams,
         'vendor'     => vendor,
-        'variant_id' => variant_id
+        'variant_id' => variant_id,
+        'variant'    => lambda { variant },
+        'product'    => lambda { product }        
       }
     end
     
+    def variant
+      @variant ||= Variant.lookup(variant_id)
+    end
     
-    private
-    
-    def to_cents(amount)
-      (amount * 100).to_i
+    def product
+      @product ||= Product.lookup(variant.product_id)
     end
   end       
 
 
   class Product < ActiveResource::Base
+    def self.lookup(id)
+      Rails.cache.fetch("products/#{id}", :expires_in => 1.hour) do
+        find(id)
+      end
+    end
+    
     # truncated (as opposed to Shopify's model) for simplicity
     def to_liquid
       {
@@ -133,24 +147,40 @@ module ShopifyAPI
         'handle'                  => handle,
         'description'             => body_html,
         'vendor'                  => vendor,
-        'type'                    => product_type
+        'type'                    => product_type,
+        'variants'                => variants, 
+        'images'                  => images
       }
+    end
+  end
+  
+  class Image < ActiveResource::Base
+    def to_liquid      
+      {'src' => src.match(/\/(products\/.*)\?/)[0]}
     end
   end
   
   
   class Variant < ActiveResource::Base
+    include PriceConversion
+
+    def self.lookup(id)
+      Rails.cache.fetch("variants/#{id}", :expires_in => 1.hour) do
+        find(id)
+      end
+    end
+
     # truncated (as opposed to Shopify's model) for simplicity
     def to_liquid
       { 
         'id'                 => id, 
         'title'              => title,
-        'trait1'             => trait1,
-        'trait2'             => trait2,
-        'trait3'             => trait3,
-        'price'              => price, 
+        'option1'            => option1,
+        'option2'            => option2,
+        'option3'            => option3,
+        'price'              => to_cents(price), 
         'weight'             => grams, 
-        'compare_at_price'   => compare_at_price, 
+        'compare_at_price'   => to_cents(compare_at_price), 
         'inventory_quantity' => inventory_quantity, 
         'sku'                => sku 
       }
@@ -159,8 +189,10 @@ module ShopifyAPI
 
 
   class ShippingLine < ActiveResource::Base
+    include PriceConversion
+
     def to_liquid
-      {'title' => title, 'price' => price}
+      {'title' => title, 'price' => to_cents(price)}
     end
   end
 end
