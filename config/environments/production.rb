@@ -25,4 +25,4 @@ config.action_controller.perform_caching             = true
 
 # Enable threaded mode
 # config.threadsafe!
-config.cache_store = :compressed_mem_cache_store, [ ENV['MEMCACHE_SERVERS'].split(","), { :namespace => ENV['MEMCACHE_NAMESPACE'] } ]
+# config.cache_store = :compressed_mem_cache_store, [ ENV['MEMCACHE_SERVERS'].split(","), { :namespace => ENV['MEMCACHE_NAMESPACE'] } ]
