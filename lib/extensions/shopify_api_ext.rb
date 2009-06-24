@@ -84,7 +84,7 @@ module ShopifyAPI
         'fulfilled_line_items' => fulfilled,
         'unfulfilled_line_items' => unfulfilled,
         'shipping_methods'  => shipping_lines,
-        'shipping_method'   => shipping_line.title,
+        'shipping_method'   => shipping_line,
         'note'              => note,
         'attributes'        => note_attributes, 
         'customer'          => {'email' => email, 'name' => billing_address.name},
