@@ -9,6 +9,15 @@
 
 <b>Subtotal price</b>:  {{ subtotal_price | money }}<br/>
 <b>Tax Price</b>:       {{ tax_price | money }}<br/>
+<b>Tax Lines</b>:       
+{% for tax_line in tax_lines %}
+  <ul>
+    <li>price:         {{ tax_line.price | money }}</li>
+    <li>rate:         {{ tax_line.rate }}</li>
+    <li>title:         {{ tax_line.title }}</li>
+  </ul>
+{% endfor %}
+<br/>
 <b>Shipping price</b>:  {{ shipping_price | money }}<br/>
 <b>Total price:</b>     {{ total_price | money }}<br/><br/>
 

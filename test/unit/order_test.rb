@@ -23,6 +23,12 @@ class OrderTest < ActiveSupport::TestCase
       assert @order.line_items.size > 0
       assert_instance_of(ShopifyAPI::LineItem, @order.line_items.first)
     end
+    
+    should "have at least one tax line" do
+      assert @order.tax_lines.size > 0
+      assert_instance_of(ShopifyAPI::TaxLine, @order.tax_lines.first)
+    end    
+    
   end
   
   
@@ -58,6 +64,18 @@ class OrderTest < ActiveSupport::TestCase
       assert_equal "Shopify T-Shirt", @liquid['line_items'].first.name
     end
     
+    should "return tax line price" do
+      assert_equal "2.65", @liquid['tax_lines'].first.price.to_s
+    end
+
+    should "return tax line rate" do
+      assert_equal "0.1563", @liquid['tax_lines'].first.rate.to_s
+    end
+    
+    should "return tax line title" do
+      assert_equal "Taxes", @liquid['tax_lines'].first.title.to_s
+    end    
+        
     should "return customer email with customer.email" do
       assert_equal 'johnsmith@shopify.com', @liquid['customer']['email']
     end
